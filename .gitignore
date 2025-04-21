@@ -1,0 +1,5 @@
+*.o
+obj
+cub3D
+test.cub
+lib/libft
