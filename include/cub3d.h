@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3D.h                                            :+:      :+:    :+:   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 01:54:17 by nmetais           #+#    #+#             */
-/*   Updated: 2025/04/22 16:11:09 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/04/22 22:52:44 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 //STRUCTS
 # include "type.h"
+
 //LIBC
 # include <stdbool.h>
 # include <stdio.h>
@@ -25,7 +26,10 @@
 //LIBS
 # include "libft.h"
 
-typedef struct s_texture
+//HEADERS
+# include "parsing.h"
+
+typedef struct s_textures
 {
 	char	*north;
 	char	*south;
@@ -33,13 +37,14 @@ typedef struct s_texture
 	char	*east;
 	int		*floor_color;
 	int		*ceiling_color;
-}	t_texture;
+}	t_textures;
 
 typedef struct s_core
 {
 	char			*map_name;
 	char			**map;
-	t_texture		texture;
+	int				map_start;
+	t_textures		*textures;
 	t_gc_controller	*gc;
 
 }	t_core;

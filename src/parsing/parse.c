@@ -6,14 +6,13 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 15:16:42 by nmetais           #+#    #+#             */
-/*   Updated: 2025/04/22 16:13:34 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/04/22 21:00:48 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "cub3d.h"
 
-//Checking de l'extension .cub du fichier 
-//FAUT LA FULL TESTER C'EST UN COPIER COLLER DE MON SO_LONG
+//Fonction Corps du parsing
 bool	parsing_cub(t_core *core, char *av)
 {
 	core->map_name = av;
@@ -22,8 +21,11 @@ bool	parsing_cub(t_core *core, char *av)
 		ft_putendl_fd("Error \n Wrong map extension (.cub)", 2);
 		return (false);
 	}
-	if (!parsing_map(core))
+	if (!file_extract(core))
 		return (false);
-	print_allocated_vars(core->gc, "map");
+	if (!check_map_validity(core))
+		return (false);
+	if (!parse_textures_colors(core))
+		return (false);
 	return (true);
 }

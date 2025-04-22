@@ -3,9 +3,11 @@ LIB = lib/libft/libft.a
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -Ilib/libft/include -Iinclude -g3
 SRCS =	src/main.c \
-		src/parsing/extract.c \
-		src/parsing/checker.c \
+		src/parsing/map_extract.c \
+		src/parsing/extension.c \
 		src/parsing/parse.c \
+		src/parsing/parse_textures_colors.c \
+		src/parsing/parse_map.c \
 
 OBJ_DIR = obj
 

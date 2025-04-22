@@ -1,17 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   checker.c                                          :+:      :+:    :+:   */
+/*   extension.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 02:41:22 by nmetais           #+#    #+#             */
-/*   Updated: 2025/04/20 03:07:10 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/04/22 17:29:21 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "cub3d.h"
 
+//Checking de l'extension .cub du fichier 
+//FAUT LA FULL TESTER C'EST UN COPIER COLLER DE MON SO_LONG
 bool	valid_extension(char *version, char *tocheck)
 {
 	size_t	sizeversion;

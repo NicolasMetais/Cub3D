@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   extract.c                                          :+:      :+:    :+:   */
+/*   map_extract.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 02:30:20 by nmetais           #+#    #+#             */
-/*   Updated: 2025/04/22 16:15:26 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/04/22 17:29:18 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3D.h"
+#include "cub3d.h"
 
 //Extension de la fonction d'extraction du fichier, la Norme TMTC
 bool	extend_extract_datas(t_core *core, int *nb, int count)
@@ -58,8 +58,7 @@ int	extract_datas(t_core *core, int map_fd)
 	return (true);
 }
 
-//Fonction Corps du parsing
-int	parsing_map(t_core *core)
+int	file_extract(t_core *core)
 {
 	int		map_fd;
 
