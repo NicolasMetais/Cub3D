@@ -15,14 +15,16 @@ OBJS := $(patsubst src/%, $(OBJ_DIR)/src/%, $(OBJS))
 all: $(NAME)
 
 $(NAME): $(OBJS) $(LIB)
-	@$(CC) $(OBJS) $(LIB) -lreadline -o $(NAME)
+	$(CC) $(OBJS) $(LIB) -lreadline -o $(NAME)
 
 $(LIB):
 	$(MAKE) -C lib/libft
 
 $(OBJ_DIR)/src/%.o: src/%.c
-	@mkdir -p $(dir $@)
-	@$(CC) $(CFLAGS) -c $< -o $@
+	mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) -MMD -MP -c $< -o $@
+
+-include $(OBJS:.o=.d)
 
 clean:
 	rm -rf $(OBJ_DIR)
