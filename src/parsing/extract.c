@@ -6,13 +6,14 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 02:30:20 by nmetais           #+#    #+#             */
-/*   Updated: 2025/04/22 15:51:00 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/04/22 16:15:26 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
-bool extend_extract_datas(t_core *core, int *nb, int count)
+//Extension de la fonction d'extraction du fichier, la Norme TMTC
+bool	extend_extract_datas(t_core *core, int *nb, int count)
 {
 	char	**new;
 	int		i;
@@ -29,6 +30,8 @@ bool extend_extract_datas(t_core *core, int *nb, int count)
 	return (true);
 }
 
+//Je recup toutes les lignes du fichier et gere les alloc EN MEME TEMPS.
+//pour eviter de devoir compter les lignes du fichier avant de les stocker.
 int	extract_datas(t_core *core, int map_fd)
 {
 	int		count;
@@ -55,6 +58,7 @@ int	extract_datas(t_core *core, int map_fd)
 	return (true);
 }
 
+//Fonction Corps du parsing
 int	parsing_map(t_core *core)
 {
 	int		map_fd;

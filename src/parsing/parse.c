@@ -6,12 +6,14 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 15:16:42 by nmetais           #+#    #+#             */
-/*   Updated: 2025/04/22 15:45:28 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/04/22 16:13:34 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
+//Checking de l'extension .cub du fichier 
+//FAUT LA FULL TESTER C'EST UN COPIER COLLER DE MON SO_LONG
 bool	parsing_cub(t_core *core, char *av)
 {
 	core->map_name = av;

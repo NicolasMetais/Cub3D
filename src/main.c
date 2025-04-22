@@ -6,12 +6,13 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 02:02:15 by nmetais           #+#    #+#             */
-/*   Updated: 2025/04/22 15:39:38 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/04/22 16:15:34 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
 
+//Initialisation du Garbage collector
 bool	garbage_init(t_gc_controller **gc)
 {
 	*gc = malloc(sizeof(t_gc_controller));
@@ -21,6 +22,7 @@ bool	garbage_init(t_gc_controller **gc)
 	return (true);
 }
 
+//Fonction corps du programme
 int	cube3d(char *av)
 {
 	t_core			core;
@@ -33,6 +35,7 @@ int	cube3d(char *av)
 	return (true);
 }
 
+//Main
 int	main(int ac, char **av)
 {
 	if (ac == 2)
