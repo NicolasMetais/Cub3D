@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.h                                          :+:      :+:    :+:   */
+/*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/20 01:58:43 by nmetais           #+#    #+#             */
-/*   Updated: 2025/04/22 15:45:09 by nmetais          ###   ########.fr       */
+/*   Created: 2025/04/22 15:16:42 by nmetais           #+#    #+#             */
+/*   Updated: 2025/04/22 15:45:28 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSING_H
-# define PARSING_H
+#include "parsing.h"
 
-# include <stdbool.h>
-# include "type.h"
-# include "cub3D.h"
-
-//Extension checker
-bool	valid_extension(char *version, char *tocheck);
-
-//Extract all datas from .cub files
-int		parsing_map(t_core *core);
-#endif
+bool	parsing_cub(t_core *core, char *av)
+{
+	core->map_name = av;
+	if (!valid_extension(".cub", core->map_name))
+	{
+		ft_putendl_fd("Error \n Wrong map extension (.cub)", 2);
+		return (false);
+	}
+	if (!parsing_map(core))
+		return (false);
+	print_allocated_vars(core->gc, "map");
+	return (true);
+}

@@ -6,19 +6,35 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 02:30:20 by nmetais           #+#    #+#             */
-/*   Updated: 2025/04/20 03:51:45 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/04/22 15:51:00 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3D.h"
+
+bool extend_extract_datas(t_core *core, int *nb, int count)
+{
+	char	**new;
+	int		i;
+
+	i = -1;
+	new = malloc(sizeof(char *) * (*nb * 2));
+	if (!new)
+		return (false);
+	while (++i < count)
+		new[i] = core->map[i];
+	free(core->map);
+	core->map = new;
+	*nb *= 2;
+	return (true);
+}
 
 int	extract_datas(t_core *core, int map_fd)
 {
 	int		count;
 	int		nb;
 	char	*line;
-	char	**new;
-	int		i;
+
 
 	count = 0;
 	nb = 16;
@@ -29,15 +45,8 @@ int	extract_datas(t_core *core, int map_fd)
 	{
 		if (count >= nb - 1)
 		{
-			i = -1;
-			new = malloc(sizeof(char *) * (nb * 2));
-			if (!new)
+			if (!extend_extract_datas(core, &nb, count))
 				return (false);
-			while (++i < count)
-				new[i] = core->map[i];
-			free(core->map);
-			core->map = new;
-			nb *= 2;
 		}
 		core->map[count++] = line;
 		line = get_next_line(map_fd);
@@ -58,6 +67,7 @@ int	parsing_map(t_core *core)
 		return (false);
 	if (!extract_datas(core, map_fd))
 		return (false);
+	add_to_gc(&core->gc, core->map, TAB_STRING, "map");
 	return (true);
 }
 

@@ -5,6 +5,7 @@ CFLAGS = -Wall -Wextra -Werror -Ilib/libft/include -Iinclude -g3
 SRCS =	src/main.c \
 		src/parsing/extract.c \
 		src/parsing/checker.c \
+		src/parsing/parse.c \
 
 OBJ_DIR = obj
 

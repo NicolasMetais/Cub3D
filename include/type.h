@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.h                                          :+:      :+:    :+:   */
+/*   type.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/20 01:58:43 by nmetais           #+#    #+#             */
-/*   Updated: 2025/04/22 15:45:09 by nmetais          ###   ########.fr       */
+/*   Created: 2025/04/22 15:28:05 by nmetais           #+#    #+#             */
+/*   Updated: 2025/04/22 15:32:40 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSING_H
-# define PARSING_H
+#ifndef TYPE_H
+# define TYPE_H
 
-# include <stdbool.h>
-# include "type.h"
-# include "cub3D.h"
+//DECLARATION DE TOUTES MES STRUCTURES EN AMMONT
+//POUR EVITER LES PROBLEME DE COMPILATIONS
+typedef struct s_core	t_core;
 
-//Extension checker
-bool	valid_extension(char *version, char *tocheck);
-
-//Extract all datas from .cub files
-int		parsing_map(t_core *core);
 #endif
