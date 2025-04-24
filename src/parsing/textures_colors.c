@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_textures_colors.c                            :+:      :+:    :+:   */
+/*   textures_colors.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 17:28:37 by nmetais           #+#    #+#             */
-/*   Updated: 2025/04/22 21:41:44 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/04/24 14:55:00 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,42 +53,43 @@ char	*strdup_without_spaces(const char *s)
 	return ((void *)cpy);
 }
 
-bool	extract_textures(t_core *core, char *prefix)
+//IL FAUT LAISSER LES ESPACES ENTRE LES MOTS DES TEXTURES
+bool	extract_textures(char **dest, t_core *core, char *prefix)
 {
 	int		i;
 	char	*tmp;
 
 	i = -1;
-	core->textures = ft_calloc(1, sizeof(t_textures));
-	add_to_gc(&core->gc, core->textures, STRUCT, "textures");
 	while (core->map[++i])
 	{
 		tmp = core->map[i];
 		while (*tmp == ' ' || *tmp == '\t')
 				tmp++;
-		if (ft_strncmp(tmp, prefix, 2) == 0)
+		if (ft_strncmp(tmp, prefix, ft_strlen(prefix)) == 0)
 		{
 			tmp += 2;
-			free(core->textures->north);
+			if (*dest)
+				free(*dest);
 			while (*tmp == ' ' || *tmp == '\t')
 				tmp++;
-			core->textures->north = strdup_without_spaces(tmp);
+			*dest = strdup_without_spaces(tmp);
+			if (!*dest)
+				return (false);
+			add_to_gc(&core->gc, *dest, STRING, "textures");
 		}
 	}
-	add_to_gc(&core->gc, core->textures->north, STRING, "texture");
 	return (true);
 }
 
-bool	parse_textures_colors(t_core *core)
+bool	parse_textures_colors(t_core *core, char *prefix[7], void *targets[6])
 {
-	if (!extract_textures(core, "NO"))
-		return (false);
-	if (!extract_textures(core, "SD"))
-		return (false);
-	if (!extract_textures(core, "WE"))
-		return (false);
-	if (!extract_textures(core, "EA"))
-		return (false);
-	print_allocated_vars(core->gc, "texture");
+	int		i;
+
+	i = -1;
+	while (prefix[++i])
+	{
+		if (!extract_textures(targets[i], core, prefix[i]))
+			return (false);
+	}
 	return (true);
 }

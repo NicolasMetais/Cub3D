@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 01:54:17 by nmetais           #+#    #+#             */
-/*   Updated: 2025/04/22 22:52:44 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/04/23 16:03:26 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,15 @@ typedef struct s_textures
 	char	*south;
 	char	*west;
 	char	*east;
-	int		*floor_color;
-	int		*ceiling_color;
+	char	*floor_color;
+	char	*ceiling_color;
 }	t_textures;
+
+typedef struct s_colors
+{
+	t_int_array		*floor_color;
+	t_int_array		*ceiling_color;
+}	t_colors;
 
 typedef struct s_core
 {
@@ -45,6 +51,7 @@ typedef struct s_core
 	char			**map;
 	int				map_start;
 	t_textures		*textures;
+	t_colors		*colors;
 	t_gc_controller	*gc;
 
 }	t_core;

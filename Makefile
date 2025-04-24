@@ -4,10 +4,11 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror -Ilib/libft/include -Iinclude -g3
 SRCS =	src/main.c \
 		src/parsing/map_extract.c \
-		src/parsing/extension.c \
-		src/parsing/parse.c \
-		src/parsing/parse_textures_colors.c \
-		src/parsing/parse_map.c \
+		src/utils/extension.c \
+		src/parsing/parse_main.c \
+		src/parsing/textures_colors.c \
+		src/parsing/flag_position.c \
+		src/parsing/textures_content.c \
 
 OBJ_DIR = obj
 
