@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 01:54:17 by nmetais           #+#    #+#             */
-/*   Updated: 2025/04/23 16:03:26 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/04/24 15:16:13 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ typedef struct s_textures
 
 typedef struct s_colors
 {
-	t_int_array		*floor_color;
-	t_int_array		*ceiling_color;
+	t_int_array		*floor;
+	t_int_array		*ceiling;
 }	t_colors;
 
 typedef struct s_core

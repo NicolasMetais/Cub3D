@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 18:00:44 by nmetais           #+#    #+#             */
-/*   Updated: 2025/04/24 14:50:31 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/04/24 17:43:40 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 bool	valid_chars(char **colors)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
+	char	*error;
 
 	i = -1;
 	while (colors[++i])
@@ -25,7 +26,12 @@ bool	valid_chars(char **colors)
 		{
 			if (!ft_isdigit(colors[i][j]))
 			{
-				ft_putendl_fd("Error \n RGB colors only take digits\n", 2);
+				error = ft_strjoin(
+						"Error \n RGB colors only take digits :", colors[i]);
+				if (!error)
+					return (false);
+				ft_putendl_fd(error, 2);
+				free(error);
 				return (false);
 			}
 		}
@@ -33,36 +39,47 @@ bool	valid_chars(char **colors)
 	return (true);
 }
 
-bool	valid_numbers_range(t_core *core, char **colors)
+bool	valid_numbers_range(char **colors, void **var_ptr)
 {
-	int	i;
+	int			i;
+	char		*error;
+	t_int_array	*tmp;
 
-	(void)core;
 	i = -1;
+	tmp = *var_ptr;
 	while (colors[++i])
 	{
-			
+		tmp->data[i] = ft_atoi(colors[i]);
+		if (tmp->data[i] < 0 || tmp->data[i] > 255)
+		{
+			error = ft_strjoin(
+					"Error \n Invalid RGB number (0 - 255) : ", colors[i]);
+			if (!error)
+				return (false);
+			ft_putendl_fd(error, 2);
+			free(error);
+			return (false);
+		}
 	}
 	return (true);
 }
 
-bool	rgb_error(t_core *core, void *targets[6], int i)
+bool	rgb_error(t_core *core, void *targets[6], int i, void **var_ptr)
 {
 	char	**colors;
 
-	(void)core;
+	*var_ptr = gc_malloc(&core->gc, sizeof(int) * 3, TAB_INT, "colors");
+	if (!*var_ptr)
+		return (false);
 	colors = ft_split(*(char **)targets[i], ',');
 	if (!colors)
 		return (false);
 	if (ft_strlen_tab(colors) != 3)
 		return (ft_free_tab(colors), ft_putendl_fd(
-				"Error \n Too many or not enought RGB number\n", 2), false);
+				"Error \n Wrong typo : (numbers,numbers,numbers)", 2), false);
 	if (!valid_chars(colors))
 		return (ft_free_tab(colors), false);
-	core->colors = gc_malloc(&core->gc, sizeof(t_colors), STRUCT, "colors");
-	if (!core->colors)
-		return (ft_free_tab(colors), false);
-	if (!valid_numbers_range(core, colors))
+	if (!valid_numbers_range(colors, var_ptr))
 		return (ft_free_tab(colors), false);
 	ft_free_tab(colors);
 	return (true);
@@ -89,18 +106,27 @@ bool	xmp_extension_error(void *targets[6], int i)
 bool	parse_textures_content(t_core *core, void *targets[6])
 {
 	int		i;
+	void	*var_ptr[2];
+	int		j;
 
+	var_ptr[0] = &core->colors->floor;
+	var_ptr[1] = &core->colors->ceiling;
 	i = -1;
+	j = 0;
 	while (++i < 4)
 	{
 		if (!xmp_extension_error(targets, i))
 			return (false);
 	}
+	core->colors = gc_malloc(&core->gc, sizeof(t_colors), STRUCT, "colors");
+	if (!core->colors)
+		return (false);
 	while (i < 6)
 	{
-		if (!rgb_error(core, targets, i))
+		if (!rgb_error(core, targets, i, &var_ptr[j]))
 			return (false);
 		i++;
+		j++;
 	}
 	return (true);
 }

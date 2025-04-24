@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 17:28:37 by nmetais           #+#    #+#             */
-/*   Updated: 2025/04/24 14:55:00 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/04/24 17:53:29 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,16 +44,15 @@ char	*strdup_without_spaces(const char *s)
 	while (s[j])
 	{
 		if (s[j] != ' ' && s[j] != '\t' && s[j] != '\n')
-		{
 			cpy[i++] = s[j];
-		}
 		j++;
 	}
 	cpy[i] = '\0';
 	return ((void *)cpy);
 }
 
-//IL FAUT LAISSER LES ESPACES ENTRE LES MOTS DES TEXTURES
+//Eventuelle "textur    e.xpm" si il y a " ou ' 
+//pour gerer les espace mais bcp de code pour pas grand chose
 bool	extract_textures(char **dest, t_core *core, char *prefix)
 {
 	int		i;
