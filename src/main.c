@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 02:02:15 by nmetais           #+#    #+#             */
-/*   Updated: 2025/04/22 17:29:35 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/04/24 21:44:00 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ int	cube3d(char *av)
 	garbage_init(&core.gc);
 	parsing_cub(&core, av);
 	//Launch Game here;
-	free_gc(core.gc);
+	print_allocated_vars(&*core.gc, NULL);
+	free_gc(core.gc, NULL);
 	return (true);
 }
 

@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 01:54:17 by nmetais           #+#    #+#             */
-/*   Updated: 2025/04/24 15:16:13 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/04/25 01:56:41 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,12 @@ typedef struct s_colors
 	t_int_array		*ceiling;
 }	t_colors;
 
+typedef struct s_spawn
+{
+	int	x;
+	int	y;
+}	t_spawn;
+
 typedef struct s_core
 {
 	char			*map_name;
@@ -52,12 +58,16 @@ typedef struct s_core
 	int				map_start;
 	t_textures		*textures;
 	t_colors		*colors;
+	t_spawn			*spawn;
 	t_gc_controller	*gc;
 
 }	t_core;
 
 //Parsing
 bool	parsing_cub(t_core *core, char *av);
+
+//UTILS
+bool	is_empty_line(char *str);
 
 
 #endif

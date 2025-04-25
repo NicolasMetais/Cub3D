@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 15:16:42 by nmetais           #+#    #+#             */
-/*   Updated: 2025/04/24 17:52:14 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/04/24 18:50:18 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ bool	parsing_cub(t_core *core, char *av)
 		return (false);
 	if (!parse_textures_content(core, targets))
 		return (false);
-	print_allocated_vars(core->gc, NULL);
+	if (!parse_map(core))
+		return (false);
 	return (true);
 }

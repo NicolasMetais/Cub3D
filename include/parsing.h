@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 01:58:43 by nmetais           #+#    #+#             */
-/*   Updated: 2025/04/23 18:44:41 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/04/25 01:28:44 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,10 @@ bool	check_flag_position(t_core *core, char *prefix[7]);
 
 //Ensure correct RGB & texture character + convert colors in int arrays
 bool	parse_textures_content(t_core *core, void *targets[6]);
+
+//Check for wrong char in map and check walls
+bool	parse_map(t_core *core);
+
+//Checker to check if my player is surrounded by walls
+bool	walkable(char **dup_maps, t_core *core);
 #endif
