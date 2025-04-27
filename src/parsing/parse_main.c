@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 15:16:42 by nmetais           #+#    #+#             */
-/*   Updated: 2025/04/24 18:50:18 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/04/27 15:02:28 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ bool	init_textures_targets(void *targets[6], t_core *core)
 	core->textures = ft_calloc(1, sizeof(t_textures));
 	if (!core->textures)
 		return (false);
-	add_to_gc(&core->gc, core->textures, STRUCT, "textures");
+	if (!add_to_gc(&core->gc, core->textures, STRUCT, "textures"))
+		return (false);
 	targets[0] = &core->textures->north;
 	targets[1] = &core->textures->south;
 	targets[2] = &core->textures->west;

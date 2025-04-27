@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 02:02:15 by nmetais           #+#    #+#             */
-/*   Updated: 2025/04/27 14:04:41 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/04/27 15:03:19 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ int	cube3d(char *av)
 	t_core			core;
 
 	ft_memset(&core, 0, sizeof(core));
-	garbage_init(&core.gc);
+	if (!garbage_init(&core.gc))
+		return (false);
 	parsing_cub(&core, av);
 	//Launch Game here;
 	//print_allocated_vars(&*core.gc, NULL);
