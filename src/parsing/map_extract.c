@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 02:30:20 by nmetais           #+#    #+#             */
-/*   Updated: 2025/04/27 15:02:10 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/04/27 17:05:45 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ int	extract_datas(t_core *core, int map_fd)
 	int		count;
 	int		nb;
 	char	*line;
-
 
 	count = 0;
 	nb = 16;
@@ -86,5 +85,3 @@ int	file_extract(t_core *core)
 		return (false);
 	return (true);
 }
-
-

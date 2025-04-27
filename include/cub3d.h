@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 01:54:17 by nmetais           #+#    #+#             */
-/*   Updated: 2025/04/25 01:56:41 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/04/27 16:59:28 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,12 @@
 # include <fcntl.h>
 # include <sys/time.h>
 # include <stdlib.h>
+//X11
+# include <X11/keysym.h>
+# include <X11/X.h>
 
 //LIBS
+# include "mlx.h"
 # include "libft.h"
 
 //HEADERS
@@ -53,6 +57,8 @@ typedef struct s_spawn
 
 typedef struct s_core
 {
+	void			*mlx;
+	void			*win;
 	char			*map_name;
 	char			**map;
 	int				map_start;
@@ -68,6 +74,14 @@ bool	parsing_cub(t_core *core, char *av);
 
 //UTILS
 bool	is_empty_line(char *str);
+
+//Game
+bool	launch_game(t_core *core);
+int		routine(t_core *core);
+
+//Keypress
+int		handle_keypress(int key, void *param);
+int		handle_destroy(t_core *core);
 
 
 #endif
