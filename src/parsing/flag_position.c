@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 20:57:39 by nmetais           #+#    #+#             */
-/*   Updated: 2025/04/25 02:06:57 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/04/27 14:04:30 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int	is_textures_colors(t_core *core, char **prefix)
 		{
 			if (!ft_strncmp(core->map[i], prefix[j], ft_strlen(prefix[j])))
 			{
-				printf("I : %d\n map start : %d\n", i, core->map_start);
 				if (i > core->map_start)
 					return (ft_putendl_fd("Error \n Invalid map position", 2)
 						, -1);
