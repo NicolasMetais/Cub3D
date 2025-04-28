@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 02:02:15 by nmetais           #+#    #+#             */
-/*   Updated: 2025/04/27 17:03:09 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/04/27 23:29:04 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ bool	window_init(t_core *core)
 		return (false);
 	if (!add_to_gc(&core->gc, core->mlx, STRUCT, "mlx"))
 		return (false);
-	core->win = mlx_new_window(core->mlx, 1920, 1080, "Cub3D");
+	core->win = mlx_new_window(core->mlx, S_LENGHT, S_HEIGHT, "Cub3D");
 	if (!core->win)
 		return (false);
 	return (true);
@@ -41,6 +41,7 @@ int	cube3d(char *av)
 	t_core			core;
 
 	ft_memset(&core, 0, sizeof(core));
+	core.state = MENU;
 	if (!garbage_init(&core.gc))
 		return (false);
 	if (!parsing_cub(&core, av))
@@ -49,9 +50,8 @@ int	cube3d(char *av)
 		return (false);
 	if (!launch_game(&core))
 		return (false);
-	//Launch Game here;
-	//print_allocated_vars(&*core.gc, NULL);
 	free_gc(core.gc, NULL);
+	destroy_img(&core);
 	return (true);
 }
 

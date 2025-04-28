@@ -6,6 +6,7 @@ CFLAGS = -Wall -Wextra -Werror -Ilib/libft/include -Ilib/minilibx-linux -Iinclud
 SRCS =	src/main.c \
 		src/utils/extension.c \
 		src/utils/empty_line.c \
+		src/utils/transparency.c \
 		src/parsing/map_extract.c \
 		src/parsing/parse_main.c \
 		src/parsing/textures_colors.c \
@@ -15,8 +16,10 @@ SRCS =	src/main.c \
 		src/parsing/flood_fill.c \
 		src/game/main_game.c \
 		src/game/routine.c \
+		src/game/destroy_img.c \
 		src/game/events/destroy.c \
 		src/game/events/keypress.c \
+		src/game/menu/render_menu.c \
 
 OBJ_DIR = obj
 
@@ -25,11 +28,14 @@ OBJS := $(patsubst src/%, $(OBJ_DIR)/src/%, $(OBJS))
 
 all: $(NAME)
 
-$(NAME): $(OBJS) $(LIB)
-	$(CC) $(OBJS) $(LIB) $(MLX) -lX11 -lXext -o $(NAME)
+$(NAME): $(OBJS) $(LIB) $(MLX)
+	$(CC) $(OBJS) $(LIB) $(MLX) -lX11 -lXext -lm -o $(NAME)
 
 $(LIB):
 	$(MAKE) -C lib/libft
+
+$(MLX):
+	$(MAKE) -C lib/minilibx-linux
 
 $(OBJ_DIR)/src/%.o: src/%.c
 	mkdir -p $(dir $@)
@@ -40,7 +46,7 @@ $(OBJ_DIR)/src/%.o: src/%.c
 clean:
 	rm -rf $(OBJ_DIR)
 	$(MAKE) clean -C lib/libft
-	$(MAKE) clean -C ./minilibx-linux/
+	$(MAKE) clean -C lib/minilibx-linux
 
 fclean: clean
 	rm -f $(NAME)

@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 01:58:43 by nmetais           #+#    #+#             */
-/*   Updated: 2025/04/25 01:28:44 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/04/27 17:11:09 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 # define PARSING_H
 
 # include <stdbool.h>
-# include "type.h"
+
+typedef struct s_core	t_core;
 
 //Extension checker
 bool	valid_extension(char *version, char *tocheck);
