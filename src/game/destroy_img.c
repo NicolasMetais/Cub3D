@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 22:03:55 by nmetais           #+#    #+#             */
-/*   Updated: 2025/04/28 05:43:05 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/04/29 04:32:48 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ void	destroy_img(t_core *core)
 		mlx_destroy_image(core->mlx, core->menu_img->maps->img);
 	if (core->menu_img->quit->img)
 		mlx_destroy_image(core->mlx, core->menu_img->quit->img);
-	if (core->menu_img->skulls_left->img)
-		mlx_destroy_image(core->mlx, core->menu_img->skulls_left->img);
-	if (core->menu_img->skulls_right->img)
-		mlx_destroy_image(core->mlx, core->menu_img->skulls_right->img);
+	if (core->menu_img->skulls->sprites[0]->img)
+		mlx_destroy_image(core->mlx, core->menu_img->skulls->sprites[0]->img);
+	if (core->menu_img->skulls->sprites[1]->img)
+		mlx_destroy_image(core->mlx, core->menu_img->skulls->sprites[1]->img);
 }

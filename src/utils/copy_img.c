@@ -1,33 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   routine.c                                          :+:      :+:    :+:   */
+/*   copy_img.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/27 15:49:25 by nmetais           #+#    #+#             */
-/*   Updated: 2025/04/29 04:41:12 by nmetais          ###   ########.fr       */
+/*   Created: 2025/04/28 20:25:03 by nmetais           #+#    #+#             */
+/*   Updated: 2025/04/29 03:53:30 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	routine(void *param)
+//NEVER USED
+void	copy_img(t_img *dest, t_img *copy)
 {
-	t_core		*core;
+	int	i;
+	int	pixels;
 
-	core = (t_core *)param;
-	if (core->state == MENU)
+	pixels = copy->width * copy->height;
+	i = 0;
+	while (i < pixels)
 	{
-		if (core->redraw)
-			render_menu(core);
-		update_sprite(core->menu_img->skulls);
-		mlx_put_image_to_window(core->mlx, core->win,
-			core->menu_img->bg->img, 0, 0);
-		core->redraw = true;
-		render_menu(core);
+		dest->addr[i] = copy->addr[i];
+		i++;
 	}
-	else if (core->state == GAME)
-		printf("game playing");
-	return (0);
 }

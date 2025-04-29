@@ -6,6 +6,8 @@ CFLAGS = -Wall -Wextra -Werror -Ilib/libft/include -Ilib/minilibx-linux -Iinclud
 SRCS =	src/main.c \
 		src/utils/extension.c \
 		src/utils/empty_line.c \
+		src/utils/sprite_udpate.c \
+		src/utils/copy_img.c \
 		src/utils/transparency.c \
 		src/parsing/map_extract.c \
 		src/parsing/parse_main.c \
@@ -19,7 +21,9 @@ SRCS =	src/main.c \
 		src/game/destroy_img.c \
 		src/game/events/destroy.c \
 		src/game/events/keypress.c \
+		src/game/events/mouse.c \
 		src/game/menu/render_menu.c \
+		src/game/menu/start_menu.c \
 
 OBJ_DIR = obj
 

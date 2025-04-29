@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 01:54:17 by nmetais           #+#    #+#             */
-/*   Updated: 2025/04/28 05:48:09 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/04/29 04:28:37 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,15 +47,23 @@ typedef struct s_img
 	int		height;
 }	t_img;
 
+typedef struct s_sprite
+{
+	t_img	**sprites;
+	int		nb;
+	int		frame;
+	int		timer;
+	int		speed;
+}	t_sprite;
+
 typedef struct s_menu_img
 {
-	t_img	*skulls_left;
-	t_img	*skulls_right;
-	t_img	*bg;
-	t_img	*play;
-	t_img	*maps;
-	t_img	*options;
-	t_img	*quit;
+	t_img		*bg;
+	t_img		*play;
+	t_img		*maps;
+	t_img		*options;
+	t_img		*quit;
+	t_sprite	*skulls;
 }	t_menu_img;
 
 typedef enum s_state
@@ -94,6 +102,8 @@ typedef struct s_core
 	char			**map;
 	int				map_start;
 	int				menu_option;
+	bool			redraw;
+	int				y_pos[4];
 	t_menu_img		*menu_img;
 	t_state			state;
 	t_textures		*textures;
@@ -110,17 +120,27 @@ bool	parsing_cub(t_core *core, char *av);
 bool	is_empty_line(char *str);
 void	transparency(t_img *bg, const t_img *stickonbg,
 			int start_x, const int start_y);
+void	copy_img(t_img *dest, t_img *copy);
+void	update_sprite(t_sprite *sprite);
+
+//Create new t_img
+bool	load_image(t_img **img, void *mlx, char *path, t_core *core);
 
 //Game
 bool	launch_game(t_core *core);
 int		routine(void *param);
 
 //Menu
+bool	start_menu(t_core *core);
 bool	render_menu(t_core *core);
+void	skulls_render(t_core *core, const int *y, int frame);
 
-//Keypress
+//Keypress Event
 int		handle_keypress(int key, void *param);
 int		handle_destroy(t_core *core);
+
+//Mouse Event
+int	mouse_menu_hover(int x, int y, void *param);
 
 //Destroy X11 memory img
 void	destroy_img(t_core *core);

@@ -1,33 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   routine.c                                          :+:      :+:    :+:   */
+/*   mouse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/27 15:49:25 by nmetais           #+#    #+#             */
-/*   Updated: 2025/04/29 04:41:12 by nmetais          ###   ########.fr       */
+/*   Created: 2025/04/29 03:13:52 by nmetais           #+#    #+#             */
+/*   Updated: 2025/04/29 03:37:40 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	routine(void *param)
+int	mouse_menu_hover(int x, int y, void *param)
 {
 	t_core		*core;
+	int			i;
 
+	(void)x;
 	core = (t_core *)param;
-	if (core->state == MENU)
+	i = 0;
+	while (i < 4)
 	{
-		if (core->redraw)
-			render_menu(core);
-		update_sprite(core->menu_img->skulls);
-		mlx_put_image_to_window(core->mlx, core->win,
-			core->menu_img->bg->img, 0, 0);
-		core->redraw = true;
-		render_menu(core);
+		if (y >= core->y_pos[i] && y < core->y_pos[i] + MENU_SPACING)
+		{
+			if (core->menu_option != i)
+			{
+				core->menu_option = i;
+				core->redraw = true;
+			}
+			break ;
+		}
+		i++;
 	}
-	else if (core->state == GAME)
-		printf("game playing");
 	return (0);
 }

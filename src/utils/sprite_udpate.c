@@ -1,33 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   routine.c                                          :+:      :+:    :+:   */
+/*   sprite_udpate.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/27 15:49:25 by nmetais           #+#    #+#             */
-/*   Updated: 2025/04/29 04:41:12 by nmetais          ###   ########.fr       */
+/*   Created: 2025/04/29 03:53:57 by nmetais           #+#    #+#             */
+/*   Updated: 2025/04/29 03:54:42 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	routine(void *param)
+void	update_sprite(t_sprite *sprite)
 {
-	t_core		*core;
-
-	core = (t_core *)param;
-	if (core->state == MENU)
+	sprite->timer++;
+	if (sprite->timer >= sprite->speed)
 	{
-		if (core->redraw)
-			render_menu(core);
-		update_sprite(core->menu_img->skulls);
-		mlx_put_image_to_window(core->mlx, core->win,
-			core->menu_img->bg->img, 0, 0);
-		core->redraw = true;
-		render_menu(core);
+		sprite->timer = 0;
+		sprite->frame = (sprite->frame + 1) % sprite->nb;
 	}
-	else if (core->state == GAME)
-		printf("game playing");
-	return (0);
 }
