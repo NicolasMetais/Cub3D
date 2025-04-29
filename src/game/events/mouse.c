@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 03:13:52 by nmetais           #+#    #+#             */
-/*   Updated: 2025/04/29 03:37:40 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/04/29 05:00:38 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,23 @@ int	mouse_menu_hover(int x, int y, void *param)
 			break ;
 		}
 		i++;
+	}
+	return (0);
+}
+
+int	mouse_menu_click(int button, int x, int y, t_core *core)
+{
+	(void)x;
+	(void)y;
+	if (button == 1)
+	{
+		if (core->state == MENU)
+		{
+			if (core->menu_option == 0)
+				core->state = GAME;
+			if (core->menu_option == 3)
+				handle_destroy(core);
+		}
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 01:54:17 by nmetais           #+#    #+#             */
-/*   Updated: 2025/04/29 04:28:37 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/04/29 04:57:44 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,7 @@ int		handle_keypress(int key, void *param);
 int		handle_destroy(t_core *core);
 
 //Mouse Event
+int	mouse_menu_click(int button, int x, int y, t_core *core);
 int	mouse_menu_hover(int x, int y, void *param);
 
 //Destroy X11 memory img

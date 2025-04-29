@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 04:04:48 by nmetais           #+#    #+#             */
-/*   Updated: 2025/04/29 04:43:27 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/04/29 04:53:50 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,7 @@ bool	start_menu(t_core *core)
 	menu_init(core);
 	core->menu_img->skulls = create_skull_sprite(core);
 	mlx_hook(core->win, 6, (1L << 6), mouse_menu_hover, core);
+	mlx_hook(core->win, 4, (1L << 2), mouse_menu_click, core);
+
 	return (true);
 }
