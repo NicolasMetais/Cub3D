@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 02:30:20 by nmetais           #+#    #+#             */
-/*   Updated: 2025/04/27 17:05:45 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/02 19:17:33 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,19 +69,17 @@ int	file_extract(t_core *core)
 		perror("cub3D: open_file");
 	core->map = malloc(sizeof(char *) * 16);
 	if (!core->map)
-		return (false);
+		return (close(map_fd), false);
 	if (!extract_datas(core, map_fd))
-		return (false);
+		return (close(map_fd), false);
 	while (core->map[++i])
 	{
 		j = -1;
 		while (core->map[i][++j])
 		{
 			if (core->map[i][j] == '\n')
-				core->map[i][j] = '\0';
+			core->map[i][j] = '\0';
 		}
 	}
-	if (!add_to_gc(&core->gc, core->map, TAB_STRING, "map"))
-		return (false);
-	return (true);
+	return (close(map_fd), true);
 }

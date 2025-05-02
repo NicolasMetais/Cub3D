@@ -6,18 +6,28 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 03:53:57 by nmetais           #+#    #+#             */
-/*   Updated: 2025/04/29 03:54:42 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/04/30 00:18:31 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	update_sprite(t_sprite *sprite)
+//UPDATE THE SPRITE EVERY X MILISEC LIKE PHILOSOPHER
+bool	update_sprite(t_sprite *sprite)
 {
-	sprite->timer++;
-	if (sprite->timer >= sprite->speed)
+	static struct timeval	save_time = {0};
+	struct timeval			current;
+	long					elapsed;
+
+	gettimeofday(&current, NULL);
+	elapsed = (current.tv_sec - save_time.tv_sec) * 1000
+		+ (current.tv_usec - save_time.tv_usec) / 1000;
+
+	if (elapsed >= sprite->speed)
 	{
-		sprite->timer = 0;
 		sprite->frame = (sprite->frame + 1) % sprite->nb;
+		save_time = current;
+		return (true);
 	}
+	return (false);
 }

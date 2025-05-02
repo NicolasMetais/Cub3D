@@ -6,12 +6,13 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/25 01:54:51 by nmetais           #+#    #+#             */
-/*   Updated: 2025/04/25 01:55:21 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/04/29 20:47:41 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+//CHECK IS THE LINE IS EMPTY
 bool	is_empty_line(char *str)
 {
 	while (*str == ' ' || *str == '\t')

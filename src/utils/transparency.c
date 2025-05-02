@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 00:46:55 by nmetais           #+#    #+#             */
-/*   Updated: 2025/04/28 05:23:14 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/04/29 20:48:46 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ unsigned int	get_img_pxl(const t_img *stickonbg, size_t x, size_t y)
 		+ (y * stickonbg->line_len + x * (stickonbg->bpp / 8))));
 }
 
+//WRITE AN IMAGE ON ANOTHER IMAGE IGNORING GREEN (00FF00)
 void	transparency(t_img *bg, const t_img *stickonbg,
 		int start_x, const int start_y)
 {

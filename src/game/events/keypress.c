@@ -6,12 +6,13 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 16:53:24 by nmetais           #+#    #+#             */
-/*   Updated: 2025/04/29 05:02:17 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/04/30 04:04:50 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+//MANAGE MENUING DEPLACEMENT
 void	menu_keypress(int key, t_core *core)
 {
 	if (key == XK_Up)
@@ -21,6 +22,7 @@ void	menu_keypress(int key, t_core *core)
 			core->menu_option--;
 		else
 			core->menu_option = 3;
+		render_menu(core);
 	}
 	else if (key == XK_Down)
 	{
@@ -29,16 +31,54 @@ void	menu_keypress(int key, t_core *core)
 			core->menu_option++;
 		else
 			core->menu_option = 0;
+		render_menu(core);
 	}
 	if (key == XK_Return)
 	{
 		if (core->menu_option == 0)
 			core->state = GAME;
+		if (core->menu_option == 1)
+		{
+			core->state = OPTIONS_MENU;
+			core->menu_option = 0;
+			render_options_menu(core);
+		}
 		if (core->menu_option == 3)
 			handle_destroy(core);
 	}
 }
 
+void	option_menu_keypress(int key, t_core *core)
+{
+	if (key == XK_Up)
+	{
+		core->redraw = true;
+		if (core->menu_option > 0)
+			core->menu_option--;
+		else
+			core->menu_option = 3;
+		render_options_menu(core);
+	}
+	else if (key == XK_Down)
+	{
+		core->redraw = true;
+		if (core->menu_option < 1)
+			core->menu_option++;
+		else
+			core->menu_option = 0;
+		render_options_menu(core);
+		printf("%d\n", core->menu_option);
+	}
+	if (key == XK_BackSpace)
+	{
+		core->state = START_MENU;
+		core->menu_option = 1;
+		render_menu(core);
+		printf("%d\n", core->menu_option);
+	}
+}
+
+//KEYBOARD MANAGEMENT
 int	handle_keypress(int key, void *param)
 {
 	t_core	*core;
@@ -46,10 +86,9 @@ int	handle_keypress(int key, void *param)
 	core = (t_core *)param;
 	if (key == XK_Escape)
 		handle_destroy(core);
-	if (core->state == MENU)
-	{
+	if (core->state == START_MENU)
 		menu_keypress(key, core);
-		render_menu(core);
-	}
+	if (core->state == OPTIONS_MENU)
+		option_menu_keypress(key, core);
 	return (true);
 }

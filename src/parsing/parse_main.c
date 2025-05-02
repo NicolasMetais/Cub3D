@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 15:16:42 by nmetais           #+#    #+#             */
-/*   Updated: 2025/04/27 18:42:47 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/02 19:17:42 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ bool	parsing_cub(t_core *core, char *av)
 		return (false);
 	}
 	if (!file_extract(core))
+		return (false);
+	if (!add_to_gc(&core->gc, core->map, TAB_STRING, "map"))
 		return (false);
 	if (!check_flag_position(core, prefix))
 		return (false);

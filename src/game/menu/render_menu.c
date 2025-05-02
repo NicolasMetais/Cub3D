@@ -6,13 +6,14 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 21:25:17 by nmetais           #+#    #+#             */
-/*   Updated: 2025/04/29 04:41:29 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/01 21:42:31 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	rewrite_options(t_core *core, const int *y, int i)
+//REWRITE ALL MENU OPTIONS
+static void	rewrite_options(t_core *core, const int *y, int i)
 {
 	t_menu_img	*menu;
 
@@ -20,7 +21,7 @@ void	rewrite_options(t_core *core, const int *y, int i)
 	if (i == 0)
 		transparency(menu->bg, menu->play,
 			(menu->bg->width / 2) - (menu->play->width / 2), y[i]);
-	else if (i == 1)
+	if (i == 1)
 		transparency(menu->bg, menu->options,
 			(menu->bg->width / 2) - (menu->options->width / 2), y[i]);
 	else if (i == 2)
@@ -31,6 +32,7 @@ void	rewrite_options(t_core *core, const int *y, int i)
 			(menu->bg->width / 2) - (menu->quit->width / 2), y[i]);
 }
 
+//PRINT SKULL AT THE RIGHT PLACE
 void	skulls_render(t_core *core, const int *y, int frame)
 {
 	int			x;
@@ -52,8 +54,11 @@ void	skulls_render(t_core *core, const int *y, int frame)
 		x - (menu->skulls->sprites[frame]->width + 10), y[core->menu_option]);
 	transparency(menu->bg, menu->skulls->sprites[frame],
 		x + (selected->width + 10), y[core->menu_option]);
+	mlx_put_image_to_window(core->mlx, core->win,
+		core->menu_img->bg->img, 0, 0);
 }
 
+//LOAD A NEW BG IMAGE AT EVERY RENDER CALL
 bool	load_bg_image(t_img **img, void *mlx, char *path, t_core *core)
 {
 	*img = gc_malloc(&core->gc, sizeof(t_img), STRUCT, "bg_img");
@@ -68,6 +73,7 @@ bool	load_bg_image(t_img **img, void *mlx, char *path, t_core *core)
 	return (true);
 }
 
+//MENU RENDERING EVERYTIME I DO A MOVEMENT IN THE MENU
 bool	render_menu(t_core *core)
 {
 	int			i;
@@ -81,8 +87,6 @@ bool	render_menu(t_core *core)
 	while (++i < 4)
 		rewrite_options(core, core->y_pos, i);
 	skulls_render(core, core->y_pos, core->menu_img->skulls->frame);
-	mlx_put_image_to_window(core->mlx, core->win,
-		core->menu_img->bg->img, 0, 0);
 	core->redraw = false;
 	return (true);
 }

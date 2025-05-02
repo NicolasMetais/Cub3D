@@ -1,0 +1,16 @@
+# Menu
+Menu_bg			menu/bg.xpm
+Menu_Submenu	menu/submenu.xpm
+
+# Sheets
+Big_sheet		sheets/big.xpm
+regular_sheet	sheets/regular.xpm
+Small_sheet		sheets/small.xpm
+
+# Words
+Kill				word_creator:regular
+Options				word_creator:regular
+Maps				word_creator:regular
+Death				word_creator:regular
+Options Random 1	word_creator:regular
+Options Random 2	word_creator:regular

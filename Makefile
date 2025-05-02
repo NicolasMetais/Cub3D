@@ -7,7 +7,6 @@ SRCS =	src/main.c \
 		src/utils/extension.c \
 		src/utils/empty_line.c \
 		src/utils/sprite_udpate.c \
-		src/utils/copy_img.c \
 		src/utils/transparency.c \
 		src/parsing/map_extract.c \
 		src/parsing/parse_main.c \
@@ -23,7 +22,12 @@ SRCS =	src/main.c \
 		src/game/events/keypress.c \
 		src/game/events/mouse.c \
 		src/game/menu/render_menu.c \
+		src/game/menu/render_options_menu.c \
 		src/game/menu/start_menu.c \
+		src/game/char_setup/init_char_nodes.c \
+		src/game/char_setup/build_words.c \
+		src/game/char_setup/build_words_utils.c \
+		src/game/image_loader.c \
 
 OBJ_DIR = obj
 

@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 02:02:15 by nmetais           #+#    #+#             */
-/*   Updated: 2025/04/29 04:44:07 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/02 17:26:38 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ bool	garbage_init(t_gc_controller **gc)
 	return (true);
 }
 
+//INIT DE LA VAR MLX Et WIN
 bool	window_init(t_core *core)
 {
 	core->mlx = mlx_init();
