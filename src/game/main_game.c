@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 15:44:46 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/02 04:11:55 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/02 21:16:48 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ bool	img_init(t_core *core)
 			STRUCT, "menu img");
 	if (!core->menu_img)
 		return (false);
+	extract_img_data(core);
 	img = core->menu_img;
 	fonts = core->fonts;
 	if (!init_menu_img(core))

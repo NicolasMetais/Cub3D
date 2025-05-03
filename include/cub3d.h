@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 01:54:17 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/02 05:38:03 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/02 20:37:40 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,6 +161,7 @@ void			skulls_render(t_core *core, const int *y, int frame);
 //Init img
 bool			init_words_img(t_core *core);
 bool			init_menu_img(t_core *core);
+bool			extract_img_data(t_core *core);
 
 //Keypress Event
 int				handle_keypress(int key, void *param);

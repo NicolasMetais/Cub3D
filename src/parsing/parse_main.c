@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 15:16:42 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/02 19:17:42 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/02 20:04:01 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ bool	parsing_cub(t_core *core, char *av)
 		ft_putendl_fd("Error \n Wrong map extension (.cub)", 2);
 		return (false);
 	}
-	if (!file_extract(core))
+	if (!file_extract(core->map_name, &core->map))
 		return (false);
 	if (!add_to_gc(&core->gc, core->map, TAB_STRING, "map"))
 		return (false);

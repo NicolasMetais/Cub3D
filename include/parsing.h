@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 01:58:43 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/02 19:17:03 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/02 20:34:35 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ typedef struct s_core	t_core;
 bool	valid_extension(char *version, char *tocheck);
 
 //Extract all datas from .cub files
-int		file_extract(t_core *core);
+bool	file_extract(char *file_name, char ***tab);
 
 //check and extract textures from the file
 bool	parse_textures_colors(t_core *core, char *prefix[7], void *targets[6]);

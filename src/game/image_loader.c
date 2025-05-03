@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 02:35:31 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/02 19:25:12 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/03 04:12:45 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,43 @@ bool	load_word_image(t_img **img, t_core *core, char *word, t_font_size size)
 	return (true);
 }
 
+bool	store_img(char **line, t_core *core)
+{
+	(void)core;
+	if (line[1] && (!ft_strncmp(line[1], "word_creator:", 13)))
+	{
+		printf("word : %s\n", line[0]);
+	}
+	else
+		printf("texture %s\n", line[0]);
+	return (true);
+}
+
 //LOAD HORRIBLE D'IMAGE POUR PASSER LA NORME JE VAIS FAIRE UNE HASHMAP
+bool	extract_img_data(t_core *core)
+{
+	int		i;
+	char	**data;
+	char	**tmp;
+
+	i = -1;
+	data = NULL;
+	if (!file_extract("config.txt", &data))
+		return (false);
+	while (data[++i])
+	{
+		if (data[i][0] == '#' || !data[i][0])
+			continue ;
+		tmp = ft_split(data[i], '\t');
+		if (!tmp)
+			return (false); //FAUT FREE MAIS G LA FLEMME DE FOU
+		store_img(tmp, core);
+		ft_free_tab(tmp);
+	}
+	ft_free_tab(data);
+	return (true);
+}
+
 bool	init_menu_img(t_core *core)
 {
 	int					i;
@@ -65,7 +101,7 @@ bool	init_words_img(t_core *core)
 {
 	int					i;
 	const t_word_loader	images[] = {
-	{&core->menu_img->play, "Kill", BIG},
+	{&core->menu_img->play, "Kill", REGULAR},
 	{&core->menu_img->options, "Options", REGULAR},
 	{&core->menu_img->maps, "Maps", REGULAR},
 	{&core->menu_img->quit, "Death", REGULAR},

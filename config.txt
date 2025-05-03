@@ -4,7 +4,7 @@ Menu_Submenu	menu/submenu.xpm
 
 # Sheets
 Big_sheet		sheets/big.xpm
-regular_sheet	sheets/regular.xpm
+Regular_sheet	sheets/regular.xpm
 Small_sheet		sheets/small.xpm
 
 # Words
