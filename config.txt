@@ -1,6 +1,9 @@
 # Menu
-Menu_bg			menu/bg.xpm
-Menu_Submenu	menu/submenu.xpm
+Menu_bg_activ	menu/bg.xpm
+Menu_bg_clean	menu/bg.xpm
+Submenu_option	menu/submenu.xpm
+Skull1			menu/skull_sprite1.xpm
+Skull2			menu/skull_sprite2.xpm
 
 # Sheets
 Big_sheet		sheets/big.xpm
@@ -8,9 +11,9 @@ Regular_sheet	sheets/regular.xpm
 Small_sheet		sheets/small.xpm
 
 # Words
-Kill				word_creator:regular
-Options				word_creator:regular
-Maps				word_creator:regular
-Death				word_creator:regular
-Options Random 1	word_creator:regular
-Options Random 2	word_creator:regular
+Menu_play		Kill				word_creator:regular
+Menu_options	Options				word_creator:regular
+Menu_maps		Maps				word_creator:regular
+Menu_quit		Death				word_creator:regular
+Menu_option1	Options Random 1	word_creator:regular
+Menu_option2	Options Random 2	word_creator:regular

@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 04:04:48 by nmetais           #+#    #+#             */
-/*   Updated: 2025/04/30 00:14:55 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/05 17:30:31 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,8 @@ t_sprite	*create_skull_sprite(t_core *core)
 			STRUCT, "skull sprite");
 	if (!skull->sprites)
 		return (NULL);
-	if (!load_image(&skull->sprites[0], core->mlx,
-			"menu/skull_sprite1.xpm", core))
-		return (NULL);
-	if (!load_image(&skull->sprites[1], core->mlx,
-			"menu/skull_sprite2.xpm", core))
-		return (NULL);
+	skull->sprites[0] = hashmap_get(&core->hashmap, "Skull1");
+	skull->sprites[1] = hashmap_get(&core->hashmap, "Skull2");
 	skull->frame = 0;
 	skull->timer = 0;
 	skull->speed = 2000;
@@ -54,6 +50,5 @@ bool	start_menu(t_core *core)
 	render_menu(core);
 	mlx_hook(core->win, 6, (1L << 6), mouse_menu_hover, core);
 	mlx_hook(core->win, 4, (1L << 2), mouse_menu_click, core);
-
 	return (true);
 }

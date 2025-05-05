@@ -6,56 +6,76 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 21:25:17 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/01 21:42:31 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/05 18:43:23 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 //REWRITE ALL MENU OPTIONS
-static void	rewrite_options(t_core *core, const int *y, int i)
+static void	rewrite_options(t_core *core, const int *y, t_img *bg)
 {
-	t_menu_img	*menu;
+	t_img	*play;
+	t_img	*options;
+	t_img	*maps;
+	t_img	*quit;
 
-	menu = core->menu_img;
-	if (i == 0)
-		transparency(menu->bg, menu->play,
-			(menu->bg->width / 2) - (menu->play->width / 2), y[i]);
-	if (i == 1)
-		transparency(menu->bg, menu->options,
-			(menu->bg->width / 2) - (menu->options->width / 2), y[i]);
-	else if (i == 2)
-		transparency(menu->bg, menu->maps,
-			(menu->bg->width / 2) - (menu->maps->width / 2), y[i]);
-	else if (i == 3)
-		transparency(menu->bg, menu->quit,
-			(menu->bg->width / 2) - (menu->quit->width / 2), y[i]);
+	play = hashmap_get(&core->hashmap, "Menu_play");
+	options = hashmap_get(&core->hashmap, "Menu_options");
+	maps = hashmap_get(&core->hashmap, "Menu_maps");
+	quit = hashmap_get(&core->hashmap, "Menu_quit");
+	transparency(bg, play, (bg->width / 2) - (play->width / 2), y[0]);
+	transparency(bg, options, (bg->width / 2) - (options->width / 2), y[1]);
+	transparency(bg, maps, (bg->width / 2) - (maps->width / 2), y[2]);
+	transparency(bg, quit, (bg->width / 2) - (quit->width / 2), y[3]);
 }
 
 //PRINT SKULL AT THE RIGHT PLACE
 void	skulls_render(t_core *core, const int *y, int frame)
 {
 	int			x;
-	t_menu_img	*menu;
 	t_img		*selected;
 
 	selected = NULL;
-	menu = core->menu_img;
 	if (core->menu_option == 0)
-		selected = menu->play;
+		selected = hashmap_get(&core->hashmap, "Menu_play");
 	else if (core->menu_option == 1)
-		selected = menu->options;
+		selected = hashmap_get(&core->hashmap, "Menu_options");
 	else if (core->menu_option == 2)
-		selected = menu->maps;
+		selected = hashmap_get(&core->hashmap, "Menu_maps");
 	else if (core->menu_option == 3)
-		selected = menu->quit;
-	x = (menu->bg->width / 2) - (selected->width / 2);
-	transparency(menu->bg, menu->skulls->sprites[frame],
-		x - (menu->skulls->sprites[frame]->width + 10), y[core->menu_option]);
-	transparency(menu->bg, menu->skulls->sprites[frame],
+		selected = hashmap_get(&core->hashmap, "Menu_quit");
+	x = (core->menu_img->bg->width / 2) - (selected->width / 2);
+	transparency(core->menu_img->bg, core->menu_img->skulls->sprites[frame],
+		x - (core->menu_img->skulls->sprites[frame]->width + 10),
+		y[core->menu_option]);
+	transparency(core->menu_img->bg, core->menu_img->skulls->sprites[frame],
 		x + (selected->width + 10), y[core->menu_option]);
-	mlx_put_image_to_window(core->mlx, core->win,
-		core->menu_img->bg->img, 0, 0);
+	mlx_put_image_to_window(core->mlx, core->win, core->menu_img->bg->img,
+		0, 0);
+}
+
+//TEMPORAIRE
+void	skulls_render_tempo(t_core *core, const int *y, int frame)
+{
+	int			x;
+	t_img		*selected;
+	t_img		*submenu;
+
+	submenu = hashmap_get(&core->hashmap, "Submenu_option");
+	selected = NULL;
+	if (core->menu_option == 0)
+		selected = hashmap_get(&core->hashmap, "Menu_option1");
+	else if (core->menu_option == 1)
+		selected = hashmap_get(&core->hashmap, "Menu_option2");
+	x = selected->width;
+	transparency(core->menu_img->bg, core->menu_img->skulls->sprites[frame],
+		x - (core->menu_img->skulls->sprites[frame]->width + 10),
+		y[core->menu_option]);
+	transparency(core->menu_img->bg, core->menu_img->skulls->sprites[frame],
+		x + (selected->width + 10), y[core->menu_option]);
+	mlx_put_image_to_window(core->mlx, core->win, core->menu_img->bg->img,
+		0, 0);
 }
 
 //LOAD A NEW BG IMAGE AT EVERY RENDER CALL
@@ -76,16 +96,13 @@ bool	load_bg_image(t_img **img, void *mlx, char *path, t_core *core)
 //MENU RENDERING EVERYTIME I DO A MOVEMENT IN THE MENU
 bool	render_menu(t_core *core)
 {
-	int			i;
+	t_img		*bg;
+	t_img		*bg_clean;
 
-	i = -1;
-	if (core->menu_img->bg->img)
-		mlx_destroy_image(core->mlx, core->menu_img->bg->img);
-	free_gc(core->gc, "bg_img");
-	if (!load_bg_image(&core->menu_img->bg, core->mlx, "menu/bg.xpm", core))
-		return (false);
-	while (++i < 4)
-		rewrite_options(core, core->y_pos, i);
+	bg_clean = hashmap_get(&core->hashmap, "Menu_bg_clean");
+	bg = hashmap_get(&core->hashmap, "Menu_bg_activ");
+	copy_img(bg, bg_clean);
+	rewrite_options(core, core->y_pos, bg);
 	skulls_render(core, core->y_pos, core->menu_img->skulls->frame);
 	core->redraw = false;
 	return (true);

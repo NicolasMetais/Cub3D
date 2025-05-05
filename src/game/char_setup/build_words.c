@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 15:25:43 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/02 15:38:00 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/05 06:25:08 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	get_index(char c, const t_font *font)
 }
 
 //COPY A LETTER INSIDE MY TMP IMAGE
-void	copy_img(t_img **dest, int start_x, const t_font font, t_img *sheet)
+void	copy_letters(t_img **dest, int start_x, const t_font font, t_img *sheet)
 {
 	int				x;
 	int				y;
@@ -79,7 +79,7 @@ void	copy_img(t_img **dest, int start_x, const t_font font, t_img *sheet)
 }
 
 //WRITE ALL LETTER SIDE BY SIDE ON THE RIGH Y AXIX
-void	write_words(t_img **img, t_fonts *fonts, char *word)
+void	write_words(t_img **img, t_fonts *fonts, char *word, t_core *core)
 {
 	int				i;
 	int				j;
@@ -89,12 +89,12 @@ void	write_words(t_img **img, t_fonts *fonts, char *word)
 
 	px_start = 0;
 	j = 0;
-	init_font(fonts, &selected_font, &selected_sheet);
+	init_font(fonts, &selected_font, &selected_sheet, core);
 	i = -1;
 	while (word[++i])
 	{
 		j = get_index(word[i], selected_font);
-		copy_img(img, px_start, selected_font[j], selected_sheet);
+		copy_letters(img, px_start, selected_font[j], selected_sheet);
 		px_start += selected_font[j].width;
 	}
 }
@@ -124,6 +124,6 @@ bool	build_words(t_core *core, t_img **img, t_font_size size, char *word)
 	(*img)->addr = mlx_get_data_addr((*img)->img, &(*img)->bpp,
 			&(*img)->line_len, &(*img)->endian);
 	fill_img_in_green(img);
-	write_words(img, core->fonts, word);
+	write_words(img, core->fonts, word, core);
 	return (true);
 }

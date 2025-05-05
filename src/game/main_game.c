@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 15:44:46 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/02 21:16:48 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/05 05:37:23 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,6 @@
 //INIT IMAGES
 bool	img_init(t_core *core)
 {
-	t_menu_img			*img;
-	t_fonts				*fonts;
-
-
 	core->fonts = gc_malloc(&core->gc, sizeof(t_fonts), STRUCT, "fonts");
 	if (!core->fonts)
 		return (false);
@@ -27,13 +23,10 @@ bool	img_init(t_core *core)
 			STRUCT, "menu img");
 	if (!core->menu_img)
 		return (false);
-	extract_img_data(core);
-	img = core->menu_img;
-	fonts = core->fonts;
-	if (!init_menu_img(core))
+	if (!extract_img_data(core))
 		return (false);
-	if (!init_words_img(core))
-		return (false);
+	core->menu_img->bg = hashmap_get(&core->hashmap, "Menu_bg_activ");
+	core->menu_img->bg_clean = hashmap_get(&core->hashmap, "Menu_bg_clean");
 	return (true);
 }
 

@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 19:08:06 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/02 15:38:38 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/04 21:14:57 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,22 @@
 
 //SELECT RIGHT DATAS DEPENDING ON THE STATE GIVEN
 void	init_font(t_fonts *fonts, const t_font **selected_font,
-		t_img **selected_sheet)
+		t_img **selected_sheet, t_core *core)
 {
 	if (fonts->state == SMALL)
 	{
+		*selected_sheet = hashmap_get(&core->hashmap, "Small_sheet");
 		*selected_font = fonts->small;
-		*selected_sheet = fonts->small_img;
 	}
 	if (fonts->state == REGULAR)
 	{
+		*selected_sheet = hashmap_get(&core->hashmap, "Regular_sheet");
 		*selected_font = fonts->regular;
-		*selected_sheet = fonts->regular_img;
 	}
 	if (fonts->state == BIG)
 	{
+		*selected_sheet = hashmap_get(&core->hashmap, "Big_sheet");
 		*selected_font = fonts->big;
-		*selected_sheet = fonts->big_img;
 	}
 }
 

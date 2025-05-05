@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 02:02:15 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/02 17:26:38 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/04 02:11:36 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,10 @@ int	cube3d(char *av)
 	if (!parsing_cub(&core, av))
 		return (false);
 	if (!window_init(&core))
-		return (false);
+		return (cleanup_game(&core), false);
 	if (!launch_game(&core))
-		return (false);
-	free_gc(core.gc, NULL);
-	destroy_img(&core);
+		return (cleanup_game(&core), false);
+	cleanup_game(&core);
 	return (true);
 }
 

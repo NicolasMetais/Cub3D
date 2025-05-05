@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 16:53:24 by nmetais           #+#    #+#             */
-/*   Updated: 2025/04/30 04:04:50 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/05 18:45:13 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	menu_keypress(int key, t_core *core)
 {
 	if (key == XK_Up)
 	{
-		core->redraw = true;
 		if (core->menu_option > 0)
 			core->menu_option--;
 		else
@@ -26,7 +25,6 @@ void	menu_keypress(int key, t_core *core)
 	}
 	else if (key == XK_Down)
 	{
-		core->redraw = true;
 		if (core->menu_option < 3)
 			core->menu_option++;
 		else
@@ -38,11 +36,7 @@ void	menu_keypress(int key, t_core *core)
 		if (core->menu_option == 0)
 			core->state = GAME;
 		if (core->menu_option == 1)
-		{
-			core->state = OPTIONS_MENU;
-			core->menu_option = 0;
 			render_options_menu(core);
-		}
 		if (core->menu_option == 3)
 			handle_destroy(core);
 	}
@@ -56,7 +50,7 @@ void	option_menu_keypress(int key, t_core *core)
 		if (core->menu_option > 0)
 			core->menu_option--;
 		else
-			core->menu_option = 3;
+			core->menu_option = 1;
 		render_options_menu(core);
 	}
 	else if (key == XK_Down)
@@ -67,14 +61,12 @@ void	option_menu_keypress(int key, t_core *core)
 		else
 			core->menu_option = 0;
 		render_options_menu(core);
-		printf("%d\n", core->menu_option);
 	}
 	if (key == XK_BackSpace)
 	{
 		core->state = START_MENU;
 		core->menu_option = 1;
 		render_menu(core);
-		printf("%d\n", core->menu_option);
 	}
 }
 

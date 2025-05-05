@@ -1,31 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   destroy_img.c                                      :+:      :+:    :+:   */
+/*   copy_img.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/27 22:03:55 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/05 06:13:06 by nmetais          ###   ########.fr       */
+/*   Created: 2025/05/05 04:00:45 by nmetais           #+#    #+#             */
+/*   Updated: 2025/05/05 04:08:37 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	destroy_img(t_core *core)
+void	copy_img(t_img *dest, t_img *copy)
 {
-	int				i;
-	t_hashmap_entry	*tmp;
+	int				x;
+	int				y;
+	unsigned int	pixel;
 
-	i = -1;
-	while (++i < core->hashmap.size)
+	y = 0;
+	while (y < copy->height)
 	{
-		tmp = core->hashmap.buckets[i];
-		while (tmp)
+		x = 0;
+		while (x < copy->width)
 		{
-			if (tmp->img)
-				mlx_destroy_image(core->mlx, tmp->img->img);
-			tmp = tmp->next;
+			pixel = get_img_pxl(copy, x, y);
+			put_on_bg(dest, y, x, pixel);
+			x++;
 		}
+		y++;
 	}
 }

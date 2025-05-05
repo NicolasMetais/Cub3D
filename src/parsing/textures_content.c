@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 18:00:44 by nmetais           #+#    #+#             */
-/*   Updated: 2025/04/24 17:43:40 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/03 04:20:06 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ bool	rgb_error(t_core *core, void *targets[6], int i, void **var_ptr)
 		return (false);
 	colors = ft_split(*(char **)targets[i], ',');
 	if (!colors)
-		return (false);
+		return (cleanup_split(colors), false);
 	if (ft_strlen_tab(colors) != 3)
 		return (ft_free_tab(colors), ft_putendl_fd(
 				"Error \n Wrong typo : (numbers,numbers,numbers)", 2), false);

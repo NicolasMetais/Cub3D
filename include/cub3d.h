@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 01:54:17 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/02 20:37:40 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/05 18:17:37 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@
 //HEADERS
 # include "word_creator.h"
 # include "parsing.h"
+# include "hashmap.h"
 
 typedef struct s_img_loader
 {
@@ -73,13 +74,7 @@ typedef struct s_sprite
 typedef struct s_menu_img
 {
 	t_img		*bg;
-	t_img		*play;
-	t_img		*maps;
-	t_img		*options;
-	t_img		*quit;
-	t_img		*option_win;
-	t_img		*option1;
-	t_img		*option2;
+	t_img		*bg_clean;
 	t_sprite	*skulls;
 }	t_menu_img;
 
@@ -122,6 +117,7 @@ typedef struct s_core
 	int				menu_option;
 	bool			redraw;
 	int				y_pos[4];
+	t_hashmap		hashmap;
 	t_menu_img		*menu_img;
 	t_state			state;
 	t_fonts			*fonts;
@@ -132,21 +128,29 @@ typedef struct s_core
 
 }	t_core;
 
+//TEMPORAIRE
+void	skulls_render_tempo(t_core *core, const int *y, int frame);
+
 //Parsing
 bool			parsing_cub(t_core *core, char *av);
 
 //UTILS
+bool			update_sprite(t_sprite *sprite);
 bool			is_empty_line(char *str);
+void			cleanup_split(char **str);
+void			cleanup_game(t_core *core);
+void			copy_img(t_img *dest, t_img *copy);
+
+//TRANSPARENCY
 void			transparency(t_img *bg, const t_img *stickonbg,
 					int start_x, const int start_y);
 void			put_on_bg(t_img *bg, size_t y, size_t x, int color);
 unsigned int	get_img_pxl(const t_img *stickonbg, size_t x, size_t y);
-bool			update_sprite(t_sprite *sprite);
 
 //Create new t_img
 bool			load_image(t_img **img, void *mlx, char *path, t_core *core);
 bool			load_word_image(t_img **img, t_core *core,
-					char *word, t_font_size size);
+					char *word, char *state);
 
 //Game
 bool			launch_game(t_core *core);
@@ -159,8 +163,6 @@ bool			render_options_menu(t_core *core);
 void			skulls_render(t_core *core, const int *y, int frame);
 
 //Init img
-bool			init_words_img(t_core *core);
-bool			init_menu_img(t_core *core);
 bool			extract_img_data(t_core *core);
 
 //Keypress Event

@@ -4,8 +4,11 @@ MLX = lib/minilibx-linux/libmlx.a
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -Ilib/libft/include -Ilib/minilibx-linux -Iinclude -g3
 SRCS =	src/main.c \
+		src/utils/copy_img.c \
 		src/utils/extension.c \
+		src/utils/power_of_two.c \
 		src/utils/empty_line.c \
+		src/utils/cleanup_split.c \
 		src/utils/sprite_udpate.c \
 		src/utils/transparency.c \
 		src/parsing/map_extract.c \
@@ -28,6 +31,8 @@ SRCS =	src/main.c \
 		src/game/char_setup/build_words.c \
 		src/game/char_setup/build_words_utils.c \
 		src/game/image_loader.c \
+		src/game/hashmap/hashmap.c \
+		src/utils/cleanup_game.c \
 
 OBJ_DIR = obj
 
