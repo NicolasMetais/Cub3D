@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 21:25:17 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/05 18:43:23 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/05 19:14:44 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	skulls_render_tempo(t_core *core, const int *y, int frame)
 		selected = hashmap_get(&core->hashmap, "Menu_option1");
 	else if (core->menu_option == 1)
 		selected = hashmap_get(&core->hashmap, "Menu_option2");
-	x = selected->width;
+	x = selected->width - 209;
 	transparency(core->menu_img->bg, core->menu_img->skulls->sprites[frame],
 		x - (core->menu_img->skulls->sprites[frame]->width + 10),
 		y[core->menu_option]);

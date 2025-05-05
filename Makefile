@@ -26,6 +26,7 @@ SRCS =	src/main.c \
 		src/game/events/mouse.c \
 		src/game/menu/render_menu.c \
 		src/game/menu/render_options_menu.c \
+		src/game/menu/render_maps_menu.c \
 		src/game/menu/start_menu.c \
 		src/game/char_setup/init_char_nodes.c \
 		src/game/char_setup/build_words.c \

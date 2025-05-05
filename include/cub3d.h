@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 01:54:17 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/05 18:17:37 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/05 19:57:54 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ typedef enum s_state
 {
 	START_MENU,
 	OPTIONS_MENU,
+	MAPS_MENU,
 	GAME,
 }	t_state;
 
@@ -129,7 +130,7 @@ typedef struct s_core
 }	t_core;
 
 //TEMPORAIRE
-void	skulls_render_tempo(t_core *core, const int *y, int frame);
+void			skulls_render_tempo(t_core *core, const int *y, int frame);
 
 //Parsing
 bool			parsing_cub(t_core *core, char *av);
@@ -159,6 +160,7 @@ int				routine(void *param);
 //Menu
 bool			start_menu(t_core *core);
 bool			render_menu(t_core *core);
+bool			render_maps_menu(t_core *core);
 bool			render_options_menu(t_core *core);
 void			skulls_render(t_core *core, const int *y, int frame);
 

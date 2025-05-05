@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render_options_menu.c                              :+:      :+:    :+:   */
+/*   render_maps_menu.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/30 01:19:51 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/05 19:47:00 by nmetais          ###   ########.fr       */
+/*   Created: 2025/05/05 19:34:35 by nmetais           #+#    #+#             */
+/*   Updated: 2025/05/05 20:00:42 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,11 @@ static void	rewrite_options(t_core *core)
 	skulls_render_tempo(core, y_pos, core->menu_img->skulls->frame);
 }
 
-bool	render_options_menu(t_core *core)
+bool	render_maps_menu(t_core *core)
 {
 	t_img	*option_win;
 
-	core->state = OPTIONS_MENU;
+	core->state = MAPS_MENU;
 	option_win = hashmap_get(&core->hashmap, "Submenu_option");
 	transparency(core->menu_img->bg, option_win, 300, 150);
 	rewrite_options(core);
