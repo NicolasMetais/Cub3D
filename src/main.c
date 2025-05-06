@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 02:02:15 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/04 02:11:36 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/06 03:24:06 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int	cube3d(char *av)
 {
 	t_core			core;
 
+	core.enter = 0;
 	ft_memset(&core, 0, sizeof(core));
 	core.redraw = true;
 	if (!garbage_init(&core.gc))

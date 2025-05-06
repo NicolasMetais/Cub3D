@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 01:54:17 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/05 19:57:54 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/06 03:22:57 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,7 @@ typedef struct s_core
 	int				menu_option;
 	bool			redraw;
 	int				y_pos[4];
+	int				enter;
 	t_hashmap		hashmap;
 	t_menu_img		*menu_img;
 	t_state			state;

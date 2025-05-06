@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 16:53:24 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/05 19:58:10 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/06 03:24:59 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,11 @@
 //MANAGE MENUING DEPLACEMENT
 void	menu_keypress(int key, t_core *core)
 {
+	if (!core->enter)
+	{
+		core->enter = 1;
+		return ;
+	}
 	if (key == XK_Up)
 	{
 		if (core->menu_option > 0)
