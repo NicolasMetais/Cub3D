@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 02:30:20 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/02 20:34:28 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/07 02:20:48 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ bool	file_extract(char *file_name, char ***tab)
 	i = -1;
 	fd = open(file_name, O_RDONLY);
 	if (fd == -1)
-		perror("cub3D: open_file");
+		return (perror("cub3D: open_file"), false);//LEAKS
 	*tab = malloc(sizeof(char *) * 16);
 	if (!*tab)
 		return (close(fd), false);

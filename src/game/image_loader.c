@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 02:35:31 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/05 06:26:47 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/07 01:24:35 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,11 @@ bool	extract_img_data(t_core *core)
 	size = 0;
 	data = NULL;
 	if (!file_extract("config.txt", &data))
-		return (ft_free_tab(data), false);
+	{
+		if (data)
+			ft_free_tab(data);
+		return (false);
+	}
 	while (data[++i])
 	{
 		if (data[i][0] == '#' || !data[i][0])

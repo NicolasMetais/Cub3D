@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 02:02:15 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/06 03:24:06 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/07 04:03:24 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,32 +37,29 @@ bool	window_init(t_core *core)
 }
 
 //Fonction corps du programme
-int	cube3d(char *av)
+void	cube3d(char *av, t_core *core)
 {
-	t_core			core;
-
-	core.enter = 0;
-	ft_memset(&core, 0, sizeof(core));
-	core.redraw = true;
-	if (!garbage_init(&core.gc))
-		return (false);
-	if (!parsing_cub(&core, av))
-		return (false);
-	if (!window_init(&core))
-		return (cleanup_game(&core), false);
-	if (!launch_game(&core))
-		return (cleanup_game(&core), false);
-	cleanup_game(&core);
-	return (true);
+	if (!garbage_init(&core->gc))
+		return ;
+	if (!parsing_cub(core, av))
+		return ;
+	if (!window_init(core))
+		return ;
+	if (!launch_game(core))
+		return ;
 }
 
 //Main
 int	main(int ac, char **av)
 {
+	t_core			core;
+
 	if (ac == 2)
 	{
-		if (!cube3d(av[1]))
-			return (false);
+		ft_memset(&core, 0, sizeof(core));
+		core.redraw = true;
+		cube3d(av[1], &core);
+		cleanup_game(&core);
 	}
 	else
 		ft_putendl_fd("Error \n Don't be silly", 2);

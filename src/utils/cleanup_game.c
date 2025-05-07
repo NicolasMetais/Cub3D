@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 02:08:56 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/04 02:10:06 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/07 04:04:11 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 void	cleanup_game(t_core *core)
 {
-	mlx_destroy_window(core->mlx, core->win);
+	if (core->mlx)
+		mlx_destroy_window(core->mlx, core->win);
 	free_gc(core->gc, NULL);
 	//destroy_img(&core);
 }

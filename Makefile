@@ -20,6 +20,7 @@ SRCS =	src/main.c \
 		src/parsing/flood_fill.c \
 		src/game/main_game.c \
 		src/game/routine.c \
+		src/game/maps_names.c \
 		src/game/destroy_img.c \
 		src/game/events/destroy.c \
 		src/game/events/keypress.c \
@@ -57,6 +58,9 @@ $(OBJ_DIR)/src/%.o: src/%.c
 
 -include $(OBJS:.o=.d)
 
+f: re
+	$(CC) $(OBJS) $(LIB) $(MLX) -lX11 -lXext -lm -o $(NAME) -fsanitize=address
+
 clean:
 	rm -rf $(OBJ_DIR)
 	$(MAKE) clean -C lib/libft
@@ -64,7 +68,6 @@ clean:
 
 fclean: clean
 	rm -f $(NAME)
-	$(MAKE) fclean -C  lib/libft
 
 re: fclean all
 

@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 19:34:35 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/05 20:00:42 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/07 02:21:56 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ static void	rewrite_options(t_core *core)
 	transparency(menu->bg, option2, (menu->bg->width / 4), y_pos[1]);
 	skulls_render_tempo(core, y_pos, core->menu_img->skulls->frame);
 }
+
 
 bool	render_maps_menu(t_core *core)
 {

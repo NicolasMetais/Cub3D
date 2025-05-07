@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 03:13:52 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/06 02:20:11 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/07 03:58:56 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	starting_menu_hover(int y, t_core *core)
 	i = -1;
 	if (core->state == START_MENU)
 	{
-		while (i < 4)
+		while (++i < 4)
 		{
 			if (y >= core->y_pos[i] && y < core->y_pos[i] + MENU_SPACING)
 			{
@@ -27,7 +27,44 @@ void	starting_menu_hover(int y, t_core *core)
 				render_menu(core);
 				break ;
 			}
-			i++;
+		}
+	}
+}
+
+void	options_menu_hover(int y, t_core *core)
+{
+	int	i;
+
+	i = -1;
+	if (core->state == OPTIONS_MENU)
+	{
+		while (++i < 2)
+		{
+			if (y >= core->y_pos[i] && y < core->y_pos[i] + MENU_SPACING)
+			{
+				core->menu_option = i;
+				render_options_menu(core);
+				break ;
+			}
+		}
+	}
+}
+
+void	maps_menu_hover(int y, t_core *core)
+{
+	int	i;
+
+	i = -1;
+	if (core->state == MAPS_MENU)
+	{
+		while (++i < 2)
+		{
+			if (y >= core->y_pos[i] && y < core->y_pos[i] + MENU_SPACING)
+			{
+				core->menu_option = i;
+				render_maps_menu(core);
+				break ;
+			}
 		}
 	}
 }
@@ -36,13 +73,12 @@ void	starting_menu_hover(int y, t_core *core)
 int	mouse_menu_hover(int x, int y, void *param)
 {
 	t_core		*core;
-	int			i;
 
 	(void)x;
 	core = (t_core *)param;
-	i = 0;
 	starting_menu_hover(y, core);
-	
+	options_menu_hover(y, core);
+	maps_menu_hover(y, core);
 	return (0);
 }
 
@@ -67,7 +103,7 @@ int	mouse_menu_click(int button, int x, int y, t_core *core)
 			{
 				core->state = MAPS_MENU;
 				core->menu_option = 0;
-				render_options_menu(core);
+				render_maps_menu(core);
 			}
 			if (core->menu_option == 3)
 				handle_destroy(core);

@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 15:44:46 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/06 03:22:36 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/07 03:53:28 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ bool	img_init(t_core *core)
 bool	launch_game(t_core *core)
 {
 	if (!img_init(core))
+		return (false);
+	if (!extract_maps_names(core))
 		return (false);
 	start_menu(core);
 	mlx_key_hook(core->win, handle_keypress, core);

@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 01:54:17 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/06 03:22:57 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/07 03:37:10 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@
 # include <fcntl.h>
 # include <sys/time.h>
 # include <stdlib.h>
+#include <dirent.h>
+#include <limits.h>
 //X11
 # include <X11/keysym.h>
 # include <X11/X.h>
@@ -108,6 +110,12 @@ typedef struct s_spawn
 	int	y;
 }	t_spawn;
 
+typedef struct s_menu_maps
+{
+	char	*name;
+	bool	parsed;
+}	t_menu_maps;
+
 typedef struct s_core
 {
 	void			*mlx;
@@ -119,6 +127,7 @@ typedef struct s_core
 	bool			redraw;
 	int				y_pos[4];
 	int				enter;
+	t_menu_maps		*menu_maps;
 	t_hashmap		hashmap;
 	t_menu_img		*menu_img;
 	t_state			state;
@@ -162,6 +171,7 @@ int				routine(void *param);
 bool			start_menu(t_core *core);
 bool			render_menu(t_core *core);
 bool			render_maps_menu(t_core *core);
+bool			extract_maps_names(t_core *core);
 bool			render_options_menu(t_core *core);
 void			skulls_render(t_core *core, const int *y, int frame);
 
