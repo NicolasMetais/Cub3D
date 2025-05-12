@@ -6,15 +6,18 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 01:54:17 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/07 03:37:10 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/12 17:30:18 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# define S_LENGHT 1920
-# define S_HEIGHT 1080
+//SCALE IMAGE RENDERING
+# define GAME_SCALE 5
+
+# define S_LENGHT 1600
+# define S_HEIGHT 1000
 //MENU PLACEMENT
 # define MENU_START_Y 500
 # define MENU_SPACING 100
@@ -25,8 +28,8 @@
 # include <fcntl.h>
 # include <sys/time.h>
 # include <stdlib.h>
-#include <dirent.h>
-#include <limits.h>
+# include <dirent.h>
+# include <limits.h>
 //X11
 # include <X11/keysym.h>
 # include <X11/X.h>

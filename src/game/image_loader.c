@@ -6,24 +6,73 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 02:35:31 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/07 01:24:35 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/12 22:07:27 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+void	put_on_img(t_img **bg, size_t y, size_t x, int pixel)
+{
+	char	*change_pix;
+
+	change_pix = (*bg)->addr + (y * (*bg)->line_len + x * ((*bg)->bpp / 8));
+	*(unsigned int *) change_pix = pixel;
+}
+
+void	resize_img(t_img *original, t_img **resized)
+{
+	int	x;
+	int	y;
+	int	dx;
+	int	dy;
+	int	pixel;
+
+	y = -1;
+	while (++y < original->height)
+	{
+		x = -1;
+		while (++x < original->width)
+		{
+			pixel = get_img_pxl(original, x, y);
+			dy = -1;
+			while (++dy < GAME_SCALE)
+			{
+				dx = -1;
+				while (++dx < GAME_SCALE)
+					put_on_img(resized, y * GAME_SCALE + dy,
+						x * GAME_SCALE + dx, pixel);
+			}
+		}
+	}
+}
+
 //MALLOC IMG AND SETUP THE T_IMG WITH GET_DATA_ADDR
 bool	load_image(t_img **img, void *mlx, char *path, t_core *core)
 {
+	t_img	*original;
+
+	original = gc_malloc(&core->gc, sizeof(t_img), STRUCT, "original img");
+	if (!original)
+		return (false);
+	original->img = mlx_xpm_file_to_image(mlx, path, &original->width,
+			&original->height);
+	if (!original->img)
+		return (printf("PATH %s\n", path), ft_putendl_fd("Error \n Images corrupted ici", 2), false);
+	original->addr = mlx_get_data_addr(original->img, &original->bpp,
+			&original->line_len, &original->endian);
 	*img = gc_malloc(&core->gc, sizeof(t_img), STRUCT, "image du menu");
 	if (!*img)
 		return (false);
-	(*img)->img = mlx_xpm_file_to_image(mlx, path, &(*img)->width,
-			&(*img)->height);
-	if (!(*img)->img)
-		return (ft_putendl_fd("Error \n Menu images corrupted", 2), false);
+	(*img)->img = mlx_new_image(core->mlx, original->width * GAME_SCALE,
+			original->height * GAME_SCALE);
+	if (!*img)
+		return (ft_putendl_fd("Error \n Images corrupted", 2), false);
 	(*img)->addr = mlx_get_data_addr((*img)->img, &(*img)->bpp,
 			&(*img)->line_len, &(*img)->endian);
+	resize_img(original, img);
+	(*img)->width = original->width * GAME_SCALE;
+	(*img)->height = original->height * GAME_SCALE;
 	return (true);
 }
 
@@ -71,10 +120,10 @@ bool	store_img(char **line, t_core *core)
 		ft_putendl_fd("Error: Failed to insert image into hashmap", 2);
 		return (false);
 	}
+	free_gc(core->gc, "original img");
 	return (true);
 }
 
-//LOAD HORRIBLE D'IMAGE POUR PASSER LA NORME JE VAIS FAIRE UNE HASHMAP
 bool	extract_img_data(t_core *core)
 {
 	int		i;

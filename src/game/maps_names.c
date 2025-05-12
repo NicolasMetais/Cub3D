@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 03:22:15 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/07 04:14:24 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/12 13:18:09 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,17 @@ int	get_maps_numbers(DIR *dir)
 	files = readdir(dir);
 	while (files)
 	{
-		if (!valid_extension(".cub", files->d_name))
-		{
-			ft_putendl_fd("Error \n i only take .cub maps extension", 2);
-			return (-1);
-		}
+		printf("%s\n", files->d_name);
 		if (ft_strcmp(files->d_name, "..") && ft_strcmp(files->d_name, "."))
+		{
 			size++;
+			if (!valid_extension(".cub", files->d_name))
+			{
+				ft_putendl_fd(
+					"Error \nOnly .cub maps extension in maps folder", 2);
+				return (-1);
+			}
+		}
 		files = readdir(dir);
 	}
 	return (size);
