@@ -1,95 +1,20 @@
 # Menu
-Menu_bg_activ	menu/bg.xpm
-Menu_bg_clean	menu/bg.xpm
-Submenu_option	menu/submenu.xpm
-Skull1			menu/skull_sprite1.xpm
-Skull2			menu/skull_sprite2.xpm
+Menu_bg_activ	menu/bg.xpm		5
+Menu_bg_clean	menu/bg.xpm		5
+Submenu_option	menu/submenu.xpm	5
+Skull1			menu/skull_sprite1.xpm	3
+Skull2			menu/skull_sprite2.xpm	3
+Logo			menu/doom_logo.xpm	4
 
 # Sheets
-Big_sheet		sheets/big.xpm
-Regular_sheet	sheets/regular.xpm
-Small_sheet		sheets/small.xpm
-A				sheets/A.xpm
-B				sheets/B.xpm
-C				sheets/C.xpm
-D				sheets/D.xpm
-E				sheets/E.xpm
-F				sheets/F.xpm
-G				sheets/G.xpm
-H				sheets/H.xpm
-I				sheets/I.xpm
-J				sheets/J.xpm
-K				sheets/K.xpm
-L				sheets/L.xpm
-M				sheets/M.xpm
-N				sheets/N.xpm
-O				sheets/O.xpm
-P				sheets/P.xpm
-Q				sheets/Q.xpm
-R				sheets/R.xpm
-S				sheets/S.xpm
-T				sheets/T.xpm
-U				sheets/U.xpm
-V				sheets/V.xpm
-W				sheets/W.xpm
-X				sheets/X.xpm
-Y				sheets/Y.xpm
-Z				sheets/Z.xpm
-!				sheets/!.xpm
-"				sheets/".xpm
-%				sheets/%.xpm
-&				sheets/&.xpm
-'				sheets/'.xpm
-(				sheets/(.xpm
-)				sheets/).xpm
-*				sheets/*.xpm
-+				sheets/+.xpm
-,				sheets/,.xpm
--				sheets/-.xpm
-:				sheets/:.xpm
-;				sheets/;.xpm
-<				sheets/<.xpm
->				sheets/>.xpm
-=				sheets/=.xpm
-?				sheets/?.xpm
-@				sheets/@.xpm
-[				sheets/[.xpm
-]				sheets/].xpm
-\				sheets/\.xpm
-]				sheets/].xpm
-^				sheets/^.xpm
-_				sheets/_.xpm
-$				sheets/$.xpm
-slash			sheets/slash.xpm
-point			sheets/point.xpm
-#				sheets/#.xpm
-0				sheets/0.xpm
-1				sheets/1.xpm
-2				sheets/2.xpm
-3				sheets/3.xpm
-4				sheets/4.xpm
-5				sheets/5.xpm
-6				sheets/6.xpm
-7				sheets/7.xpm
-8				sheets/8.xpm
-9				sheets/9.xpm
-
-
-
-
-
-
-
-
-
-
-
-
+Big_sheet		sheets/big.xpm	1
+Regular_sheet	sheets/regular.xpm	1
+Small_sheet		sheets/small.xpm	1
 
 # Words
 Menu_play		Kill				word_creator:regular
 Menu_options	Options				word_creator:regular
 Menu_maps		Maps				word_creator:regular
 Menu_quit		Death				word_creator:regular
-Menu_option1	Options Random 1	word_creator:regular
+Menu_option1	Test				word_creator:regular
 Menu_option2	Options Random 2	word_creator:regular

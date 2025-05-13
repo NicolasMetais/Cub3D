@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 15:44:46 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/07 03:53:28 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/13 20:30:16 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,32 @@ bool	img_init(t_core *core)
 	return (true);
 }
 
+bool	create_maps_words(t_core *core)
+{
+	int		i;
+	t_img	*new;
+
+	new = NULL;
+	i = 0;
+	while (i < core->maps_nb)
+	{
+		if (!load_word_image(&new, core, core->menu_maps[i].name, "regular"))
+			return (false);
+		if (!hashmap_insert(&core->hashmap, core->menu_maps[i++].name,
+				new, core))
+			return (false);
+	}
+	return (true);
+}
+
 //GAME LAUNCH
 bool	launch_game(t_core *core)
 {
 	if (!img_init(core))
 		return (false);
 	if (!extract_maps_names(core))
+		return (false);
+	if (!create_maps_words(core))
 		return (false);
 	start_menu(core);
 	mlx_key_hook(core->win, handle_keypress, core);

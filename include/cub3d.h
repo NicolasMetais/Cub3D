@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 01:54:17 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/12 17:30:18 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/13 20:19:13 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # define S_LENGHT 1600
 # define S_HEIGHT 1000
 //MENU PLACEMENT
-# define MENU_START_Y 500
+# define MENU_START_Y 540
 # define MENU_SPACING 100
 
 //LIBC
@@ -130,6 +130,7 @@ typedef struct s_core
 	bool			redraw;
 	int				y_pos[4];
 	int				enter;
+	int				maps_nb;
 	t_menu_maps		*menu_maps;
 	t_hashmap		hashmap;
 	t_menu_img		*menu_img;
@@ -162,7 +163,7 @@ void			put_on_bg(t_img *bg, size_t y, size_t x, int color);
 unsigned int	get_img_pxl(const t_img *stickonbg, size_t x, size_t y);
 
 //Create new t_img
-bool			load_image(t_img **img, void *mlx, char *path, t_core *core);
+bool			load_image(t_img **img, char *path, t_core *core, char *scale);
 bool			load_word_image(t_img **img, t_core *core,
 					char *word, char *state);
 

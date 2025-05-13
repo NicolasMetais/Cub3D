@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 04:04:48 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/05 17:30:31 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/13 15:27:39 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,12 @@ t_sprite	*create_skull_sprite(t_core *core)
 //Core menu function
 bool	start_menu(t_core *core)
 {
+	t_img	*logo;
+
+	logo = hashmap_get(&core->hashmap, "Logo");
 	menu_init(core);
 	core->menu_img->skulls = create_skull_sprite(core);
+	transparency(core->menu_img->bg_clean, logo, 544, 260);
 	render_menu(core);
 	mlx_hook(core->win, 6, (1L << 6), mouse_menu_hover, core);
 	mlx_hook(core->win, 4, (1L << 2), mouse_menu_click, core);

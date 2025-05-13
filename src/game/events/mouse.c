@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 03:13:52 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/07 03:58:56 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/13 21:49:49 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	maps_menu_hover(int y, t_core *core)
 	i = -1;
 	if (core->state == MAPS_MENU)
 	{
-		while (++i < 2)
+		while (++i < core->maps_nb)
 		{
 			if (y >= core->y_pos[i] && y < core->y_pos[i] + MENU_SPACING)
 			{

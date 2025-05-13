@@ -33,6 +33,7 @@ SRCS =	src/main.c \
 		src/game/char_setup/build_words.c \
 		src/game/char_setup/build_words_utils.c \
 		src/game/image_loader.c \
+		src/game/config_parse.c \
 		src/game/hashmap/hashmap.c \
 		src/utils/cleanup_game.c \
 

@@ -6,13 +6,13 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 03:22:15 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/12 13:18:09 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/13 21:55:30 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	get_maps_numbers(DIR *dir)
+int	get_maps_numbers(DIR *dir, t_core *core)
 {
 	struct dirent	*files;
 	int				size;
@@ -21,7 +21,6 @@ int	get_maps_numbers(DIR *dir)
 	files = readdir(dir);
 	while (files)
 	{
-		printf("%s\n", files->d_name);
 		if (ft_strcmp(files->d_name, "..") && ft_strcmp(files->d_name, "."))
 		{
 			size++;
@@ -34,7 +33,28 @@ int	get_maps_numbers(DIR *dir)
 		}
 		files = readdir(dir);
 	}
+	core->maps_nb = size;
 	return (size);
+}
+
+bool	allocate_names(struct dirent *files, char **name, t_core *core, int *i)
+{
+	char	*tmp;
+
+	if (ft_strcmp(files->d_name, "..") && ft_strcmp(files->d_name, "."))
+	{
+		tmp = ft_substr(files->d_name, 0, ft_strlen(files->d_name) - 4);
+		if (!tmp)
+			return (false);
+		*name = ft_strdup(tmp);
+		if (!*name)
+			return (false);
+		if (!add_to_gc(&core->gc, *name, STRING, "file names"))
+			return (false);
+		(*i)++;
+		free(tmp);
+	}
+	return (true);
 }
 
 bool	extract_maps_names(t_core *core)
@@ -48,7 +68,7 @@ bool	extract_maps_names(t_core *core)
 	dir = opendir("./maps");
 	if (!dir)
 		return (ft_putendl_fd("Error \n can't load maps folder", 2), false);
-	size = get_maps_numbers(dir);
+	size = get_maps_numbers(dir, core);
 	if (size == -1)
 		return (false);
 	core->menu_maps = gc_malloc(&core->gc, sizeof(t_menu_maps) * size,
@@ -59,8 +79,8 @@ bool	extract_maps_names(t_core *core)
 	files = readdir(dir);
 	while (files)
 	{
-		if (ft_strcmp(files->d_name, "..") && ft_strcmp(files->d_name, "."))
-			core->menu_maps[i++].name = ft_strdup(files->d_name);
+		if (!allocate_names(files, &core->menu_maps[i].name, core, &i))
+			return (closedir(dir), false);
 		files = readdir(dir);
 	}
 	return (closedir(dir), true);
