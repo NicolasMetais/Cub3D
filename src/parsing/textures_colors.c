@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 17:28:37 by nmetais           #+#    #+#             */
-/*   Updated: 2025/04/28 01:31:03 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/14 11:43:11 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,6 @@ char	*strdup_without_spaces(const char *s)
 	return ((void *)cpy);
 }
 
-//Eventuelle "textur    e.xpm" si il y a " ou ' 
-//pour gerer les espace mais bcp de code pour pas grand chose
 bool	extract_textures(char **dest, t_core *core, char *prefix)
 {
 	int		i;

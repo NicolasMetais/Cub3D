@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 01:54:17 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/13 20:19:13 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/14 14:58:57 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,7 @@ typedef struct s_core
 	int				y_pos[4];
 	int				enter;
 	int				maps_nb;
+	char			*loaded_map;
 	t_menu_maps		*menu_maps;
 	t_hashmap		hashmap;
 	t_menu_img		*menu_img;
@@ -182,7 +183,11 @@ void			skulls_render(t_core *core, const int *y, int frame);
 //Init img
 bool			extract_img_data(t_core *core);
 
+//Map selector
+bool	map_selector(t_core *core);
+
 //Keypress Event
+void			maps_menu_keypress(int key, t_core *core);
 int				handle_keypress(int key, void *param);
 int				handle_destroy(t_core *core);
 

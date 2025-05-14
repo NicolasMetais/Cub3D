@@ -23,8 +23,10 @@ SRCS =	src/main.c \
 		src/game/maps_names.c \
 		src/game/destroy_img.c \
 		src/game/events/destroy.c \
-		src/game/events/keypress.c \
-		src/game/events/mouse.c \
+		src/game/events/keyboard/keypress_maps.c \
+		src/game/events/keyboard/keypress.c \
+		src/game/events/mouse/mouse_over.c \
+		src/game/events/mouse/mouse_click.c \
 		src/game/menu/render_menu.c \
 		src/game/menu/render_options_menu.c \
 		src/game/menu/render_maps_menu.c \

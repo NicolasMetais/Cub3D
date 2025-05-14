@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 03:22:15 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/13 21:55:30 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/14 10:55:43 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ bool	extract_maps_names(t_core *core)
 		return (ft_putendl_fd("Error \n can't load maps folder", 2), false);
 	size = get_maps_numbers(dir, core);
 	if (size == -1)
-		return (false);
+		return (closedir(dir), false);
 	core->menu_maps = gc_malloc(&core->gc, sizeof(t_menu_maps) * size,
 			STRUCT, "menu maps");
 	if (!core->menu_maps)

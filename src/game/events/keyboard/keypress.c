@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 16:53:24 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/13 21:47:56 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/14 14:34:59 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	menu_keypress(int key, t_core *core)
 		if (core->menu_option == 2)
 		{
 			core->menu_option = 0;
+			core->enter = 0;
 			render_maps_menu(core);
 		}
 		if (core->menu_option == 3)
@@ -79,34 +80,6 @@ void	option_menu_keypress(int key, t_core *core)
 	{
 		core->state = START_MENU;
 		core->menu_option = 1;
-		render_menu(core);
-	}
-}
-
-void	maps_menu_keypress(int key, t_core *core)
-{
-	if (key == XK_Up)
-	{
-		core->redraw = true;
-		if (core->menu_option > 0)
-			core->menu_option--;
-		else
-			core->menu_option = core->maps_nb - 1;
-		render_maps_menu(core);
-	}
-	else if (key == XK_Down)
-	{
-		core->redraw = true;
-		if (core->menu_option < core->maps_nb - 1)
-			core->menu_option++;
-		else
-			core->menu_option = 0;
-		render_maps_menu(core);
-	}
-	if (key == XK_BackSpace)
-	{
-		core->state = START_MENU;
-		core->menu_option = 2;
 		render_menu(core);
 	}
 }
