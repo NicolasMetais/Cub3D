@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   maps_selector.c                                    :+:      :+:    :+:   */
+/*   keypress_maps.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 10:45:42 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/14 14:39:04 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/14 17:10:54 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,17 +63,21 @@ void	maps_menu_keypress(int key, t_core *core)
 	if (key == XK_Up)
 	{
 		if (core->menu_option > 0)
+		{
 			core->menu_option--;
-		else
-			core->menu_option = core->maps_nb - 1;
+			if (core->menu_option < core->scroll_offset)
+				core->scroll_offset--;
+		}
 		render_maps_menu(core);
 	}
 	else if (key == XK_Down)
 	{
 		if (core->menu_option < core->maps_nb - 1)
+		{
 			core->menu_option++;
-		else
-			core->menu_option = 0;
+			if (core->menu_option >= core->scroll_offset + VISIBLE)
+				core->scroll_offset++;
+		}
 		render_maps_menu(core);
 	}
 	extend_menu_handler(core, key);

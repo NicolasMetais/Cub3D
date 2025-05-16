@@ -6,20 +6,11 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 04:04:48 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/14 14:49:58 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/15 13:02:43 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-//INIT Y POS
-void	menu_init(t_core *core)
-{
-	core->y_pos[0] = MENU_START_Y + (0 * MENU_SPACING);
-	core->y_pos[1] = MENU_START_Y + (1 * MENU_SPACING);
-	core->y_pos[2] = MENU_START_Y + (2 * MENU_SPACING);
-	core->y_pos[3] = MENU_START_Y + (3 * MENU_SPACING);
-}
 
 //INIT SKULLS SPRITES
 t_sprite	*create_skull_sprite(t_core *core)
@@ -48,7 +39,6 @@ bool	start_menu(t_core *core)
 	t_img	*logo;
 
 	logo = hashmap_get(&core->hashmap, "Logo");
-	menu_init(core);
 	core->menu_img->skulls = create_skull_sprite(core);
 	transparency(core->menu_img->bg_clean, logo, 544, 260);
 	render_menu(core);

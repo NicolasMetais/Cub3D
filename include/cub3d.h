@@ -6,21 +6,33 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 01:54:17 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/14 14:58:57 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/16 16:02:06 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
+//FOV
+# define FOV_MIN 60
+# define FOV_MAX 120
+# define FOV_DEFAULT 90
+
 //SCALE IMAGE RENDERING
 # define GAME_SCALE 5
 
+# define SLIDER_SIZE 9
+
+//WINDOW SIZE
 # define S_LENGHT 1600
 # define S_HEIGHT 1000
+
 //MENU PLACEMENT
 # define MENU_START_Y 540
 # define MENU_SPACING 100
+
+//VISIBLE SCROLLING ELEMENTS
+# define VISIBLE 4
 
 //LIBC
 # include <stdbool.h>
@@ -80,6 +92,8 @@ typedef struct s_menu_img
 {
 	t_img		*bg;
 	t_img		*bg_clean;
+	t_img		*slider_bar;
+	t_img		*cursor;
 	t_sprite	*skulls;
 }	t_menu_img;
 
@@ -130,8 +144,14 @@ typedef struct s_core
 	bool			redraw;
 	int				y_pos[4];
 	int				enter;
+	int				fov;
+	float			fov_ratio;
 	int				maps_nb;
 	char			*loaded_map;
+	bool			isclicked;
+	int				x;
+	int				y;
+	int				scroll_offset;
 	t_menu_maps		*menu_maps;
 	t_hashmap		hashmap;
 	t_menu_img		*menu_img;
@@ -143,9 +163,6 @@ typedef struct s_core
 	t_gc_controller	*gc;
 
 }	t_core;
-
-//TEMPORAIRE
-void			skulls_render_tempo(t_core *core, const int *y, int frame);
 
 //Parsing
 bool			parsing_cub(t_core *core, char *av);
@@ -167,6 +184,7 @@ unsigned int	get_img_pxl(const t_img *stickonbg, size_t x, size_t y);
 bool			load_image(t_img **img, char *path, t_core *core, char *scale);
 bool			load_word_image(t_img **img, t_core *core,
 					char *word, char *state);
+void			fill_img_in_green(t_img **img);
 
 //Game
 bool			launch_game(t_core *core);
@@ -183,8 +201,11 @@ void			skulls_render(t_core *core, const int *y, int frame);
 //Init img
 bool			extract_img_data(t_core *core);
 
-//Map selector
-bool	map_selector(t_core *core);
+//Slider bar img construc
+bool			slider_constructor(t_core *core, int width);
+
+//MAP SELECTOR
+bool			map_selector(t_core *core);
 
 //Keypress Event
 void			maps_menu_keypress(int key, t_core *core);
@@ -194,6 +215,10 @@ int				handle_destroy(t_core *core);
 //Mouse Event
 int				mouse_menu_click(int button, int x, int y, t_core *core);
 int				mouse_menu_hover(int x, int y, void *param);
+int				mouse_menu_release(int button, int x, int y, t_core *core);
+
+//Slider Update
+void			update_slider(t_core *core, const int *y, t_img *bg);
 
 //Destroy X11 memory img
 void			destroy_img(t_core *core);

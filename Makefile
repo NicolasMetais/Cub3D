@@ -2,7 +2,7 @@ NAME = cub3D
 LIB = lib/libft/libft.a
 MLX = lib/minilibx-linux/libmlx.a
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -Ilib/libft/include -Ilib/minilibx-linux -Iinclude -g3
+CFLAGS = -Wall -Wextra -Werror -Ilib/libft/include -Ilib/minilibx-linux -Iinclude -g3 -O3
 SRCS =	src/main.c \
 		src/utils/copy_img.c \
 		src/utils/extension.c \
@@ -26,6 +26,7 @@ SRCS =	src/main.c \
 		src/game/events/keyboard/keypress_maps.c \
 		src/game/events/keyboard/keypress.c \
 		src/game/events/mouse/mouse_over.c \
+		src/game/events/mouse/mouse_release.c \
 		src/game/events/mouse/mouse_click.c \
 		src/game/menu/render_menu.c \
 		src/game/menu/render_options_menu.c \

@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 21:25:17 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/13 20:05:13 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/16 12:18:19 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,18 @@ void	skulls_render(t_core *core, const int *y, int frame)
 	int			x;
 
 	x = (core->menu_img->bg->width / 2) - 100;
-	transparency(core->menu_img->bg, core->menu_img->skulls->sprites[frame],
-		x - (core->menu_img->skulls->sprites[frame]->width + 10),
-		y[core->menu_option]);
+	if (core->state == MAPS_MENU)
+	{
+		transparency(core->menu_img->bg, core->menu_img->skulls->sprites[frame],
+			x - (core->menu_img->skulls->sprites[frame]->width + 10),
+			y[core->menu_option - core->scroll_offset]);
+	}
+	else if (core->state == START_MENU)
+	{
+		transparency(core->menu_img->bg, core->menu_img->skulls->sprites[frame],
+			x - (core->menu_img->skulls->sprites[frame]->width + 10),
+			y[core->menu_option]);
+	}
 	mlx_put_image_to_window(core->mlx, core->win, core->menu_img->bg->img,
 		0, 0);
 }
@@ -59,10 +68,20 @@ bool	load_bg_image(t_img **img, void *mlx, char *path, t_core *core)
 	return (true);
 }
 
+//INIT Y POS
+static void	start_menu_init(t_core *core)
+{
+	int	i;
+
+	i = -1;
+	while (++i < 4)
+		core->y_pos[i] = 540 + (i * MENU_SPACING);
+}
+
 //MENU RENDERING EVERYTIME I DO A MOVEMENT IN THE MENU
 bool	render_menu(t_core *core)
 {
-
+	start_menu_init(core);
 	copy_img(core->menu_img->bg, core->menu_img->bg_clean);
 	rewrite_options(core, core->y_pos, core->menu_img->bg);
 	skulls_render(core, core->y_pos, core->menu_img->skulls->frame);

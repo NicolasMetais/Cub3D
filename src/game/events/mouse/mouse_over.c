@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 03:13:52 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/14 14:49:30 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/16 18:18:19 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,24 @@ void	starting_menu_hover(int y, t_core *core)
 	}
 }
 
-void	options_menu_hover(int y, t_core *core)
+void	options_menu_hover(int x, int y, t_core *core)
 {
-	int	i;
+	int		i;
+	int		j;
+	int		slider_min;
+	int		slider_max;
+	float	ratio;
+	char 	*percent;
+	t_img	*tempo;
 
 	i = -1;
+	j = -1;
+	slider_min = core->menu_img->bg->width / 2 + 5 - 70;
+	slider_max = slider_min + core->menu_img->slider_bar->width
+		- 90 - core->menu_img->cursor->width;
 	if (core->state == OPTIONS_MENU)
 	{
-		while (++i < 2)
+		while (++i < 1)
 		{
 			if (y >= core->y_pos[i] && y < core->y_pos[i] + MENU_SPACING)
 			{
@@ -46,6 +56,33 @@ void	options_menu_hover(int y, t_core *core)
 				render_options_menu(core);
 				break ;
 			}
+		}
+		if (core->isclicked)
+		{
+			if (x < slider_min)
+				core->x = slider_min;
+			else if (x > slider_max)
+				core->x = slider_max;
+			else
+				core->x = x;
+			ratio = (float)(core->x - slider_min) / (slider_max - slider_min);
+			if (ratio < 0.0f)
+				ratio = 0.0f;
+			else if (ratio > 1.0f)
+				ratio = 1.0f;
+			core->fov = (int)(FOV_MIN + ratio * (FOV_MAX - FOV_MIN));
+			percent = ft_itoa(core->fov);
+			while (percent[++j])
+			{
+				printf("%c", percent[j]);
+				//tempo = hashmap_get(&core->hashmap, (char)percent[j]);
+				//transparency(core->menu_img->bg, tempo, 200, 200);
+			}
+			tempo = hashmap_get(&core->hashmap, "%");
+			transparency(core->menu_img->bg, tempo, 0, 150);
+			printf("\n");
+			free(percent);
+			update_slider(core, core->y_pos, core->menu_img->bg);
 		}
 	}
 }
@@ -77,7 +114,7 @@ int	mouse_menu_hover(int x, int y, void *param)
 	(void)x;
 	core = (t_core *)param;
 	starting_menu_hover(y, core);
-	options_menu_hover(y, core);
+	options_menu_hover(x, y, core);
 	maps_menu_hover(y, core);
 	return (0);
 }
