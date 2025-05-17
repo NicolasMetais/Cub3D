@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 03:13:52 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/16 18:18:19 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/17 13:34:19 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	options_menu_hover(int x, int y, t_core *core)
 	int		slider_max;
 	float	ratio;
 	char 	*percent;
+	char 	tmp[2];
 	t_img	*tempo;
 
 	i = -1;
@@ -72,11 +73,20 @@ void	options_menu_hover(int x, int y, t_core *core)
 				ratio = 1.0f;
 			core->fov = (int)(FOV_MIN + ratio * (FOV_MAX - FOV_MIN));
 			percent = ft_itoa(core->fov);
+			if (!percent)
+				return ;
 			while (percent[++j])
 			{
+				tmp[0] = percent[j];
+				tmp[1] = '\0';
 				printf("%c", percent[j]);
-				//tempo = hashmap_get(&core->hashmap, (char)percent[j]);
-				//transparency(core->menu_img->bg, tempo, 200, 200);
+				tempo = hashmap_get(&core->hashmap, tmp);
+				if (j == 0)
+					transparency(core->menu_img->bg, tempo, 200, 200);
+				if (j == 1)
+					transparency(core->menu_img->bg, tempo, 250, 200);
+				if (j == 2)
+					transparency(core->menu_img->bg, tempo, 300, 200);
 			}
 			tempo = hashmap_get(&core->hashmap, "%");
 			transparency(core->menu_img->bg, tempo, 0, 150);

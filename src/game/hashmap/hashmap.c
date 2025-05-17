@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 16:57:29 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/05 17:50:08 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/17 13:22:42 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ t_img	*hashmap_get(t_hashmap *map, char *key)
 			return (entry->img);
 		entry = entry->next;
 	}
-
 	return (NULL);
 }
 
