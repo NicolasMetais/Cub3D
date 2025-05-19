@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 10:45:42 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/14 17:10:54 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/17 22:33:32 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ bool	map_selector(t_core *core)
 	char	*tmp;
 	char	*tmp2;
 
+	load_word_image(&core->menu_img->loaded_map, core,
+		core->menu_maps[core->menu_option].name, "regular");
 	tmp = ft_strjoin("maps/", core->menu_maps[core->menu_option].name);
 	if (!tmp)
 		return (false);

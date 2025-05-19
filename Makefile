@@ -26,9 +26,12 @@ SRCS =	src/main.c \
 		src/game/events/keyboard/keypress_maps.c \
 		src/game/events/keyboard/keypress.c \
 		src/game/events/mouse/mouse_over.c \
+		src/game/events/mouse/option_menu_over.c \
 		src/game/events/mouse/mouse_release.c \
 		src/game/events/mouse/mouse_click.c \
 		src/game/menu/render_menu.c \
+		src/game/menu/slider.c \
+		src/game/menu/loaded_map.c \
 		src/game/menu/render_options_menu.c \
 		src/game/menu/render_maps_menu.c \
 		src/game/menu/start_menu.c \

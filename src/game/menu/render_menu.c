@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 21:25:17 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/16 12:18:19 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/17 22:33:28 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ bool	render_menu(t_core *core)
 	copy_img(core->menu_img->bg, core->menu_img->bg_clean);
 	rewrite_options(core, core->y_pos, core->menu_img->bg);
 	skulls_render(core, core->y_pos, core->menu_img->skulls->frame);
+	loaded_map(core->menu_img->bg, core);
 	core->redraw = false;
 	return (true);
 }

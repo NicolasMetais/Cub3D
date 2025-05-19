@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 14:49:13 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/16 15:24:56 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/17 17:18:00 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,14 @@ int	mouse_menu_click(int button, int x, int y, t_core *core)
 			mouse_click_maps_menu(core);
 		if (core->state == OPTIONS_MENU)
 			mouse_click_options_menu(x, y, core);
+	}
+	if (core->state == MAPS_MENU)
+	{
+		if (button == 4 && core->scroll_offset > 0)
+			core->scroll_offset--;
+		if (button == 5 && core->scroll_offset < core->maps_nb - VISIBLE)
+			core->scroll_offset++;
+		render_maps_menu(core);
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 18:50:31 by nmetais           #+#    #+#             */
-/*   Updated: 2025/04/25 01:46:45 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/19 18:00:30 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ bool	realloc_map(t_core *core, char **dup_maps)
 		if (!core->map[i])
 			return (false);
 	}
+	core->map_height = i - 1;
 	core->map[i] = NULL;
 	return (true);
 }

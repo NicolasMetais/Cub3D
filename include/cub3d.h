@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 01:54:17 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/16 16:02:06 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/19 18:00:45 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,8 @@ typedef struct s_menu_img
 	t_img		*bg_clean;
 	t_img		*slider_bar;
 	t_img		*cursor;
+	t_img		*loaded_map;
+	t_img		*minimap;
 	t_sprite	*skulls;
 }	t_menu_img;
 
@@ -139,6 +141,7 @@ typedef struct s_core
 	void			*win;
 	char			*map_name;
 	char			**map;
+	int				map_height;
 	int				map_start;
 	int				menu_option;
 	bool			redraw;
@@ -149,6 +152,7 @@ typedef struct s_core
 	int				maps_nb;
 	char			*loaded_map;
 	bool			isclicked;
+	bool			map_changed;
 	int				x;
 	int				y;
 	int				scroll_offset;
@@ -197,6 +201,9 @@ bool			render_maps_menu(t_core *core);
 bool			extract_maps_names(t_core *core);
 bool			render_options_menu(t_core *core);
 void			skulls_render(t_core *core, const int *y, int frame);
+bool			slider_constructor(t_core *core, int width);
+bool			loaded_map(t_img *bg, t_core *core);
+
 
 //Init img
 bool			extract_img_data(t_core *core);
@@ -216,9 +223,14 @@ int				handle_destroy(t_core *core);
 int				mouse_menu_click(int button, int x, int y, t_core *core);
 int				mouse_menu_hover(int x, int y, void *param);
 int				mouse_menu_release(int button, int x, int y, t_core *core);
+void			options_menu_hover(int x, int y, t_core *core);
+
 
 //Slider Update
 void			update_slider(t_core *core, const int *y, t_img *bg);
+
+//Percent with number render
+void	render_percent(t_core *core, char *percent, int render);
 
 //Destroy X11 memory img
 void			destroy_img(t_core *core);
