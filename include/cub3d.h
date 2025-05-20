@@ -6,13 +6,15 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 01:54:17 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/19 18:00:45 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/20 15:32:57 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
+
+# define TILE 64
 //FOV
 # define FOV_MIN 60
 # define FOV_MAX 120
@@ -142,6 +144,7 @@ typedef struct s_core
 	char			*map_name;
 	char			**map;
 	int				map_height;
+	int				map_width;
 	int				map_start;
 	int				menu_option;
 	bool			redraw;

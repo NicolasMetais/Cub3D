@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 18:50:31 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/19 18:00:30 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/20 16:17:45 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ char	*ft_strdup_error(const char *s, int *count)
 bool	realloc_map(t_core *core, char **dup_maps)
 {
 	int	i;
+	int	j;
+	int size;
 
 	free_gc(core->gc, "map");
 	core->map = gc_malloc(&core->gc,
@@ -51,11 +53,21 @@ bool	realloc_map(t_core *core, char **dup_maps)
 	i = -1;
 	while (dup_maps[++i])
 	{
-		core->map[i] = ft_strdup(dup_maps[i]);
+		j = -1;
+		core->map[i] = ft_calloc(core->map_width + 1, sizeof(char));
 		if (!core->map[i])
 			return (false);
+		size = ft_strlen(dup_maps[i]);
+		while (++j < core->map_width)
+		{
+			if (j < size)
+				core->map[i][j] = dup_maps[i][j];
+			else
+				core->map[i][j] = ' ';
+		}
+		core->map[i][j] = '\0';
 	}
-	core->map_height = i - 1;
+	core->map_height = i;
 	core->map[i] = NULL;
 	return (true);
 }
@@ -77,6 +89,8 @@ char	**dup_map(t_core *core)
 		return (false);
 	while (core->map[i])
 	{
+		if (core->map_width < (int)ft_strlen(core->map[i]))
+			core->map_width = ft_strlen(core->map[i]);
 		dup_maps[j] = ft_strdup_error(core->map[i++], &count);
 		if (!dup_maps[j++])
 			return (false);

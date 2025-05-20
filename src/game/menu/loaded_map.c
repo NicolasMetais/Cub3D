@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 17:22:34 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/19 18:30:05 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/20 17:01:29 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,17 @@ bool	draw_minimap(t_core *core)
 	int		y_draw;
 	char	tile;
 
-	radius = 7;
+	radius = 11;
 	y = -radius;
-	while (y++ <= radius)
+	while (y <= radius)
 	{
 		y_draw = y + core->spawn->y;
 		x = -radius;
-		while (x++ <= radius)
+		while (x < radius)
 		{
 			x_draw = x + core->spawn->x;
-			if (x_draw >= 0 && x_draw < (int)ft_strlen(core->map[y_draw])
-				&& y_draw >= 0 && y_draw < core->map_height)
+			if (y_draw >= 0 && y_draw < core->map_height && x_draw >= 0
+				&& x_draw < core->map_width)
 			{
 				tile = core->map[y_draw][x_draw];
 				if (tile == '0')
@@ -56,14 +56,18 @@ bool	draw_minimap(t_core *core)
 				else if (tile == 'D')
 					color = 0x1E90FF;
 				else if (tile == 'N' || tile == 'S'
-					|| tile == 'E' || tile == 'O')
+					|| tile == 'E' || tile == 'W')
 					color = 0xFF0000;
+				else
+					color = 0x000000;
 			}
 			else
 				color = 0x000000;
 			draw_tile(core->menu_img->minimap, color,
 				(x + radius) * 8, (y + radius) * 8);
+			x++;
 		}
+		y++;
 	}
 	return (true);
 }
@@ -77,6 +81,6 @@ bool	loaded_map(t_img *bg, t_core *core)
 	transparency(bg, core->menu_img->loaded_map, 1220, 400);
 	if (!draw_minimap(core))
 		return (false);
-	transparency(bg, core->menu_img->minimap, 200, 200);
+	transparency(bg, core->menu_img->minimap, 1100, 500);
 	return (true);
 }
