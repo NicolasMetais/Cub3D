@@ -6,13 +6,13 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 17:22:34 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/21 02:53:07 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/26 19:18:01 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	draw_tile(t_img *minimap, int color, int x, int y)
+void	draw_tile_2(t_img *minimap, int color, int x, int y)
 {
 	int	i;
 	int	j;
@@ -63,7 +63,7 @@ bool	draw_minimap(t_core *core)
 			}
 			else
 				color = 0x000000;
-			draw_tile(core->menu_img->minimap, color,
+			draw_tile_2(core->menu_img->minimap, color,
 				(x + radius) * 8, (y + radius) * 8);
 			x++;
 		}

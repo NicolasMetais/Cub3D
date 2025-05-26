@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 16:53:24 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/16 14:47:30 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/26 19:22:20 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,18 @@ void	option_menu_keypress(int key, t_core *core)
 	}
 }
 
+void	game_keypress(int key, t_core *core)
+{
+	if (key == 65361 || key == 'a')
+		move_player(core, LEFT);
+	else if (key == 65363 || key == 'd')
+		move_player(core, RIGHT);
+	else if (key == 65362 || key == 'w')
+		move_player(core, UP);
+	else if (key == 65364 || key == 's')
+		move_player(core, DOWN);
+}
+
 //KEYBOARD MANAGEMENT
 int	handle_keypress(int key, void *param)
 {
@@ -98,5 +110,7 @@ int	handle_keypress(int key, void *param)
 		option_menu_keypress(key, core);
 	if (core->state == MAPS_MENU)
 		maps_menu_keypress(key, core);
+	if (core->state == GAME)
+		game_keypress(key, core);
 	return (true);
 }

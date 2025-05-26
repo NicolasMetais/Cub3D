@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 15:49:25 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/15 12:55:32 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/26 19:19:23 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	routine(void *param)
 			skulls_render(core, core->y_pos, core->menu_img->skulls->frame);
 	}
 	else if (core->state == GAME)
-		printf("game playing");
+		start_game(core);
+	core->redraw = false;
 	return (0);
 }

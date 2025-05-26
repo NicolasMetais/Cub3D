@@ -44,6 +44,10 @@ SRCS =	src/main.c \
 		src/game/hashmap/hashmap.c \
 		src/game/hashmap/hashmap_del.c \
 		src/utils/cleanup_game.c \
+		src/game/play/main_play.c \
+		src/game/play/main_play_utils.c \
+		src/game/play/print_layers.c \
+		src/game/play/player_moves.c
 
 OBJ_DIR = obj
 
