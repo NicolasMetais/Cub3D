@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 15:16:42 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/26 18:38:25 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/26 19:01:51 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,64 +53,17 @@ bool	file_checker(t_tmp *stock, char *file_name)
 	return (true);
 }
 
-void	free_parsing(t_tmp *stock)
+bool	parsing_cub_2(t_core *core, t_tmp *stock, void *targets[7],
+		char *prefix[7])
 {
-	if (stock->tmp_textures)
-	{
-		free(stock->tmp_textures->north);
-		free(stock->tmp_textures->south);
-		free(stock->tmp_textures->west);
-		free(stock->tmp_textures->east);
-		free(stock->tmp_textures->floor_color);
-		free(stock->tmp_textures->ceiling_color);
-		free(stock->tmp_textures);
-	}
-	if (stock->tmp_colors)
-	{
-		free(stock->tmp_colors->floor);
-		free(stock->tmp_colors->ceiling);
-		free(stock->tmp_colors);
-	}
-	if (stock->spawn)
-		free(stock->spawn);
-	if (stock->tmp_map_content)
-	{
-		ft_free_tab(stock->tmp_map_content);
-		stock->tmp_map_content = NULL;
-	}
-	if (stock->tmp_loaded_map)
-		free(stock->tmp_loaded_map);
-	free(stock);
-}
-
-bool	load_valid_datas(t_core *core, t_tmp *stock)
-{
-	core->map_name = stock->map_name;
-	core->loaded_map = stock->tmp_loaded_map;
-	if (!add_to_gc(&core->gc, core->loaded_map, STRING, "loaded_map"))
+	if (!parse_textures_colors(stock, prefix, targets, core))
+		return (free_parsing(stock), false);
+	if (!parse_textures_content(core, stock, targets))
+		return (free_parsing(stock), false);
+	if (!parse_map(stock))
+		return (free_parsing(stock), false);
+	if (!load_valid_datas(core, stock))
 		return (false);
-	stock->tmp_loaded_map = NULL;
-	stock->tmp_maps = NULL;
-	core->map = stock->tmp_map_content;
-	if (!add_to_gc(&core->gc, core->map, TAB_STRING, "map"))
-		return (false);
-	stock->tmp_map_content = NULL;
-	core->map_start = stock->map_start;
-	core->map_height = stock->height;
-	core->map_width = stock->width;
-	core->spawn = stock->spawn;
-	if (!add_to_gc(&core->gc, core->spawn, STRUCT, "spawn_pos"))
-		return (false);
-	stock->spawn = NULL;
-	core->textures = stock->tmp_textures;
-	if (!add_to_gc(&core->gc, core->textures, STRUCT, "textures_struct"))
-		return (false);
-	stock->tmp_textures = NULL;
-	core->colors = stock->tmp_colors;
-	if (!add_to_gc(&core->gc, core->colors, STRUCT, "colors_struct"))
-		return (false);
-	stock->tmp_colors = NULL;
-	free(stock);
 	return (true);
 }
 
@@ -130,20 +83,15 @@ bool	parsing_cub(t_core *core, char *av)
 		return (free_parsing(stock), false);
 	stock->map_name = av;
 	if (!valid_extension(".cub", stock->map_name))
-		return (free_parsing(stock), ft_putendl_fd("Error \n Wrong map extension (.cub)", 2), false);
+		return (free_parsing(stock),
+			ft_putendl_fd("Error \n Wrong map extension (.cub)", 2), false);
 	if (!file_checker(stock, stock->map_name))
 		return (free_parsing(stock), false);
 	if (!file_extract(stock->map_name, &stock->tmp_maps, core))
 		return (free_parsing(stock), false);
 	if (!check_flag_position(stock, prefix))
 		return (free_parsing(stock), false);
-	if (!parse_textures_colors(stock, prefix, targets, core))
-		return (free_parsing(stock), false);
-	if (!parse_textures_content(core, stock, targets))
-		return (free_parsing(stock), false);
-	if (!parse_map(stock))
-		return (free_parsing(stock), false);
-	if (!load_valid_datas(core, stock))
+	if (!parsing_cub_2(core, stock, targets, prefix))
 		return (false);
 	return (true);
 }

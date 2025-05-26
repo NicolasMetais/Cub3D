@@ -12,6 +12,7 @@ SRCS =	src/main.c \
 		src/utils/sprite_udpate.c \
 		src/utils/transparency.c \
 		src/parsing/map_extract.c \
+		src/parsing/data_manager.c \
 		src/parsing/parse_main.c \
 		src/parsing/textures_colors.c \
 		src/parsing/flag_position.c \
