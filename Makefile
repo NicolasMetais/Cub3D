@@ -17,6 +17,10 @@ SRCS =	src/main.c \
 		src/game/routine.c \
 		src/game/events/destroy.c \
 		src/game/events/keypress.c \
+		src/game/play/main_play.c \
+		src/game/play/main_play_utils.c \
+		src/game/play/print_layers.c \
+		src/game/play/player_moves.c
 
 OBJ_DIR = obj
 
@@ -26,7 +30,7 @@ OBJS := $(patsubst src/%, $(OBJ_DIR)/src/%, $(OBJS))
 all: $(NAME)
 
 $(NAME): $(OBJS) $(LIB)
-	$(CC) $(OBJS) $(LIB) $(MLX) -lX11 -lXext -o $(NAME)
+	$(CC) $(OBJS) $(LIB) $(MLX) -lm -lX11 -lXext -o $(NAME)
 
 $(LIB):
 	$(MAKE) -C lib/libft

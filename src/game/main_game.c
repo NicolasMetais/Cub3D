@@ -14,8 +14,12 @@
 
 bool	launch_game(t_core *core)
 {
-	mlx_key_hook(core->win, handle_keypress, core);
-	mlx_loop_hook(core->mlx, routine, &core);
+	//init_tmp(core);
+	core->redraw = true;
+	get_rc_data(core);
+	mlx_hook(core->win, 2, 1L << 0, &handle_keypress, core);
+	//mlx_key_hook(core->win, handle_keypress, core);
+	mlx_loop_hook(core->mlx, &routine, core);
 	mlx_loop(core->mlx);
 	return (true);
 }

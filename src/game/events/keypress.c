@@ -19,5 +19,13 @@ int	handle_keypress(int key, void *param)
 	core = (t_core *)param;
 	if (key == XK_Escape)
 		handle_destroy(core);
+	else if (key == 65361 || key == 'a')
+		move_player(core, LEFT);
+	else if (key == 65363 || key == 'd')
+		move_player(core, RIGHT);
+	else if (key == 65362 || key == 'w')
+		move_player(core, UP);
+	else if (key == 65364 || key == 's')
+		move_player(core, DOWN);
 	return (true);
 }

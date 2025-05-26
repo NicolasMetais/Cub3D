@@ -43,8 +43,9 @@ int	cube3d(char *av)
 	ft_memset(&core, 0, sizeof(core));
 	if (!garbage_init(&core.gc))
 		return (false);
-	if (!parsing_cub(&core, av))
-		return (false);
+	(void)av;
+	// if (!parsing_cub(&core, av))
+	// 	return (false);
 	if (!window_init(&core))
 		return (false);
 	if (!launch_game(&core))
@@ -58,12 +59,13 @@ int	cube3d(char *av)
 //Main
 int	main(int ac, char **av)
 {
-	if (ac == 2)
-	{
+	// if (ac == 2)
+	// {
+		(void)ac;
 		if (!cube3d(av[1]))
 			return (false);
-	}
-	else
-		ft_putendl_fd("Error \n Don't be silly", 2);
-	return (true);
+	// }
+	// else
+	// 	ft_putendl_fd("Error \n Don't be silly", 2);
+	// return (true);
 }

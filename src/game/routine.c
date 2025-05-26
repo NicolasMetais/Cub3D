@@ -14,6 +14,9 @@
 
 int	routine(t_core *core)
 {
-	(void)core;
+	//(void)core;
+	if (core->redraw == true)
+		start_game(core);
+	core->redraw = false;
 	return (0);
 }
