@@ -25,7 +25,11 @@ int	routine(void *param)
 			skulls_render(core, core->y_pos, core->menu_img->skulls->frame);
 	}
 	else if (core->state == GAME)
-		start_game(core);
+	{
+		core->tmp_rc->max_r = core->fov;
+		if (core->redraw == true)
+			start_game(core);
+	}
 	core->redraw = false;
 	return (0);
 }

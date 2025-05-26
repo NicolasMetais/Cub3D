@@ -107,18 +107,15 @@ void    draw_test_map(char *img_data, int bpp, int size_line)
 }
 void    draw_3d(t_core *core)
 {
-	int pixel_index;
-
-	pixel_index = 0;
-    core->tmp_3d->line_h = (32 * 1080) / core->tmp_rc->dist3[core->tmp_rc->r];
-    if (core->tmp_3d->line_h > 1080)
-        core->tmp_3d->line_h = 1080;
-    core->tmp_3d->line_s = (1080 - core->tmp_3d->line_h) / 2;
+    core->tmp_3d->line_h = (16 * S_HEIGHT) / core->tmp_rc->dist3[core->tmp_rc->r];
+    if (core->tmp_3d->line_h > S_HEIGHT)
+        core->tmp_3d->line_h = S_HEIGHT;
+    core->tmp_3d->line_s = (S_HEIGHT - core->tmp_3d->line_h) / 3;
     core->tmp_3d->line_e = core->tmp_3d->line_s + core->tmp_3d->line_h;
     core->tmp_3d->y = 0;
-	while (core->tmp_3d->y < 1080)
+	while (core->tmp_3d->y < S_HEIGHT)
 	{
-		print_3d(core, pixel_index);
+		print_3d(core);
 		core->tmp_3d->y++;
 	}
 }
@@ -201,13 +198,13 @@ void    vertical_cast(t_core *core)
 
 void    get_raycast_data(t_core *core)
 {
-    core->tmp_rc->ra = core->tmp_rc->pl_angle - RAD * (core->tmp_rc->max_r / 2) * core->tmp_rc->res;
+    core->tmp_rc->ra = core->tmp_rc->pl_angle - RAD * ((core->tmp_rc->max_r) / 2);
     if (core->tmp_rc->ra < 0)
         core->tmp_rc->ra += 2 * PI;
     if (core->tmp_rc->ra > 2 * PI)
         core->tmp_rc->ra -= 2 * PI;
     core->tmp_rc->r = 0;
-    while (core->tmp_rc->r < core->tmp_rc->max_r * core->tmp_rc->res)
+    while (core->tmp_rc->r < core->tmp_rc->max_r)
     {
         horizontal_cast(core);
         core->tmp_rc->dist[core->tmp_rc->r] = sqrt((core->tmp_rc->rx - core->tmp_rc->pl_x) * (core->tmp_rc->rx - core->tmp_rc->pl_x) + \
@@ -235,13 +232,13 @@ void    get_rc_data(t_core *core)
     core->tmp_rc->pl_x = 100;
     core->tmp_rc->pl_y = 100;
     core->tmp_rc->pl_angle = 0;
-    core->tmp_rc->pldelt_x = cos(core->tmp_rc->pl_angle);
-    core->tmp_rc->pldelt_y = sin(core->tmp_rc->pl_angle);
-    core->tmp_rc->max_r = 90;
+    core->tmp_rc->pldelt_x = cos(core->tmp_rc->pl_angle) / 2;
+    core->tmp_rc->pldelt_y = sin(core->tmp_rc->pl_angle) / 2;
 	core->tmp_rc->res = 16;
-	core->tmp_rc->dist = ft_calloc(core->tmp_rc->max_r * core->tmp_rc->res , sizeof(float));
-	core->tmp_rc->dist2 = ft_calloc(core->tmp_rc->max_r * core->tmp_rc->res, sizeof(float));
-	core->tmp_rc->dist3 = ft_calloc(core->tmp_rc->max_r * core->tmp_rc->res, sizeof(float));
+    core->tmp_rc->max_r = core->fov * 16;
+	core->tmp_rc->dist = gc_malloc(&core->gc, sizeof(float) * core->tmp_rc->max_r, FLOAT, "dist");
+	core->tmp_rc->dist2 = gc_malloc(&core->gc, sizeof(float) * core->tmp_rc->max_r, FLOAT, "dist2");
+	core->tmp_rc->dist3 = gc_malloc(&core->gc, sizeof(float) * core->tmp_rc->max_r, FLOAT, "dist3");
 	if (!core->tmp_rc->dist || !core->tmp_rc->dist2 || !core->tmp_rc->dist3)
 		return ;
 }
@@ -251,7 +248,7 @@ void    start_game(t_core *core)
     core->tmp_imgdata = malloc(sizeof(t_tmp_imgdata));
     if (!core->tmp_imgdata)
         return ;
-    core->tmp_imgdata->img = mlx_new_image(core->mlx, 1920, 1080);
+    core->tmp_imgdata->img = mlx_new_image(core->mlx, S_LENGHT, S_HEIGHT);
     if (!core->tmp_imgdata->img)
 		return ;
 	core->tmp_3d = malloc(sizeof(t_tmp_3d));
@@ -259,10 +256,11 @@ void    start_game(t_core *core)
         return ;
     core->tmp_imgdata->img_data = mlx_get_data_addr(core->tmp_imgdata->img, \
     &core->tmp_imgdata->bpp, &core->tmp_imgdata->size, &core->tmp_imgdata->endian);
-    print_background(core, 1920, 1080, 0xAAAAAA);
+    print_background(core, S_LENGHT, S_HEIGHT, 0xAAAAAA);
 	draw_test_map2(core->tmp_imgdata->img_data, core->tmp_imgdata->bpp, core->tmp_imgdata->size);
 	get_raycast_data(core);
     print_player(core, 0xFFFF00);
 	draw_test_map(core->tmp_imgdata->img_data, core->tmp_imgdata->bpp, core->tmp_imgdata->size);
     mlx_put_image_to_window(core->mlx, core->win, core->tmp_imgdata->img, 0, 0);
+    core->redraw = false;
 }

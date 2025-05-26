@@ -12,10 +12,20 @@
 
 #include "cub3d.h"
 
-void    print_3d(t_core *core, int pixel_index)
+void    print_3d(t_core *core)
 {
-    core->tmp_3d->x = core->tmp_rc->r * (16 / 16);
-    while (core->tmp_3d->x < (core->tmp_rc->r + 1) * (16 / 16))
+    float   ray_width;
+    float     start;
+    float     end;
+    int     pixel_index;
+
+    ray_width = S_LENGHT / core->tmp_rc->max_r;
+    start = core->tmp_rc->r * (ray_width);
+    end = (core->tmp_rc->r + 1) * (ray_width);
+    if (end > S_LENGHT)
+        end = S_LENGHT;
+    core->tmp_3d->x = start;
+    while (core->tmp_3d->x < end)
     {
         pixel_index = core->tmp_3d->y * core->tmp_imgdata->size + core->tmp_3d->x * (core->tmp_imgdata->bpp / 8);
         if (core->tmp_3d->y >= core->tmp_3d->line_s && core->tmp_3d->y <= \
@@ -32,7 +42,7 @@ void    print_3d(t_core *core, int pixel_index)
             core->tmp_imgdata->img_data[pixel_index + 1] = 0xDD;
             core->tmp_imgdata->img_data[pixel_index + 2] = 0x00;
         }
-        if (core->tmp_imgdata->bpp == 4)
+        if (core->tmp_imgdata->bpp == 32)
             core->tmp_imgdata->img_data[pixel_index + 3] = 0;
         core->tmp_3d->x++;
     }

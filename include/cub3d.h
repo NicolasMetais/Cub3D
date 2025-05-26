@@ -57,6 +57,11 @@
 # include "parsing.h"
 # include "hashmap.h"
 
+//MATHS
+# include <math.h>
+# define PI 3.14159
+# define RAD 0.01745
+
 typedef struct s_img_loader
 {
 	t_img	**img;
@@ -109,11 +114,6 @@ typedef enum s_state
 	GAME,
 }	t_state;
 
-//MATHS
-# include <math.h>
-# define PI 3.14159
-# define RAD 0.01745 / 16
-
 typedef struct s_textures
 {
 	char	*north;
@@ -141,6 +141,7 @@ typedef struct s_menu_maps
 	char	*name;
 	bool	parsed;
 }	t_menu_maps;
+
 typedef enum e_move {
 	UP,
 	DOWN,
@@ -194,6 +195,14 @@ typedef struct s_tmp_rc
     float   *dist;
     float   *dist2;
     float   *dist3;
+	int		of_x;	//values for collision and movements
+	int		of_y;
+	int		px2;
+	int		py2;
+	int		px2_add;
+	int		py2_add;
+	int		px2_sub;
+	int		py2_sub;
 }	t_tmp_rc;
 
 typedef struct s_core
@@ -317,7 +326,7 @@ void	init_tmp(t_core *core);
 void    print_background(t_core *core, int x, int y, int color);
 void    print_player(t_core *core, int color);
 void    print_rays(t_core *core, int color);
-void    print_3d(t_core *core, int pixel_index);
+void    print_3d(t_core *core);
 void    get_rc_data(t_core *core);
 void    rays_updates(t_core *core);
 void    draw_player_line(t_core *core, int color);
