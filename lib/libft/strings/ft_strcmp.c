@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/06 02:05:31 by nmetais           #+#    #+#             */
-/*   Updated: 2025/04/22 14:19:54 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/26 16:06:03 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,5 @@ int	ft_strcmp(char *s1, char *s2)
 		return (1);
 	while (s1[i] && s2[i] && s1[i] == s2[i])
 		i++;
-	return ((unsigned int)s1[i] - (unsigned int)s2[i]);
+	return ((int)s1[i] - (int)s2[i]);
 }

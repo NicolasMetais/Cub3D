@@ -1,6 +1,7 @@
-NO                         	         ./LENORD.xpm
+NO                         	         ./LENO         RD.xpm
 SO ./LE  		 	 	 	 SUD.xpm
 SO ./LE  		 	 	 	 SUD.xpm
+WE ./LE OUEST.xpm
 WE ./LE OUEST.xpm
 EA ./LE EST.xpm
 F 220           ,    100   ,     			 	 		    0 

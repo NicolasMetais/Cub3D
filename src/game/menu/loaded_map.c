@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 17:22:34 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/20 17:01:29 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/21 02:53:07 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,6 @@ bool	loaded_map(t_img *bg, t_core *core)
 	transparency(bg, core->menu_img->loaded_map, 1220, 400);
 	if (!draw_minimap(core))
 		return (false);
-	transparency(bg, core->menu_img->minimap, 1100, 500);
+	transparency(bg, core->menu_img->minimap, 1210, 450);
 	return (true);
 }

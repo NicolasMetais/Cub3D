@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 01:54:17 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/20 15:32:57 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/22 14:55:21 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -233,7 +233,7 @@ void			options_menu_hover(int x, int y, t_core *core);
 void			update_slider(t_core *core, const int *y, t_img *bg);
 
 //Percent with number render
-void	render_percent(t_core *core, char *percent, int render);
+void			render_percent(t_core *core, char *percent, int render);
 
 //Destroy X11 memory img
 void			destroy_img(t_core *core);

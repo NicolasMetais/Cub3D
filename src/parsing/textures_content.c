@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 18:00:44 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/03 04:20:06 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/23 21:45:09 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,14 +103,14 @@ bool	xmp_extension_error(void *targets[6], int i)
 	return (true);
 }
 
-bool	parse_textures_content(t_core *core, void *targets[6])
+bool	parse_textures_content(t_core *core, t_tmp *stock, void *targets[6])
 {
 	int		i;
 	void	*var_ptr[2];
 	int		j;
 
-	var_ptr[0] = &core->colors->floor;
-	var_ptr[1] = &core->colors->ceiling;
+	var_ptr[0] = &stock->tmp_colors->floor;
+	var_ptr[1] = &stock->tmp_colors->ceiling;
 	i = -1;
 	j = 0;
 	while (++i < 4)
@@ -118,8 +118,8 @@ bool	parse_textures_content(t_core *core, void *targets[6])
 		if (!xmp_extension_error(targets, i))
 			return (false);
 	}
-	core->colors = gc_malloc(&core->gc, sizeof(t_colors), STRUCT, "colors");
-	if (!core->colors)
+	stock->tmp_colors = ft_calloc(1, sizeof(t_colors));
+	if (!stock->tmp_colors)
 		return (false);
 	while (i < 6)
 	{

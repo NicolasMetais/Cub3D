@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 10:45:42 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/17 22:33:32 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/26 18:39:12 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ bool	map_selector(t_core *core)
 	char	*tmp;
 	char	*tmp2;
 
-	load_word_image(&core->menu_img->loaded_map, core,
-		core->menu_maps[core->menu_option].name, "regular");
 	tmp = ft_strjoin("maps/", core->menu_maps[core->menu_option].name);
 	if (!tmp)
 		return (false);
@@ -26,13 +24,18 @@ bool	map_selector(t_core *core)
 	if (!tmp2)
 		return (false);
 	free(tmp);
-	if (!parsing_cub(core, tmp2))
+	if (!(ft_strcmp(core->menu_maps[core->menu_option].name, core->loaded_map - 4) == 0) 
+		&& !parsing_cub(core, tmp2))
 	{
-		core->menu_maps[core->menu_option].parsed = false;
 		ft_putendl_fd("loading failed", 2);
 		free(tmp2);
 		return (true);
 	}
+	hashmap_delete(&core->hashmap, "loaded_name", core);
+	load_word_image(&core->menu_img->loaded_map, core,
+		core->menu_maps[core->menu_option].name, "regular");
+	hashmap_insert(&core->hashmap, "loaded_name",
+		core->menu_img->loaded_map, core);
 	core->loaded_map = core->menu_maps[core->menu_option].name;
 	core->menu_maps[core->menu_option].parsed = true;
 	free(tmp2);

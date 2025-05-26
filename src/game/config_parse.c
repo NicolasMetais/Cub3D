@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 13:43:55 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/14 14:27:17 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/26 13:17:40 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ bool	extract_img_data(t_core *core)
 	i = -1;
 	size = 0;
 	data = NULL;
-	if (!file_extract("config.cfg", &data))
+	if (!file_extract("config.cfg", &data, core))
 		return (ft_free_tab(data), false);
 	size = hashmap_size(data);
 	i = -1;
@@ -80,5 +80,5 @@ bool	extract_img_data(t_core *core)
 			return (ft_free_tab(tmp), ft_free_tab(data), false);
 		ft_free_tab(tmp);
 	}
-	return (ft_free_tab(data), true);
+	return (true);
 }

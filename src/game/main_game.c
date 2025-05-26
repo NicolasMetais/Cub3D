@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 15:44:46 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/19 23:02:02 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/26 13:51:28 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ bool	img_init(t_core *core)
 	if (!name)
 		return (false);
 	load_word_image(&core->menu_img->loaded_map, core, name, "regular");
+	hashmap_insert(&core->hashmap, "loaded_name", core->menu_img->loaded_map, core);
 	free(name);
 	core->menu_img->minimap->img = mlx_new_image(core->mlx, 180, 180);
 	if (!core->menu_img->minimap->img)

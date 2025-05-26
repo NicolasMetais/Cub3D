@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 22:57:33 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/19 19:20:47 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/22 15:34:31 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ bool	flood_fill(char **map, int x, int y, int len)
 	return (true);
 }
 
-bool	walkable(char **dup_maps, t_core *core)
+bool	walkable(char **dup_maps, t_tmp *stock)
 {
 	int	i;
 	int	j;
@@ -43,8 +43,8 @@ bool	walkable(char **dup_maps, t_core *core)
 			if (dup_maps[i][j] == 'N' || dup_maps[i][j] == 'S'
 				|| dup_maps[i][j] == 'E' || dup_maps[i][j] == 'W')
 			{
-				core->spawn->x = j;
-				core->spawn->y = i;
+				stock->spawn->x = j;
+				stock->spawn->y = i;
 				if (!flood_fill(dup_maps, j, i, ft_strlen_tab(dup_maps)))
 				{
 					dup_maps[i][j] = 'V';
