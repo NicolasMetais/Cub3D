@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 13:48:56 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/03 16:02:58 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/26 19:06:40 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,10 @@ void	ft_free_tab(char **str)
 	if (!str)
 		return ;
 	while (str[++i])
-		free(str[i]);
-	free(str);
+	{
+		if (str[i])
+			free(str[i]);
+	}
+	if (str)
+		free(str);
 }

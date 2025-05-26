@@ -2,6 +2,10 @@
 	"files.associations": {
 		"stdlib.h": "c",
 		"time.h": "c",
-		"cub3d.h": "c"
+		"cub3d.h": "c",
+		"dirent.h": "c",
+		"keysym.h": "c",
+		"limits.h": "c",
+		"stdbool.h": "c"
 	}
 }

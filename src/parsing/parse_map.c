@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 18:50:31 by nmetais           #+#    #+#             */
-/*   Updated: 2025/04/25 01:46:45 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/26 18:54:23 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,28 +38,45 @@ char	*ft_strdup_error(const char *s, int *count)
 	return ((void *)cpy);
 }
 
-bool	realloc_map(t_core *core, char **dup_maps)
+bool	realloc_map_2(t_tmp	*stock, char **dup_maps, int i)
 {
-	int	i;
+	int	j;
+	int	size;
 
-	free_gc(core->gc, "map");
-	core->map = gc_malloc(&core->gc,
-			sizeof(char *) * (ft_strlen_tab(dup_maps) + 1),
-			TAB_STRING, "map");
-	if (!core->map)
+	j = -1;
+	stock->tmp_map_content[i] = ft_calloc(stock->width + 1, sizeof(char));
+	if (!stock->tmp_map_content[i])
 		return (false);
-	i = -1;
-	while (dup_maps[++i])
+	size = ft_strlen(dup_maps[i]);
+	while (++j < stock->width)
 	{
-		core->map[i] = ft_strdup(dup_maps[i]);
-		if (!core->map[i])
-			return (false);
+		if (j < size)
+			stock->tmp_map_content[i][j] = dup_maps[i][j];
+		else
+			stock->tmp_map_content[i][j] = ' ';
 	}
-	core->map[i] = NULL;
+	stock->tmp_map_content[i][j] = '\0';
 	return (true);
 }
 
-char	**dup_map(t_core *core)
+bool	realloc_map(t_tmp *stock, char **dup_maps)
+{
+	int	i;
+
+	stock->tmp_map_content = malloc(sizeof(char *)
+			* (ft_strlen_tab(dup_maps) + 1));
+	if (!stock->tmp_map_content)
+		return (false);
+	i = -1;
+	while (dup_maps[++i])
+		if (!realloc_map_2(stock, dup_maps, i))
+			return (false);
+	stock->height = i;
+	stock->tmp_map_content[i] = NULL;
+	return (true);
+}
+
+char	**dup_map(t_tmp *stock)
 {
 	char	**dup_maps;
 	int		count;
@@ -67,39 +84,41 @@ char	**dup_map(t_core *core)
 	int		j;
 
 	count = 0;
-	i = core->map_start;
+	i = stock->map_start;
 	j = 0;
-	dup_maps = gc_malloc(&core->gc,
-			sizeof(char *) * (ft_strlen_tab(core->map) - core->map_start + 1),
-			TAB_STRING, "dup_map");
+	dup_maps = malloc(sizeof(char *) * (ft_strlen_tab(stock->tmp_maps)
+				- stock->map_start + 1));
 	if (!dup_maps)
 		return (false);
-	while (core->map[i])
+	while (stock->tmp_maps[i])
 	{
-		dup_maps[j] = ft_strdup_error(core->map[i++], &count);
+		if (stock->width < (int)ft_strlen(stock->tmp_maps[i]))
+			stock->width = ft_strlen(stock->tmp_maps[i]);
+		dup_maps[j] = ft_strdup_error(stock->tmp_maps[i++], &count);
 		if (!dup_maps[j++])
 			return (false);
 	}
 	dup_maps[j] = NULL;
-	realloc_map(core, dup_maps);
+	realloc_map(stock, dup_maps);
 	return (dup_maps);
 }
 
-bool	parse_map(t_core *core)
+bool	parse_map(t_tmp *stock)
 {
 	char	**dup_maps;
 
-	core->spawn = gc_malloc(&core->gc, sizeof(t_spawn), STRUCT, "spawn");
-	if (!core->spawn)
+	stock->spawn = malloc(sizeof(t_spawn));
+	if (!stock->spawn)
 		return (false);
-	dup_maps = dup_map(core);
+	dup_maps = dup_map(stock);
 	if (!dup_maps)
 		return (false);
-	if (!walkable(dup_maps, core))
+	if (!walkable(dup_maps, stock))
 	{
 		ft_putendl_fd(
 			"Error \n Invalid map. i shoudn't be able to walk in the void", 2);
 		return (false);
 	}
+	ft_free_tab(dup_maps);
 	return (true);
 }

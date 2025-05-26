@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 17:28:37 by nmetais           #+#    #+#             */
-/*   Updated: 2025/04/24 17:53:29 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/26 13:26:28 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	*strdup_without_spaces(const char *s)
 	j = 0;
 	len = strlen_without_spaces(s);
 	cpy = malloc(len * sizeof(char) + 1);
-	if (cpy == NULL)
+	if (!cpy)
 		return (NULL);
 	while (s[j])
 	{
@@ -51,24 +51,20 @@ char	*strdup_without_spaces(const char *s)
 	return ((void *)cpy);
 }
 
-//Eventuelle "textur    e.xpm" si il y a " ou ' 
-//pour gerer les espace mais bcp de code pour pas grand chose
-bool	extract_textures(char **dest, t_core *core, char *prefix)
+bool	extract_textures(char **dest, t_tmp *stock, char *prefix, t_core *core)
 {
 	int		i;
 	char	*tmp;
 
 	i = -1;
-	while (core->map[++i])
+	while (stock->tmp_maps[++i])
 	{
-		tmp = core->map[i];
+		tmp = stock->tmp_maps[i];
 		while (*tmp == ' ' || *tmp == '\t')
 				tmp++;
 		if (ft_strncmp(tmp, prefix, ft_strlen(prefix)) == 0)
 		{
-			tmp += 2;
-			if (*dest)
-				free(*dest);
+			tmp += ft_strlen(prefix);
 			while (*tmp == ' ' || *tmp == '\t')
 				tmp++;
 			*dest = strdup_without_spaces(tmp);
@@ -80,14 +76,15 @@ bool	extract_textures(char **dest, t_core *core, char *prefix)
 	return (true);
 }
 
-bool	parse_textures_colors(t_core *core, char *prefix[7], void *targets[6])
+bool	parse_textures_colors(t_tmp *stock, char *prefix[7], void *targets[6]
+	, t_core *core)
 {
 	int		i;
 
 	i = -1;
 	while (prefix[++i])
 	{
-		if (!extract_textures(targets[i], core, prefix[i]))
+		if (!extract_textures(targets[i], stock, prefix[i], core))
 			return (false);
 	}
 	return (true);
