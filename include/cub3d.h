@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 01:54:17 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/28 18:57:49 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/28 22:56:35 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,11 @@ typedef struct s_hud_img
 {
 	t_img		*clean_hud;
 	t_img		*hud;
+	t_sprite	*neutral;
+	t_sprite	*tired;
+	t_sprite	*hurt;
+	t_sprite	*bloody;
+	t_sprite	*critical;
 }	t_hud_img;
 
 typedef enum s_state
@@ -363,5 +368,7 @@ bool			render_head(t_core *core);
 bool			render_numbers(t_core *core);
 bool			render_weapon_menu(t_core *core);
 bool			render_ammo(t_core *core);
+bool			head_init(t_core *core);
+
 
 #endif

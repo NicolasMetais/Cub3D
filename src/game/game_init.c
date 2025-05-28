@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 17:55:32 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/28 14:31:04 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/28 22:36:34 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ bool	game_init(t_core *core)
 	core->player->ammo[3] = 0;
 	core->player->current_weapon = 2;
 	if (!hud_init(core))
+		return (false);
+	if (!head_init(core))
 		return (false);
 	weapons_init(core->player->weapon);
 	mlx_clear_window(core->mlx, core->win);

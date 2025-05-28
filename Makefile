@@ -42,8 +42,7 @@ HUD	=	src/hud/render_hud.c \
 		src/hud/numbers_hud.c \
 		src/hud/ammo_hud.c \
 		src/hud/weapon_menu_hud.c \
-
-
+		src/hud/head_init.c \
 
 UTILS =	src/utils/copy_img.c \
 		src/utils/extension.c \
