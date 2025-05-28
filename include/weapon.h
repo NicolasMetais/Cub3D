@@ -1,0 +1,36 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   weapon.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/05/27 16:33:30 by nmetais           #+#    #+#             */
+/*   Updated: 2025/05/27 21:35:08 by nmetais          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef WEAPON_H
+# define WEAPON_H
+
+# include <stdbool.h>
+
+typedef struct s_damage_range
+{
+	unsigned int	min;
+	unsigned int	max;
+}	t_damage_range;
+
+typedef struct s_weapon
+{
+	char			*name;
+	unsigned int	ammo_type;
+	t_damage_range	damage;
+	float			fire_rate;
+	float			cooldown;
+	bool			owned;
+}	t_weapon;
+
+void	weapons_init(t_weapon weapon[9]);
+
+#endif

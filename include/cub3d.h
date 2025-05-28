@@ -6,13 +6,12 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 01:54:17 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/26 19:15:16 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/28 18:57:49 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
-
 
 # define TILE 64
 //FOV
@@ -56,6 +55,8 @@
 # include "word_creator.h"
 # include "parsing.h"
 # include "hashmap.h"
+# include "weapon.h"
+# include "player.h"
 
 //MATHS
 # include <math.h>
@@ -108,6 +109,12 @@ typedef struct s_menu_img
 	t_sprite	*skulls;
 }	t_menu_img;
 
+typedef struct s_hud_img
+{
+	t_img		*clean_hud;
+	t_img		*hud;
+}	t_hud_img;
+
 typedef enum s_state
 {
 	START_MENU,
@@ -136,11 +143,11 @@ typedef struct s_colors
 	t_int_array		*ceiling;
 }	t_colors;
 
-typedef struct s_spawn
+typedef struct s_pos
 {
-	int	x;
-	int	y;
-}	t_spawn;
+	float	x;
+	float	y;
+}	t_pos;
 
 typedef struct s_menu_maps
 {
@@ -182,18 +189,19 @@ typedef struct s_tmp_rc
 	float	pldelt_x;
 	float	pldelt_y;
 	float	pl_angle;
-	int 	r;
+	int		r;
 	int		max_r;
 	int		res; //always power of 2;
-    int 	mx;
-    int 	my;
-    int 	mp;
-    int 	px;
-    int 	py;
-    float   rx;
-    float   ry;
-    float   ra;
+    int		mx;
+    int		my;
+    int		mp;
+    int		px;
+    int		py;
+    float	rx;
+    float	ry;
+    float	ra;
 	float	ca;
+<<<<<<< HEAD
     float   x;
     float   y;
     float   atan;
@@ -209,6 +217,15 @@ typedef struct s_tmp_rc
 	int		py2_add;
 	int		px2_sub;
 	int		py2_sub;
+=======
+    float	x;
+    float	y;
+    float	atan;
+    float	ntan;
+    float	*dist;
+    float	*dist2;
+    float	*dist3;
+>>>>>>> origin/hud
 }	t_tmp_rc;
 
 typedef struct s_core
@@ -223,6 +240,7 @@ typedef struct s_core
 	int				menu_option;
 	bool			redraw;
 	int				y_pos[4];
+	char			tmp[2];
 	int				enter;
 	int				fov;
 	float			fov_ratio;
@@ -233,14 +251,16 @@ typedef struct s_core
 	int				x;
 	int				y;
 	int				scroll_offset;
+	t_player		*player;
 	t_menu_maps		*menu_maps;
 	t_hashmap		hashmap;
 	t_menu_img		*menu_img;
 	t_state			state;
+	t_hud_img		*hud_img;
 	t_fonts			*fonts;
 	t_textures		*textures;
 	t_colors		*colors;
-	t_spawn			*spawn;
+	t_pos			*spawn;
 	t_gc_controller	*gc;
 	t_tmp_rc		*tmp_rc;
 	t_tmp_imgdata	*tmp_imgdata;
@@ -284,7 +304,6 @@ void			skulls_render(t_core *core, const int *y, int frame);
 bool			slider_constructor(t_core *core, int width);
 bool			loaded_map(t_img *bg, t_core *core);
 
-
 //Init img
 bool			extract_img_data(t_core *core);
 
@@ -305,7 +324,6 @@ int				mouse_menu_hover(int x, int y, void *param);
 int				mouse_menu_release(int button, int x, int y, t_core *core);
 void			options_menu_hover(int x, int y, t_core *core);
 
-
 //Slider Update
 void			update_slider(t_core *core, const int *y, t_img *bg);
 
@@ -314,15 +332,15 @@ void			render_percent(t_core *core, char *percent, int render);
 
 //Destroy X11 memory img
 void			destroy_img(t_core *core);
-bool	launch_game(t_core *core);
+bool			launch_game(t_core *core);
 int				routine(void *param);
 
-void    start_game(t_core *core);
+void			start_game(t_core *core);
 
 //Keypress
-int		handle_keypress(int key, void *param);
-int		handle_destroy(t_core *core);
-void    move_player(t_core *core, t_move move);
+int				handle_keypress(int key, void *param);
+int				handle_destroy(t_core *core);
+void			move_player(t_core *core, t_move move);
 
 //Temp_functions
 void	move_player(t_core *core, t_move move);
@@ -337,5 +355,23 @@ void    print_3d(t_core *core);
 void    get_rc_data(t_core *core);
 void    rays_updates(t_core *core);
 void    draw_player_line(t_core *core, int color);
+void			move_player(t_core *core, t_move move);
+void			init_tmp(t_core *core);
+
+//Layers printing
+void			print_background(t_core *core, int x, int y, int color);
+void			print_player(t_core *core, int color);
+void			print_rays(t_core *core, int color);
+void			print_3d(t_core *core, int pixel_index);
+void			get_rc_data(t_core *core);
+void			rays_updates(t_core *core);
+void			draw_player_line(t_core *core, int color);
+
+//HUD
+bool			render_hud(t_core *core);
+bool			render_head(t_core *core);
+bool			render_numbers(t_core *core);
+bool			render_weapon_menu(t_core *core);
+bool			render_ammo(t_core *core);
 
 #endif

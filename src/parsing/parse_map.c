@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 18:50:31 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/26 18:54:23 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/27 16:22:34 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ bool	parse_map(t_tmp *stock)
 {
 	char	**dup_maps;
 
-	stock->spawn = malloc(sizeof(t_spawn));
+	stock->spawn = malloc(sizeof(t_pos));
 	if (!stock->spawn)
 		return (false);
 	dup_maps = dup_map(stock);

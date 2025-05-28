@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 15:44:46 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/26 19:10:38 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/27 15:04:32 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,14 +111,14 @@ bool	launch_game(t_core *core)
 		return (false);
 	core->fov = 90;
 	start_menu(core);
+	mlx_hook(core->win, 2, 1L << 0, &handle_keypress, core);
 	mlx_hook(core->win, 6, (1L << 6), mouse_menu_hover, core);
 	mlx_hook(core->win, 4, (1L << 2), mouse_menu_click, core);
 	mlx_hook(core->win, 5, (1L << 3), mouse_menu_release, core);
 	mlx_loop_hook(core->mlx, routine, core);
 	//init_tmp(core);
-	core->redraw = true;
+	//core->redraw = true;
 	get_rc_data(core);
-	mlx_hook(core->win, 2, 1L << 0, &handle_keypress, core);
 	//mlx_key_hook(core->win, handle_keypress, core);
 	mlx_loop_hook(core->mlx, &routine, core);
 	mlx_loop(core->mlx);

@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 16:53:24 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/26 19:22:20 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/27 21:21:16 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,12 @@ void	menu_keypress(int key, t_core *core)
 	{
 		if (core->menu_option == 0)
 		{
+<<<<<<< HEAD
 			mlx_clear_window(core->mlx, core->win);
+=======
+			if (!game_init(core))
+				return ;
+>>>>>>> origin/hud
 			core->state = GAME;
 		}
 		if (core->menu_option == 1)
