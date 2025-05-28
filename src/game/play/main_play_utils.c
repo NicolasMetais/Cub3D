@@ -25,16 +25,15 @@
 
 void    init_map_textures(t_core *core)
 {
-    (void)core;
     // t_img *wall_north;
     // t_img *wall_south;
     // t_img *wall_east;
     // t_img *wall_west;
 
-    // core->textures->tmp_north = hashmap_get(&core->hashmap, "Wall_north");
-    // core->textures->tmp_south = hashmap_get(&core->hashmap, "Wall_south");
-    // core->textures->tmp_east = hashmap_get(&core->hashmap, "Wall_east");
-    // core->textures->tmp_west = hashmap_get(&core->hashmap, "Wall_west");
+    core->textures->tmp_north = hashmap_get(&core->hashmap, "Wall_north");
+    core->textures->tmp_south = hashmap_get(&core->hashmap, "Wall_south");
+    core->textures->tmp_east = hashmap_get(&core->hashmap, "Wall_east");
+    core->textures->tmp_west = hashmap_get(&core->hashmap, "Wall_west");
 }
 
 void    rays_updates(t_core *core)

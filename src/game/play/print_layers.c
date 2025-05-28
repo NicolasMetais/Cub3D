@@ -12,13 +12,32 @@
 
 #include "cub3d.h"
 
+void    print_3d_east(t_core *core, int px_index)
+{
+    int     tex_index;
+    int     tex_x;
+    int     tex_y;
+    float   wall_y;
+
+    wall_y = core->tmp_rc->ry - (int)core->tmp_rc->ry;
+    if (wall_y < 0)
+        wall_y += 1;
+    tex_x = (int)(wall_y * core->textures->tmp_east->height);
+    tex_y = (int)((core->tmp_3d->y - core->tmp_3d->line_s) * core->textures->tmp_east->height) / (core->tmp_3d->line_e - core->tmp_3d->line_s);
+
+    tex_index = tex_y * core->textures->tmp_east->line_len + tex_x * (core->textures->tmp_east->bpp / 8);
+    core->tmp_imgdata->img_data[px_index + 0] = core->textures->tmp_east->addr[tex_index];
+    core->tmp_imgdata->img_data[px_index + 1] = core->textures->tmp_east->addr[tex_index];
+    core->tmp_imgdata->img_data[px_index + 2] = core->textures->tmp_east->addr[tex_index];
+}
+
 void    print_3d(t_core *core)
 {
     float   ray_width;
     int     start;
     int     end;
     int     pixel_index;
-    //int     tex_index;
+
 
     ray_width = 1;
     if (ray_width < 1)
@@ -28,26 +47,46 @@ void    print_3d(t_core *core)
     if (end > S_LENGHT)
         end = S_LENGHT;
     core->tmp_3d->x = start;
+
     while (core->tmp_3d->x < end && (core->tmp_3d->x > core->map_width * 8 || core->tmp_3d->y > core->map_height * 8) && \
         core->tmp_3d->y < S_HEIGHT - 160)
     {
         pixel_index = core->tmp_3d->y * core->tmp_imgdata->size + core->tmp_3d->x * (core->tmp_imgdata->bpp / 8);
-        // pixel_index = core->tmp_3d->y * core->textures->tmp_north->width + core->tmp_3d->x * (core->textures->tmp_north->bpp / 8);
-        // tex_index = core->textures->tmp_north
         if (core->tmp_3d->y >= core->tmp_3d->line_s && core->tmp_3d->y <= \
-        core->tmp_3d->line_e && core->tmp_rc->dist[core->tmp_rc->r] > core->tmp_rc->dist2[core->tmp_rc->r])
+            core->tmp_3d->line_e && core->tmp_rc->dist2[core->tmp_rc->r] > core->tmp_rc->dist[core->tmp_rc->r])
         {
-            // core->tmp_imgdata->img_data[pixel_index + 0] = core->textures->tmp_north->addr[];
-            core->tmp_imgdata->img_data[pixel_index + 0] = 0x00;
-            core->tmp_imgdata->img_data[pixel_index + 1] = 0xFF;
-            core->tmp_imgdata->img_data[pixel_index + 2] = 0x00;
+            if (core->tmp_rc->ra > PI)
+            {
+                print_3d_east(core, pixel_index);
+                // core->tmp_imgdata->img_data[pixel_index + 0] = core->textures->tmp_east->addr[tex_index];
+                // core->tmp_imgdata->img_data[pixel_index + 1] = core->textures->tmp_east->addr[tex_index];
+                // core->tmp_imgdata->img_data[pixel_index + 2] = core->textures->tmp_east->addr[tex_index];
+                // // core->tmp_imgdata->img_data[pixel_index + 0] = 0xFF;
+                // // core->tmp_imgdata->img_data[pixel_index + 1] = 0x00;
+                // // core->tmp_imgdata->img_data[pixel_index + 2] = 0x00;
+            }
+            else
+            {
+                core->tmp_imgdata->img_data[pixel_index + 0] = 0x00;
+                core->tmp_imgdata->img_data[pixel_index + 1] = 0xFF;
+                core->tmp_imgdata->img_data[pixel_index + 2] = 0x00;
+            }
         }
         else if (core->tmp_3d->y >= core->tmp_3d->line_s && core->tmp_3d->y <= \
-        core->tmp_3d->line_e && core->tmp_rc->dist2[core->tmp_rc->r] > core->tmp_rc->dist[core->tmp_rc->r])
+        core->tmp_3d->line_e && core->tmp_rc->dist[core->tmp_rc->r] > core->tmp_rc->dist2[core->tmp_rc->r])
         {
-            core->tmp_imgdata->img_data[pixel_index + 0] = 0x00;
-            core->tmp_imgdata->img_data[pixel_index + 1] = 0xDD;
-            core->tmp_imgdata->img_data[pixel_index + 2] = 0x00;
+            if (core->tmp_rc->ra > PI / 2 && core->tmp_rc->ra < 3 * PI / 2)
+            {
+                core->tmp_imgdata->img_data[pixel_index + 0] = 0x00;
+                core->tmp_imgdata->img_data[pixel_index + 1] = 0x00;
+                core->tmp_imgdata->img_data[pixel_index + 2] = 0xFF;
+            }
+            else
+            {
+                core->tmp_imgdata->img_data[pixel_index + 0] = 0x00;
+                core->tmp_imgdata->img_data[pixel_index + 1] = 0x00;
+                core->tmp_imgdata->img_data[pixel_index + 2] = 0x00;
+            }
         }
         if (core->tmp_imgdata->bpp == 32)
             core->tmp_imgdata->img_data[pixel_index + 3] = 0;
