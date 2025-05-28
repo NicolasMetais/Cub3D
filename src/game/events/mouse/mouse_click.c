@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 14:49:13 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/17 17:18:00 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/27 21:21:29 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,11 @@
 void	mouse_click_starting_menu(t_core *core)
 {
 	if (core->menu_option == 0)
+	{
+		if (!game_init(core))
+			return ;
 		core->state = GAME;
+	}
 	if (core->menu_option == 1)
 	{
 		core->state = OPTIONS_MENU;

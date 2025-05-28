@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 01:58:43 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/26 19:01:32 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/27 16:22:28 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 typedef struct s_core		t_core;
 typedef struct s_textures	t_textures;
 typedef struct s_colors		t_colors;
-typedef struct s_spawn		t_spawn;
+typedef struct s_pos		t_pos;
 
 
 
@@ -28,7 +28,7 @@ typedef struct s_tmp
 	char		*map_name;
 	t_textures	*tmp_textures;
 	t_colors	*tmp_colors;
-	t_spawn		*spawn;
+	t_pos		*spawn;
 	int			width;
 	int			height;
 	char		**tmp_maps;

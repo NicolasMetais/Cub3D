@@ -3,34 +3,31 @@ LIB = lib/libft/libft.a
 MLX = lib/minilibx-linux/libmlx.a
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -Ilib/libft/include -Ilib/minilibx-linux -Iinclude -g3 -O3
-SRCS =	src/main.c \
-		src/utils/copy_img.c \
-		src/utils/extension.c \
-		src/utils/power_of_two.c \
-		src/utils/empty_line.c \
-		src/utils/cleanup_split.c \
-		src/utils/sprite_udpate.c \
-		src/utils/transparency.c \
-		src/parsing/map_extract.c \
-		src/parsing/data_manager.c \
-		src/parsing/parse_main.c \
-		src/parsing/textures_colors.c \
-		src/parsing/flag_position.c \
-		src/parsing/textures_content.c \
-		src/parsing/parse_map.c \
-		src/parsing/flood_fill.c \
+SRCS =	$(MAIN)$(EVENTS)$(IMG)$(MENU)$(HUD)$(UTILS)$(PARSING)$(GAME)
+
+MAIN =	src/main.c \
 		src/game/main_game.c \
 		src/game/routine.c \
 		src/game/maps_names.c \
+		src/game/game_init.c \
+		src/game/weapons_init.c \
+
+EVENTS = 	src/game/events/destroy.c \
+			src/game/events/keyboard/keypress_maps.c \
+			src/game/events/keyboard/keypress.c \
+			src/game/events/mouse/mouse_over.c \
+			src/game/events/mouse/option_menu_over.c \
+			src/game/events/mouse/mouse_release.c \
+			src/game/events/mouse/mouse_click.c \
+
+
+IMG = 	src/game/image_loader.c \
+		src/game/hashmap/hashmap.c \
+		src/game/hashmap/hashmap_del.c \
+		src/game/config_parse.c \
 		src/game/destroy_img.c \
-		src/game/events/destroy.c \
-		src/game/events/keyboard/keypress_maps.c \
-		src/game/events/keyboard/keypress.c \
-		src/game/events/mouse/mouse_over.c \
-		src/game/events/mouse/option_menu_over.c \
-		src/game/events/mouse/mouse_release.c \
-		src/game/events/mouse/mouse_click.c \
-		src/game/menu/render_menu.c \
+
+MENU =	src/game/menu/render_menu.c \
 		src/game/menu/slider.c \
 		src/game/menu/loaded_map.c \
 		src/game/menu/render_options_menu.c \
@@ -39,15 +36,38 @@ SRCS =	src/main.c \
 		src/game/char_setup/init_char_nodes.c \
 		src/game/char_setup/build_words.c \
 		src/game/char_setup/build_words_utils.c \
-		src/game/image_loader.c \
-		src/game/config_parse.c \
-		src/game/hashmap/hashmap.c \
-		src/game/hashmap/hashmap_del.c \
+
+HUD	=	src/hud/render_hud.c \
+		src/hud/head_hud.c \
+		src/hud/numbers_hud.c \
+		src/hud/ammo_hud.c \
+		src/hud/weapon_menu_hud.c \
+
+
+
+UTILS =	src/utils/copy_img.c \
+		src/utils/extension.c \
+		src/utils/power_of_two.c \
+		src/utils/empty_line.c \
+		src/utils/cleanup_split.c \
+		src/utils/sprite_udpate.c \
+		src/utils/transparency.c \
 		src/utils/cleanup_game.c \
-		src/game/play/main_play.c \
+
+PARSING =	src/parsing/map_extract.c \
+			src/parsing/data_manager.c \
+			src/parsing/parse_main.c \
+			src/parsing/textures_colors.c \
+			src/parsing/flag_position.c \
+			src/parsing/textures_content.c \
+			src/parsing/parse_map.c \
+			src/parsing/flood_fill.c \
+
+GAME =	src/game/play/main_play.c \
 		src/game/play/main_play_utils.c \
 		src/game/play/print_layers.c \
-		src/game/play/player_moves.c
+		src/game/play/player_moves.c \
+
 
 OBJ_DIR = obj
 
