@@ -15,22 +15,28 @@
 void    print_3d(t_core *core)
 {
     float   ray_width;
-    float     start;
-    float     end;
+    int     start;
+    int     end;
     int     pixel_index;
+    //int     tex_index;
 
-    ray_width = S_LENGHT / core->tmp_rc->max_r;
-    start = core->tmp_rc->r * (ray_width);
-    end = (core->tmp_rc->r + 1) * (ray_width);
+    ray_width = 1;
+    if (ray_width < 1)
+        ray_width = 1;
+    start = (int)(core->tmp_rc->r * (ray_width));
+    end = (int)((core->tmp_rc->r + 1) * (ray_width));
     if (end > S_LENGHT)
         end = S_LENGHT;
     core->tmp_3d->x = start;
-    while (core->tmp_3d->x < end)
+    while (core->tmp_3d->x < end && (core->tmp_3d->x > core->map_width * 8 || core->tmp_3d->y > core->map_height * 8))
     {
         pixel_index = core->tmp_3d->y * core->tmp_imgdata->size + core->tmp_3d->x * (core->tmp_imgdata->bpp / 8);
+        // pixel_index = core->tmp_3d->y * core->textures->tmp_north->width + core->tmp_3d->x * (core->textures->tmp_north->bpp / 8);
+        // tex_index = core->textures->tmp_north
         if (core->tmp_3d->y >= core->tmp_3d->line_s && core->tmp_3d->y <= \
         core->tmp_3d->line_e && core->tmp_rc->dist[core->tmp_rc->r] > core->tmp_rc->dist2[core->tmp_rc->r])
         {
+            // core->tmp_imgdata->img_data[pixel_index + 0] = core->textures->tmp_north->addr[];
             core->tmp_imgdata->img_data[pixel_index + 0] = 0x00;
             core->tmp_imgdata->img_data[pixel_index + 1] = 0xFF;
             core->tmp_imgdata->img_data[pixel_index + 2] = 0x00;
@@ -44,7 +50,7 @@ void    print_3d(t_core *core)
         }
         if (core->tmp_imgdata->bpp == 32)
             core->tmp_imgdata->img_data[pixel_index + 3] = 0;
-        core->tmp_3d->x++;
+        core->tmp_3d->x += 1;
     }
 }
 
@@ -80,7 +86,7 @@ void    draw_player_line(t_core *core, int color)
     int px_index;
 
     i = 0;
-    while (i < 16)
+    while (i < 8)
     {
         px = core->tmp_rc->pl_x + cos(core->tmp_rc->pl_angle) * i;
         py = core->tmp_rc->pl_y + sin(core->tmp_rc->pl_angle) * i;
@@ -104,10 +110,10 @@ void    print_player(t_core *core, int color)
     int     px_index;
 
     y = core->tmp_rc->pl_y;
-    while (y < core->tmp_rc->pl_y + 6)
+    while (y < core->tmp_rc->pl_y + 4)
     {
         x = core->tmp_rc->pl_x;
-        while (x < core->tmp_rc->pl_x + 6)
+        while (x < core->tmp_rc->pl_x + 4)
         {
             px_index = y * core->tmp_imgdata->size + x * (core->tmp_imgdata->bpp / 8);
             core->tmp_imgdata->img_data[px_index + 0] = (color >> 0) & 0xFF;

@@ -26,8 +26,8 @@
 # define SLIDER_SIZE 9
 
 //WINDOW SIZE
-# define S_LENGHT 1600
-# define S_HEIGHT 1000
+# define S_LENGHT 1920
+# define S_HEIGHT 1080
 
 //MENU PLACEMENT
 # define MENU_START_Y 540
@@ -59,8 +59,10 @@
 
 //MATHS
 # include <math.h>
-# define PI 3.14159
-# define RAD 0.01745
+# define PI 3.14159265359
+# define RAD 0.0174533
+
+extern int	map[];
 
 typedef struct s_img_loader
 {
@@ -120,6 +122,10 @@ typedef struct s_textures
 	char	*south;
 	char	*west;
 	char	*east;
+	t_img	*tmp_north;
+	t_img	*tmp_south;
+	t_img	*tmp_west;
+	t_img	*tmp_east;
 	char	*floor_color;
 	char	*ceiling_color;
 }	t_textures;
@@ -321,6 +327,7 @@ void    move_player(t_core *core, t_move move);
 //Temp_functions
 void	move_player(t_core *core, t_move move);
 void	init_tmp(t_core *core);
+void    init_map_textures(t_core *core);
 
 //Layers printing
 void    print_background(t_core *core, int x, int y, int color);

@@ -26,7 +26,8 @@ int	routine(void *param)
 	}
 	else if (core->state == GAME)
 	{
-		core->tmp_rc->max_r = core->fov;
+		init_map_textures(core);
+		core->tmp_rc->max_r = S_LENGHT;
 		if (core->redraw == true)
 			start_game(core);
 	}

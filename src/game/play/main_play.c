@@ -12,26 +12,6 @@
 
 #include "cub3d.h"
 
-int map[] = 
-{
-    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-    1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1,
-    1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 1,
-    1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1,
-    1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-    1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1,
-    1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1,
-    1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1, 1,
-    1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1,
-    1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1,
-    1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 1,
-    1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-    1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-    1, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-    1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1,
-    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-};
-
 void    draw_tile(char *img_data, int bpp, int size_line, int x, int y, int color)
 {
     int i;
@@ -39,10 +19,10 @@ void    draw_tile(char *img_data, int bpp, int size_line, int x, int y, int colo
     int pixel_index;
 
     j = 0;
-    while (j < 31)
+    while (j < 7)
     {
         i = 0;
-        while (i < 31)
+        while (i < 7)
         {
             pixel_index = (y + j) * size_line + (x + i) * (bpp / 8);
             img_data[pixel_index + 0] = (color & 0x0000FF);
@@ -56,7 +36,7 @@ void    draw_tile(char *img_data, int bpp, int size_line, int x, int y, int colo
     }
 }
 
-void    draw_test_map2(char *img_data, int bpp, int size_line)
+void    draw_test_map2(t_core *core, char *img_data, int bpp, int size_line)
 {
     int x;
     int y;
@@ -64,16 +44,16 @@ void    draw_test_map2(char *img_data, int bpp, int size_line)
     int tile_y;
 
     y = 0;
-    while (y < 16)
+    while (y < core->map_height)
     {
         x = 0;
-        while (x < 16)
+        while (x < core->map_width)
         {
-            tile_x = x * 32;
-            tile_y = y * 32;
-            if (map[y * 16 + x] == 1)
+            tile_x = x * 8;
+            tile_y = y * 8;
+            if (core->map[y][x] == '1')
                 draw_tile(img_data, bpp, size_line, tile_x, tile_y, 0xFFFFFF);
-            else
+            else if (core->map[y][x] != ' ' && core->map[y][x] != 9)
                 draw_tile(img_data, bpp, size_line, tile_x, tile_y, 0x000000);
             x++;
         }
@@ -81,30 +61,6 @@ void    draw_test_map2(char *img_data, int bpp, int size_line)
     }
 }
 
-void    draw_test_map(char *img_data, int bpp, int size_line)
-{
-    int x;
-    int y;
-    int tile_x;
-    int tile_y;
-
-    y = 0;
-    while (y < 16)
-    {
-        x = 0;
-        while (x < 16)
-        {
-            tile_x = x * 32;
-            tile_y = y * 32;
-            if (map[y * 16 + x] == 1)
-                draw_tile(img_data, bpp, size_line, tile_x, tile_y, 0xFFFFFF);
-            // else
-            //     draw_tile(img_data, bpp, size_line, tile_x, tile_y, 0x000000);
-            x++;
-        }
-        y++;
-    }
-}
 void    draw_3d(t_core *core)
 {
     core->tmp_3d->line_h = (16 * S_HEIGHT) / core->tmp_rc->dist3[core->tmp_rc->r];
@@ -120,14 +76,38 @@ void    draw_3d(t_core *core)
 	}
 }
 
-static void loop_tiles(t_core *core, int i)
+static void loop_tiles_height(t_core *core, int i)
 {
-    while (i < 16)
+    while (i < core->map_height)
     {
-        core->tmp_rc->mx = (int)core->tmp_rc->rx >> 5;
-        core->tmp_rc->my = (int)core->tmp_rc->ry >> 5;
-        core->tmp_rc->mp = core->tmp_rc->my * 16 + core->tmp_rc->mx;
-        if (core->tmp_rc->mp >= 0 && core->tmp_rc->mp < 16 * 16 && map[core->tmp_rc->mp] == 1)
+        core->tmp_rc->mx = (int)core->tmp_rc->rx >> 3;
+        core->tmp_rc->my = (int)core->tmp_rc->ry >> 3;
+        // core->tmp_rc->mp = core->tmp_rc->my * core->map_width + core->tmp_rc->mx;
+        // if (core->tmp_rc->mp >= 0 && core->tmp_rc->mp < core->map_width && core->map[core->tmp_rc->my][core->tmp_rc->mx] == '1')
+        if (core->tmp_rc->my >= 0 && core->tmp_rc->my < core->map_height \
+            && core->tmp_rc->mx >= 0 && core->tmp_rc->mx < core->map_width \
+            && core->map[core->tmp_rc->my][core->tmp_rc->mx] == '1')
+            break ;
+        else
+        {
+            core->tmp_rc->rx += core->tmp_rc->x;
+            core->tmp_rc->ry += core->tmp_rc->y;
+            i++;
+        }
+    }  
+}
+
+static void loop_tiles_width(t_core *core, int i)
+{
+    while (i < core->map_width)
+    {
+        core->tmp_rc->mx = (int)core->tmp_rc->rx >> 3;
+        core->tmp_rc->my = (int)core->tmp_rc->ry >> 3;
+        // core->tmp_rc->mp = core->tmp_rc->my * core->map_width + core->tmp_rc->mx;
+        // if (core->tmp_rc->mp >= 0 && core->tmp_rc->mp < core->map_width && core->map[core->tmp_rc->my][core->tmp_rc->mx] == '1')
+        if (core->tmp_rc->my >= 0 && core->tmp_rc->my < core->map_height \
+            && core->tmp_rc->mx >= 0 && core->tmp_rc->mx < core->map_width \
+            && core->map[core->tmp_rc->my][core->tmp_rc->mx] == '1')
             break ;
         else
         {
@@ -146,25 +126,25 @@ void    horizontal_cast(t_core *core)
     core->tmp_rc->atan = -1 / tan(core->tmp_rc->ra);
     if (core->tmp_rc->ra > PI)
     {
-        core->tmp_rc->ry = (((int)core->tmp_rc->pl_y >> 5) << 5) -0.0001;
+        core->tmp_rc->ry = (((int)core->tmp_rc->pl_y >> 3) << 3) -0.0001;
         core->tmp_rc->rx = (core->tmp_rc->pl_y - core->tmp_rc->ry) * core->tmp_rc->atan + core->tmp_rc->pl_x;
-        core->tmp_rc->y = -32;
+        core->tmp_rc->y = -8;
         core->tmp_rc->x = -core->tmp_rc->y * core->tmp_rc->atan;
     }
     if (core->tmp_rc->ra < PI)
     {
-        core->tmp_rc->ry = (((int)core->tmp_rc->pl_y >> 5) << 5) + 32;
+        core->tmp_rc->ry = (((int)core->tmp_rc->pl_y >> 3) << 3) + 8;
         core->tmp_rc->rx = (core->tmp_rc->pl_y - core->tmp_rc->ry) * core->tmp_rc->atan + core->tmp_rc->pl_x;
-        core->tmp_rc->y = 32;
+        core->tmp_rc->y = 8;
         core->tmp_rc->x = -core->tmp_rc->y * core->tmp_rc->atan;
     }
     if (core->tmp_rc->ra == 0 || core->tmp_rc->ra == PI)
     {
         core->tmp_rc->rx = core->tmp_rc->pl_x;
         core->tmp_rc->ry = core->tmp_rc->pl_y;
-        i = 16;
+        i = core->map_height;
     }
-    loop_tiles(core, i);
+    loop_tiles_height(core, i);
 }
 
 void    vertical_cast(t_core *core)
@@ -175,30 +155,30 @@ void    vertical_cast(t_core *core)
     core->tmp_rc->ntan = -tan(core->tmp_rc->ra);
     if (core->tmp_rc->ra > PI / 2 && core->tmp_rc->ra < 3 * PI / 2)
     {
-        core->tmp_rc->rx = (((int)core->tmp_rc->pl_x >> 5) << 5) - 0.0001;
+        core->tmp_rc->rx = (((int)core->tmp_rc->pl_x >> 3) << 3) - 0.0001;
         core->tmp_rc->ry = (core->tmp_rc->pl_x - core->tmp_rc->rx) * core->tmp_rc->ntan + core->tmp_rc->pl_y;
-        core->tmp_rc->x = -32;
+        core->tmp_rc->x = -8;
         core->tmp_rc->y = -core->tmp_rc->x * core->tmp_rc->ntan;
     }
     if (core->tmp_rc->ra < PI / 2 || core->tmp_rc->ra > 3 * PI / 2)
     {
-        core->tmp_rc->rx = (((int)core->tmp_rc->pl_x >> 5) << 5) + 32;
+        core->tmp_rc->rx = (((int)core->tmp_rc->pl_x >> 3) << 3) + 8;
         core->tmp_rc->ry = (core->tmp_rc->pl_x - core->tmp_rc->rx) * core->tmp_rc->ntan + core->tmp_rc->pl_y;
-        core->tmp_rc->x = 32;
+        core->tmp_rc->x = 8;
         core->tmp_rc->y = -core->tmp_rc->x * core->tmp_rc->ntan;
     }
     if (core->tmp_rc->ra == 0 || core->tmp_rc->ra == PI)
     {
         core->tmp_rc->rx = core->tmp_rc->pl_x;
         core->tmp_rc->ry = core->tmp_rc->pl_y;
-        i = 16;
+        i = core->map_width;
     }
-    loop_tiles(core, i);
+    loop_tiles_width(core, i);
 }
 
 void    get_raycast_data(t_core *core)
 {
-    core->tmp_rc->ra = core->tmp_rc->pl_angle - RAD * ((core->tmp_rc->max_r) / 2);
+    core->tmp_rc->ra = core->tmp_rc->pl_angle - RAD * ((core->fov) / 2);
     if (core->tmp_rc->ra < 0)
         core->tmp_rc->ra += 2 * PI;
     if (core->tmp_rc->ra > 2 * PI)
@@ -217,7 +197,7 @@ void    get_raycast_data(t_core *core)
     	else
 		{
         	core->tmp_rc->dist3[core->tmp_rc->r] = core->tmp_rc->dist[core->tmp_rc->r];
-		}
+		};
 		print_rays(core, 0xFF0000);
 		rays_updates(core);
         draw_3d(core);
@@ -229,13 +209,13 @@ void    get_rc_data(t_core *core)
     core->tmp_rc = malloc(sizeof(*core->tmp_rc));
     if (!core->tmp_rc)
         return ;
-    core->tmp_rc->pl_x = 100;
-    core->tmp_rc->pl_y = 100;
+    core->tmp_rc->pl_x = core->spawn->x * 8;
+    core->tmp_rc->pl_y = core->spawn->y * 8;
     core->tmp_rc->pl_angle = 0;
-    core->tmp_rc->pldelt_x = cos(core->tmp_rc->pl_angle) / 2;
-    core->tmp_rc->pldelt_y = sin(core->tmp_rc->pl_angle) / 2;
+    core->tmp_rc->pldelt_x = cos(core->tmp_rc->pl_angle);
+    core->tmp_rc->pldelt_y = sin(core->tmp_rc->pl_angle);
 	core->tmp_rc->res = 16;
-    core->tmp_rc->max_r = core->fov * 16;
+    core->tmp_rc->max_r = S_LENGHT;
 	core->tmp_rc->dist = gc_malloc(&core->gc, sizeof(float) * core->tmp_rc->max_r, FLOAT, "dist");
 	core->tmp_rc->dist2 = gc_malloc(&core->gc, sizeof(float) * core->tmp_rc->max_r, FLOAT, "dist2");
 	core->tmp_rc->dist3 = gc_malloc(&core->gc, sizeof(float) * core->tmp_rc->max_r, FLOAT, "dist3");
@@ -257,10 +237,9 @@ void    start_game(t_core *core)
     core->tmp_imgdata->img_data = mlx_get_data_addr(core->tmp_imgdata->img, \
     &core->tmp_imgdata->bpp, &core->tmp_imgdata->size, &core->tmp_imgdata->endian);
     print_background(core, S_LENGHT, S_HEIGHT, 0xAAAAAA);
-	draw_test_map2(core->tmp_imgdata->img_data, core->tmp_imgdata->bpp, core->tmp_imgdata->size);
+	draw_test_map2(core, core->tmp_imgdata->img_data, core->tmp_imgdata->bpp, core->tmp_imgdata->size);
 	get_raycast_data(core);
     print_player(core, 0xFFFF00);
-	draw_test_map(core->tmp_imgdata->img_data, core->tmp_imgdata->bpp, core->tmp_imgdata->size);
     mlx_put_image_to_window(core->mlx, core->win, core->tmp_imgdata->img, 0, 0);
     core->redraw = false;
 }

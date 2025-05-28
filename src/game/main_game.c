@@ -111,7 +111,6 @@ bool	launch_game(t_core *core)
 		return (false);
 	core->fov = 90;
 	start_menu(core);
-	mlx_key_hook(core->win, handle_keypress, core);
 	mlx_hook(core->win, 6, (1L << 6), mouse_menu_hover, core);
 	mlx_hook(core->win, 4, (1L << 2), mouse_menu_click, core);
 	mlx_hook(core->win, 5, (1L << 3), mouse_menu_release, core);

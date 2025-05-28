@@ -39,7 +39,10 @@ void	menu_keypress(int key, t_core *core)
 	if (key == XK_Return)
 	{
 		if (core->menu_option == 0)
+		{
+			mlx_clear_window(core->mlx, core->win);
 			core->state = GAME;
+		}
 		if (core->menu_option == 1)
 		{
 			core->menu_option = 0;
