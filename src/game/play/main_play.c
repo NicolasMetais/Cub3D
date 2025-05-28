@@ -236,10 +236,12 @@ void    start_game(t_core *core)
         return ;
     core->tmp_imgdata->img_data = mlx_get_data_addr(core->tmp_imgdata->img, \
     &core->tmp_imgdata->bpp, &core->tmp_imgdata->size, &core->tmp_imgdata->endian);
-    print_background(core, S_LENGHT, S_HEIGHT, 0xAAAAAA);
+    print_background(core, S_LENGHT, S_HEIGHT - 160, 0xAAAAAA);
 	draw_test_map2(core, core->tmp_imgdata->img_data, core->tmp_imgdata->bpp, core->tmp_imgdata->size);
 	get_raycast_data(core);
     print_player(core, 0xFFFF00);
     mlx_put_image_to_window(core->mlx, core->win, core->tmp_imgdata->img, 0, 0);
+    if (!render_hud(core))
+		return ;
     core->redraw = false;
 }

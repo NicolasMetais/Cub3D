@@ -25,8 +25,8 @@
 # define SLIDER_SIZE 9
 
 //WINDOW SIZE
-# define S_LENGHT 1920
-# define S_HEIGHT 1080
+# define S_LENGHT 1600
+# define S_HEIGHT 1000
 
 //MENU PLACEMENT
 # define MENU_START_Y 540
@@ -201,7 +201,6 @@ typedef struct s_tmp_rc
     float	ry;
     float	ra;
 	float	ca;
-<<<<<<< HEAD
     float   x;
     float   y;
     float   atan;
@@ -217,15 +216,6 @@ typedef struct s_tmp_rc
 	int		py2_add;
 	int		px2_sub;
 	int		py2_sub;
-=======
-    float	x;
-    float	y;
-    float	atan;
-    float	ntan;
-    float	*dist;
-    float	*dist2;
-    float	*dist3;
->>>>>>> origin/hud
 }	t_tmp_rc;
 
 typedef struct s_core
@@ -358,14 +348,14 @@ void    draw_player_line(t_core *core, int color);
 void			move_player(t_core *core, t_move move);
 void			init_tmp(t_core *core);
 
-//Layers printing
-void			print_background(t_core *core, int x, int y, int color);
-void			print_player(t_core *core, int color);
-void			print_rays(t_core *core, int color);
-void			print_3d(t_core *core, int pixel_index);
-void			get_rc_data(t_core *core);
-void			rays_updates(t_core *core);
-void			draw_player_line(t_core *core, int color);
+// //Layers printing
+// void			print_background(t_core *core, int x, int y, int color);
+// void			print_player(t_core *core, int color);
+// void			print_rays(t_core *core, int color);
+// void			print_3d(t_core *core, int pixel_index);
+// void			get_rc_data(t_core *core);
+// void			rays_updates(t_core *core);
+// void			draw_player_line(t_core *core, int color);
 
 //HUD
 bool			render_hud(t_core *core);

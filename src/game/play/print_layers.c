@@ -28,7 +28,8 @@ void    print_3d(t_core *core)
     if (end > S_LENGHT)
         end = S_LENGHT;
     core->tmp_3d->x = start;
-    while (core->tmp_3d->x < end && (core->tmp_3d->x > core->map_width * 8 || core->tmp_3d->y > core->map_height * 8))
+    while (core->tmp_3d->x < end && (core->tmp_3d->x > core->map_width * 8 || core->tmp_3d->y > core->map_height * 8) && \
+        core->tmp_3d->y < S_HEIGHT - 160)
     {
         pixel_index = core->tmp_3d->y * core->tmp_imgdata->size + core->tmp_3d->x * (core->tmp_imgdata->bpp / 8);
         // pixel_index = core->tmp_3d->y * core->textures->tmp_north->width + core->tmp_3d->x * (core->textures->tmp_north->bpp / 8);

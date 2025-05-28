@@ -28,13 +28,16 @@ int	routine(void *param)
 	{
 		init_map_textures(core);
 		core->tmp_rc->max_r = S_LENGHT;
+		
 		if (core->redraw == true)
-			start_game(core);
+		// if (!render_hud(core))
+		// 	return (false);
+		start_game(core);
+			//start_game(core);
 	}
 	core->redraw = false;
-		if (!render_hud(core))
-			return (false);
-	}
-		//start_game(core);
+		// if (!render_hud(core))
+		// 	return (false);
+		// start_game(core);
 	return (0);
 }

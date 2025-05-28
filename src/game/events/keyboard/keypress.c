@@ -40,12 +40,9 @@ void	menu_keypress(int key, t_core *core)
 	{
 		if (core->menu_option == 0)
 		{
-<<<<<<< HEAD
 			mlx_clear_window(core->mlx, core->win);
-=======
 			if (!game_init(core))
 				return ;
->>>>>>> origin/hud
 			core->state = GAME;
 		}
 		if (core->menu_option == 1)
