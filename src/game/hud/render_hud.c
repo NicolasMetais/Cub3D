@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 15:11:40 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/28 17:56:27 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/29 15:31:11 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 bool	render_hud(t_core *core)
 {
-	render_head(core);
 	render_numbers(core);
 	render_ammo(core);
 	render_weapon_menu(core);
+	render_head(core);
 	mlx_put_image_to_window(core->mlx, core->win, core->hud_img->hud->img,
 		0, 840);
 	return (true);

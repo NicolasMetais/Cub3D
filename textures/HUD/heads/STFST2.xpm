@@ -39,7 +39,7 @@ static char *result[] = {
 "y c #FFBB93",
 "u c #FFBF9B",
 "i c #FFD7BB",
-"p c None",
+"p c #00FF00",
 /* pixels */
 "pppppO###$%%%%%$##Oppppp",
 "pppX#+&>1366631,%#+#Xppp",

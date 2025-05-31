@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 01:58:43 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/27 16:22:28 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/29 17:41:22 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ typedef struct s_core		t_core;
 typedef struct s_textures	t_textures;
 typedef struct s_colors		t_colors;
 typedef struct s_pos		t_pos;
-
-
 
 //Je stocke toutes les data que je parse au cas ou le parsing foire
 typedef struct s_tmp

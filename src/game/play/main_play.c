@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_play.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tvacher <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 13:33:49 by tvacher           #+#    #+#             */
-/*   Updated: 2025/05/14 13:33:51 by tvacher          ###   ########.fr       */
+/*   Updated: 2025/05/30 18:21:30 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -225,23 +225,14 @@ void    get_rc_data(t_core *core)
 
 void    start_game(t_core *core)
 {
-    core->tmp_imgdata = malloc(sizeof(t_tmp_imgdata));
-    if (!core->tmp_imgdata)
-        return ;
-    core->tmp_imgdata->img = mlx_new_image(core->mlx, S_LENGHT, S_HEIGHT);
-    if (!core->tmp_imgdata->img)
-		return ;
 	core->tmp_3d = malloc(sizeof(t_tmp_3d));
     if (!core->tmp_3d)
         return ;
-    core->tmp_imgdata->img_data = mlx_get_data_addr(core->tmp_imgdata->img, \
-    &core->tmp_imgdata->bpp, &core->tmp_imgdata->size, &core->tmp_imgdata->endian);
     print_background(core, S_LENGHT, S_HEIGHT - 160, 0xAAAAAA);
-	draw_test_map2(core, core->tmp_imgdata->img_data, core->tmp_imgdata->bpp, core->tmp_imgdata->size);
+    draw_test_map2(core, core->game_img->addr, core->game_img->bpp, core->game_img->line_len);
 	get_raycast_data(core);
     print_player(core, 0xFFFF00);
-    mlx_put_image_to_window(core->mlx, core->win, core->tmp_imgdata->img, 0, 0);
-    if (!render_hud(core))
-		return ;
+    render_weapon(core);
+    mlx_put_image_to_window(core->mlx, core->win, core->game_img->img, 0, 0);
     core->redraw = false;
 }

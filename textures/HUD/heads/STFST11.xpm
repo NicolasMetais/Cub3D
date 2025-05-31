@@ -44,7 +44,7 @@ static char *result[] = {
 "s c #FFBB93",
 "d c #FFC7A7",
 "f c #FFD7BB",
-"g c None",
+"g c #00FF00",
 /* pixels */
 "ggggg+$$$%&&&&&%$$+ggggg",
 "gggX$@*3678qq752&$@$Xggg",

@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 21:25:17 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/17 22:33:28 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/29 23:58:54 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,10 @@ static void	rewrite_options(t_core *core, const int *y, t_img *bg)
 	t_img	*maps;
 	t_img	*quit;
 
-	play = hashmap_get(&core->hashmap, "Menu_play");
-	options = hashmap_get(&core->hashmap, "Menu_options");
-	maps = hashmap_get(&core->hashmap, "Menu_maps");
-	quit = hashmap_get(&core->hashmap, "Menu_quit");
+	play = (t_img *)hashmap_get(&core->hashmap, "Menu_play");
+	options = (t_img *)hashmap_get(&core->hashmap, "Menu_options");
+	maps = (t_img *)hashmap_get(&core->hashmap, "Menu_maps");
+	quit = (t_img *)hashmap_get(&core->hashmap, "Menu_quit");
 	transparency(bg, play, (bg->width / 2) - 100, y[0]);
 	transparency(bg, options, (bg->width / 2) - 100, y[1]);
 	transparency(bg, maps, (bg->width / 2) - 100, y[2]);
@@ -31,21 +31,24 @@ static void	rewrite_options(t_core *core, const int *y, t_img *bg)
 }
 
 //PRINT SKULL AT THE RIGHT PLACE
-void	skulls_render(t_core *core, const int *y, int frame)
+void	skulls_render(t_core *core, const int *y)
 {
 	int			x;
+	t_sprite	*skulls;
 
 	x = (core->menu_img->bg->width / 2) - 100;
 	if (core->state == MAPS_MENU)
 	{
-		transparency(core->menu_img->bg, core->menu_img->skulls->sprites[frame],
-			x - (core->menu_img->skulls->sprites[frame]->width + 10),
+		skulls = hashmap_get(&core->hashmap_sprites, "skulls");
+		transparency(core->menu_img->bg, skulls->img_list->image,
+			x - (skulls->img_list->image->width + 10),
 			y[core->menu_option - core->scroll_offset]);
 	}
 	else if (core->state == START_MENU)
 	{
-		transparency(core->menu_img->bg, core->menu_img->skulls->sprites[frame],
-			x - (core->menu_img->skulls->sprites[frame]->width + 10),
+		skulls = hashmap_get(&core->hashmap_sprites, "skulls");
+		transparency(core->menu_img->bg, skulls->img_list->image,
+			x - (skulls->img_list->image->width + 10),
 			y[core->menu_option]);
 	}
 	mlx_put_image_to_window(core->mlx, core->win, core->menu_img->bg->img,
@@ -84,7 +87,7 @@ bool	render_menu(t_core *core)
 	start_menu_init(core);
 	copy_img(core->menu_img->bg, core->menu_img->bg_clean);
 	rewrite_options(core, core->y_pos, core->menu_img->bg);
-	skulls_render(core, core->y_pos, core->menu_img->skulls->frame);
+	skulls_render(core, core->y_pos);
 	loaded_map(core->menu_img->bg, core);
 	core->redraw = false;
 	return (true);

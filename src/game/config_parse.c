@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 13:43:55 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/26 13:17:40 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/29 22:41:33 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ bool	store_img(char **line, t_core *core)
 		if (!load_image(&img, line[1], core, line[2]))
 			return (false);
 	}
-	if (!hashmap_insert(&core->hashmap, line[0], img, core))
+	if (!hashmap_insert(&core->hashmap, line[0], (void *)img, core))
 	{
 		ft_putendl_fd("Error: Failed to insert image into hashmap", 2);
 		return (false);
@@ -58,18 +58,14 @@ unsigned int	hashmap_size(char **data)
 bool	extract_img_data(t_core *core)
 {
 	int		i;
-	int		size;
 	char	**data;
 	char	**tmp;
 
-	i = -1;
-	size = 0;
 	data = NULL;
 	if (!file_extract("config.cfg", &data, core))
-		return (ft_free_tab(data), false);
-	size = hashmap_size(data);
+		return (false);
 	i = -1;
-	if (!hashmap_init(core, size))
+	if (!hashmap_init(core, hashmap_size(data)))
 		return (false);
 	while (data[++i])
 	{
@@ -77,8 +73,9 @@ bool	extract_img_data(t_core *core)
 			continue ;
 		tmp = ft_split(data[i], '\t');
 		if (!tmp || !store_img(tmp, core))
-			return (ft_free_tab(tmp), ft_free_tab(data), false);
+			return (ft_free_tab(tmp), false);
 		ft_free_tab(tmp);
 	}
+	load_assets(core, data);
 	return (true);
 }

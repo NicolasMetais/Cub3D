@@ -50,7 +50,7 @@ static char *result[] = {
 "k c #F7AB7B",
 "l c #FFBB93",
 "z c #FFC7A7",
-"x c None",
+"x c #00FF00",
 /* pixels */
 "xxxxx-:::>9>>99,>:-xxxxx",
 "xxxX:;::,,t99tt9,88;Xxxx",
