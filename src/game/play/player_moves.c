@@ -35,7 +35,7 @@ static void handle_up(t_core *core)
 static void    handle_left(t_core *core)
 {
     core->tmp_rc->pl_angle -= 0.05;
-    if (core->tmp_rc->pl_angle < 0)
+    if (core->tmp_rc->pl_angle <= 0)
         core->tmp_rc->pl_angle += 2 * PI;
     core->tmp_rc->pldelt_x = cos(core->tmp_rc->pl_angle) * 5;
     core->tmp_rc->pldelt_y = sin(core->tmp_rc->pl_angle) * 5;
@@ -44,7 +44,7 @@ static void    handle_left(t_core *core)
 static void handle_right(t_core *core)
 {
     core->tmp_rc->pl_angle += 0.05;
-    if (core->tmp_rc->pl_angle > 2 * PI)
+    if (core->tmp_rc->pl_angle >= 2 * PI)
         core->tmp_rc->pl_angle -= 2 * PI;
     core->tmp_rc->pldelt_x = cos(core->tmp_rc->pl_angle) * 5;
     core->tmp_rc->pldelt_y = sin(core->tmp_rc->pl_angle) * 5;

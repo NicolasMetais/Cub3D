@@ -65,8 +65,9 @@ PARSING =	src/parsing/map_extract.c \
 
 GAME =	src/game/play/main_play.c \
 		src/game/play/main_play_utils.c \
-		src/game/play/print_layers.c \
+		src/game/play/print_back_and_player.c \
 		src/game/play/player_moves.c \
+		src/game/play/minimap.c
 
 
 OBJ_DIR = obj

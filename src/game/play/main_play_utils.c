@@ -29,7 +29,8 @@ void    init_map_textures(t_core *core)
     // t_img *wall_south;
     // t_img *wall_east;
     // t_img *wall_west;
-
+    core->textures->path_sky = "/tmp_assets/SKY3.xpm";
+    core->textures->sky = hashmap_get(&core->hashmap, "Sky");
     core->textures->tmp_north = hashmap_get(&core->hashmap, "Wall_north");
     core->textures->tmp_south = hashmap_get(&core->hashmap, "Wall_south");
     core->textures->tmp_east = hashmap_get(&core->hashmap, "Wall_east");
@@ -43,11 +44,5 @@ void    rays_updates(t_core *core)
     if (core->tmp_rc->ra < 0)
         core->tmp_rc->ra += 2 * PI;
     if (core->tmp_rc->ra > 2 * PI)
-        core->tmp_rc->ra -= 2 * PI;
-    core->tmp_rc->ca = core->tmp_rc->ra - core->tmp_rc->pl_angle;
-    if (core->tmp_rc->ca < -PI)
-        core->tmp_rc->ca += 2 * PI;
-    if (core->tmp_rc->ca > PI)
-        core->tmp_rc->ca -= 2 * PI;
-    core->tmp_rc->dist3[core->tmp_rc->r] = core->tmp_rc->dist3[core->tmp_rc->r] * cos(core->tmp_rc->ca);    
+        core->tmp_rc->ra -= 2 * PI;   
 }

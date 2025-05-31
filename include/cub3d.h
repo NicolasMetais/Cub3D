@@ -129,10 +129,12 @@ typedef struct s_textures
 	char	*south;
 	char	*west;
 	char	*east;
+	char	*path_sky;
 	t_img	*tmp_north;
 	t_img	*tmp_south;
 	t_img	*tmp_west;
 	t_img	*tmp_east;
+	t_img	*sky;
 	char	*floor_color;
 	char	*ceiling_color;
 }	t_textures;
@@ -199,6 +201,10 @@ typedef struct s_tmp_rc
     int		py;
     float	rx;
     float	ry;
+	float	vx;
+    float	vy;
+    float	hx;
+    float	hy;
     float	ra;
 	float	ca;
     float   x;
@@ -216,6 +222,8 @@ typedef struct s_tmp_rc
 	int		py2_add;
 	int		px2_sub;
 	int		py2_sub;
+	int		was_vertical;
+	int		map_size;
 }	t_tmp_rc;
 
 typedef struct s_core
@@ -338,15 +346,20 @@ void	init_tmp(t_core *core);
 void    init_map_textures(t_core *core);
 
 //Layers printing
-void    print_background(t_core *core, int x, int y, int color);
+void    print_background(t_core *core);
 void    print_player(t_core *core, int color);
 void    print_rays(t_core *core, int color);
 void    print_3d(t_core *core);
+void    draw_ceiling_floor(t_core *core);
 void    get_rc_data(t_core *core);
 void    rays_updates(t_core *core);
 void    draw_player_line(t_core *core, int color);
 void			move_player(t_core *core, t_move move);
 void			init_tmp(t_core *core);
+
+//Minimap in game
+void	draw_minimap_game(t_core *core);
+void	print_miscellaneous(t_core *core, int color);
 
 // //Layers printing
 // void			print_background(t_core *core, int x, int y, int color);
