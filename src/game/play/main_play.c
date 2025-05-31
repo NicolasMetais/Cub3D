@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 13:33:49 by tvacher           #+#    #+#             */
-/*   Updated: 2025/05/31 15:30:07 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/31 23:26:36 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -290,6 +290,8 @@ void    get_rc_data(t_core *core)
 
 void    start_game(t_core *core)
 {
+    t_sprite    *sprite;
+
 	core->tmp_3d = malloc(sizeof(t_tmp_3d));
     if (!core->tmp_3d)
         return ;
@@ -297,7 +299,16 @@ void    start_game(t_core *core)
     draw_minimap_game(core);
 	get_raycast_data(core);
     print_player(core, 0xFFFF00);
-    render_weapon(core);
+    sprite = core->player->weapon[core->player->current_weapon].anim;
+	if (core->player->weapon[core->player->current_weapon].lock)
+    {
+        update_animation(sprite);
+        if (!sprite->activ)
+            core->player->weapon[core->player->current_weapon].lock = false;
+    }
+	    render_weapon(core);
     mlx_put_image_to_window(core->mlx, core->win, core->game_img->img, 0, 0);
-    core->redraw = false;
+	render_hud(core);
+	render_head(core);
+	
 }

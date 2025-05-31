@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 14:39:58 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/29 18:50:07 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/31 19:11:11 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ bool	slider_constructor(t_core *core, int width)
 	menu->slider_bar->addr = mlx_get_data_addr(menu->slider_bar->img,
 			&menu->slider_bar->bpp, &menu->slider_bar->line_len,
 			&menu->slider_bar->endian);
-	fill_img_in_green(&menu->slider_bar);
+	fill_img_in_green(menu->slider_bar);
 	slider_assembler(menu->slider_bar, corner_left, corner_right, slider);
 	hashmap_insert(&core->hashmap, "slider_bar",
 		(void *)menu->slider_bar, core);

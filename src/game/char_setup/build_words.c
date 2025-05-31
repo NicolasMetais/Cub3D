@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 15:25:43 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/05 06:25:08 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/31 19:11:19 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ bool	build_words(t_core *core, t_img **img, t_font_size size, char *word)
 	(*img)->height = height;
 	(*img)->addr = mlx_get_data_addr((*img)->img, &(*img)->bpp,
 			&(*img)->line_len, &(*img)->endian);
-	fill_img_in_green(img);
+	fill_img_in_green(*img);
 	write_words(img, core->fonts, word, core);
 	return (true);
 }

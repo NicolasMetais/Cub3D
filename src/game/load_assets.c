@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 19:09:05 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/30 00:16:51 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/31 21:59:53 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ bool	new_sprite_node(t_core *core, t_sprite *tempo, t_node_img *head,
 	if (!head)
 	{
 		tempo->img_list = new;
+		tempo->head = new;
 		new->next = new;
 	}
 	else
@@ -33,6 +34,8 @@ bool	new_sprite_node(t_core *core, t_sprite *tempo, t_node_img *head,
 		head->next = new;
 		new->next = tempo->img_list;
 	}
+	tempo->speed = 100;
+	tempo->timer = 0;
 	tempo->nb++;
 	return (true);
 }

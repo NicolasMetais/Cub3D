@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 17:05:18 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/31 14:46:38 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/31 23:48:44 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,30 @@
 
 bool	render_weapon(t_core *core)
 {
+	int			offset_y;
+	int			offset_x;
+	t_weapon	weapon;
 
+	weapon = core->player->weapon[core->player->current_weapon];
+	fill_img_in_green(core->weapon_buffer);
 	if (!core->player->weapon[core->player->current_weapon].lock)
 	{
-		transparency(core->game_img, core->player->weapon[core->player->current_weapon].normal,((S_LENGHT - core->player->weapon[core->player->current_weapon].normal->width) / 2) + core->player->bob_x, (S_HEIGHT - 150 - core->player->weapon[core->player->current_weapon].normal->height) + core->player->bob_y);
+		offset_x = (core->weapon_buffer->width - weapon.normal->width) / 2;
+		offset_y = core->weapon_buffer->height - weapon.normal->height;
+		transparency(core->weapon_buffer, weapon.normal, offset_x, offset_y);
 	}
 	else
-		transparency(core->game_img, core->player->weapon[core->player->current_weapon].fire->img_list->image, ((S_LENGHT - core->player->weapon[core->player->current_weapon].fire->img_list->image->width) / 2) + core->player->bob_x, (S_HEIGHT - 150 - core->player->weapon[core->player->current_weapon].fire->img_list->image->height) + core->player->bob_y);
+	{
+		offset_x = (core->weapon_buffer->width
+				- weapon.anim->img_list->image->width) / 2;
+		offset_y = core->weapon_buffer->height
+			- weapon.anim->img_list->image->height;
+		transparency(core->weapon_buffer, weapon.anim->img_list->image,
+			offset_x, offset_y);
+	}
+	transparency(core->game_img, core->weapon_buffer,
+		(core->game_img->width - core->weapon_buffer->width) / 2,
+		core->game_img->height - (core->weapon_buffer->height + 150));
 	return (true);
 }
 

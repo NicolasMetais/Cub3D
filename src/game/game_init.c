@@ -6,11 +6,34 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 17:55:32 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/31 15:20:01 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/31 23:49:48 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+	// int i = -1;
+	// while(++i < 9)
+	// {
+	// 	if (i == 4)
+	// 		i++;
+	// 	if (weapon[i].normal)
+	// 		printf("NORMAL : width : %d, Height : %d\n", weapon[i].normal->width, weapon[i].normal->height);
+	// 	int j = -1;
+	// 	while(++j < weapon[i].anim->nb)
+	// 	{
+	// 		printf("ANIM : width : %d, Height : %d\n", weapon[i].anim->img_list->image->width, weapon[i].anim->img_list->image->height);
+	// 		weapon[i].anim->img_list = weapon[i].anim->img_list->next;
+	// 	}
+	// 	j = -1;
+	// 	if (!weapon[i].fire)
+	// 		continue ;
+	// 	while (++j < weapon[i].fire->nb)
+	// 	{
+	// 		printf("FIRE : width : %d, Height : %d\n", weapon[i].fire->img_list->image->width, weapon[i].fire->img_list->image->height);
+	// 		weapon[i].fire->img_list = weapon[i].fire->img_list->next;
+	// 	}
+	// }
 
 bool	player_init(t_core *core)
 {
@@ -69,6 +92,20 @@ bool	game_init(t_core *core)
 		return (false);
     init_map_textures(core);
 	weapons_init(core->player->weapon, core);
+	core->weapon_buffer = gc_malloc(&core->gc, sizeof(t_img), STRUCT, "weapon_buffer");
+	if (!core->weapon_buffer)
+		return (false);
+	core->weapon_buffer->img = mlx_new_image(core->mlx, 680, 604);
+	if (!core->weapon_buffer->img)
+		return (false);
+	core->weapon_buffer->addr = mlx_get_data_addr(core->weapon_buffer->img,
+			&core->weapon_buffer->bpp, &core->weapon_buffer->line_len,
+			&core->weapon_buffer->endian);
+	core->weapon_buffer->width = 680;
+	core->weapon_buffer->height = 604;
+	hashmap_insert(&core->hashmap, "weapon_buffer", (void *)core->weapon_buffer, core);
+	t_weapon	*weapon;
+	weapon = core->player->weapon;
 	mlx_clear_window(core->mlx, core->win);
 	return (true);
 }

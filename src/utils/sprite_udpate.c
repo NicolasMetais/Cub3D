@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 03:53:57 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/30 00:24:45 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/31 20:51:31 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,27 @@ bool	update_sprite(t_sprite *sprite)
 	{
 		sprite->img_list = sprite->img_list->next;
 		sprite->update = current;
+		return (true);
+	}
+	return (false);
+}
+
+bool	update_animation(t_sprite *sprite)
+{
+	struct timeval			current;
+	long					elapsed;
+
+	if (!sprite->activ)
+		return (false);
+	gettimeofday(&current, NULL);
+	elapsed = (current.tv_sec - sprite->update.tv_sec) * 1000
+		+ (current.tv_usec - sprite->update.tv_usec) / 1000;
+	if (elapsed >= sprite->speed)
+	{
+		sprite->img_list = sprite->img_list->next;
+		sprite->update = current;
+		if (sprite->started && sprite->img_list == sprite->head)
+			sprite->activ = false;
 		return (true);
 	}
 	return (false);

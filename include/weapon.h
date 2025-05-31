@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 16:33:30 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/30 20:07:59 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/31 17:35:33 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ typedef struct s_weapon
 	float			cooldown;
 	bool			owned;
 	t_img			*normal;
+	t_sprite		*anim;
 	t_sprite		*fire;
 	bool			lock;
 }	t_weapon;

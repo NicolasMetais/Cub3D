@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 19:47:38 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/30 20:16:41 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/31 20:51:40 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,18 @@
 
 void	mouse_click_game(t_core *core, int button)
 {
-	t_sprite	*anim;
-	int			i;
+	t_sprite	*sprite;
 
-	i = -1;
 	if (button == 1)
 	{
-		core->player->weapon[core->player->current_weapon].lock = true;
-		anim = hashmap_get(&core->hashmap_sprites, "pistol");
-		while(++i < anim->nb)
+		if (!core->player->weapon[core->player->current_weapon].lock)
 		{
-
-			anim->img_list = anim->img_list->next;
-			render_weapon(core);
-			mlx_put_image_to_window(core->mlx, core->win, core->game_img->img, 0, 0);
+			sprite = core->player->weapon[core->player->current_weapon].anim;
+			core->player->weapon[core->player->current_weapon].lock = true;
+			sprite->activ = true;
+			sprite->started = true;
+			gettimeofday(&sprite->update, NULL);
 		}
-		core->player->weapon[core->player->current_weapon].lock = false;
-		render_weapon(core);
-		mlx_put_image_to_window(core->mlx, core->win, core->game_img->img, 0, 0);
 
 	}
 }

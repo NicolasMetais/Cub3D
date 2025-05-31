@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 01:54:17 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/31 15:11:12 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/31 20:33:27 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,9 @@ typedef struct s_sprite
 	int				timer;
 	int				speed;
 	struct timeval	update;
+	bool			activ;
+	bool			started;
+	t_node_img		*head;
 	t_node_img		*img_list;
 }	t_sprite;
 
@@ -262,6 +265,7 @@ typedef struct s_core
 	int				y;
 	int				scroll_offset;
 	t_img			*game_img;
+	t_img			*weapon_buffer;
 	t_player		*player;
 	t_menu_maps		*menu_maps;
 	t_hashmap		hashmap;
@@ -286,6 +290,8 @@ bool			parsing_cub(t_core *core, char *av);
 //UTILS
 bool			update_sprite(t_sprite *sprite);
 bool			update_sprite_random(t_sprite *sprite);
+bool			update_animation(t_sprite *sprite);
+
 bool			is_empty_line(char *str);
 void			cleanup_split(char **str);
 void			cleanup_game(t_core *core);
@@ -301,7 +307,7 @@ unsigned int	get_img_pxl(const t_img *stickonbg, size_t x, size_t y);
 bool			load_image(t_img **img, char *path, t_core *core, char *scale);
 bool			load_word_image(t_img **img, t_core *core,
 					char *word, char *state);
-void			fill_img_in_green(t_img **img);
+void			fill_img_in_green(t_img *img);
 
 //Game
 bool			launch_game(t_core *core);

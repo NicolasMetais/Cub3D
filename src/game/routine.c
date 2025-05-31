@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 15:49:25 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/30 19:39:09 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/31 21:06:32 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,10 +73,7 @@ int	routine(void *param)
 		//init_map_textures(core);
 		core->tmp_rc->max_r = S_LENGHT;
 		movements(core);
-		if (core->redraw == true)
-			start_game(core);
-		render_hud(core);
-		render_head(core);
+		start_game(core);
 	}
 	core->redraw = false;
 	return (0);
