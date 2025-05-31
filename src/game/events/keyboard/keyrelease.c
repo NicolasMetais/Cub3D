@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render_hud.c                                       :+:      :+:    :+:   */
+/*   keyrelease.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/27 15:11:40 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/28 17:56:27 by nmetais          ###   ########.fr       */
+/*   Created: 2025/05/30 16:52:44 by nmetais           #+#    #+#             */
+/*   Updated: 2025/05/30 16:54:25 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-bool	render_hud(t_core *core)
+int	handle_keyrelease(int key, void *param)
 {
-	render_head(core);
-	render_numbers(core);
-	render_ammo(core);
-	render_weapon_menu(core);
-	mlx_put_image_to_window(core->mlx, core->win, core->hud_img->hud->img,
-		0, 840);
+	t_core	*core;
+
+	core = (t_core *)param;
+	if (core->state == GAME)
+		on_keyrelease_game(key, core);
 	return (true);
 }

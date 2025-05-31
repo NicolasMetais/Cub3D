@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 15:16:14 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/28 16:09:05 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/29 18:01:32 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ void	hud_render_percent(t_core *core, char *percent, int render)
 	{
 		tmp[0] = percent[j];
 		tmp[1] = '\0';
-		tempo = hashmap_get(&core->hashmap, tmp);
+		tempo = (t_img *)hashmap_get(&core->hashmap, tmp);
 		render += 44;
 		transparency(core->hud_img->hud, tempo, render, 45);
 	}
 	render += 44;
-	tempo = hashmap_get(&core->hashmap, "%");
+	tempo = (t_img *)hashmap_get(&core->hashmap, "%");
 	transparency(core->hud_img->hud, tempo, render, 45);
 	free(percent);
 }

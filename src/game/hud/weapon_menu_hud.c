@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 15:51:43 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/28 17:04:27 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/29 18:01:38 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ bool	render_weapon_menu(t_core *core)
 			file_id = ft_strjoin(num, "_grey");
 			if (!file_id)
 				return (free(num), false);
-			number = hashmap_get(&core->hashmap, file_id);
+			number = (t_img *)hashmap_get(&core->hashmap, file_id);
 		}
-		number = hashmap_get(&core->hashmap, file_id);
+		number = (t_img *)hashmap_get(&core->hashmap, file_id);
 		free(file_id);
 		transparency(core->hud_img->hud, number, x, y);
 		free(num);

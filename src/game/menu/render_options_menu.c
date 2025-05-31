@@ -6,19 +6,21 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 01:19:51 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/17 14:40:27 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/30 00:00:10 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	skulls_render_options(t_core *core, const int *y, int frame)
+void	skulls_render_options(t_core *core, const int *y)
 {
 	int			x;
+	t_sprite	*skulls;
 
+	skulls = hashmap_get(&core->hashmap_sprites, "skulls");
 	x = (core->menu_img->bg->width / 2) - 100;
-	transparency(core->menu_img->bg, core->menu_img->skulls->sprites[frame],
-		x - (core->menu_img->skulls->sprites[frame]->width + 10),
+	transparency(core->menu_img->bg, skulls->img_list->image,
+		x - (skulls->img_list->image->width + 10),
 		y[core->menu_option]);
 	mlx_put_image_to_window(core->mlx, core->win, core->menu_img->bg->img,
 		0, 0);
@@ -36,14 +38,13 @@ static void	rewrite_options(t_core *core, const int *y, t_img *bg)
 	t_img		*option1;
 	char		*percent;
 
-	option1 = hashmap_get(&core->hashmap, "Option_fov");
+	option1 = (t_img *)hashmap_get(&core->hashmap, "Option_fov");
 	transparency(bg, option1, (bg->width / 3), y[0] + 10);
 	update_slider(core, y, bg);
 	percent = ft_itoa(core->fov);
 	if (!percent)
 		return ;
 	render_percent(core, percent, 790);
-	//skulls_render_options(core, y, core->menu_img->skulls->frame);
 }
 
 static void	option_menu_init(t_core *core)
@@ -62,7 +63,7 @@ bool	render_options_menu(t_core *core)
 	core->state = OPTIONS_MENU;
 	option_menu_init(core);
 	copy_img(core->menu_img->bg, core->menu_img->bg_clean);
-	option = hashmap_get(&core->hashmap, "Option_title");
+	option = (t_img *)hashmap_get(&core->hashmap, "Option_title");
 	transparency(core->menu_img->bg, option, 545, 440);
 	rewrite_options(core, core->y_pos, core->menu_img->bg);
 	mlx_put_image_to_window(core->mlx, core->win, core->menu_img->bg->img,

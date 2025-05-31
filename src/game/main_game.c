@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 15:44:46 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/27 15:04:32 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/30 16:54:54 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,14 @@ bool	img_init(t_core *core)
 	char	*name;
 
 	width = 0;
-	core->menu_img->cursor = hashmap_get(&core->hashmap, "Slider_cursor");
-	core->menu_img->bg = hashmap_get(&core->hashmap, "Menu_bg_activ");
-	core->menu_img->bg_clean = hashmap_get(&core->hashmap, "Menu_bg_clean");
+	core->menu_img->cursor = (t_img *)hashmap_get(&core->hashmap, "Slider_cursor");
+	core->menu_img->bg =(t_img *) hashmap_get(&core->hashmap, "Menu_bg_activ");
+	core->menu_img->bg_clean = (t_img *)hashmap_get(&core->hashmap, "Menu_bg_clean");
 	name = ft_substr(core->loaded_map, 0, ft_strlen(core->loaded_map) - 4);
 	if (!name)
 		return (false);
 	load_word_image(&core->menu_img->loaded_map, core, name, "regular");
-	hashmap_insert(&core->hashmap, "loaded_name", core->menu_img->loaded_map, core);
+	hashmap_insert(&core->hashmap, "loaded_name", (void *)core->menu_img->loaded_map, core);
 	free(name);
 	core->menu_img->minimap->img = mlx_new_image(core->mlx, 180, 180);
 	if (!core->menu_img->minimap->img)
@@ -49,7 +49,7 @@ bool	img_init(t_core *core)
 			&core->menu_img->minimap->endian);
 	core->menu_img->minimap->width = 180;
 	core->menu_img->minimap->height = 180;
-	hashmap_insert(&core->hashmap, "minimap", core->menu_img->minimap, core);
+	hashmap_insert(&core->hashmap, "minimap", (void *)core->menu_img->minimap, core);
 	if (!slider_constructor(core, width))
 		return (false);
 	sliders_default_values(core);
@@ -94,7 +94,7 @@ bool	create_maps_words(t_core *core)
 		if (!load_word_image(&new, core, core->menu_maps[i].name, "regular"))
 			return (false);
 		if (!hashmap_insert(&core->hashmap, core->menu_maps[i++].name,
-				new, core))
+				(void *)new, core))
 			return (false);
 	}
 	return (true);
@@ -112,10 +112,10 @@ bool	launch_game(t_core *core)
 	core->fov = 90;
 	start_menu(core);
 	mlx_hook(core->win, 2, 1L << 0, &handle_keypress, core);
+	mlx_hook(core->win, 3, 1L << 1, &handle_keyrelease, core);
 	mlx_hook(core->win, 6, (1L << 6), mouse_menu_hover, core);
 	mlx_hook(core->win, 4, (1L << 2), mouse_menu_click, core);
 	mlx_hook(core->win, 5, (1L << 3), mouse_menu_release, core);
-	mlx_loop_hook(core->mlx, routine, core);
 	//init_tmp(core);
 	//core->redraw = true;
 	//mlx_key_hook(core->win, handle_keypress, core);

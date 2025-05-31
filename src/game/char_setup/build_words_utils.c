@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 19:08:06 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/04 21:14:57 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/29 18:01:02 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,17 @@ void	init_font(t_fonts *fonts, const t_font **selected_font,
 {
 	if (fonts->state == SMALL)
 	{
-		*selected_sheet = hashmap_get(&core->hashmap, "Small_sheet");
+		*selected_sheet = (t_img *)hashmap_get(&core->hashmap, "Small_sheet");
 		*selected_font = fonts->small;
 	}
 	if (fonts->state == REGULAR)
 	{
-		*selected_sheet = hashmap_get(&core->hashmap, "Regular_sheet");
+		*selected_sheet = (t_img *)hashmap_get(&core->hashmap, "Regular_sheet");
 		*selected_font = fonts->regular;
 	}
 	if (fonts->state == BIG)
 	{
-		*selected_sheet = hashmap_get(&core->hashmap, "Big_sheet");
+		*selected_sheet = (t_img *)hashmap_get(&core->hashmap, "Big_sheet");
 		*selected_font = fonts->big;
 	}
 }

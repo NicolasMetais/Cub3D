@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 14:39:58 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/17 15:12:14 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/29 18:50:07 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,9 @@ bool	slider_constructor(t_core *core, int width)
 	int			height;
 
 	menu = core->menu_img;
-	corner_left = hashmap_get(&core->hashmap, "Slider_left");
-	slider = hashmap_get(&core->hashmap, "Slider");
-	corner_right = hashmap_get(&core->hashmap, "Slider_right");
+	corner_left = (t_img *)hashmap_get(&core->hashmap, "Slider_left");
+	slider = (t_img *)hashmap_get(&core->hashmap, "Slider");
+	corner_right = (t_img *)hashmap_get(&core->hashmap, "Slider_right");
 	width = corner_left->width * 2 + slider->width * SLIDER_SIZE;
 	height = slider->height;
 	menu->slider_bar->img = mlx_new_image(core->mlx, width, height);
@@ -87,6 +87,7 @@ bool	slider_constructor(t_core *core, int width)
 			&menu->slider_bar->endian);
 	fill_img_in_green(&menu->slider_bar);
 	slider_assembler(menu->slider_bar, corner_left, corner_right, slider);
-	hashmap_insert(&core->hashmap, "slider_bar", menu->slider_bar, core);
+	hashmap_insert(&core->hashmap, "slider_bar",
+		(void *)menu->slider_bar, core);
 	return (true);
 }

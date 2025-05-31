@@ -3,7 +3,7 @@ LIB = lib/libft/libft.a
 MLX = lib/minilibx-linux/libmlx.a
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -Ilib/libft/include -Ilib/minilibx-linux -Iinclude -g3 -O3
-SRCS =	$(MAIN)$(EVENTS)$(IMG)$(MENU)$(HUD)$(UTILS)$(PARSING)$(GAME)
+SRCS =	$(MAIN)$(EVENTS)$(IMG)$(MENU)$(HUD)$(UTILS)$(PARSING)$(GAME)$(WEAPONS)
 
 MAIN =	src/main.c \
 		src/game/main_game.c \
@@ -14,18 +14,21 @@ MAIN =	src/main.c \
 
 EVENTS = 	src/game/events/destroy.c \
 			src/game/events/keyboard/keypress_maps.c \
+			src/game/events/keyboard/keypress_game.c \
 			src/game/events/keyboard/keypress.c \
+			src/game/events/keyboard/keyrelease.c \
 			src/game/events/mouse/mouse_over.c \
 			src/game/events/mouse/option_menu_over.c \
 			src/game/events/mouse/mouse_release.c \
 			src/game/events/mouse/mouse_click.c \
-
+			src/game/events/mouse/mouse_click_game.c \
 
 IMG = 	src/game/image_loader.c \
 		src/game/hashmap/hashmap.c \
 		src/game/hashmap/hashmap_del.c \
 		src/game/config_parse.c \
 		src/game/destroy_img.c \
+		src/game/load_assets.c \
 
 MENU =	src/game/menu/render_menu.c \
 		src/game/menu/slider.c \
@@ -37,12 +40,14 @@ MENU =	src/game/menu/render_menu.c \
 		src/game/char_setup/build_words.c \
 		src/game/char_setup/build_words_utils.c \
 
-HUD	=	src/hud/render_hud.c \
-		src/hud/head_hud.c \
-		src/hud/numbers_hud.c \
-		src/hud/ammo_hud.c \
-		src/hud/weapon_menu_hud.c \
+HUD	=	src/game/hud/render_hud.c \
+		src/game/hud/head_hud.c \
+		src/game/hud/numbers_hud.c \
+		src/game/hud/ammo_hud.c \
+		src/game/hud/weapon_menu_hud.c \
+		src/game/hud/head_init.c \
 
+WEAPONS	=	src/game/weapons/render_weapons.c \
 
 
 UTILS =	src/utils/copy_img.c \
@@ -67,7 +72,7 @@ GAME =	src/game/play/main_play.c \
 		src/game/play/main_play_utils.c \
 		src/game/play/print_back_and_player.c \
 		src/game/play/player_moves.c \
-		src/game/play/minimap.c
+		src/game/play/minimap.c \
 
 
 OBJ_DIR = obj

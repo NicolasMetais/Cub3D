@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/13 13:45:42 by nmetais           #+#    #+#             */
-/*   Updated: 2024/12/01 00:03:25 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/29 23:32:15 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	if (nmemb * size > 2147483647)
 		return (NULL);
 	al = malloc(nmemb * size);
-	if (al == NULL)
+	if (!al)
 		return (NULL);
 	while (i < (nmemb * size))
 	{

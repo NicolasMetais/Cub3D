@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_layers.c                                     :+:      :+:    :+:   */
+/*   print_back_and_player.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tvacher <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 13:48:11 by tvacher           #+#    #+#             */
-/*   Updated: 2025/05/25 13:48:41 by tvacher          ###   ########.fr       */
+/*   Updated: 2025/05/31 15:23:53 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,12 @@ void	print_rays(t_core *core, int color)
 		core->tmp_rc->py = core->tmp_rc->map_size / 2 + sin(core->tmp_rc->ra) * i;
 		if (core->tmp_rc->px >= 0 && core->tmp_rc->py >= 0 && core->tmp_rc->px < 32 * 8 - 8)
 		{
-			px_index = core->tmp_rc->py * core->tmp_imgdata->size + core->tmp_rc->px * (core->tmp_imgdata->bpp / 8);
-			core->tmp_imgdata->img_data[px_index + 0] = (color >> 0) & 0xFF;
-			core->tmp_imgdata->img_data[px_index + 1] = (color >> 8) & 0xFF;
-			core->tmp_imgdata->img_data[px_index + 2] = (color >> 16) & 0xFF;
-			if (core->tmp_imgdata->bpp == 4)
-				core->tmp_imgdata->img_data[px_index + 0] = 0xFF;
+			px_index = core->tmp_rc->py * core->game_img->line_len + core->tmp_rc->px * (core->game_img->bpp / 8);
+			core->game_img->addr[px_index + 0] = (color >> 0) & 0xFF;
+			core->game_img->addr[px_index + 1] = (color >> 8) & 0xFF;
+			core->game_img->addr[px_index + 2] = (color >> 16) & 0xFF;
+			if (core->game_img->bpp == 4)
+				core->game_img->addr[px_index + 0] = 0xFF;
 		}
 		i++;
 	}
@@ -55,12 +55,12 @@ void	draw_player_line(t_core *core, int color)
 		py = core->tmp_rc->map_size / 2 + sin(core->tmp_rc->pl_angle) * i;
 		if (px >= 0 && py >= 0)
 		{
-			px_index = py * core->tmp_imgdata->size + px * (core->tmp_imgdata->bpp / 8);
-			core->tmp_imgdata->img_data[px_index + 0] = (color >> 0) & 0xFF;
-			core->tmp_imgdata->img_data[px_index + 1] = (color >> 8) & 0xFF;
-			core->tmp_imgdata->img_data[px_index + 2] = (color >> 16) & 0xFF;
-			if (core->tmp_imgdata->bpp == 4)
-				core->tmp_imgdata->img_data[px_index + 0] = 0xFF;
+			px_index = py * core->game_img->line_len + px * (core->game_img->bpp / 8);
+			core->game_img->addr[px_index + 0] = (color >> 0) & 0xFF;
+			core->game_img->addr[px_index + 1] = (color >> 8) & 0xFF;
+			core->game_img->addr[px_index + 2] = (color >> 16) & 0xFF;
+			if (core->game_img->bpp == 4)
+				core->game_img->addr[px_index + 0] = 0xFF;
 		}
 		i++;
 	}
@@ -78,12 +78,12 @@ void	print_player(t_core *core, int color)
 		x = core->tmp_rc->map_size / 2;
 		while (x < core->tmp_rc->map_size / 2 + 4)
 		{
-			px_index = y * core->tmp_imgdata->size + x * (core->tmp_imgdata->bpp / 8);
-			core->tmp_imgdata->img_data[px_index + 0] = (color >> 0) & 0xFF;
-			core->tmp_imgdata->img_data[px_index + 1] = (color >> 8) & 0xFF;
-			core->tmp_imgdata->img_data[px_index + 2] = (color >> 16) & 0xFF;
-			if (core->tmp_imgdata->bpp == 4)
-				core->tmp_imgdata->img_data[px_index + 0] = 0xFF;
+			px_index = y * core->game_img->line_len + x * (core->game_img->bpp / 8);
+			core->game_img->addr[px_index + 0] = (color >> 0) & 0xFF;
+			core->game_img->addr[px_index + 1] = (color >> 8) & 0xFF;
+			core->game_img->addr[px_index + 2] = (color >> 16) & 0xFF;
+			if (core->game_img->bpp == 4)
+				core->game_img->addr[px_index + 0] = 0xFF;
 			x++;
 		}
 		y++;
@@ -94,12 +94,12 @@ void	print_player(t_core *core, int color)
 //check color parsing for ceiling and floor
 static void print_floor(t_core *core, int pixel_index)
 {
-	// core->tmp_imgdata->img_data[pixel_index + 0] = (core->colors->floor >> 0) & 0xFF;
-	// core->tmp_imgdata->img_data[pixel_index + 1] = (core->colors->floor >> 8) & 0xFF;
-	// core->tmp_imgdata->img_data[pixel_index + 2] = (core->colors->floor >> 16) & 0xFF;
-	core->tmp_imgdata->img_data[pixel_index + 0] = 0xAA;
-	core->tmp_imgdata->img_data[pixel_index + 1] = 0xAA;
-	core->tmp_imgdata->img_data[pixel_index + 2] = 0xAA;
+	// core->game_img->addr[pixel_index + 0] = (core->colors->floor >> 0) & 0xFF;
+	// core->game_img->addr[pixel_index + 1] = (core->colors->floor >> 8) & 0xFF;
+	// core->game_img->addr[pixel_index + 2] = (core->colors->floor >> 16) & 0xFF;
+	core->game_img->addr[pixel_index + 0] = 0xAA;
+	core->game_img->addr[pixel_index + 1] = 0xAA;
+	core->game_img->addr[pixel_index + 2] = 0xAA;
 }
 
 static void print_ceiling(t_core *core, int pixel_index, int i, int j)
@@ -109,12 +109,12 @@ static void print_ceiling(t_core *core, int pixel_index, int i, int j)
 
 	offset = (int)((core->tmp_rc->pl_angle) * S_LENGHT) / 16;
 	tex_index = (j * core->textures->sky->line_len +  (offset + i) * (core->textures->sky->bpp / 8));
-	core->tmp_imgdata->img_data[pixel_index + 0] = core->textures->sky->addr[(int)tex_index + 0];
-	core->tmp_imgdata->img_data[pixel_index + 1] = core->textures->sky->addr[(int)tex_index + 1];
-	core->tmp_imgdata->img_data[pixel_index + 2] = core->textures->sky->addr[(int)tex_index + 2];
-	// core->tmp_imgdata->img_data[pixel_index + 0] = 0x00;
-	// core->tmp_imgdata->img_data[pixel_index + 1] = 0x00;
-	// core->tmp_imgdata->img_data[pixel_index + 2] = 0xFF;
+	core->game_img->addr[pixel_index + 0] = core->textures->sky->addr[(int)tex_index + 0];
+	core->game_img->addr[pixel_index + 1] = core->textures->sky->addr[(int)tex_index + 1];
+	core->game_img->addr[pixel_index + 2] = core->textures->sky->addr[(int)tex_index + 2];
+	// core->game_img->addr[pixel_index + 0] = 0x00;
+	// core->game_img->addr[pixel_index + 1] = 0x00;
+	// core->game_img->addr[pixel_index + 2] = 0xFF;
 }
 
 void	print_background(t_core *core)
@@ -131,13 +131,13 @@ void	print_background(t_core *core)
 		{
 			if (i > core->tmp_rc->map_size + 8 || j > core->tmp_rc->map_size + 8)
 			{
-				pixel_index = j * core->tmp_imgdata->size + i * (core->tmp_imgdata->bpp / 8);
+				pixel_index = j * core->game_img->line_len + i * (core->game_img->bpp / 8);
 				if (j > S_HEIGHT / 2)
 					print_floor(core, pixel_index);
 				else
 					print_ceiling(core, pixel_index, i, j);
-				if (core->tmp_imgdata->bpp == 4)
-					core->tmp_imgdata->img_data[pixel_index + 0] = 0xFF;
+				if (core->game_img->bpp == 4)
+					core->game_img->addr[pixel_index + 0] = 0xFF;
 			}
 			i++;
 		}

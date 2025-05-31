@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 01:54:17 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/28 18:57:49 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/31 15:11:12 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,13 +89,19 @@ typedef struct s_img
 	int		height;
 }	t_img;
 
+typedef struct s_node_img
+{
+	t_img				*image;
+	struct s_node_img	*next;
+}	t_node_img;
+
 typedef struct s_sprite
 {
-	t_img	**sprites;
-	int		nb;
-	int		frame;
-	int		timer;
-	int		speed;
+	int				nb;
+	int				timer;
+	int				speed;
+	struct timeval	update;
+	t_node_img		*img_list;
 }	t_sprite;
 
 typedef struct s_menu_img
@@ -113,6 +119,11 @@ typedef struct s_hud_img
 {
 	t_img		*clean_hud;
 	t_img		*hud;
+	t_sprite	*neutral;
+	t_sprite	*tired;
+	t_sprite	*hurt;
+	t_sprite	*bloody;
+	t_sprite	*critical;
 }	t_hud_img;
 
 typedef enum s_state
@@ -170,6 +181,7 @@ typedef struct s_tmp_imgdata
 	int		bpp;
 	int		size;
 	int		endian;
+	int		line_len;
 	void	*img;
 }	t_tmp_imgdata;
 
@@ -186,11 +198,11 @@ typedef struct s_tmp_3d
 
 typedef struct s_tmp_rc
 {
-	float	pl_x;
-	float	pl_y;
-	float	pldelt_x;
-	float	pldelt_y;
-	float	pl_angle;
+	double	pl_x;
+	double	pl_y;
+	double	pldelt_x;
+	double	pldelt_y;
+	double	pl_angle;
 	int		r;
 	int		max_r;
 	int		res; //always power of 2;
@@ -199,21 +211,21 @@ typedef struct s_tmp_rc
     int		mp;
     int		px;
     int		py;
-    float	rx;
-    float	ry;
-	float	vx;
-    float	vy;
-    float	hx;
-    float	hy;
-    float	ra;
-	float	ca;
-    float   x;
-    float   y;
-    float   atan;
-    float   ntan;
+    double	rx;
+    double	ry;
+    double	ra;
+	double	ca;
+    double   x;
+    double   y;
+    double   atan;
+    double   ntan;
     float   *dist;
     float   *dist2;
     float   *dist3;
+	double	hx;
+	double	hy;
+	double	vx;
+	double	vy;
 	int		of_x;	//values for collision and movements
 	int		of_y;
 	int		px2;
@@ -249,9 +261,11 @@ typedef struct s_core
 	int				x;
 	int				y;
 	int				scroll_offset;
+	t_img			*game_img;
 	t_player		*player;
 	t_menu_maps		*menu_maps;
 	t_hashmap		hashmap;
+	t_hashmap		hashmap_sprites;
 	t_menu_img		*menu_img;
 	t_state			state;
 	t_hud_img		*hud_img;
@@ -271,6 +285,7 @@ bool			parsing_cub(t_core *core, char *av);
 
 //UTILS
 bool			update_sprite(t_sprite *sprite);
+bool			update_sprite_random(t_sprite *sprite);
 bool			is_empty_line(char *str);
 void			cleanup_split(char **str);
 void			cleanup_game(t_core *core);
@@ -298,12 +313,14 @@ bool			render_menu(t_core *core);
 bool			render_maps_menu(t_core *core);
 bool			extract_maps_names(t_core *core);
 bool			render_options_menu(t_core *core);
-void			skulls_render(t_core *core, const int *y, int frame);
+void			skulls_render(t_core *core, const int *y);
 bool			slider_constructor(t_core *core, int width);
 bool			loaded_map(t_img *bg, t_core *core);
 
 //Init img
 bool			extract_img_data(t_core *core);
+bool			load_assets(t_core *core, char **data);
+
 
 //Slider bar img construc
 bool			slider_constructor(t_core *core, int width);
@@ -321,6 +338,10 @@ int				mouse_menu_click(int button, int x, int y, t_core *core);
 int				mouse_menu_hover(int x, int y, void *param);
 int				mouse_menu_release(int button, int x, int y, t_core *core);
 void			options_menu_hover(int x, int y, t_core *core);
+int				handle_keyrelease(int key, void *param);
+void			mouse_click_game(t_core *core, int button);
+
+
 
 //Slider Update
 void			update_slider(t_core *core, const int *y, t_img *bg);
@@ -329,6 +350,7 @@ void			update_slider(t_core *core, const int *y, t_img *bg);
 void			render_percent(t_core *core, char *percent, int render);
 
 //Destroy X11 memory img
+void			destroy_single_img(void *value, t_core *core);
 void			destroy_img(t_core *core);
 bool			launch_game(t_core *core);
 int				routine(void *param);
@@ -338,12 +360,12 @@ void			start_game(t_core *core);
 //Keypress
 int				handle_keypress(int key, void *param);
 int				handle_destroy(t_core *core);
-void			move_player(t_core *core, t_move move);
+void			move_player(t_core *core, t_move move, double delta_time);
 
 //Temp_functions
-void	move_player(t_core *core, t_move move);
-void	init_tmp(t_core *core);
-void    init_map_textures(t_core *core);
+void			move_player(t_core *core, t_move move, double delta_time);
+void			init_tmp(t_core *core);
+void    		init_map_textures(t_core *core);
 
 //Layers printing
 void    print_background(t_core *core);
@@ -354,7 +376,7 @@ void    draw_ceiling_floor(t_core *core);
 void    get_rc_data(t_core *core);
 void    rays_updates(t_core *core);
 void    draw_player_line(t_core *core, int color);
-void			move_player(t_core *core, t_move move);
+void			move_player(t_core *core, t_move move, double delta_time);
 void			init_tmp(t_core *core);
 
 //Minimap in game
@@ -372,9 +394,11 @@ void	print_miscellaneous(t_core *core, int color);
 
 //HUD
 bool			render_hud(t_core *core);
-bool			render_head(t_core *core);
+void			render_head(t_core *core);
 bool			render_numbers(t_core *core);
 bool			render_weapon_menu(t_core *core);
 bool			render_ammo(t_core *core);
+bool			head_init(t_core *core);
+
 
 #endif

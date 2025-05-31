@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tvacher <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 11:13:56 by tvacher           #+#    #+#             */
-/*   Updated: 2025/05/31 11:14:05 by tvacher          ###   ########.fr       */
+/*   Updated: 2025/05/31 15:30:26 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ void	print_miscellaneous(t_core *core, int color)
 		j = 0;
 		while (j < core->tmp_rc->map_size + 8)
 		{
-			pixel_index = j * core->tmp_imgdata->size + i * (core->tmp_imgdata->bpp / 8);
-			core->tmp_imgdata->img_data[pixel_index + 0] = (color & 0x0000FF);
-			core->tmp_imgdata->img_data[pixel_index + 1] = (color & 0x00FF00) >> 8;
-			core->tmp_imgdata->img_data[pixel_index + 2] = (color & 0xFF0000) >> 16;
-			if (core->tmp_imgdata->bpp == 32)
-				core->tmp_imgdata->img_data[pixel_index + 3] = 0;
+			pixel_index = j * core->game_img->line_len + i * (core->game_img->bpp / 8);
+			core->game_img->addr[pixel_index + 0] = (color & 0x0000FF);
+			core->game_img->addr[pixel_index + 1] = (color & 0x00FF00) >> 8;
+			core->game_img->addr[pixel_index + 2] = (color & 0xFF0000) >> 16;
+			if (core->game_img->bpp == 32)
+				core->game_img->addr[pixel_index + 3] = 0;
 			j++;			
 		}
 		i++;
@@ -52,12 +52,12 @@ static void	draw_map_back(t_core *core, int color)
 		j = 0;
 		while (j < core->tmp_rc->map_size)
 		{
-			pixel_index = j * core->tmp_imgdata->size + i * (core->tmp_imgdata->bpp / 8);
-			core->tmp_imgdata->img_data[pixel_index + 0] = (color & 0x0000FF);
-			core->tmp_imgdata->img_data[pixel_index + 1] = (color & 0x00FF00) >> 8;
-			core->tmp_imgdata->img_data[pixel_index + 2] = (color & 0xFF0000) >> 16;
-			if (core->tmp_imgdata->bpp == 32)
-				core->tmp_imgdata->img_data[pixel_index + 3] = 0;
+			pixel_index = j * core->game_img->line_len + i * (core->game_img->bpp / 8);
+			core->game_img->addr[pixel_index + 0] = (color & 0x0000FF);
+			core->game_img->addr[pixel_index + 1] = (color & 0x00FF00) >> 8;
+			core->game_img->addr[pixel_index + 2] = (color & 0xFF0000) >> 16;
+			if (core->game_img->bpp == 32)
+				core->game_img->addr[pixel_index + 3] = 0;
 			j++;			
 		}
 		i++;
@@ -78,12 +78,12 @@ static void	draw_tile(t_core *core, int x, int y, int color)
 		{
 			if (x < 32 * 8 && y < 32 * 8)
 			{
-				pixel_index = (y + j) * core->tmp_imgdata->size + (x + i) * (core->tmp_imgdata->bpp / 8);
-				core->tmp_imgdata->img_data[pixel_index + 0] = (color & 0x0000FF);
-				core->tmp_imgdata->img_data[pixel_index + 1] = (color & 0x00FF00) >> 8;
-				core->tmp_imgdata->img_data[pixel_index + 2] = (color & 0xFF0000) >> 16;
-				if (core->tmp_imgdata->bpp == 32)
-					core->tmp_imgdata->img_data[pixel_index + 3] = 0;
+				pixel_index = (y + j) * core->game_img->line_len + (x + i) * (core->game_img->bpp / 8);
+				core->game_img->addr[pixel_index + 0] = (color & 0x0000FF);
+				core->game_img->addr[pixel_index + 1] = (color & 0x00FF00) >> 8;
+				core->game_img->addr[pixel_index + 2] = (color & 0xFF0000) >> 16;
+				if (core->game_img->bpp == 32)
+					core->game_img->addr[pixel_index + 3] = 0;
 			}
 			i++;
 		}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_play.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tvacher <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 13:33:49 by tvacher           #+#    #+#             */
-/*   Updated: 2025/05/14 13:33:51 by tvacher          ###   ########.fr       */
+/*   Updated: 2025/05/31 15:30:07 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,23 +73,23 @@ void    draw_3d(t_core *core)
 		while (core->tmp_3d->x < end && (core->tmp_3d->x > core->tmp_rc->map_size + 8 || core->tmp_3d->y > core->tmp_rc->map_size + 8) && \
 		core->tmp_3d->y < S_HEIGHT - 160)
 		{
-			pixel_index = core->tmp_3d->y * core->tmp_imgdata->size + core->tmp_3d->x * (core->tmp_imgdata->bpp / 8);
+			pixel_index = core->tmp_3d->y * core->game_img->line_len + core->tmp_3d->x * (core->game_img->bpp / 8);
 			if (core->tmp_3d->y >= core->tmp_3d->line_s && core->tmp_3d->y <= \
     		core->tmp_3d->line_e && core->tmp_rc->dist2[core->tmp_rc->r] > core->tmp_rc->dist[core->tmp_rc->r] && (core->tmp_3d->y > draw_start && core->tmp_3d->y < draw_end))
     		{
         		if (core->tmp_rc->ra > PI)
         		{
 					tex_index = (int)ty * core->textures->tmp_east->line_len + (int)tx * (core->textures->tmp_east->bpp / 8);
-					core->tmp_imgdata->img_data[pixel_index + 0] = core->textures->tmp_east->addr[(int)tex_index + 0];
-					core->tmp_imgdata->img_data[pixel_index + 1] = core->textures->tmp_east->addr[(int)tex_index + 1];
-					core->tmp_imgdata->img_data[pixel_index + 2] = core->textures->tmp_east->addr[(int)tex_index + 2];
+					core->game_img->addr[pixel_index + 0] = core->textures->tmp_east->addr[(int)tex_index + 0];
+					core->game_img->addr[pixel_index + 1] = core->textures->tmp_east->addr[(int)tex_index + 1];
+					core->game_img->addr[pixel_index + 2] = core->textures->tmp_east->addr[(int)tex_index + 2];
         		}
         		else
         		{
 					tex_index = (int)ty * core->textures->tmp_north->line_len + (int)tx * (core->textures->tmp_north->bpp / 8);
-					core->tmp_imgdata->img_data[pixel_index + 0] = core->textures->tmp_north->addr[(int)tex_index + 0];
-					core->tmp_imgdata->img_data[pixel_index + 1] = core->textures->tmp_north->addr[(int)tex_index + 1];
-					core->tmp_imgdata->img_data[pixel_index + 2] = core->textures->tmp_north->addr[(int)tex_index + 2];
+					core->game_img->addr[pixel_index + 0] = core->textures->tmp_north->addr[(int)tex_index + 0];
+					core->game_img->addr[pixel_index + 1] = core->textures->tmp_north->addr[(int)tex_index + 1];
+					core->game_img->addr[pixel_index + 2] = core->textures->tmp_north->addr[(int)tex_index + 2];
         		}
     		}
    			else if (core->tmp_3d->y >= core->tmp_3d->line_s && core->tmp_3d->y <= \
@@ -98,16 +98,16 @@ void    draw_3d(t_core *core)
                 if (core->tmp_rc->ra > PI / 2 && core->tmp_rc->ra < 3 * PI / 2)
                 {
 					tex_index = (int)ty * core->textures->tmp_west->line_len + (int)tx * (core->textures->tmp_west->bpp / 8);
-					core->tmp_imgdata->img_data[pixel_index + 0] = core->textures->tmp_west->addr[(int)tex_index + 0];
-					core->tmp_imgdata->img_data[pixel_index + 1] = core->textures->tmp_west->addr[(int)tex_index + 1];
-					core->tmp_imgdata->img_data[pixel_index + 2] = core->textures->tmp_west->addr[(int)tex_index + 2];
+					core->game_img->addr[pixel_index + 0] = core->textures->tmp_west->addr[(int)tex_index + 0];
+					core->game_img->addr[pixel_index + 1] = core->textures->tmp_west->addr[(int)tex_index + 1];
+					core->game_img->addr[pixel_index + 2] = core->textures->tmp_west->addr[(int)tex_index + 2];
                 }
                 else
                 {
 					tex_index = (int)ty * core->textures->tmp_south->line_len + (int)tx * (core->textures->tmp_south->bpp / 8);
-					core->tmp_imgdata->img_data[pixel_index + 0] = core->textures->tmp_south->addr[(int)tex_index + 0];
-					core->tmp_imgdata->img_data[pixel_index + 1] = core->textures->tmp_south->addr[(int)tex_index + 1];
-					core->tmp_imgdata->img_data[pixel_index + 2] = core->textures->tmp_south->addr[(int)tex_index + 2];
+					core->game_img->addr[pixel_index + 0] = core->textures->tmp_south->addr[(int)tex_index + 0];
+					core->game_img->addr[pixel_index + 1] = core->textures->tmp_south->addr[(int)tex_index + 1];
+					core->game_img->addr[pixel_index + 2] = core->textures->tmp_south->addr[(int)tex_index + 2];
                 }
             }
             core->tmp_3d->x += 1;
@@ -268,9 +268,6 @@ void    get_raycast_data(t_core *core)
 
 void    get_rc_data(t_core *core)
 {
-    core->tmp_imgdata = malloc(sizeof(t_tmp_imgdata));
-    if (!core->tmp_imgdata)
-        return ;
     core->tmp_3d = malloc(sizeof(t_tmp_3d));
     if (!core->tmp_3d)
         return ;
@@ -293,17 +290,14 @@ void    get_rc_data(t_core *core)
 
 void    start_game(t_core *core)
 {
-    core->tmp_imgdata->img = mlx_new_image(core->mlx, S_LENGHT, S_HEIGHT);
-    if (!core->tmp_imgdata->img)
-		return ;
-    core->tmp_imgdata->img_data = mlx_get_data_addr(core->tmp_imgdata->img, \
-    &core->tmp_imgdata->bpp, &core->tmp_imgdata->size, &core->tmp_imgdata->endian);
+	core->tmp_3d = malloc(sizeof(t_tmp_3d));
+    if (!core->tmp_3d)
+        return ;
     print_background(core);
-	draw_minimap_game(core);
+    draw_minimap_game(core);
 	get_raycast_data(core);
     print_player(core, 0xFFFF00);
-    mlx_put_image_to_window(core->mlx, core->win, core->tmp_imgdata->img, 0, 0);
-    if (!render_hud(core))
-		return ;
+    render_weapon(core);
+    mlx_put_image_to_window(core->mlx, core->win, core->game_img->img, 0, 0);
     core->redraw = false;
 }

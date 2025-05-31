@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   head_hud.c                                         :+:      :+:    :+:   */
+/*   render_hud.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/28 14:38:17 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/28 15:44:09 by nmetais          ###   ########.fr       */
+/*   Created: 2025/05/27 15:11:40 by nmetais           #+#    #+#             */
+/*   Updated: 2025/05/29 15:31:11 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-bool	render_head(t_core *core)
+bool	render_hud(t_core *core)
 {
-	t_img	*head;
-
-	head = hashmap_get(&core->hashmap, "head");
-	transparency(core->hud_img->hud, head, 740, 7);
+	render_numbers(core);
+	render_ammo(core);
+	render_weapon_menu(core);
+	render_head(core);
+	mlx_put_image_to_window(core->mlx, core->win, core->hud_img->hud->img,
+		0, 840);
 	return (true);
 }
