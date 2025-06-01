@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 19:09:05 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/31 21:59:53 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/02 00:31:58 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ bool	new_sprite_node(t_core *core, t_sprite *tempo, t_node_img *head,
 	new = gc_malloc(&core->gc, sizeof(t_node_img), STRUCT, "node sprite");
 	if (!new)
 		return (false);
+	ft_memset(new, 0, sizeof(new));
 	new->image = hashmap_get(&core->hashmap, name);
 	if (!new->image)
 		return (false);
@@ -34,7 +35,7 @@ bool	new_sprite_node(t_core *core, t_sprite *tempo, t_node_img *head,
 		head->next = new;
 		new->next = tempo->img_list;
 	}
-	tempo->speed = 100;
+	tempo->speed = 130;
 	tempo->timer = 0;
 	tempo->nb++;
 	return (true);

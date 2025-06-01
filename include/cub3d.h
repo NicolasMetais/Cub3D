@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 01:54:17 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/31 20:33:27 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/01 22:51:14 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,9 +92,13 @@ typedef struct s_img
 typedef struct s_node_img
 {
 	t_img				*image;
+	int					offset_x;
+	int					offset_y;
+	bool				has_offset;
 	struct s_node_img	*next;
 }	t_node_img;
 
+//fired only used for weapons
 typedef struct s_sprite
 {
 	int				nb;

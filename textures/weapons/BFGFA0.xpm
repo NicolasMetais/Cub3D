@@ -41,7 +41,7 @@ static char *result[] = {
 "i c #FFFFD7",
 "p c #EFEFEF",
 "a c white",
-"s c None",
+"s c #00FF00",
 /* pixels */
 "sssssssssssssssssssssssssssssssssssss.sss.ss.sssssssssssssssssssssssssssssssssssss",
 "sssssssssssssssssssssssssssssssssssssssss=ssssssssssssssssssssssssssssssssssssssss",
