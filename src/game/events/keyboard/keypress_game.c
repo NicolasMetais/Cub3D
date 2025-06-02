@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 16:38:24 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/01 20:38:14 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/02 21:09:36 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,14 @@ void	on_keypress_game(int key, t_core *core)
 		core->player->current_weapon = 2;
 	if (key == XK_3 && core->player->weapon[3].owned)
 		core->player->current_weapon = 3;
+	if (key == XK_4 && core->player->weapon[4].owned)
+		core->player->current_weapon = 4;
 	if (key == XK_5 && core->player->weapon[5].owned)
 		core->player->current_weapon = 5;
 	if (key == XK_6 && core->player->weapon[6].owned)
 		core->player->current_weapon = 6;
 	if (key == XK_7 && core->player->weapon[7].owned)
 		core->player->current_weapon = 7;
-	if (key == XK_8 && core->player->weapon[8].owned)
-		core->player->current_weapon = 8;
-
 }
 
 void	on_keyrelease_game(int key, t_core *core)

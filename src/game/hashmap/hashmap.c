@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 16:57:29 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/29 18:49:22 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/02 21:12:24 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ bool	hashmap_init(t_core *core, int size)
 
 bool	node_exist(t_hashmap_entry	*node, char *key, void *img)
 {
-
 	while (node)
 	{
 		if (!ft_strcmp(node->key, key))

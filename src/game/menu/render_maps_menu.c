@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 19:34:35 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/30 00:01:32 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/02 21:13:36 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ static void	rewrite_options(t_core *core, const int *y, t_img *bg)
 		index = i + core->scroll_offset;
 		if (index >= core->maps_nb)
 			break ;
-		map_word = (t_img *)hashmap_get(&core->hashmap, core->menu_maps[index].name);
+		map_word = (t_img *)hashmap_get(&core->hashmap,
+				core->menu_maps[index].name);
 		transparency(bg, map_word, (bg->width / 4) + 300,
 			590 + (i++ *MENU_SPACING));
 	}

@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 19:47:38 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/01 16:07:22 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/02 22:19:22 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,15 +29,7 @@ void	mouse_click_game(t_core *core, int button)
 			anim->activ = true;
 			anim->started = true;
 			gettimeofday(&anim->update, NULL);
-			if (fire)
-			{
-				fire->activ = true;
-				fire->started = true;
-				gettimeofday(&fire->update, NULL);
-			}
-			weapon->fired = true;
-			weapon->freeze = true;
-			gettimeofday(&weapon->freeze_start, NULL);
 		}
+		weapon_fired(core);
 	}
 }

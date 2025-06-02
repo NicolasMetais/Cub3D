@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   keyrelease.c                                       :+:      :+:    :+:   */
+/*   weapons_fired.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/30 16:52:44 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/02 21:11:45 by nmetais          ###   ########.fr       */
+/*   Created: 2025/06/02 13:18:48 by nmetais           #+#    #+#             */
+/*   Updated: 2025/06/02 22:57:26 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	handle_keyrelease(int key, void *param)
+void	weapon_fired(t_core *core)
 {
-	t_core	*core;
+	int	ammo_index;
 
-	core = (t_core *)param;
-	if (core->state == GAME)
-		on_keyrelease_game(key, core);
-	return (true);
+	ammo_index = core->player->weapon[core->player->current_weapon].ammo_type;
+	if (core->player->ammo[ammo_index] > 0)
+		core->player->ammo[ammo_index] -= 1;
 }

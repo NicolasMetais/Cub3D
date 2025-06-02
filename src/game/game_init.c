@@ -6,36 +6,11 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 17:55:32 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/02 12:55:20 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/02 23:01:58 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-	// t_weapon	*weapon;
-	// weapon = core->player->weapon;
-	// int i = -1;
-	// while(++i < 9)
-	// {
-	// 	if (i == 4)
-	// 		i++;
-	// 	if (weapon[i].normal)
-	// 		printf("NORMAL : width : %d, Height : %d\n", weapon[i].normal->width, weapon[i].normal->height);
-	// 	int j = -1;
-	// 	while(++j < weapon[i].anim->nb)
-	// 	{
-	// 		printf("ANIM : width : %d, Height : %d\n", weapon[i].anim->img_list->image->width, weapon[i].anim->img_list->image->height);
-	// 		weapon[i].anim->img_list = weapon[i].anim->img_list->next;
-	// 	}
-	// 	j = -1;
-	// 	if (!weapon[i].fire)
-	// 		continue ;
-	// 	while (++j < weapon[i].fire->nb)
-	// 	{
-	// 		printf("FIRE : width : %d, Height : %d\n", weapon[i].fire->img_list->image->width, weapon[i].fire->img_list->image->height);
-	// 		weapon[i].fire->img_list = weapon[i].fire->img_list->next;
-	// 	}
-	// }
 
 bool	player_init(t_core *core)
 {
@@ -50,10 +25,39 @@ bool	player_init(t_core *core)
 		return (false);
 	core->player->position->x = core->spawn->x;
 	core->player->position->y = core->spawn->y;
-	core->player->health = 100;
-	core->player->ammo[0] = 50;
+	core->player->health = 50;
+	core->player->ammo[0] = 150;
+	core->player->ammo[1] = 99;
+	core->player->ammo[2] = 98;
+	core->player->ammo[3] = 97;
 	core->player->current_weapon = 2;
 	core->player->speed = PLAYER_SPEED;
+	return (true);
+}
+
+bool	hud_buffers(t_core *core)
+{
+	core->hud_img->ammo1 = load_buffer(core->hud_img->ammo1, 60, 30, core);
+	if (!core->hud_img->ammo1)
+		return (false);
+	core->hud_img->ammo2 = load_buffer(core->hud_img->ammo2, 60, 30, core);
+	if (!core->hud_img->ammo2)
+		return (false);
+	core->hud_img->ammo3 = load_buffer(core->hud_img->ammo3, 60, 30, core);
+	if (!core->hud_img->ammo3)
+		return (false);
+	core->hud_img->ammo4 = load_buffer(core->hud_img->ammo4, 60, 30, core);
+	if (!core->hud_img->ammo4)
+		return (false);
+	core->hud_img->health = load_buffer(core->hud_img->health, 220, 48, core);
+	if (!core->hud_img->health)
+		return (false);
+	core->hud_img->ammo = load_buffer(core->hud_img->ammo, 220, 48, core);
+	if (!core->hud_img->ammo)
+		return (false);
+	core->hud_img->armor = load_buffer(core->hud_img->armor, 220, 48, core);
+	if (!core->hud_img->armor)
+		return (false);
 	return (true);
 }
 
@@ -68,6 +72,25 @@ bool	hud_init(t_core *core)
 	core->hud_img->hud = (t_img *)hashmap_get(&core->hashmap, "hud");
 	arms = (t_img *)hashmap_get(&core->hashmap, "arms");
 	transparency(core->hud_img->hud, arms, 520, 0);
+	if (!hud_buffers(core))
+		return (false);
+	core->hud_img->hud_render = true;
+	core->hud_img->ammo1_render = true;
+	core->hud_img->ammo2_render = true;
+	core->hud_img->ammo3_render = true;
+	core->hud_img->ammo4_render = true;
+	core->hud_img->health_render = true;
+	core->hud_img->armor_render = true;
+	core->hud_img->new_weapon_render = true;
+	return (true);
+}
+
+bool	weapon_buffer(t_core *core)
+{
+	weapons_init(core->player->weapon, core);
+	core->weapon_buffer = load_buffer(core->weapon_buffer, 880, 804, core);
+	if (!core->weapon_buffer)
+		return (false);
 	return (true);
 }
 
@@ -76,36 +99,18 @@ bool	game_init(t_core *core)
 	core->game_img = gc_malloc(&core->gc, sizeof(t_img), STRUCT, "game_img");
 	if (!core->game_img)
 		return (false);
-	core->game_img->img = mlx_new_image(core->mlx, S_LENGHT, S_HEIGHT);
-	if (!core->game_img->img)
+	core->game_img = load_buffer(core->game_img, S_LENGHT, S_HEIGHT, core);
+	if (!core->game_img)
 		return (false);
-	core->game_img->addr = mlx_get_data_addr(core->game_img->img,
-			&core->game_img->bpp, &core->game_img->line_len,
-			&core->game_img->endian);
-	core->game_img->width = S_LENGHT;
-	core->game_img->height = S_HEIGHT;
-	core->redraw = true;
-	hashmap_insert(&core->hashmap, "game_img", (void *)core->game_img, core);
 	if (!player_init(core))
 		return (false);
 	if (!hud_init(core))
 		return (false);
 	if (!head_init(core))
 		return (false);
-    init_map_textures(core);
-	weapons_init(core->player->weapon, core);
-	core->weapon_buffer = gc_malloc(&core->gc, sizeof(t_img), STRUCT, "weapon_buffer");
-	if (!core->weapon_buffer)
+	init_map_textures(core);
+	if (!weapon_buffer(core))
 		return (false);
-	core->weapon_buffer->img = mlx_new_image(core->mlx, 880, 804);
-	if (!core->weapon_buffer->img)
-		return (false);
-	core->weapon_buffer->addr = mlx_get_data_addr(core->weapon_buffer->img,
-			&core->weapon_buffer->bpp, &core->weapon_buffer->line_len,
-			&core->weapon_buffer->endian);
-	core->weapon_buffer->width = 880;
-	core->weapon_buffer->height = 804;
-	hashmap_insert(&core->hashmap, "weapon_buffer", (void *)core->weapon_buffer, core);
 	mlx_clear_window(core->mlx, core->win);
 	core->hud_redraw = true;
 	return (true);

@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 13:33:49 by tvacher           #+#    #+#             */
-/*   Updated: 2025/06/02 13:03:12 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/02 13:22:58 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -306,6 +306,7 @@ void    start_game(t_core *core)
         if (!sprite->activ)
             core->player->weapon[core->player->current_weapon].lock = false;
     }
+	fill_img_in_green(core->weapon_buffer);
     render_weapon(core);
     mlx_put_image_to_window(core->mlx, core->win, core->game_img->img, 0, 0);
 	render_hud(core);

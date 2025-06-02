@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 16:33:30 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/01 22:50:32 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/02 21:06:08 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 
 # include <stdbool.h>
 
-typedef struct s_sprite	t_sprite;
+typedef struct s_sprite		t_sprite;
+typedef struct s_node_img	t_node_img;
 
 typedef struct s_damage_range
 {
@@ -34,14 +35,17 @@ typedef struct s_weapon
 	t_img			*normal;
 	t_sprite		*anim;
 	t_sprite		*fire;
-	bool			fired;
-	bool			freeze;
-	struct timeval	freeze_start;
 	bool			lock;
 }	t_weapon;
 
 void	weapons_init(t_weapon weapon[9], t_core *core);
 bool	render_weapon(t_core *core);
+void	weapon_fired(t_core *core);
+void	setup_animation_exceptions(t_weapon weapon[9]);
+bool	rebuild_fire_anim(t_node_img **anim_list,
+			t_sprite *fire_list, t_pos offset, t_core *core);
+
+
 
 
 #endif

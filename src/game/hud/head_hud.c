@@ -6,13 +6,12 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 14:38:17 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/30 00:04:39 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/02 19:21:53 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-//GERER LE UPDATE SPRITE AVEC UNE STRUCT TIMEVAL DIRECTEMENT DANS LE T_SPRITE
 void	render_head(t_core *core)
 {
 	t_sprite	*selec;

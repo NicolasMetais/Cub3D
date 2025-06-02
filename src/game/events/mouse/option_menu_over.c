@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 14:01:54 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/29 18:01:11 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/02 21:12:13 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,6 @@ void	slider(t_core *core, int slider_min, int slider_max, int x)
 	if (!percent)
 		return ;
 	render_percent(core, percent, 790);
-
-
 }
 
 void	options_menu_hover(int x, int y, t_core *core)

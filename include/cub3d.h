@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 01:54:17 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/02 12:52:49 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/02 22:42:11 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,21 @@ typedef struct s_hud_img
 	t_sprite	*hurt;
 	t_sprite	*bloody;
 	t_sprite	*critical;
+	t_img		*ammo1;
+	t_img		*ammo2;
+	t_img		*ammo3;
+	t_img		*ammo4;
+	t_img		*health;
+	t_img		*armor;
+	t_img		*ammo;
+	bool		hud_render;
+	bool		ammo1_render;
+	bool		ammo2_render;
+	bool		ammo3_render;
+	bool		ammo4_render;
+	bool		health_render;
+	bool		armor_render;
+	bool		new_weapon_render;
 }	t_hud_img;
 
 typedef enum s_state
@@ -301,6 +316,11 @@ bool			is_empty_line(char *str);
 void			cleanup_split(char **str);
 void			cleanup_game(t_core *core);
 void			copy_img(t_img *dest, t_img *copy);
+void			partial_copy_img(t_img *dest, t_img *copy,
+					int x_start, int y_start);
+t_img			*load_buffer(t_img *image, int x, int y, t_core *core);
+
+
 
 //TRANSPARENCY
 void			transparency(t_img *bg, const t_img *stickonbg,

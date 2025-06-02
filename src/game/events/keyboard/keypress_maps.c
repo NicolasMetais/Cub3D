@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 10:45:42 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/29 18:44:19 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/02 21:10:33 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,7 @@ void	maps_menu_keypress(int key, t_core *core)
 	{
 		if (core->menu_option > 0)
 		{
-			core->menu_option--;
-			if (core->menu_option < core->scroll_offset)
+			if (core->menu_option-- < core->scroll_offset)
 				core->scroll_offset--;
 		}
 		render_maps_menu(core);
@@ -77,8 +76,7 @@ void	maps_menu_keypress(int key, t_core *core)
 	{
 		if (core->menu_option < core->maps_nb - 1)
 		{
-			core->menu_option++;
-			if (core->menu_option >= core->scroll_offset + VISIBLE)
+			if (core->menu_option++ >= core->scroll_offset + VISIBLE)
 				core->scroll_offset++;
 		}
 		render_maps_menu(core);

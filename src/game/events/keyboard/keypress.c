@@ -6,11 +6,38 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 16:53:24 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/30 17:24:25 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/02 21:08:42 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	enter_handler(int key, t_core *core)
+{
+	if (key == XK_Return)
+	{
+		if (core->menu_option == 0)
+		{
+			mlx_clear_window(core->mlx, core->win);
+			if (!game_init(core))
+				return ;
+			core->state = GAME;
+		}
+		if (core->menu_option == 1)
+		{
+			core->menu_option = 0;
+			render_options_menu(core);
+		}
+		if (core->menu_option == 2)
+		{
+			core->menu_option = 0;
+			core->enter = 0;
+			render_maps_menu(core);
+		}
+		if (core->menu_option == 3)
+			handle_destroy(core);
+	}
+}
 
 //MANAGE MENUING DEPLACEMENT
 void	menu_keypress(int key, t_core *core)
@@ -36,29 +63,7 @@ void	menu_keypress(int key, t_core *core)
 			core->menu_option = 0;
 		render_menu(core);
 	}
-	if (key == XK_Return)
-	{
-		if (core->menu_option == 0)
-		{
-			mlx_clear_window(core->mlx, core->win);
-			if (!game_init(core))
-				return ;
-			core->state = GAME;
-		}
-		if (core->menu_option == 1)
-		{
-			core->menu_option = 0;
-			render_options_menu(core);
-		}
-		if (core->menu_option == 2)
-		{
-			core->menu_option = 0;
-			core->enter = 0;
-			render_maps_menu(core);
-		}
-		if (core->menu_option == 3)
-			handle_destroy(core);
-	}
+	enter_handler(key, core);
 }
 
 void	option_menu_keypress(int key, t_core *core)

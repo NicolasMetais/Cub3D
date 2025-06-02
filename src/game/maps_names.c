@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 03:22:15 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/26 16:50:47 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/02 19:47:33 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ bool	extract_maps_names(t_core *core)
 	files = readdir(dir);
 	while (files)
 	{
-		core->menu_maps[i].parsed = false;
 		if (!allocate_names(files, &core->menu_maps[i].name, core, &i))
 			return (closedir(dir), false);
 		files = readdir(dir);

@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 03:13:52 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/06 02:51:35 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/02 21:09:29 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	starting_menu_hover(int y, t_core *core)
 {
 	int	i;
 
-	i = -1
+	i = -1;
 	if (core->state == START_MENU)
 	{
 		while (i < 4)
@@ -42,7 +42,6 @@ int	mouse_menu_hover(int x, int y, void *param)
 	core = (t_core *)param;
 	i = 0;
 	starting_menu_hover(y, core);
-	
 	return (0);
 }
 
@@ -75,5 +74,3 @@ int	mouse_menu_click(int button, int x, int y, t_core *core)
 	}
 	return (0);
 }
-
-

@@ -10,7 +10,6 @@ MAIN =	src/main.c \
 		src/game/routine.c \
 		src/game/maps_names.c \
 		src/game/game_init.c \
-		src/game/weapons_init.c \
 
 EVENTS = 	src/game/events/destroy.c \
 			src/game/events/keyboard/keypress_maps.c \
@@ -48,7 +47,9 @@ HUD	=	src/game/hud/render_hud.c \
 		src/game/hud/head_init.c \
 
 WEAPONS	=	src/game/weapons/render_weapons.c \
-
+			src/game/weapons/weapons_init.c \
+			src/game/weapons/weapons_fired.c \
+			src/game/weapons/weapons_animations.c \
 
 UTILS =	src/utils/copy_img.c \
 		src/utils/extension.c \
@@ -58,6 +59,7 @@ UTILS =	src/utils/copy_img.c \
 		src/utils/sprite_udpate.c \
 		src/utils/transparency.c \
 		src/utils/cleanup_game.c \
+		src/utils/load_buffer.c \
 
 PARSING =	src/parsing/map_extract.c \
 			src/parsing/data_manager.c \

@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 21:25:17 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/29 23:58:54 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/02 21:13:46 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ void	skulls_render(t_core *core, const int *y)
 	mlx_put_image_to_window(core->mlx, core->win, core->menu_img->bg->img,
 		0, 0);
 }
-
 
 //LOAD A NEW BG IMAGE AT EVERY RENDER CALL
 bool	load_bg_image(t_img **img, void *mlx, char *path, t_core *core)
