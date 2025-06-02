@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 13:33:49 by tvacher           #+#    #+#             */
-/*   Updated: 2025/05/31 23:26:36 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/02 13:03:12 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -279,13 +279,13 @@ void    get_rc_data(t_core *core)
     core->tmp_rc->pl_angle = 2 * PI;
     core->tmp_rc->pldelt_x = cos(core->tmp_rc->pl_angle);
     core->tmp_rc->pldelt_y = sin(core->tmp_rc->pl_angle);
-	core->tmp_rc->res = 16;
+    core->tmp_rc->res = 16;
     core->tmp_rc->max_r = S_LENGHT;
-	core->tmp_rc->dist = gc_malloc(&core->gc, sizeof(float) * core->tmp_rc->max_r, FLOAT, "dist");
-	core->tmp_rc->dist2 = gc_malloc(&core->gc, sizeof(float) * core->tmp_rc->max_r, FLOAT, "dist2");
-	core->tmp_rc->dist3 = gc_malloc(&core->gc, sizeof(float) * core->tmp_rc->max_r, FLOAT, "dist3");
-	if (!core->tmp_rc->dist || !core->tmp_rc->dist2 || !core->tmp_rc->dist3)
-		return ;
+    core->tmp_rc->dist = gc_malloc(&core->gc, sizeof(float) * core->tmp_rc->max_r, FLOAT, "dist");
+    core->tmp_rc->dist2 = gc_malloc(&core->gc, sizeof(float) * core->tmp_rc->max_r, FLOAT, "dist2");
+    core->tmp_rc->dist3 = gc_malloc(&core->gc, sizeof(float) * core->tmp_rc->max_r, FLOAT, "dist3");
+    if (!core->tmp_rc->dist || !core->tmp_rc->dist2 || !core->tmp_rc->dist3)
+        return ;
 }
 
 void    start_game(t_core *core)
@@ -306,9 +306,8 @@ void    start_game(t_core *core)
         if (!sprite->activ)
             core->player->weapon[core->player->current_weapon].lock = false;
     }
-	    render_weapon(core);
+    render_weapon(core);
     mlx_put_image_to_window(core->mlx, core->win, core->game_img->img, 0, 0);
 	render_hud(core);
 	render_head(core);
-	
 }

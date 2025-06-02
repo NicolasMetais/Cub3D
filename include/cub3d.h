@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 01:54:17 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/01 22:51:14 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/02 12:52:49 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -265,6 +265,7 @@ typedef struct s_core
 	char			*loaded_map;
 	bool			isclicked;
 	bool			map_changed;
+	bool			hud_redraw;
 	int				x;
 	int				y;
 	int				scroll_offset;

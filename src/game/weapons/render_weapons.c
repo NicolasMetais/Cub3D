@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 17:05:18 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/01 16:06:29 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/02 13:08:13 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ bool	render_weapon(t_core *core)
 	{
 		offset_x = (core->weapon_buffer->width - weapon.normal->width) / 2;
 		offset_y = core->weapon_buffer->height - weapon.normal->height;
-		transparency(core->weapon_buffer, weapon.normal, offset_x, offset_y);
+		transparency(core->weapon_buffer, weapon.normal, offset_x + core->player->bob_x, offset_y + core->player->bob_y);
 	}
 	else
 	{

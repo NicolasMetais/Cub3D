@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 15:49:25 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/31 21:06:32 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/02 13:10:42 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ void	movements(t_core *core)
 void	calculate_bob(t_core *core, double ampli, double freq)
 {
 	core->player->bobbing_speed = 2.0 * PI * freq;
-	core->player->bob_y = ampli * sin(core->player->bobbing_speed * core->player->bobbing_time);
+	core->player->bob_y = ampli * sin(core->player->bobbing_speed
+			* core->player->bobbing_time);
 	core->player->bob_x = (ampli / 2.0)
 		* sin(core->player->bobbing_speed * 2.0 * core->player->bobbing_time);
 }
@@ -70,7 +71,6 @@ int	routine(void *param)
 		else
 			core->player->bobbing_time = 0;
 		calculate_bob(core, 10.0, 2.0);
-		//init_map_textures(core);
 		core->tmp_rc->max_r = S_LENGHT;
 		movements(core);
 		start_game(core);

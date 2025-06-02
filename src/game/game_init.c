@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 17:55:32 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/01 17:49:11 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/02 12:55:20 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,5 +107,6 @@ bool	game_init(t_core *core)
 	core->weapon_buffer->height = 804;
 	hashmap_insert(&core->hashmap, "weapon_buffer", (void *)core->weapon_buffer, core);
 	mlx_clear_window(core->mlx, core->win);
+	core->hud_redraw = true;
 	return (true);
 }
