@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 01:54:17 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/02 22:42:11 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/06 13:22:31 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,9 @@
 //MENU PLACEMENT
 # define MENU_START_Y 540
 # define MENU_SPACING 100
+
+//CHEAT AND DEBUG
+# define INFINITE_AMMOS 1
 
 //VISIBLE SCROLLING ELEMENTS
 # define VISIBLE 4
@@ -64,6 +67,8 @@
 # define RAD 0.0174533
 
 extern int	map[];
+
+//LA CROIX MARCHE PAS ENCULE CODE LE
 
 typedef struct s_img_loader
 {
@@ -135,7 +140,7 @@ typedef struct s_hud_img
 	t_img		*ammo2;
 	t_img		*ammo3;
 	t_img		*ammo4;
-	t_img		*health;
+	t_img		*life;
 	t_img		*armor;
 	t_img		*ammo;
 	bool		hud_render;
@@ -284,6 +289,8 @@ typedef struct s_core
 	int				x;
 	int				y;
 	int				scroll_offset;
+	t_projectiles	proj;
+	t_impact		impact;
 	t_img			*game_img;
 	t_img			*weapon_buffer;
 	t_player		*player;
@@ -319,6 +326,9 @@ void			copy_img(t_img *dest, t_img *copy);
 void			partial_copy_img(t_img *dest, t_img *copy,
 					int x_start, int y_start);
 t_img			*load_buffer(t_img *image, int x, int y, t_core *core);
+void			transparency_scaled(t_img *bg, const t_img *stickonbg,
+					int start_x, int start_y, int size);
+
 
 
 
@@ -386,7 +396,8 @@ void			destroy_img(t_core *core);
 bool			launch_game(t_core *core);
 int				routine(void *param);
 
-void			start_game(t_core *core);
+bool    		start_game(t_core *core);
+
 
 //Keypress
 int				handle_keypress(int key, void *param);
@@ -430,6 +441,9 @@ bool			render_numbers(t_core *core);
 bool			render_weapon_menu(t_core *core);
 bool			render_ammo(t_core *core);
 bool			head_init(t_core *core);
-
+void			hud_render_percent(t_img *buffer, t_core *core,
+					char *percent, int render);
+void			hud_render_number(t_img *buffer, t_core *core,
+					char *percent, int render);
 
 #endif

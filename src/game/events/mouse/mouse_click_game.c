@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 19:47:38 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/02 22:19:22 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/06 15:12:51 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,9 @@ void	mouse_click_game(t_core *core, int button)
 
 	if (button == 1)
 	{
-		weapon = &core->player->weapon[core->player->current_weapon];
-		if (!weapon->lock)
+		weapon = &core->player->weapon[core->player->curr_wpn];
+		if ((core->player->ammo[weapon->ammo_type] > 0 && !weapon->lock)
+			|| core->player->curr_wpn <= 1)
 		{
 			anim = weapon->anim;
 			fire = weapon->fire;
@@ -29,7 +30,9 @@ void	mouse_click_game(t_core *core, int button)
 			anim->activ = true;
 			anim->started = true;
 			gettimeofday(&anim->update, NULL);
+			if (core->player->curr_wpn == 4 || core->player->curr_wpn == 6)
+				core->player->firing = true;
+			weapon_fired(core);
 		}
-		weapon_fired(core);
 	}
 }

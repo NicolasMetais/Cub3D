@@ -45,11 +45,18 @@ HUD	=	src/game/hud/render_hud.c \
 		src/game/hud/ammo_hud.c \
 		src/game/hud/weapon_menu_hud.c \
 		src/game/hud/head_init.c \
+		src/game/hud/draw_numbers.c \
 
 WEAPONS	=	src/game/weapons/render_weapons.c \
 			src/game/weapons/weapons_init.c \
 			src/game/weapons/weapons_fired.c \
 			src/game/weapons/weapons_animations.c \
+			src/game/weapons/render_impacts.c \
+			src/game/weapons/weapons_mecanics.c \
+			src/game/weapons/offsets_animations.c \
+			src/game/weapons/weapons_projectiles.c \
+			src/game/weapons/render_projectiles.c \
+			src/game/weapons/hit_detections.c \
 
 UTILS =	src/utils/copy_img.c \
 		src/utils/extension.c \

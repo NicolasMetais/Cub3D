@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 19:09:05 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/02 00:31:58 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/06 12:21:40 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ bool	new_sprite_node(t_core *core, t_sprite *tempo, t_node_img *head,
 	new->image = hashmap_get(&core->hashmap, name);
 	if (!new->image)
 		return (false);
+	new->has_offset = false;
 	if (!head)
 	{
 		tempo->img_list = new;

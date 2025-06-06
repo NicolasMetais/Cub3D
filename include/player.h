@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 16:23:22 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/02 13:48:33 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/05 10:48:19 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,13 @@ typedef struct s_player
 	unsigned int	health;
 	unsigned int	armor;
 	unsigned int	ammo[4];
-	int				current_weapon;
+	int				curr_wpn;
 	t_weapon		weapon[9];
 	bool			key_up;
 	bool			key_down;
 	bool			key_left;
 	bool			key_right;
+	bool			firing;
 	double			speed;
 	double			bobbing_speed;
 	double			delta_time;

@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 18:17:25 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/02 22:56:57 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/06 15:08:51 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,8 @@ void	weapons_init_fourth(t_weapon weapon[9], t_core *core)
 	weapon[7].anim = hashmap_get(&core->hashmap_sprites, "BFG9000");
 	weapon[7].fire = hashmap_get(&core->hashmap_sprites, "BFG9000_fire");
 	animation_options_init(weapon, core);
+	weapon[4].loop_loaded = weapon[4].anim->img_list->next;
+	weapon[6].loop_loaded = weapon[6].anim->img_list->next;
 }
 
 void	weapons_init_third(t_weapon weapon[9], t_core *core)

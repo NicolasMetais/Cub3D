@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 15:49:25 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/02 13:10:42 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/06 10:25:52 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,8 @@ int	routine(void *param)
 		calculate_bob(core, 10.0, 2.0);
 		core->tmp_rc->max_r = S_LENGHT;
 		movements(core);
-		start_game(core);
+		if (!start_game(core))
+			return (false);
 	}
 	core->redraw = false;
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 17:55:32 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/02 23:01:58 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/06 13:28:22 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ bool	player_init(t_core *core)
 		return (false);
 	core->player->position->x = core->spawn->x;
 	core->player->position->y = core->spawn->y;
-	core->player->health = 50;
-	core->player->ammo[0] = 150;
-	core->player->ammo[1] = 99;
-	core->player->ammo[2] = 98;
-	core->player->ammo[3] = 97;
-	core->player->current_weapon = 2;
+	core->player->health = 100;
+	core->player->ammo[0] = 200;
+	core->player->ammo[1] = 50;
+	core->player->ammo[2] = 50;
+	core->player->ammo[3] = 300;
+	core->player->curr_wpn = 2;
 	core->player->speed = PLAYER_SPEED;
 	return (true);
 }
@@ -49,8 +49,8 @@ bool	hud_buffers(t_core *core)
 	core->hud_img->ammo4 = load_buffer(core->hud_img->ammo4, 60, 30, core);
 	if (!core->hud_img->ammo4)
 		return (false);
-	core->hud_img->health = load_buffer(core->hud_img->health, 220, 48, core);
-	if (!core->hud_img->health)
+	core->hud_img->life = load_buffer(core->hud_img->life, 220, 48, core);
+	if (!core->hud_img->life)
 		return (false);
 	core->hud_img->ammo = load_buffer(core->hud_img->ammo, 220, 48, core);
 	if (!core->hud_img->ammo)

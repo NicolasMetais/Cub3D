@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 21:00:55 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/02 21:08:56 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/06 12:32:20 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ t_node_img	*duplicate_node(t_node_img	*original, t_core *core)
 			&new_node->image->endian);
 	new_node->image->width = original->image->width;
 	new_node->image->height = original->image->height + 200;
+	hashmap_insert(&core->hashmap, "img dup", new_node->image, core);
 	fill_img_in_green(new_node->image);
 	copy_image(new_node->image, original->image, 200);
 	return (new_node);
@@ -90,23 +91,4 @@ bool	rebuild_fire_anim(t_node_img **anim_list,
 	}
 	last_inserted->next = second;
 	return (true);
-}
-
-void	setup_animation_exceptions(t_weapon weapon[9])
-{
-	weapon[3].fire->img_list->next->has_offset = true;
-	weapon[3].fire->img_list->next->offset_x = 60;
-	weapon[3].fire->img_list->next->offset_y = 115;
-	weapon[5].fire->img_list->next->has_offset = true;
-	weapon[5].fire->img_list->next->offset_x = 57;
-	weapon[5].fire->img_list->next->offset_y = 100;
-	weapon[5].fire->img_list->next->next->has_offset = true;
-	weapon[5].fire->img_list->next->next->offset_x = 20;
-	weapon[5].fire->img_list->next->next->offset_y = 80;
-	weapon[5].fire->img_list->next->next->next->has_offset = true;
-	weapon[5].fire->img_list->next->next->next->offset_x = 0;
-	weapon[5].fire->img_list->next->next->next->offset_y = 25;
-	weapon[7].fire->img_list->next->has_offset = true;
-	weapon[7].fire->img_list->next->offset_x = 65;
-	weapon[7].fire->img_list->next->offset_y = 45;
 }
