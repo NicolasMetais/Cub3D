@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 16:53:24 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/02 21:08:42 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/06 23:06:21 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ void	menu_keypress(int key, t_core *core)
 	enter_handler(key, core);
 }
 
+
+
 void	option_menu_keypress(int key, t_core *core)
 {
 /* 	if (key == XK_Up)
@@ -100,8 +102,18 @@ int	handle_keypress(int key, void *param)
 	t_core	*core;
 
 	core = (t_core *)param;
-	if (key == XK_Escape)
+	if (key == XK_Escape && core->state != GAME)
 		handle_destroy(core);
+	else if (key == XK_Escape && core->state == GAME)
+	{
+		if (!create_pause_bg(core))
+			return (0);
+		core->redraw = true;
+		core->menu_option = 0;
+		core->state = PAUSE;
+	}
+	if (core->state == PAUSE)
+		pause_menu_keypress(key, core);
 	if (core->state == START_MENU)
 		menu_keypress(key, core);
 	if (core->state == OPTIONS_MENU)
@@ -110,5 +122,7 @@ int	handle_keypress(int key, void *param)
 		maps_menu_keypress(key, core);
 	if (core->state == GAME)
 		on_keypress_game(key, core);
+	if (core->state == PAUSE_OPTION)
+		pause_option_keypress(key, core);
 	return (true);
 }

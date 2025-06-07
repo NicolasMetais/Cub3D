@@ -16,11 +16,15 @@ EVENTS = 	src/game/events/destroy.c \
 			src/game/events/keyboard/keypress_game.c \
 			src/game/events/keyboard/keypress.c \
 			src/game/events/keyboard/keyrelease.c \
+			src/game/events/keyboard/keypress_pause.c \
+			src/game/events/keyboard/keypress_pause_options.c \
 			src/game/events/mouse/mouse_over.c \
 			src/game/events/mouse/option_menu_over.c \
+			src/game/events/mouse/pause_options_hover.c \
 			src/game/events/mouse/mouse_release.c \
 			src/game/events/mouse/mouse_click.c \
 			src/game/events/mouse/mouse_click_game.c \
+
 
 IMG = 	src/game/image_loader.c \
 		src/game/hashmap/hashmap.c \
@@ -38,6 +42,8 @@ MENU =	src/game/menu/render_menu.c \
 		src/game/char_setup/init_char_nodes.c \
 		src/game/char_setup/build_words.c \
 		src/game/char_setup/build_words_utils.c \
+		src/game/menu/render_pause_menu.c \
+		src/game/menu/render_pause_options.c \
 
 HUD	=	src/game/hud/render_hud.c \
 		src/game/hud/head_hud.c \

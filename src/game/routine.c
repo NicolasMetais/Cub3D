@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 15:49:25 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/06 10:25:52 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/06 20:40:56 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,14 @@ int	routine(void *param)
 		movements(core);
 		if (!start_game(core))
 			return (false);
+	}
+	else if (core->state == PAUSE)
+	{
+		sprite = hashmap_get(&core->hashmap_sprites, "skulls");
+		if (core->redraw)
+			render_pause_menu(core);
+		if (update_sprite(sprite))
+			skulls_render_pause(core, core->y_pos);
 	}
 	core->redraw = false;
 	return (0);

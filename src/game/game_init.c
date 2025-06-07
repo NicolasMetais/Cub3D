@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 17:55:32 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/06 13:28:22 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/06 18:25:38 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,11 +85,19 @@ bool	hud_init(t_core *core)
 	return (true);
 }
 
-bool	weapon_buffer(t_core *core)
+bool	more_buffers(t_core *core)
 {
 	weapons_init(core->player->weapon, core);
 	core->weapon_buffer = load_buffer(core->weapon_buffer, 880, 804, core);
 	if (!core->weapon_buffer)
+		return (false);
+	core->hud_img->pause_buffer = load_buffer(core->hud_img->pause_buffer,
+			S_LENGHT, S_HEIGHT, core);
+	if (!core->hud_img->pause_buffer)
+		return (false);
+	core->hud_img->clean_pause_buffer = load_buffer(
+			core->hud_img->clean_pause_buffer, S_LENGHT, S_HEIGHT, core);
+	if (!core->hud_img->clean_pause_buffer)
 		return (false);
 	return (true);
 }
@@ -109,7 +117,7 @@ bool	game_init(t_core *core)
 	if (!head_init(core))
 		return (false);
 	init_map_textures(core);
-	if (!weapon_buffer(core))
+	if (!more_buffers(core))
 		return (false);
 	mlx_clear_window(core->mlx, core->win);
 	core->hud_redraw = true;

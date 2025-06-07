@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 14:49:13 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/30 19:48:43 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/06 23:02:56 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,9 @@ void	mouse_click_options_menu(int x, int y, t_core *core)
 	if (x >= core->x && x <= core->x + core->menu_img->cursor->width
 		&& y >= core->y_pos[0] + 5 && y <= core->y_pos[0]
 		+ 5 + core->menu_img->cursor->height)
+	{
 		core->isclicked = true;
+	}
 }
 
 int	mouse_menu_click(int button, int x, int y, t_core *core)
@@ -60,7 +62,7 @@ int	mouse_menu_click(int button, int x, int y, t_core *core)
 			mouse_click_starting_menu(core);
 		if (core->state == MAPS_MENU)
 			mouse_click_maps_menu(core);
-		if (core->state == OPTIONS_MENU)
+		if (core->state == OPTIONS_MENU || core->state == PAUSE_OPTION)
 			mouse_click_options_menu(x, y, core);
 	}
 	if (core->state == MAPS_MENU)

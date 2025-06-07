@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 15:51:54 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/02 21:09:11 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/06 18:14:31 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	render_ammo_init(t_core *core, t_img *img_ammo[4])
 	core->tmp[1] = '\0';
 }
 
-bool	render_ammo(t_core *core)
+bool	render_ammo(t_core *core, t_img *bg)
 {
 	unsigned int		i;
 	int					y;
@@ -96,16 +96,20 @@ bool	render_ammo(t_core *core)
 	render_ammo_init(core, img_ammo);
 	while (++i < 4)
 	{
-		partial_copy_img(img_ammo[i], core->hud_img->hud, 1380, y);
+		partial_copy_img(img_ammo[i], bg, 1380, y);
 		y += 30;
 	}
-	write_ammo_type(core, 25, 0, "200");
-	write_ammo_type(core, 55, 1, "50");
-	write_ammo_type(core, 85, 2, "50");
-	write_ammo_type(core, 115, 3, "300");
-	mlx_put_image_to_window(core->mlx, core->win, img_ammo[0]->img, 1380, 860);
-	mlx_put_image_to_window(core->mlx, core->win, img_ammo[1]->img, 1380, 890);
-	mlx_put_image_to_window(core->mlx, core->win, img_ammo[2]->img, 1380, 920);
-	mlx_put_image_to_window(core->mlx, core->win, img_ammo[3]->img, 1380, 950);
+	if (!write_ammo_type(core, 25, 0, "200"))
+		return (false);
+	if (!write_ammo_type(core, 55, 1, "50"))
+		return (false);
+	if (!write_ammo_type(core, 85, 2, "50"))
+		return (false);
+	if (!write_ammo_type(core, 115, 3, "300"))
+		return (false);
+	mlx_put_image_to_window(core->mlx, core->win, img_ammo[0]->img, 1380, 865);
+	mlx_put_image_to_window(core->mlx, core->win, img_ammo[1]->img, 1380, 895);
+	mlx_put_image_to_window(core->mlx, core->win, img_ammo[2]->img, 1380, 925);
+	mlx_put_image_to_window(core->mlx, core->win, img_ammo[3]->img, 1380, 955);
 	return (true);
 }

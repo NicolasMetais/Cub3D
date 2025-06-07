@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 00:46:55 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/04 16:04:29 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/06 22:55:37 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ void transparency_scaled(t_img *bg, const t_img *stickonbg, int start_x, int sta
 			bg_x = j + start_x;
 			if (bg_x < 0 || bg_x >= bg->width || bg_y < 0 || bg_y >= bg->height)
 				continue;
-
 			src_x = (int)(j * scale_x);
 			src_y = (int)(i * scale_y);
 			if (src_x < 0 || src_x >= stickonbg->width || src_y < 0 || src_y >= stickonbg->height)

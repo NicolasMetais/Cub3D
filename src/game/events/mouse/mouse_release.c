@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/16 12:34:06 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/05 11:08:58 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/06 20:25:01 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	mouse_menu_release(int button, int x, int y, t_core *core)
 {
 	(void)x;
 	(void)y;
-	if (core->state == OPTIONS_MENU)
+	if (core->state == OPTIONS_MENU || core->state == PAUSE_OPTION)
 	{
 		if (button == 1)
 			core->isclicked = 0;

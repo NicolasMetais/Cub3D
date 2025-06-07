@@ -1,12 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
+/*   render_pause_options.c                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/06 19:49:55 by nmetais           #+#    #+#             */
+/*   Updated: 2025/06/06 20:15:27 by nmetais          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "cub3d.h"
+
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
 /*   render_options_menu.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 01:19:51 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/06 23:05:21 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/05/30 00:00:10 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +38,14 @@
 		y[core->menu_option]);
 	mlx_put_image_to_window(core->mlx, core->win, core->menu_img->bg->img,
 		0, 0);
-} */
+}
 
-void	update_slider(t_core *core, const int *y, t_img *bg)
+static void	update_slider(t_core *core, const int *y, t_img *bg)
 {
 	transparency(bg, core->menu_img->slider_bar, (bg->width / 2) - 70, y[0]);
 	transparency(bg, core->menu_img->slider_bar, (bg->width / 2) - 70, y[0]);
 	transparency(bg, core->menu_img->cursor, core->x, y[0] + 5);
-}
+} */
 
 static void	rewrite_options(t_core *core, const int *y, t_img *bg)
 {
@@ -56,17 +70,17 @@ static void	option_menu_init(t_core *core)
 		core->y_pos[i] = 650 + (i * MENU_SPACING);
 }
 
-bool	render_options_menu(t_core *core)
+bool	render_pause_options(t_core *core)
 {
 	t_img	*option;
 
-	core->state = OPTIONS_MENU;
+	core->state = PAUSE_OPTION;
 	option_menu_init(core);
-	copy_img(core->menu_img->bg, core->menu_img->bg_clean);
+	copy_img(core->hud_img->pause_buffer, core->hud_img->clean_pause_buffer);
 	option = (t_img *)hashmap_get(&core->hashmap, "Option_title");
-	transparency(core->menu_img->bg, option, 545, 440);
-	rewrite_options(core, core->y_pos, core->menu_img->bg);
-	mlx_put_image_to_window(core->mlx, core->win, core->menu_img->bg->img,
+	transparency(core->hud_img->pause_buffer, option, 640, 260);
+	rewrite_options(core, core->y_pos, core->hud_img->pause_buffer);
+	mlx_put_image_to_window(core->mlx, core->win, core->hud_img->pause_buffer->img,
 		0, 0);
 	return (true);
 }

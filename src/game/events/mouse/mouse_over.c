@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 03:13:52 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/02 21:12:02 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/06 20:18:05 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ int	mouse_menu_hover(int x, int y, void *param)
 	core = (t_core *)param;
 	starting_menu_hover(y, core);
 	options_menu_hover(x, y, core);
+	pause_options_hover(x, y, core);
 	maps_menu_hover(y, core);
 	return (0);
 }

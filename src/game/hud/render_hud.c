@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 15:11:40 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/02 22:45:44 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/06 18:06:32 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,10 @@ bool	render_hud(t_core *core)
 	render_head(core);
 	mlx_put_image_to_window(core->mlx, core->win, core->hud_img->hud->img,
 		0, 840);
-	if (!render_numbers(core))
+	if (!render_numbers(core, core->hud_img->hud))
 		return (false);
-	render_ammo(core);
+	if (!render_ammo(core, core->hud_img->hud))
+		return (false);
 	core->hud_redraw = false;
 	return (true);
 }

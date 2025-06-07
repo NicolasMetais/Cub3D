@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 16:38:24 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/05 13:44:29 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/06 20:53:56 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,18 +27,6 @@ void	switch_weapons(int key, t_core *core)
 			= core->player->weapon[index].anim->head;
 		core->player->curr_wpn = key - XK_0;
 	}
-	// if (key == XK_2 && core->player->weapon[2].owned)
-	// 	core->player->curr_wpn = 2;
-	// if (key == XK_3 && core->player->weapon[3].owned)
-	// 	core->player->curr_wpn = 3;
-	// if (key == XK_4 && core->player->weapon[4].owned)
-	// 	core->player->curr_wpn = 4;
-	// if (key == XK_5 && core->player->weapon[5].owned)
-	// 	core->player->curr_wpn = 5;
-	// if (key == XK_6 && core->player->weapon[6].owned)
-	// 	core->player->curr_wpn = 6;
-	// if (key == XK_7 && core->player->weapon[7].owned)
-	// 	core->player->curr_wpn = 7;
 }
 
 void	on_keypress_game(int key, t_core *core)

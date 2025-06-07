@@ -6,14 +6,13 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 15:16:14 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/03 14:06:56 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/06 18:08:12 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-//FAUT FAIRE CA SUR LES 2 AUTRE NUM DE MERDE ET LE HUD EST PIXEL PERFECT OPTIMISE DU CUL
-bool	render_ammo_red_num(t_core *core)
+bool	render_ammo_red_num(t_core *core, t_img *bg)
 {
 	char	*num;
 
@@ -26,23 +25,23 @@ bool	render_ammo_red_num(t_core *core)
 		return (false);
 	if (ft_strlen(num) == 1)
 	{
-		partial_copy_img(core->hud_img->ammo, core->hud_img->hud, 45, 40);
+		partial_copy_img(core->hud_img->ammo, bg, 45, 40);
 		hud_render_number(core->hud_img->ammo, core, num, 45);
 	}
 	else if (ft_strlen(num) == 2)
 	{
-		partial_copy_img(core->hud_img->ammo, core->hud_img->hud, 30, 40);
+		partial_copy_img(core->hud_img->ammo, bg, 30, 40);
 		hud_render_number(core->hud_img->ammo, core, num, 30);
 	}
 	else
 	{
-		partial_copy_img(core->hud_img->ammo, core->hud_img->hud, 5, 40);
+		partial_copy_img(core->hud_img->ammo, bg, 5, 40);
 		hud_render_number(core->hud_img->ammo, core, num, 5);
 	}
 	return (true);
 }
 
-bool	render_health_red_num(t_core *core)
+bool	render_health_red_num(t_core *core, t_img *bg)
 {
 	char	*num;
 
@@ -53,24 +52,24 @@ bool	render_health_red_num(t_core *core)
 			return (false);
 		if (ft_strlen(num) == 1)
 		{
-			partial_copy_img(core->hud_img->life, core->hud_img->hud, 300, 40);
+			partial_copy_img(core->hud_img->life, bg, 300, 40);
 			hud_render_percent(core->hud_img->life, core, num, 300);
 		}
 		else if (ft_strlen(num) == 2)
 		{
-			partial_copy_img(core->hud_img->life, core->hud_img->hud, 270, 40);
+			partial_copy_img(core->hud_img->life, bg, 270, 40);
 			hud_render_percent(core->hud_img->life, core, num, 270);
 		}
 		else
 		{
-			partial_copy_img(core->hud_img->life, core->hud_img->hud, 250, 40);
+			partial_copy_img(core->hud_img->life, bg, 250, 40);
 			hud_render_percent(core->hud_img->life, core, num, 250);
 		}
 	}
 	return (true);
 }
 
-bool	render_armor_red_num(t_core *core)
+bool	render_armor_red_num(t_core *core, t_img *bg)
 {
 	char	*num;
 
@@ -81,30 +80,30 @@ bool	render_armor_red_num(t_core *core)
 			return (false);
 		if (ft_strlen(num) == 1)
 		{
-			partial_copy_img(core->hud_img->armor, core->hud_img->hud, 945, 40);
+			partial_copy_img(core->hud_img->armor, bg, 945, 40);
 			hud_render_percent(core->hud_img->armor, core, num, 945);
 		}
 		else if (ft_strlen(num) == 2)
 		{
-			partial_copy_img(core->hud_img->armor, core->hud_img->hud, 930, 40);
+			partial_copy_img(core->hud_img->armor, bg, 930, 40);
 			hud_render_percent(core->hud_img->armor, core, num, 930);
 		}
 		else
 		{
-			partial_copy_img(core->hud_img->armor, core->hud_img->hud, 905, 40);
+			partial_copy_img(core->hud_img->armor, bg, 905, 40);
 			hud_render_percent(core->hud_img->armor, core, num, 905);
 		}
 	}
 	return (true);
 }
 
-bool	render_numbers(t_core *core)
+bool	render_numbers(t_core *core, t_img	*bg)
 {
-	if (!render_health_red_num(core))
+	if (!render_health_red_num(core, bg))
 		return (false);
-	if (!render_armor_red_num(core))
+	if (!render_armor_red_num(core, bg))
 		return (false);
-	if (!render_ammo_red_num(core))
+	if (!render_ammo_red_num(core, bg))
 		return (false);
 	return (true);
 }
