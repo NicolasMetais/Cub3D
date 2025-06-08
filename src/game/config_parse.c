@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 13:43:55 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/29 22:41:33 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/08 18:26:19 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,11 @@ bool	store_img(char **line, t_core *core)
 	}
 	if (!hashmap_insert(&core->hashmap, line[0], (void *)img, core))
 	{
+		if (img && img->img)
+			mlx_destroy_image(core->mlx, img->img);
 		ft_putendl_fd("Error: Failed to insert image into hashmap", 2);
 		return (false);
 	}
-	free_gc(core->gc, "original img");
 	return (true);
 }
 
@@ -69,10 +70,17 @@ bool	extract_img_data(t_core *core)
 		return (false);
 	while (data[++i])
 	{
-		if (data[i][0] == '#' || !data[i][0])
+		if (!data[i][0] || data[i][0] == '#')
 			continue ;
 		tmp = ft_split(data[i], '\t');
-		if (!tmp || !store_img(tmp, core))
+		if (!tmp)
+			return (ft_free_tab(tmp), false);
+		if (ft_strlen_tab(tmp) < 3)
+		{
+			ft_free_tab(tmp);
+			continue ;
+		}
+		if (!store_img(tmp, core))
 			return (ft_free_tab(tmp), false);
 		ft_free_tab(tmp);
 	}

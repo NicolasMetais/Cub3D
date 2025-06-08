@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 21:25:17 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/06 16:18:32 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/08 19:11:09 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ static void	rewrite_options(t_core *core, const int *y, t_img *bg)
 	options = (t_img *)hashmap_get(&core->hashmap, "Menu_options");
 	maps = (t_img *)hashmap_get(&core->hashmap, "Menu_maps");
 	quit = (t_img *)hashmap_get(&core->hashmap, "Menu_quit");
+	if (!play || !options || !maps ||!quit)
+		return ;
 	transparency(bg, play, (bg->width / 2) - 100, y[0]);
 	transparency(bg, options, (bg->width / 2) - 100, y[1]);
 	transparency(bg, maps, (bg->width / 2) - 100, y[2]);
@@ -40,6 +42,8 @@ void	skulls_render(t_core *core, const int *y)
 	if (core->state == MAPS_MENU)
 	{
 		skulls = hashmap_get(&core->hashmap_sprites, "skulls");
+		if (!skulls)
+			return ;
 		transparency(core->menu_img->bg, skulls->img_list->image,
 			x - (skulls->img_list->image->width + 10),
 			y[core->menu_option - core->scroll_offset]);
@@ -47,6 +51,8 @@ void	skulls_render(t_core *core, const int *y)
 	else if (core->state == START_MENU)
 	{
 		skulls = hashmap_get(&core->hashmap_sprites, "skulls");
+		if (!skulls)
+			return ;
 		transparency(core->menu_img->bg, skulls->img_list->image,
 			x - (skulls->img_list->image->width + 10),
 			y[core->menu_option]);

@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 01:54:17 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/06 23:06:32 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/08 19:10:38 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -402,11 +402,11 @@ void			pause_options_hover(int x, int y, t_core *core);
 
 //Slider Update
 void			update_slider(t_core *core, const int *y, t_img *bg);
-void			slider(t_core *core, t_pos pos, int x, t_img *bg);
+bool			slider(t_core *core, t_pos pos, int x, t_img *bg);
 
 
 //Percent with number render
-void	render_percent(t_core *core, char *percent, int render, t_img *bg);
+bool			render_percent(t_core *core, char *percent, int render, t_img *bg);
 
 
 //Destroy X11 memory img
@@ -426,7 +426,7 @@ void			move_player(t_core *core, t_move move, double delta_time);
 //Temp_functions
 void			move_player(t_core *core, t_move move, double delta_time);
 void			init_tmp(t_core *core);
-void    		init_map_textures(t_core *core);
+bool    		init_map_textures(t_core *core);
 
 //Layers printing
 void    print_background(t_core *core);
@@ -460,7 +460,7 @@ bool			render_numbers(t_core *core, t_img	*bg);
 bool			render_weapon_menu(t_core *core);
 bool			render_ammo(t_core *core, t_img *bg);
 bool			head_init(t_core *core);
-void			hud_render_percent(t_img *buffer, t_core *core,
+bool			hud_render_percent(t_img *buffer, t_core *core,
 					char *percent, int render);
 void			hud_render_number(t_img *buffer, t_core *core,
 					char *percent, int render);

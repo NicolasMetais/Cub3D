@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:56:58 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/26 19:02:40 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/08 15:30:14 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,18 @@ bool	load_valid_datas(t_core *core, t_tmp *stock)
 		return (false);
 	core->colors = stock->tmp_colors;
 	if (!add_to_gc(&core->gc, core->colors, STRUCT, "colors_struct"))
+		return (false);
+	if (!add_to_gc(&core->gc, core->textures->north, STRING, "text"))
+		return (false);
+	if (!add_to_gc(&core->gc, core->textures->east, STRING, "text"))
+		return (false);
+	if (!add_to_gc(&core->gc, core->textures->west, STRING, "text"))
+		return (false);
+	if (!add_to_gc(&core->gc, core->textures->south, STRING, "text"))
+		return (false);
+	if (!add_to_gc(&core->gc, core->textures->ceiling_color, STRING, "text"))
+		return (false);
+	if (!add_to_gc(&core->gc, core->textures->floor_color, STRING, "text"))
 		return (false);
 	free(stock);
 	return (true);

@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:33:47 by tvacher           #+#    #+#             */
-/*   Updated: 2025/06/02 17:54:35 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/08 19:02:14 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,19 @@
 // 	return (img);
 // }
 
-void    init_map_textures(t_core *core)
+bool    init_map_textures(t_core *core)
 {
     core->textures->path_sky = "/tmp_assets/SKY3.xpm";
-    core->textures->sky = (t_img *)hashmap_get(&core->hashmap, "Sky");
-    core->textures->tmp_north = (t_img *)hashmap_get(&core->hashmap, "Wall_north");
-    core->textures->tmp_south = (t_img *)hashmap_get(&core->hashmap, "Wall_south");
-    core->textures->tmp_east = (t_img *)hashmap_get(&core->hashmap, "Wall_east");
-    core->textures->tmp_west = (t_img *)hashmap_get(&core->hashmap, "Wall_west");
+    core->textures->sky = hashmap_get(&core->hashmap, "Sky");
+    core->textures->tmp_north = hashmap_get(&core->hashmap, "Wall_north");
+    core->textures->tmp_south = hashmap_get(&core->hashmap, "Wall_south");
+    core->textures->tmp_east = hashmap_get(&core->hashmap, "Wall_east");
+    core->textures->tmp_west = hashmap_get(&core->hashmap, "Wall_west");
+    if (!core->textures->sky || !core->textures->tmp_north
+        || !core->textures->tmp_south|| !core->textures->tmp_east
+        || !core->textures->tmp_west)
+        return (false);
+    return (true);
 }
 
 void    rays_updates(t_core *core)

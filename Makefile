@@ -55,6 +55,7 @@ HUD	=	src/game/hud/render_hud.c \
 
 WEAPONS	=	src/game/weapons/render_weapons.c \
 			src/game/weapons/weapons_init.c \
+			src/game/weapons/weapons_init2.c \
 			src/game/weapons/weapons_fired.c \
 			src/game/weapons/weapons_animations.c \
 			src/game/weapons/render_impacts.c \

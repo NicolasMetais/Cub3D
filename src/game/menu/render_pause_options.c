@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 19:49:55 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/06 20:15:27 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/08 19:11:34 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,15 @@ static void	rewrite_options(t_core *core, const int *y, t_img *bg)
 	char		*percent;
 
 	option1 = (t_img *)hashmap_get(&core->hashmap, "Option_fov");
+	if (!option1)
+		return ;
 	transparency(bg, option1, (bg->width / 3), y[0] + 10);
 	update_slider(core, y, bg);
 	percent = ft_itoa(core->fov);
 	if (!percent)
 		return ;
-	render_percent(core, percent, 790, bg);
+	if (!render_percent(core, percent, 790, bg))
+		return ;
 }
 
 static void	option_menu_init(t_core *core)
@@ -78,6 +81,8 @@ bool	render_pause_options(t_core *core)
 	option_menu_init(core);
 	copy_img(core->hud_img->pause_buffer, core->hud_img->clean_pause_buffer);
 	option = (t_img *)hashmap_get(&core->hashmap, "Option_title");
+	if (!option)
+		return (false);
 	transparency(core->hud_img->pause_buffer, option, 640, 260);
 	rewrite_options(core, core->y_pos, core->hud_img->pause_buffer);
 	mlx_put_image_to_window(core->mlx, core->win, core->hud_img->pause_buffer->img,

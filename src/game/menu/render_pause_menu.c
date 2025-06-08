@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 16:00:31 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/06 18:26:46 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/08 18:58:17 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ static void	rewrite_options(t_core *core, const int *y, t_img *bg)
 	conti = (t_img *)hashmap_get(&core->hashmap, "Pause_continue");
 	options = (t_img *)hashmap_get(&core->hashmap, "Menu_options");
 	quit = (t_img *)hashmap_get(&core->hashmap, "Menu_quit");
+	if (!conti || !options || !quit)
+		return ;
 	transparency(bg, conti, (bg->width / 2) - 100, y[0]);
 	transparency(bg, options, (bg->width / 2) - 100, y[1]);
 	transparency(bg, quit, (bg->width / 2) - 100, y[2]);
@@ -43,6 +45,8 @@ void	skulls_render_pause(t_core *core, const int *y)
 
 	x = (core->hud_img->pause_buffer->width / 2) - 100;
 	skulls = hashmap_get(&core->hashmap_sprites, "skulls");
+	if (!skulls)
+		return ;
 	transparency(core->hud_img->pause_buffer, skulls->img_list->image,
 		x - (skulls->img_list->image->width + 10),
 		y[core->menu_option]);
@@ -58,6 +62,8 @@ bool	render_pause_menu(t_core *core)
 	start_menu_init(core);
 	copy_img(core->hud_img->pause_buffer, core->hud_img->clean_pause_buffer);
 	pause = (t_img *)hashmap_get(&core->hashmap, "Pause_menu");
+	if (!pause)
+		return (false);
 	transparency(core->hud_img->pause_buffer, pause, 640, 260);
 	rewrite_options(core, core->y_pos, core->hud_img->pause_buffer);
 	skulls_render_pause(core, core->y_pos);

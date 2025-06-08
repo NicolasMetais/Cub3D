@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 17:55:32 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/06 18:25:38 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/08 19:20:05 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ bool	hud_init(t_core *core)
 	core->hud_img->clean_hud = (t_img *)hashmap_get(&core->hashmap, "hud");
 	core->hud_img->hud = (t_img *)hashmap_get(&core->hashmap, "hud");
 	arms = (t_img *)hashmap_get(&core->hashmap, "arms");
+	if (!core->hud_img->clean_hud || !core->hud_img->hud || !arms)
+		return (false);
 	transparency(core->hud_img->hud, arms, 520, 0);
 	if (!hud_buffers(core))
 		return (false);
@@ -87,7 +89,8 @@ bool	hud_init(t_core *core)
 
 bool	more_buffers(t_core *core)
 {
-	weapons_init(core->player->weapon, core);
+	if (!weapons_init(core->player->weapon, core))
+		return (false);
 	core->weapon_buffer = load_buffer(core->weapon_buffer, 880, 804, core);
 	if (!core->weapon_buffer)
 		return (false);
@@ -116,7 +119,8 @@ bool	game_init(t_core *core)
 		return (false);
 	if (!head_init(core))
 		return (false);
-	init_map_textures(core);
+	if (!init_map_textures(core))
+		return (false);
 	if (!more_buffers(core))
 		return (false);
 	mlx_clear_window(core->mlx, core->win);

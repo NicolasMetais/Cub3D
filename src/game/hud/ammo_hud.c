@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 15:51:54 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/06 18:14:31 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/08 19:20:53 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ bool	write_max_mun(t_core *core, int x, int y, char *max_mun)
 		if (!file_id)
 			return (false);
 		number = (t_img *)hashmap_get(&core->hashmap, file_id);
+		if (!number)
+			return (false);
 		free(file_id);
 		transparency(core->hud_img->hud, number, x, y);
 		x -= 20;
@@ -67,6 +69,8 @@ bool	write_ammo_type(t_core *core, int y, int ammo_type, char *max_mun)
 		if (!file_id)
 			return (free(num), false);
 		number = (t_img *)hashmap_get(&core->hashmap, file_id);
+		if (!number)
+			return (false);
 		free(file_id);
 		transparency(get_ammo_img(core, ammo_type), number, x, 0);
 		x -= number->width;

@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 14:38:17 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/02 19:21:53 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/08 19:11:48 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void	render_head(t_core *core)
 	if (core->player->health <= 0)
 	{
 		dead = (t_img *)hashmap_get(&core->hashmap, "STFDEAD0");
+		if (!dead)
+			return ;
 		transparency(core->hud_img->hud, dead, 740, 7);
 		return ;
 	}
@@ -33,6 +35,8 @@ void	render_head(t_core *core)
 		selec = hashmap_get(&core->hashmap_sprites, "tired");
 	else
 		selec = hashmap_get(&core->hashmap_sprites, "neutral");
+	if (!selec)
+		return ;
 	if (selec && update_sprite_random(selec))
 	{
 		transparency(core->hud_img->hud, selec->img_list->image, 740, 7);

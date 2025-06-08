@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 02:02:15 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/29 18:47:04 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/08 18:03:15 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,6 @@ bool	window_init(t_core *core)
 	if (!core->mlx)
 		return (false);
 	if (!add_to_gc(&core->gc, core->mlx, STRUCT, "mlx"))
-		return (false);
-	core->win = mlx_new_window(core->mlx, S_LENGHT, S_HEIGHT, "Cub3D");
-	if (!core->win)
 		return (false);
 	return (true);
 }

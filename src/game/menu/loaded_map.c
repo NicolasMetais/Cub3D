@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 17:22:34 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/02 21:13:20 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/08 18:55:20 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ bool	loaded_map(t_img *bg, t_core *core)
 	t_img	*loaded_map;
 
 	loaded_map = (t_img *)hashmap_get(&core->hashmap, "Menu_loaded_map");
+	if (!loaded_map)
+		return (false);
 	transparency(bg, loaded_map, 1090, 300);
 	transparency(bg, core->menu_img->loaded_map, 1220, 400);
 	if (!draw_minimap(core))

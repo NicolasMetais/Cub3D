@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 20:18:16 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/06 23:04:35 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/08 19:10:50 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,9 @@ void	pause_options_hover(int x, int y, t_core *core)
 			}
 		}
 		if (core->isclicked)
-			slider(core, pos, x, core->hud_img->pause_buffer);
+		{
+			if (!slider(core, pos, x, core->hud_img->pause_buffer))
+				return ;
+		}
 	}
 }

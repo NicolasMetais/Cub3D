@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 19:09:05 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/06 12:21:40 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/08 18:24:49 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ bool	load_assets(t_core *core, char **data)
 		line = ft_split(data[i], '\t');
 		if (!line)
 			return (ft_free_tab(line), false);
-		if (line[3])
+		if (ft_strlen_tab(line) > 2 && line[3])
 		{
 			tmp = ft_split(line[3], ':');
 			if (!tmp)

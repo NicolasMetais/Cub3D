@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 18:50:31 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/27 16:22:34 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/08 15:00:31 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ bool	parse_map(t_tmp *stock)
 	{
 		ft_putendl_fd(
 			"Error \n Invalid map. i shoudn't be able to walk in the void", 2);
-		return (false);
+		return (ft_free_tab(dup_maps), false);
 	}
 	ft_free_tab(dup_maps);
 	return (true);

@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 16:41:57 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/06 16:27:38 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/08 19:23:11 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ static t_projectile_node	*new_node(t_core *core,
 			new->sprite = hashmap_get(&core->hashmap_sprites, "rocket");
 	else if (core->player->curr_wpn == 7)
 			new->sprite = hashmap_get(&core->hashmap_sprites, "BFG9000_proj");
+	if (!new->sprite)
+		return (NULL);
 	new->activ_img = new->sprite->img_list;
 	gettimeofday(&new->timer, NULL);
 	new->next = NULL;

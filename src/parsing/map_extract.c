@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 02:30:20 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/26 14:42:56 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/08 17:56:30 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ bool	file_extract(char *file_name, char ***tab, t_core *core)
 	i = -1;
 	fd = open(file_name, O_RDONLY);
 	if (fd == -1)
-		return (perror("cub3D: file_extract"), false);
+		return (ft_putendl_fd("Error \n Can't open config.cfg", 2), false);
 	*tab = ft_calloc(sizeof(char *), 16);
 	if (!*tab)
 		return (close(fd), false);

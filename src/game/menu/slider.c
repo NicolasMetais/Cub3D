@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 14:39:58 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/31 19:11:11 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/08 18:59:07 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ bool	slider_constructor(t_core *core, int width)
 	corner_left = (t_img *)hashmap_get(&core->hashmap, "Slider_left");
 	slider = (t_img *)hashmap_get(&core->hashmap, "Slider");
 	corner_right = (t_img *)hashmap_get(&core->hashmap, "Slider_right");
+	if (!corner_left || !corner_right || !slider)
+		return (false);
 	width = corner_left->width * 2 + slider->width * SLIDER_SIZE;
 	height = slider->height;
 	menu->slider_bar->img = mlx_new_image(core->mlx, width, height);
