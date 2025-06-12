@@ -24,7 +24,8 @@ char	*ft_strdup_error(const char *s, int *count)
 	while (s[++i])
 	{
 		if (s[i] != '0' && s[i] != '1' && s[i] != 'N' && s[i] != 'S'
-			&& s[i] != 'E' && s[i] != 'W' && s[i] != '\t' && s[i] != ' ')
+			&& s[i] != 'E' && s[i] != 'W' && s[i] != '\t' && s[i] != ' '
+			&& s[i] != '2')
 			return (free(cpy), ft_putendl_fd(
 					"Error \n Invalid character in the map", 2), NULL);
 		if (s[i] == 'N' || s[i] == 'S' || s[i] == 'E' || s[i] == 'W')

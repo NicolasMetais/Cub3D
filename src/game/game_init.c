@@ -58,7 +58,8 @@ bool	game_init(t_core *core)
 			&core->game_img->bpp, &core->game_img->line_len,
 			&core->game_img->endian);
 	core->game_img->width = S_LENGHT;
-	core->game_img->height = S_HEIGHT;
+	core->game_img->height = S_HEIGHT -160;
+	core->scroll_ingame = S_LENGHT / 2;
 	core->redraw = true;
 	hashmap_insert(&core->hashmap, "game_img", (void *)core->game_img, core);
 	if (!player_init(core))

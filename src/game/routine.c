@@ -78,6 +78,6 @@ int	routine(void *param)
 		render_hud(core);
 		render_head(core);
 	}
-	core->redraw = false;
+	//core->redraw = false;
 	return (0);
 }

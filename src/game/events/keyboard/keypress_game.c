@@ -14,22 +14,32 @@
 
 void	on_keypress_game(int key, t_core *core)
 {
-	if (key == 65361 || key == 'a')
+	if (key == 65361)
 		core->player->key_left = true;
-	else if (key == 65363 || key == 'd')
+	else if (key == 'a')
+		core->player->straf_left = true;
+	else if (key == 65363)
 		core->player->key_right = true;
+	else if (key == 'd')
+		core->player->straf_right = true;
 	else if (key == 65362 || key == 'w')
 		core->player->key_up = true;
 	else if (key == 65364 || key == 's')
 		core->player->key_down = true;
+	else if (key == 'e')
+		handle_door(core);
 }
 
 void	on_keyrelease_game(int key, t_core *core)
 {
-	if (key == 65361 || key == 'a')
+	if (key == 65361)
 		core->player->key_left = false;
-	else if (key == 65363 || key == 'd')
+	else if (key == 'a')
+		core->player->straf_left = false;
+	else if (key == 65363)
 		core->player->key_right = false;
+	else if (key == 'd')
+		core->player->straf_right = false;
 	else if (key == 65362 || key == 'w')
 		core->player->key_up = false;
 	else if (key == 65364 || key == 's')
@@ -46,4 +56,8 @@ void	game_keypress(t_core *core, double delta_time)
 		move_player(core, LEFT, delta_time);
 	if (core->player->key_right)
 		move_player(core, RIGHT, delta_time);
+	if (core->player->straf_right)
+		move_player(core, S_RIGHT, delta_time);
+	if (core->player->straf_left)
+		move_player(core, S_LEFT, delta_time);
 }

@@ -33,6 +33,8 @@ typedef struct s_player
 	bool			key_down;
 	bool			key_left;
 	bool			key_right;
+	bool			straf_right;
+	bool			straf_left;
 	double			speed;
 	double			bobbing_speed;
 	double			delta_time;

@@ -141,11 +141,13 @@ typedef struct s_textures
 	char	*west;
 	char	*east;
 	char	*path_sky;
+	char	*path_door;
 	t_img	*tmp_north;
 	t_img	*tmp_south;
 	t_img	*tmp_west;
 	t_img	*tmp_east;
 	t_img	*sky;
+	t_img	*door;
 	char	*floor_color;
 	char	*ceiling_color;
 }	t_textures;
@@ -172,7 +174,9 @@ typedef enum e_move {
 	UP,
 	DOWN,
 	LEFT,
-	RIGHT
+	RIGHT,
+	S_RIGHT,
+	S_LEFT
 }	t_move;
 
 typedef struct s_tmp_imgdata
@@ -192,7 +196,42 @@ typedef struct s_tmp_3d
     float   line_e;
     float     x;
     float     y;
+    int     start;
+    int     end;
+    int     pixel_index;
+	float	tex_index;
+	float	step;
+	float	ty;
+	float	ty_off;
+	float	tx;
+	float	offset;
+	float 	tex_pos;
+	int		draw_start;
+	int		draw_end;
+
 }	t_tmp_3d;
+
+typedef struct s_open_door
+{
+    float   line_h;
+    float   line_s;
+    float   line_e;
+    float     x;
+    float     y;
+    int     start;
+    int     end;
+    int     pixel_index;
+	float	tex_index;
+	float	step;
+	float	ty;
+	float	ty_off;
+	float	tx;
+	float	offset;
+	float 	tex_pos;
+	int		draw_start;
+	int		draw_end;
+
+}	t_open_door;
 
 //r.. = rays data, m.. = map data, pl.. = player data, dist* = rays lenght;
 
@@ -222,6 +261,12 @@ typedef struct s_tmp_rc
     float   *dist;
     float   *dist2;
     float   *dist3;
+	char	v_wall;
+	char	h_wall;
+	char	hit_wall;
+	char	front_wall;
+	int		front_x;
+	int		front_y;
 	double	hx;
 	double	hy;
 	double	vx;
@@ -236,7 +281,29 @@ typedef struct s_tmp_rc
 	int		py2_sub;
 	int		was_vertical;
 	int		map_size;
+	double	door_x;  //values for opening door
+	double	door_y;
+	float	*door_dist;
+	double	v_door_x;
+	double	v_door_y;
+	float	*v_door_dist;
+	double	h_door_x;
+	double	h_door_y;
+	float	*h_door_dist;
+	int		open_door;
+
 }	t_tmp_rc;
+
+typedef struct s_door_anim
+{
+	int		map_x;
+	int		map_y;
+	long	start;
+	long	elapsed;
+	int		frame;
+	int		active;
+	float	corrected_ty;
+}	t_door_anim;
 
 typedef struct s_core
 {
@@ -261,6 +328,7 @@ typedef struct s_core
 	int				x;
 	int				y;
 	int				scroll_offset;
+	int				scroll_ingame;
 	t_img			*game_img;
 	t_player		*player;
 	t_menu_maps		*menu_maps;
@@ -277,6 +345,8 @@ typedef struct s_core
 	t_tmp_rc		*tmp_rc;
 	t_tmp_imgdata	*tmp_imgdata;
 	t_tmp_3d		*tmp_3d;
+	t_door_anim		*door_anim;
+	t_open_door		*open_door;
 	t_move			move;
 }	t_core;
 
@@ -357,31 +427,53 @@ int				routine(void *param);
 
 void			start_game(t_core *core);
 
-//Keypress
+//Keypress and moves
 int				handle_keypress(int key, void *param);
 int				handle_destroy(t_core *core);
 void			move_player(t_core *core, t_move move, double delta_time);
+void			init_new_pos(t_core *core);
+void			handle_right(t_core *core, double move_dist);
+void			handle_left(t_core *core, double move_dist);
+void			mouse_scroll_game(t_core *core, int x, int y);
 
 //Temp_functions
 void			move_player(t_core *core, t_move move, double delta_time);
 void			init_tmp(t_core *core);
-void    		init_map_textures(t_core *core);
+void			init_map_textures(t_core *core);
 
 //Layers printing
-void    print_background(t_core *core);
-void    print_player(t_core *core, int color);
-void    print_rays(t_core *core, int color);
-void    print_3d(t_core *core);
-void    draw_ceiling_floor(t_core *core);
-void    get_rc_data(t_core *core);
-void    rays_updates(t_core *core);
-void    draw_player_line(t_core *core, int color);
+void			print_background(t_core *core);
+void			print_player(t_core *core, int color);
+void			print_rays(t_core *core, int color);
+void			print_3d(t_core *core);
+void			draw_ceiling_floor(t_core *core);
+void			get_rc_data(t_core *core);
+void			rays_updates(t_core *core);
+void			draw_player_line(t_core *core, int color);
 void			move_player(t_core *core, t_move move, double delta_time);
 void			init_tmp(t_core *core);
+void			anim_door(t_core *core);
 
 //Minimap in game
-void	draw_minimap_game(t_core *core);
-void	print_miscellaneous(t_core *core, int color);
+void			draw_minimap_game(t_core *core);
+void			print_miscellaneous(t_core *core, int color);
+int				get_map_tile_x(t_core *core, int x);
+int				get_map_tile_y(t_core *core, int y);
+
+//Raycast
+void			get_rc_data(t_core *core);
+void			get_raycast_data(t_core *core);
+void			loop_tiles_width(t_core *core, int i);
+void			loop_tiles_height(t_core *core, int i);
+void			draw_3d(t_core *core);
+void			get_3d_based_data(t_core *core);
+void			get_draw_start_data(t_core *core);
+void			get_draw_loop_data(t_core *core);
+void			print_3d_render(t_core *core);
+void			print_3d_vertical(t_core *core);
+void			print_3d_horizontal(t_core *core);
+void			handle_door(t_core *core);
+//void			print_anim_door(t_core *core, int i);
 
 // //Layers printing
 // void			print_background(t_core *core, int x, int y, int color);

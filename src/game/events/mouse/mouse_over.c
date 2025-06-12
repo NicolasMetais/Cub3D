@@ -65,6 +65,11 @@ int	mouse_menu_hover(int x, int y, void *param)
 	starting_menu_hover(y, core);
 	options_menu_hover(x, y, core);
 	maps_menu_hover(y, core);
+	if (core->state == GAME)
+	{
+		mlx_mouse_hide(core->mlx, core->win);
+		mouse_scroll_game(core, x, y);
+	}
 	return (0);
 }
 
