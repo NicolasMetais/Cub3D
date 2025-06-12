@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 01:54:17 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/12 20:41:49 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/13 01:12:00 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -415,6 +415,12 @@ void			transparency_scaled(t_img *bg, const t_img *fg,
 					t_pos start, int size);
 bool			is_moving(t_player *player);
 t_img			*get_ammo_img(t_core *core, int type);
+
+//utils de mandatory
+bool	load_img(t_img **img, char *path, t_core *core);
+int		mouse_direction(int x, int y, void *param);
+
+
 
 
 
