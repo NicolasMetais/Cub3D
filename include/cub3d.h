@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 01:54:17 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/08 19:10:38 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/12 18:39:16 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -316,6 +316,14 @@ typedef struct s_core
 	t_move			move;
 }	t_core;
 
+typedef struct s_scale_ctx
+{
+	t_img		*bg;
+	const t_img	*fg;
+	t_pos		start;
+	t_pos		scale;
+}	t_scale_ctx;
+
 //Parsing
 bool			parsing_cub(t_core *core, char *av);
 
@@ -324,6 +332,8 @@ bool			update_sprite(t_sprite *sprite);
 bool			update_sprite_random(t_sprite *sprite);
 bool			update_animation(t_sprite *sprite);
 
+bool			name_generator(int count, char *prefix_name,
+					t_img *image, t_core *core);
 bool			is_empty_line(char *str);
 void			cleanup_split(char **str);
 void			cleanup_game(t_core *core);
@@ -331,8 +341,12 @@ void			copy_img(t_img *dest, t_img *copy);
 void			partial_copy_img(t_img *dest, t_img *copy,
 					int x_start, int y_start);
 t_img			*load_buffer(t_img *image, int x, int y, t_core *core);
-void			transparency_scaled(t_img *bg, const t_img *stickonbg,
-					int start_x, int start_y, int size);
+void			transparency_scaled(t_img *bg, const t_img *fg,
+					t_pos start, int size);
+bool			is_moving(t_player *player);
+t_img			*get_ammo_img(t_core *core, int type);
+
+
 
 //TRANSPARENCY
 void			transparency(t_img *bg, const t_img *stickonbg,
@@ -364,10 +378,6 @@ void			skulls_render_pause(t_core *core, const int *y);
 bool			create_pause_bg(t_core *core);
 bool			render_pause_options(t_core *core);
 
-
-
-
-
 //Init img
 bool			extract_img_data(t_core *core);
 bool			load_assets(t_core *core, char **data);
@@ -397,16 +407,14 @@ int				handle_keyrelease(int key, void *param);
 void			mouse_click_game(t_core *core, int button);
 void			pause_options_hover(int x, int y, t_core *core);
 
-
-
-
 //Slider Update
 void			update_slider(t_core *core, const int *y, t_img *bg);
 bool			slider(t_core *core, t_pos pos, int x, t_img *bg);
 
 
 //Percent with number render
-bool			render_percent(t_core *core, char *percent, int render, t_img *bg);
+bool			render_percent(t_core *core, char *percent,
+					int render, t_img *bg);
 
 
 //Destroy X11 memory img
@@ -464,8 +472,8 @@ bool			hud_render_percent(t_img *buffer, t_core *core,
 					char *percent, int render);
 void			hud_render_number(t_img *buffer, t_core *core,
 					char *percent, int render);
-bool			render_armor_red_num(t_core *core, t_img *bg);
-bool			render_health_red_num(t_core *core, t_img *bg);
+bool			render_armor_red_num(t_core *core, t_img *bg, char *num);
+bool			render_health_red_num(t_core *core, t_img *bg, char *num);
 bool			render_ammo_red_num(t_core *core, t_img *bg);
 
 

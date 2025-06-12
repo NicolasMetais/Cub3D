@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 01:58:43 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/29 17:41:22 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/12 17:27:52 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,15 @@ typedef struct s_tmp
 	int			map_start;
 }	t_tmp;
 
+typedef struct s_parse_map
+{
+	size_t	i;
+	int		j;
+	int		count;
+	char	*cpy;
+	const char *s;
+}	t_parse_map;
+
 //Extension checker
 bool	valid_extension(char *version, char *tocheck);
 
@@ -51,7 +60,6 @@ bool	check_flag_position(t_tmp *stock, char *prefix[7]);
 //Ensure correct RGB & texture character + convert colors in int arrays
 bool	parse_textures_content(t_core *core, t_tmp *stock, void *targets[6]);
 
-
 //Check for wrong char in map and check walls
 bool	parse_map(t_tmp *stock);
 
@@ -63,5 +71,8 @@ void	free_parsing(t_tmp *stock);
 
 //Put all valid datas inside the garbage
 bool	load_valid_datas(t_core *core, t_tmp *stock);
+
+bool	realloc_map(t_tmp *stock, char **dup_maps);
+
 
 #endif

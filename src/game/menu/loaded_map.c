@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 17:22:34 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/08 18:55:20 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/12 17:02:09 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	draw_tile_2(t_img *minimap, int color, int x, int y)
 			put_on_bg(minimap, y + i, x + j, color);
 	}
 }
+
 //minimap du menu, a changer par celle du jeu quand elle sera ok
 bool	draw_minimap(t_core *core)
 {

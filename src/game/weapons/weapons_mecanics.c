@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 10:27:18 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/06 11:56:29 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/12 17:03:11 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,3 @@ bool	shoot_shotgun(t_core *core)
 	}
 	return (true);
 }
-
-

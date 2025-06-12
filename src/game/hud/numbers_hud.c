@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 15:16:14 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/08 18:51:38 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/12 15:54:55 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,10 @@ bool	render_ammo_red_num(t_core *core, t_img *bg)
 	return (true);
 }
 
-bool	render_health_red_num(t_core *core, t_img *bg)
+bool	render_health_red_num(t_core *core, t_img *bg, char *num)
 {
-	char	*num;
-
 	if (core->hud_img->health_render)
 	{
-		num = ft_itoa(core->player->health);
-		if (!num)
-			return (false);
 		if (ft_strlen(num) == 1)
 		{
 			partial_copy_img(core->hud_img->life, bg, 300, 40);
@@ -72,15 +67,10 @@ bool	render_health_red_num(t_core *core, t_img *bg)
 	return (true);
 }
 
-bool	render_armor_red_num(t_core *core, t_img *bg)
+bool	render_armor_red_num(t_core *core, t_img *bg, char *num)
 {
-	char	*num;
-
 	if (core->hud_img->armor_render)
 	{
-		num = ft_itoa(core->player->armor);
-		if (!num)
-			return (false);
 		if (ft_strlen(num) == 1)
 		{
 			partial_copy_img(core->hud_img->armor, bg, 945, 40);
@@ -105,9 +95,17 @@ bool	render_armor_red_num(t_core *core, t_img *bg)
 
 bool	render_numbers(t_core *core, t_img	*bg)
 {
-	if (!render_health_red_num(core, bg))
+	char	*num;
+
+	num = ft_itoa(core->player->health);
+	if (!num)
 		return (false);
-	if (!render_armor_red_num(core, bg))
+	if (!render_health_red_num(core, bg, num))
+		return (false);
+	num = ft_itoa(core->player->armor);
+	if (!num)
+		return (false);
+	if (!render_armor_red_num(core, bg, num))
 		return (false);
 	if (!render_ammo_red_num(core, bg))
 		return (false);

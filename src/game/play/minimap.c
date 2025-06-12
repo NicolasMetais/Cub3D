@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 11:13:56 by tvacher           #+#    #+#             */
-/*   Updated: 2025/05/31 15:30:26 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/12 17:02:27 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ void	print_miscellaneous(t_core *core, int color)
 		j = 0;
 		while (j < core->tmp_rc->map_size + 8)
 		{
-			pixel_index = j * core->game_img->line_len + i * (core->game_img->bpp / 8);
+			pixel_index = j * core->game_img->line_len
+				+ i * (core->game_img->bpp / 8);
 			core->game_img->addr[pixel_index + 0] = (color & 0x0000FF);
 			core->game_img->addr[pixel_index + 1] = (color & 0x00FF00) >> 8;
 			core->game_img->addr[pixel_index + 2] = (color & 0xFF0000) >> 16;

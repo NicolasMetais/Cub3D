@@ -74,6 +74,10 @@ UTILS =	src/utils/copy_img.c \
 		src/utils/transparency.c \
 		src/utils/cleanup_game.c \
 		src/utils/load_buffer.c \
+		src/utils/ismoving.c \
+		src/utils/name_generator.c \
+		src/utils/transparency_scaled.c \
+		src/utils/update_loaded_anim.c \
 
 PARSING =	src/parsing/map_extract.c \
 			src/parsing/data_manager.c \
@@ -82,6 +86,7 @@ PARSING =	src/parsing/map_extract.c \
 			src/parsing/flag_position.c \
 			src/parsing/textures_content.c \
 			src/parsing/parse_map.c \
+			src/parsing/realloc_map.c \
 			src/parsing/flood_fill.c \
 
 GAME =	src/game/play/main_play.c \

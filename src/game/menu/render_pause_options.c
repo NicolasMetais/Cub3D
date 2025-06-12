@@ -6,21 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 19:49:55 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/08 19:11:34 by nmetais          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-#include "cub3d.h"
-
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   render_options_menu.c                              :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/30 01:19:51 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/30 00:00:10 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/12 18:51:10 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +71,7 @@ bool	render_pause_options(t_core *core)
 		return (false);
 	transparency(core->hud_img->pause_buffer, option, 640, 260);
 	rewrite_options(core, core->y_pos, core->hud_img->pause_buffer);
-	mlx_put_image_to_window(core->mlx, core->win, core->hud_img->pause_buffer->img,
-		0, 0);
+	mlx_put_image_to_window(core->mlx, core->win,
+		core->hud_img->pause_buffer->img, 0, 0);
 	return (true);
 }

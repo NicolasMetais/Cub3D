@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 15:51:43 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/08 18:55:08 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/12 16:52:09 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,17 @@ char	*pick_img(int i, t_core *core)
 	return (file_id);
 }
 
+void	coor_update(int i, int *x, int *y)
+{
+	if (i == 4)
+	{
+		*y += 50;
+		*x = 555;
+	}
+	else
+		*x += 59;
+}
+
 bool	render_weapon_menu(t_core *core)
 {
 	t_img	*number;
@@ -51,17 +62,11 @@ bool	render_weapon_menu(t_core *core)
 	{
 		file_id = pick_img(i, core);
 		number = (t_img *)hashmap_get(&core->hashmap, file_id);
+		free(file_id);
 		if (!number)
 			return (false);
-		free(file_id);
 		transparency(core->hud_img->hud, number, x, y);
-		if (i == 4)
-		{
-			y += 50;
-			x = 555;
-		}
-		else
-			x += 59;
+		coor_update(i, &x, &y);
 	}
 	return (true);
 }

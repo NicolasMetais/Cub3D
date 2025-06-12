@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 17:08:30 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/06 19:54:16 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/12 17:02:00 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ int	change_color(int color, float ratio)
 	r = (int)(r * ratio);
 	g = (int)(g * ratio);
 	b = (int)(b * ratio);
-
 	return ((r << 16) | (g << 8) | b);
 }
 
@@ -62,6 +61,8 @@ bool	create_pause_bg(t_core *core)
 	transparency(core->hud_img->clean_pause_buffer, core->hud_img->ammo4,
 		1380, 955);
 	d4rk_img(core->hud_img->clean_pause_buffer, 0.2);
+	core->menu_option = 0;
+	core->state = PAUSE;
 	return (true);
 }
 

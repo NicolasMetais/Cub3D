@@ -6,12 +6,11 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 18:17:25 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/08 19:17:53 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/12 17:03:04 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
 
 bool	weapons_init_fourth(t_weapon weapon[9], t_core *core)
 {
@@ -37,7 +36,8 @@ bool	weapons_init_fourth(t_weapon weapon[9], t_core *core)
 	weapon[6].damage.min = 5;
 	weapon[6].damage.max = 40;
 	weapon[6].owned = true;
-	weapon[7].name = "BFG 9000";
+	if (!weapons_init_five(weapon, core))
+		return (false);
 	return (true);
 }
 

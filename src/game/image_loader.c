@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/02 02:35:31 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/08 18:27:31 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/11 17:52:36 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ bool	load_image(t_img **img, char *path, t_core *core, char *scale)
 	original->img = mlx_xpm_file_to_image(core->mlx, path, &original->width,
 			&original->height);
 	if (!original->img)
-		return (ft_putendl_fd("Error \n Images corrupted", 2), free(original), false);
+		return (ft_putendl_fd("Error \n Corrupted", 2), free(original), false);
 	original->addr = mlx_get_data_addr(original->img, &original->bpp,
 			&original->line_len, &original->endian);
 	*img = gc_malloc(&core->gc, sizeof(t_img), STRUCT, "image du menu");
@@ -67,7 +67,7 @@ bool	load_image(t_img **img, char *path, t_core *core, char *scale)
 	(*img)->img = mlx_new_image(core->mlx, original->width * ft_atoi(scale),
 			original->height * ft_atoi(scale));
 	if (!(*img)->img)
-		return (ft_putendl_fd("Error \n Images corrupted", 2), free(original), false);
+		return (ft_putendl_fd("Error \n Corrupted", 2), free(original), false);
 	(*img)->addr = mlx_get_data_addr((*img)->img, &(*img)->bpp,
 			&(*img)->line_len, &(*img)->endian);
 	resize_img(original, img, ft_atoi(scale));

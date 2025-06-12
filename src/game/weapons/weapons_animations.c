@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 21:00:55 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/06 12:32:20 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/12 17:02:54 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	copy_image(t_img *dst, t_img *src, int offset_y)
 t_node_img	*duplicate_node(t_node_img	*original, t_core *core)
 {
 	t_node_img	*new_node;
+	static int	count = 0;
 
 	new_node = gc_malloc(&core->gc, sizeof(t_node_img), STRUCT, "node sprite");
 	if (!new_node)
@@ -48,7 +49,8 @@ t_node_img	*duplicate_node(t_node_img	*original, t_core *core)
 			&new_node->image->endian);
 	new_node->image->width = original->image->width;
 	new_node->image->height = original->image->height + 200;
-	hashmap_insert(&core->hashmap, "img dup", new_node->image, core);
+	if (!name_generator(count++, "img_dup_", new_node->image, core))
+		return (NULL);
 	fill_img_in_green(new_node->image);
 	copy_image(new_node->image, original->image, 200);
 	return (new_node);

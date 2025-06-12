@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 16:38:24 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/06 20:53:56 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/12 17:01:52 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void	on_keypress_game(int key, t_core *core)
 	else if (key == XK_Down || key == XK_s || key == XK_S)
 		core->player->key_down = true;
 	switch_weapons(key, core);
-
 }
 
 void	on_keyrelease_game(int key, t_core *core)

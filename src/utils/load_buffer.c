@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 19:51:57 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/02 19:58:43 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/11 15:33:29 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 t_img	*load_buffer(t_img *image, int x, int y, t_core *core)
 {
+	static int	count = 0;
+
 	image = gc_malloc(&core->gc, sizeof(t_img),
 			STRUCT, "buffer_img");
 	if (!image)
@@ -24,6 +26,7 @@ t_img	*load_buffer(t_img *image, int x, int y, t_core *core)
 			&image->endian);
 	image->width = x;
 	image->height = y;
-	hashmap_insert(&core->hashmap, "buffer", (t_img *)image, core);
+	if (!name_generator(count++, "buffer_img", image, core))
+		return (NULL);
 	return (image);
 }

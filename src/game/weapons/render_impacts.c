@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 22:41:23 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/06 15:32:23 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/12 18:46:00 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,8 @@ void	draw_impact(t_core *core, t_impact_node *current)
 			- core->tmp_rc->dist3[core->impact.screen_x] <= 1.0f)
 			transparency_scaled(core->game_img,
 				current->activ_img->image,
-				(core->impact.screen_x - core->impact.size / 2),
-				(S_HEIGHT / 2) - (core->impact.size / 2), core->impact.size);
+				(t_pos){(core->impact.screen_x - core->impact.size / 2),
+				(S_HEIGHT / 2) - (core->impact.size / 2)}, core->impact.size);
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 16:41:57 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/08 19:23:11 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/12 18:08:16 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ static t_projectile_node	*new_node(t_core *core,
 	new = malloc(sizeof(t_projectile_node));
 	if (!new)
 		return (NULL);
+	ft_memset(new, 0, sizeof(t_projectile_node));
 	new->x = x;
 	new->y = y;
 	new->dir_x = cosf(angle);
@@ -32,16 +33,13 @@ static t_projectile_node	*new_node(t_core *core,
 	if (core->player->curr_wpn == 6)
 		new->sprite = hashmap_get(&core->hashmap_sprites, "plasma_proj");
 	else if (core->player->curr_wpn == 5)
-			new->sprite = hashmap_get(&core->hashmap_sprites, "rocket");
+		new->sprite = hashmap_get(&core->hashmap_sprites, "rocket");
 	else if (core->player->curr_wpn == 7)
-			new->sprite = hashmap_get(&core->hashmap_sprites, "BFG9000_proj");
+		new->sprite = hashmap_get(&core->hashmap_sprites, "BFG9000_proj");
 	if (!new->sprite)
 		return (NULL);
 	new->activ_img = new->sprite->img_list;
-	gettimeofday(&new->timer, NULL);
-	new->next = NULL;
-	new->prev = NULL;
-	return (new);
+	return (gettimeofday(&new->timer, NULL), new);
 }
 
 bool	new_proj(t_core *core, float x, float y, float angle)

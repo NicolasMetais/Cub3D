@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 18:28:02 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/06 13:16:05 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/12 18:47:13 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,16 +62,17 @@ void	draw_projectile(t_core *core, t_projectile_node *proj, float angle_diff)
 	float	dist;
 	float	corr;
 	float	size;
-	int		screen_x;
+	t_pos	pos;
 
 	dist = sqrtf(core->proj.dx * core->proj.dx + core->proj.dy * core->proj.dy);
 	corr = dist * cosf(angle_diff);
 	size = (int)((4 * (S_HEIGHT / (2.0f
 						* tanf(core->proj.fov_rad / 2.0f)))) / corr);
-	screen_x = (int)((angle_diff / core->proj.fov_rad + 0.5f)
+	pos.x = (int)((angle_diff / core->proj.fov_rad + 0.5f)
 			* S_LENGHT) - size / 2;
+	pos.y = S_HEIGHT / 2 - size / 2;
 	transparency_scaled(core->game_img, proj->activ_img->image,
-		screen_x, S_HEIGHT / 2 - size / 2, size);
+		pos, size);
 }
 
 void	calculation_proj(t_core *core, t_projectile_node *proj)

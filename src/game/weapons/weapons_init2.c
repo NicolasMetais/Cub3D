@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 19:15:56 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/08 19:17:57 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/11 14:32:22 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ bool	animation_options_init(t_weapon weapon[9], t_core *core)
 	{145, 120}};
 
 	setup_animation_exceptions(weapon);
+	weapon[7].name = "BFG 9000";
 	i = 1;
 	j = 0;
 	while (++i < 8)
