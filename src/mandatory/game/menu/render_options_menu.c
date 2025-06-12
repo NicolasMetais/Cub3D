@@ -6,13 +6,13 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 01:19:51 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/30 00:00:10 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/12 20:26:04 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	skulls_render_options(t_core *core, const int *y)
+/* static void	skulls_render_options(t_core *core, const int *y)
 {
 	int			x;
 	t_sprite	*skulls;
@@ -24,7 +24,7 @@ void	skulls_render_options(t_core *core, const int *y)
 		y[core->menu_option]);
 	mlx_put_image_to_window(core->mlx, core->win, core->menu_img->bg->img,
 		0, 0);
-}
+} */
 
 void	update_slider(t_core *core, const int *y, t_img *bg)
 {
@@ -39,12 +39,15 @@ static void	rewrite_options(t_core *core, const int *y, t_img *bg)
 	char		*percent;
 
 	option1 = (t_img *)hashmap_get(&core->hashmap, "Option_fov");
+	if (!option1)
+		return ;
 	transparency(bg, option1, (bg->width / 3), y[0] + 10);
 	update_slider(core, y, bg);
 	percent = ft_itoa(core->fov);
 	if (!percent)
 		return ;
-	render_percent(core, percent, 790);
+	if (!render_percent(core, percent, 790, bg))
+		return ;
 }
 
 static void	option_menu_init(t_core *core)
@@ -64,6 +67,8 @@ bool	render_options_menu(t_core *core)
 	option_menu_init(core);
 	copy_img(core->menu_img->bg, core->menu_img->bg_clean);
 	option = (t_img *)hashmap_get(&core->hashmap, "Option_title");
+	if (!option)
+		return (false);
 	transparency(core->menu_img->bg, option, 545, 440);
 	rewrite_options(core, core->y_pos, core->menu_img->bg);
 	mlx_put_image_to_window(core->mlx, core->win, core->menu_img->bg->img,

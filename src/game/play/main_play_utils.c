@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:33:47 by tvacher           #+#    #+#             */
-/*   Updated: 2025/06/12 20:06:29 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/12 20:18:58 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ void	handle_door(t_core *core)
 	}
 }
 
-void	init_map_textures(t_core *core)
+bool	init_map_textures(t_core *core)
 {
 	core->door_anim = ft_calloc(1, sizeof(t_door_anim));
 	core->open_door = ft_calloc(1, sizeof(t_open_door));
@@ -120,6 +120,7 @@ void	init_map_textures(t_core *core)
 	"Wall_east");
 	core->textures->tmp_west = (t_img *)hashmap_get(&core->hashmap, \
 	"Wall_west");
+	return (true);
 }
 
 void	rays_updates(t_core *core)

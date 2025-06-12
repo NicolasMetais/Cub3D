@@ -6,24 +6,11 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 15:51:54 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/06 18:14:31 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/12 15:36:30 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-static t_img	*get_ammo_img(t_core *core, int type)
-{
-	if (type == 0)
-		return (core->hud_img->ammo1);
-	if (type == 1)
-		return (core->hud_img->ammo2);
-	if (type == 2)
-		return (core->hud_img->ammo3);
-	if (type == 3)
-		return (core->hud_img->ammo4);
-	return (NULL);
-}
 
 bool	write_max_mun(t_core *core, int x, int y, char *max_mun)
 {
@@ -40,6 +27,8 @@ bool	write_max_mun(t_core *core, int x, int y, char *max_mun)
 		if (!file_id)
 			return (false);
 		number = (t_img *)hashmap_get(&core->hashmap, file_id);
+		if (!number)
+			return (false);
 		free(file_id);
 		transparency(core->hud_img->hud, number, x, y);
 		x -= 20;
@@ -47,30 +36,40 @@ bool	write_max_mun(t_core *core, int x, int y, char *max_mun)
 	return (true);
 }
 
-bool	write_ammo_type(t_core *core, int y, int ammo_type, char *max_mun)
+bool	display_ammo_number(t_core *core, char *num, int ammo_type, int *x)
 {
 	t_img	*number;
-	char	*num;
 	char	*file_id;
 	int		i;
-	int		x;
 
-	x = 40;
-	num = ft_itoa(core->player->ammo[ammo_type]);
-	if (!num)
-		return (false);
 	i = ft_strlen(num);
 	while (--i >= 0)
 	{
 		core->tmp[0] = num[i];
 		file_id = ft_strjoin(core->tmp, "_yellow");
 		if (!file_id)
-			return (free(num), false);
+			return (false);
 		number = (t_img *)hashmap_get(&core->hashmap, file_id);
+		if (!number)
+			return (free(file_id), false);
 		free(file_id);
-		transparency(get_ammo_img(core, ammo_type), number, x, 0);
-		x -= number->width;
+		transparency(get_ammo_img(core, ammo_type), number, *x, 0);
+		*x -= number->width;
 	}
+	return (true);
+}
+
+bool	write_ammo_type(t_core *core, int y, int ammo_type, char *max_mun)
+{
+	char	*num;
+	int		x;
+
+	x = 40;
+	num = ft_itoa(core->player->ammo[ammo_type]);
+	if (!num)
+		return (false);
+	if (!display_ammo_number(core, num, ammo_type, &x))
+		return (free(num), false);
 	if (!write_max_mun(core, x, y, max_mun))
 		return (free(num), false);
 	return (free(num), true);

@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 15:49:25 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/06 20:40:56 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/12 20:19:26 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,29 +42,9 @@ void	calculate_bob(t_core *core, double ampli, double freq)
 		* sin(core->player->bobbing_speed * 2.0 * core->player->bobbing_time);
 }
 
-bool	is_moving(t_player *player)
+bool	game_routine(t_sprite *sprite, t_core *core)
 {
-	if (player->key_down || player->key_up
-		|| player->key_left || player->key_right)
-		return (true);
-	return (false);
-}
-
-//WHOLE GAME ROUTINE
-int	routine(void *param)
-{
-	t_core		*core;
-	t_sprite	*sprite;
-
-	core = (t_core *)param;
-	if (core->state == START_MENU || core->state == OPTIONS_MENU
-		|| core->state == MAPS_MENU)
-	{
-		sprite = hashmap_get(&core->hashmap_sprites, "skulls");
-		if (update_sprite(sprite))
-			skulls_render(core, core->y_pos);
-	}
-	else if (core->state == GAME)
+	if (core->state == GAME)
 	{
 		if (is_moving(core->player))
 			core->player->bobbing_time += core->player->delta_time;
@@ -79,11 +59,35 @@ int	routine(void *param)
 	else if (core->state == PAUSE)
 	{
 		sprite = hashmap_get(&core->hashmap_sprites, "skulls");
+		if (!sprite)
+			return (false);
 		if (core->redraw)
 			render_pause_menu(core);
 		if (update_sprite(sprite))
 			skulls_render_pause(core, core->y_pos);
 	}
-	//core->redraw = false;
+	return (true);
+}
+
+//WHOLE GAME ROUTINE
+int	routine(void *param)
+{
+	t_core		*core;
+	t_sprite	*sprite;
+
+	core = (t_core *)param;
+	sprite = NULL;
+	if (core->state == START_MENU || core->state == OPTIONS_MENU
+		|| core->state == MAPS_MENU)
+	{
+		sprite = hashmap_get(&core->hashmap_sprites, "skulls");
+		if (!sprite)
+			return (false);
+		if (update_sprite(sprite))
+			skulls_render(core, core->y_pos);
+	}
+	if (!game_routine(sprite, core))
+		return (false);
+	core->redraw = false;
 	return (0);
 }

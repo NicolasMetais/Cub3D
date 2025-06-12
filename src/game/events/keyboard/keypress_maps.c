@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 10:45:42 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/06 20:55:39 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/08 17:06:38 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@ bool	map_selector(t_core *core)
 	if (!tmp2)
 		return (false);
 	free(tmp);
-	if (!(ft_strcmp(core->menu_maps[core->menu_option].name,
-				core->loaded_map - 4) == 0) && !parsing_cub(core, tmp2))
+	if (!parsing_cub(core, tmp2))
 	{
 		ft_putendl_fd("loading failed", 2);
 		return (free(tmp2), true);

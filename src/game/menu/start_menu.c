@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 04:04:48 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/30 00:02:22 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/08 19:00:01 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ t_sprite	*create_skull_sprite(t_core *core)
 	t_sprite	*skulls;
 
 	skulls = hashmap_get(&core->hashmap_sprites, "skulls");
+	if (!skulls)
+		return (NULL);
 	skulls->timer = 0;
 	skulls->speed = 2000;
 	return (skulls);
@@ -29,7 +31,11 @@ bool	start_menu(t_core *core)
 	t_img	*logo;
 
 	logo = (t_img *)hashmap_get(&core->hashmap, "Logo");
+	if (!logo)
+		return (false);
 	core->menu_img->skulls = create_skull_sprite(core);
+	if (!core->menu_img->skulls)
+		return (false);
 	transparency(core->menu_img->bg_clean, logo, 544, 260);
 	render_menu(core);
 	return (true);

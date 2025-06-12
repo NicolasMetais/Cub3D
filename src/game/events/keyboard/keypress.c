@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 16:53:24 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/06 23:06:21 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/12 17:01:34 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,6 @@ void	menu_keypress(int key, t_core *core)
 	enter_handler(key, core);
 }
 
-
-
 void	option_menu_keypress(int key, t_core *core)
 {
 /* 	if (key == XK_Up)
@@ -109,8 +107,6 @@ int	handle_keypress(int key, void *param)
 		if (!create_pause_bg(core))
 			return (0);
 		core->redraw = true;
-		core->menu_option = 0;
-		core->state = PAUSE;
 	}
 	if (core->state == PAUSE)
 		pause_menu_keypress(key, core);

@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 17:28:37 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/26 13:26:28 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/08 14:59:05 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ char	*strdup_without_spaces(const char *s)
 	return ((void *)cpy);
 }
 
-bool	extract_textures(char **dest, t_tmp *stock, char *prefix, t_core *core)
+bool	extract_textures(char **dest, t_tmp *stock, char *prefix)
 {
 	int		i;
 	char	*tmp;
@@ -70,7 +70,6 @@ bool	extract_textures(char **dest, t_tmp *stock, char *prefix, t_core *core)
 			*dest = strdup_without_spaces(tmp);
 			if (!*dest)
 				return (false);
-			add_to_gc(&core->gc, *dest, STRING, "textures");
 		}
 	}
 	return (true);
@@ -81,10 +80,11 @@ bool	parse_textures_colors(t_tmp *stock, char *prefix[7], void *targets[6]
 {
 	int		i;
 
+	(void)core;
 	i = -1;
 	while (prefix[++i])
 	{
-		if (!extract_textures(targets[i], stock, prefix[i], core))
+		if (!extract_textures(targets[i], stock, prefix[i]))
 			return (false);
 	}
 	return (true);

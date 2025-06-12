@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 17:55:32 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/12 20:09:28 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/12 20:39:49 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,6 @@ bool	game_init(t_core *core)
 	if (!player_init(core))
 		return (false);
 	if (!hud_init(core))
-		return (false);
-	if (!head_init(core))
 		return (false);
     init_map_textures(core);
 	weapons_init(core->player->weapon, core);

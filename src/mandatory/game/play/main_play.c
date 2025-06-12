@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 13:33:49 by tvacher           #+#    #+#             */
-/*   Updated: 2025/05/31 15:30:07 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/12 20:28:48 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	draw_3d(t_core *core)
 	}
 }
 
-void	start_game(t_core *core)
+bool	start_game(t_core *core)
 {
 	print_background(core);
 	//draw_minimap_game(core);
@@ -37,4 +37,5 @@ void	start_game(t_core *core)
 	//render_weapon(core);
 	mlx_put_image_to_window(core->mlx, core->win, core->game_img->img, 0, 0);
 	core->redraw = false;
+	return (true);
 }

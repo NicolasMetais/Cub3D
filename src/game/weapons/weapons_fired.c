@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 13:18:48 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/06 15:30:55 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/12 21:00:18 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ static t_impact_node	*new_node(t_core *core, float x, float y)
 		new->sprite = hashmap_get(&core->hashmap_sprites, "BFG9000_puff");
 	else
 		new->sprite = hashmap_get(&core->hashmap_sprites, "puff");
+	if (!new->sprite)
+		return (NULL);
 	new->activ_img = new->sprite->img_list;
 	new->frame = 0;
 	gettimeofday(&new->timer, NULL);

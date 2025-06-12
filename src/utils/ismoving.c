@@ -1,24 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render_hud.c                                       :+:      :+:    :+:   */
+/*   ismoving.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/27 15:11:40 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/29 15:31:11 by nmetais          ###   ########.fr       */
+/*   Created: 2025/06/11 20:34:11 by nmetais           #+#    #+#             */
+/*   Updated: 2025/06/12 18:50:34 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-bool	render_hud(t_core *core)
+bool	is_moving(t_player *player)
 {
-	render_numbers(core);
-	render_ammo(core);
-	render_weapon_menu(core);
-	render_head(core);
-	mlx_put_image_to_window(core->mlx, core->win, core->hud_img->hud->img,
-		0, 840);
-	return (true);
+	if (player->key_down || player->key_up
+		|| player->key_left || player->key_right)
+		return (true);
+	return (false);
 }

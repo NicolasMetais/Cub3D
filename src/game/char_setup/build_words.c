@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 15:25:43 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/31 19:11:19 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/08 19:11:28 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	copy_letters(t_img **dest, int start_x, const t_font font, t_img *sheet)
 }
 
 //WRITE ALL LETTER SIDE BY SIDE ON THE RIGH Y AXIX
-void	write_words(t_img **img, t_fonts *fonts, char *word, t_core *core)
+bool	write_words(t_img **img, t_fonts *fonts, char *word, t_core *core)
 {
 	int				i;
 	int				j;
@@ -89,7 +89,8 @@ void	write_words(t_img **img, t_fonts *fonts, char *word, t_core *core)
 
 	px_start = 0;
 	j = 0;
-	init_font(fonts, &selected_font, &selected_sheet, core);
+	if (!init_font(fonts, &selected_font, &selected_sheet, core))
+		return (false);
 	i = -1;
 	while (word[++i])
 	{
@@ -97,6 +98,7 @@ void	write_words(t_img **img, t_fonts *fonts, char *word, t_core *core)
 		copy_letters(img, px_start, selected_font[j], selected_sheet);
 		px_start += selected_font[j].width;
 	}
+	return (true);
 }
 
 //INIT WORD AND CREATE A TMP IMAGE TO WRITE THE WORDS
@@ -124,6 +126,7 @@ bool	build_words(t_core *core, t_img **img, t_font_size size, char *word)
 	(*img)->addr = mlx_get_data_addr((*img)->img, &(*img)->bpp,
 			&(*img)->line_len, &(*img)->endian);
 	fill_img_in_green(*img);
-	write_words(img, core->fonts, word, core);
+	if (!write_words(img, core->fonts, word, core))
+		return (false);
 	return (true);
 }

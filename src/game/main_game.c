@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 15:44:46 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/02 21:06:42 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/08 19:26:00 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,9 @@ bool	img_init(t_core *core)
 	core->menu_img->cursor = hashmap_get(&core->hashmap, "Slider_cursor");
 	core->menu_img->bg = hashmap_get(&core->hashmap, "Menu_bg_activ");
 	core->menu_img->bg_clean = hashmap_get(&core->hashmap, "Menu_bg_clean");
+	if (!core->menu_img->cursor || !core->menu_img->bg
+		|| !core->menu_img->bg_clean)
+		return (false);
 	name = ft_substr(core->loaded_map, 0, ft_strlen(core->loaded_map) - 4);
 	if (!name)
 		return (false);
@@ -71,7 +74,8 @@ bool	menus_init(t_core *core)
 			STRUCT, "minimap");
 	if (!core->menu_img->minimap)
 		return (false);
-	img_init(core);
+	if (!img_init(core))
+		return (false);
 	return (true);
 }
 
@@ -103,6 +107,9 @@ bool	launch_game(t_core *core)
 	if (!create_maps_words(core))
 		return (false);
 	core->fov = 90;
+	core->win = mlx_new_window(core->mlx, S_LENGHT, S_HEIGHT, "Cub3D");
+	if (!core->win)
+		return (false);
 	start_menu(core);
 	mlx_hook(core->win, 2, 1L << 0, &handle_keypress, core);
 	mlx_hook(core->win, 3, 1L << 1, &handle_keyrelease, core);

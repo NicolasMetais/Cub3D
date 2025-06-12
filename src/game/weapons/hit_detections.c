@@ -6,29 +6,37 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 10:51:43 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/06 11:57:19 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/12 19:55:09 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	is_colliding(t_pos pos, t_core *core)
+int	is_colliding(t_pos start, t_pos end, t_core *core, t_pos *collision)
 {
-	int		dx;
-	int		dy;
-	t_pos	test;
+	float	dist;
+	int		steps;
+	float	dx;
+	float	dy;
+	t_pos	norm;
+	int		i;
 
-	dy = -1;
-	while (dy++ <= 1)
+	dist = hypotf(end.x - start.x, end.y - start.y);
+	steps = (int)(dist / 0.1f);
+	dx = (end.x - start.x) / steps;
+	dy = (end.y - start.y) / steps;
+	i = 1;
+	while (i <= steps)
 	{
-		dx = -1;
-		while (dx++ <= 1)
+		norm.x = start.x + dx * i;
+		norm.y = start.y + dy * i;
+		if (iswall(norm, core))
 		{
-			test.x = pos.x + dx;
-			test.y = pos.y + dy;
-			if (iswall(test, core))
-				return (true);
+			if (collision)
+				*collision = norm;
+			return (true);
 		}
+		i++;
 	}
 	return (false);
 }

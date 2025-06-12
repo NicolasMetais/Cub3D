@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 14:39:58 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/31 19:11:11 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/12 16:55:19 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	slider_assembler(t_img *slider_bar, t_img *corner_left,
 
 	i = -1;
 	px_start = 0;
+	fill_img_in_green(slider_bar);
 	while (++i < SLIDER_SIZE + 2)
 	{
 		if (i == 0)
@@ -75,19 +76,19 @@ bool	slider_constructor(t_core *core, int width)
 	corner_left = (t_img *)hashmap_get(&core->hashmap, "Slider_left");
 	slider = (t_img *)hashmap_get(&core->hashmap, "Slider");
 	corner_right = (t_img *)hashmap_get(&core->hashmap, "Slider_right");
+	if (!corner_left || !corner_right || !slider)
+		return (false);
 	width = corner_left->width * 2 + slider->width * SLIDER_SIZE;
 	height = slider->height;
 	menu->slider_bar->img = mlx_new_image(core->mlx, width, height);
-	if (!menu->slider_bar)
+	if (!menu->slider_bar->img)
 		return (false);
 	menu->slider_bar->width = width;
 	menu->slider_bar->height = height;
 	menu->slider_bar->addr = mlx_get_data_addr(menu->slider_bar->img,
 			&menu->slider_bar->bpp, &menu->slider_bar->line_len,
 			&menu->slider_bar->endian);
-	fill_img_in_green(menu->slider_bar);
 	slider_assembler(menu->slider_bar, corner_left, corner_right, slider);
-	hashmap_insert(&core->hashmap, "slider_bar",
-		(void *)menu->slider_bar, core);
+	hashmap_insert(&core->hashmap, "slider_bar", menu->slider_bar, core);
 	return (true);
 }

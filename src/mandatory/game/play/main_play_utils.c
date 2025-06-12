@@ -6,13 +6,13 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:33:47 by tvacher           #+#    #+#             */
-/*   Updated: 2025/05/31 15:16:31 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/12 20:29:02 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	init_map_textures(t_core *core)
+bool	init_map_textures(t_core *core)
 {
 	core->textures->path_sky = "/tmp_assets/SKY3.xpm";
 	core->textures->sky = (t_img *)hashmap_get(&core->hashmap, "Sky");
@@ -24,6 +24,7 @@ void	init_map_textures(t_core *core)
 	"Wall_east");
 	core->textures->tmp_west = (t_img *)hashmap_get(&core->hashmap, \
 	"Wall_west");
+	return (true);
 }
 
 void	rays_updates(t_core *core)

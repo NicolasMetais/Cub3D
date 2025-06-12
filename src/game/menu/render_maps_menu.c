@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/05 19:34:35 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/02 21:13:36 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/08 19:21:30 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void	skulls_render_maps(t_core *core, const int *y)
 	t_sprite	*skulls;
 
 	skulls = hashmap_get(&core->hashmap_sprites, "skulls");
+	if (!skulls)
+		return ;
 	x = (core->menu_img->bg->width / 2) - 100;
 	index_y = core->menu_option - core->scroll_offset;
 	if (index_y >= 0 && index_y < VISIBLE)
@@ -44,6 +46,8 @@ static void	rewrite_options(t_core *core, const int *y, t_img *bg)
 			break ;
 		map_word = (t_img *)hashmap_get(&core->hashmap,
 				core->menu_maps[index].name);
+		if (!map_word)
+			return ;
 		transparency(bg, map_word, (bg->width / 4) + 300,
 			590 + (i++ *MENU_SPACING));
 	}
@@ -67,6 +71,8 @@ bool	render_maps_menu(t_core *core)
 	maps_menu_init(core);
 	copy_img(core->menu_img->bg, core->menu_img->bg_clean);
 	select = (t_img *)hashmap_get(&core->hashmap, "Map_selection");
+	if (!select)
+		return (false);
 	transparency(core->menu_img->bg, select, 370, 440);
 	rewrite_options(core, core->y_pos, core->menu_img->bg);
 	mlx_put_image_to_window(core->mlx, core->win, core->menu_img->bg->img,

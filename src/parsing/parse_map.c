@@ -6,75 +6,60 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 18:50:31 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/27 16:22:34 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/12 20:19:42 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+bool	extend_strdup(t_parse_map *pm)
+{
+	int		c;
+
+	if (pm->s[pm->i] != '0' && pm->s[pm->i] != '1'
+		&& pm->s[pm->i] != 'N' && pm->s[pm->i] != 'S'
+		&& pm->s[pm->i] != 'E' && pm->s[pm->i] != 'W'
+		&& pm->s[pm->i] != '\t' && pm->s[pm->i] != ' ')
+		return (free(pm->cpy), ft_putendl_fd(
+				"Error \n Invalid character in the map", 2), false);
+	if (pm->s[pm->i] == 'N' || pm->s[pm->i] == 'S'
+		|| pm->s[pm->i] == 'E' || pm->s[pm->i] == 'W')
+			(pm->count)++;
+	if (pm->count > 1)
+		return (free(pm->cpy), ft_putendl_fd(
+				"Error \n Too many spawn point", 2), false);
+	if (pm->s[pm->i] == '\t')
+	{
+		c = -1;
+		while (++c < 4)
+			pm->cpy[pm->j++] = ' ';
+	}
+	else
+		pm->cpy[pm->j++] = pm->s[pm->i];
+	return (true);
+}
+
 char	*ft_strdup_error(const char *s, int *count)
 {
-	size_t	i;
-	char	*cpy;
+	t_parse_map	pm;
+	int			tab;
 
-	i = -1;
-	cpy = malloc(ft_strlen(s) * sizeof(char) + 1);
-	if (cpy == NULL)
+	pm.i = -1;
+	pm.s = s;
+	pm.j = 0;
+	pm.count = *count;
+	tab = 0;
+	while (s[++pm.i])
+		if (s[pm.i] == '\t')
+			tab++;
+	pm.cpy = malloc((ft_strlen(s) + (tab * 3) + 1) * sizeof(char));
+	if (pm.cpy == NULL)
 		return (NULL);
-	while (s[++i])
-	{
-		if (s[i] != '0' && s[i] != '1' && s[i] != 'N' && s[i] != 'S'
-			&& s[i] != 'E' && s[i] != 'W' && s[i] != '\t' && s[i] != ' '
-			&& s[i] != '2')
-			return (free(cpy), ft_putendl_fd(
-					"Error \n Invalid character in the map", 2), NULL);
-		if (s[i] == 'N' || s[i] == 'S' || s[i] == 'E' || s[i] == 'W')
-				(*count)++;
-		if (*count > 1)
-			return (free(cpy), ft_putendl_fd(
-					"Error \n Too many spawn point", 2), NULL);
-		cpy[i] = s[i];
-	}
-	cpy[i] = '\0';
-	return ((void *)cpy);
-}
-
-bool	realloc_map_2(t_tmp	*stock, char **dup_maps, int i)
-{
-	int	j;
-	int	size;
-
-	j = -1;
-	stock->tmp_map_content[i] = ft_calloc(stock->width + 1, sizeof(char));
-	if (!stock->tmp_map_content[i])
-		return (false);
-	size = ft_strlen(dup_maps[i]);
-	while (++j < stock->width)
-	{
-		if (j < size)
-			stock->tmp_map_content[i][j] = dup_maps[i][j];
-		else
-			stock->tmp_map_content[i][j] = ' ';
-	}
-	stock->tmp_map_content[i][j] = '\0';
-	return (true);
-}
-
-bool	realloc_map(t_tmp *stock, char **dup_maps)
-{
-	int	i;
-
-	stock->tmp_map_content = malloc(sizeof(char *)
-			* (ft_strlen_tab(dup_maps) + 1));
-	if (!stock->tmp_map_content)
-		return (false);
-	i = -1;
-	while (dup_maps[++i])
-		if (!realloc_map_2(stock, dup_maps, i))
-			return (false);
-	stock->height = i;
-	stock->tmp_map_content[i] = NULL;
-	return (true);
+	pm.i = -1;
+	while (s[++pm.i])
+		extend_strdup(&pm);
+	pm.cpy[pm.j] = '\0';
+	return ((void *)pm.cpy);
 }
 
 char	**dup_map(t_tmp *stock)
@@ -97,7 +82,7 @@ char	**dup_map(t_tmp *stock)
 			stock->width = ft_strlen(stock->tmp_maps[i]);
 		dup_maps[j] = ft_strdup_error(stock->tmp_maps[i++], &count);
 		if (!dup_maps[j++])
-			return (false);
+			return ((ft_free_tab(dup_maps), NULL));
 	}
 	dup_maps[j] = NULL;
 	realloc_map(stock, dup_maps);
@@ -118,7 +103,7 @@ bool	parse_map(t_tmp *stock)
 	{
 		ft_putendl_fd(
 			"Error \n Invalid map. i shoudn't be able to walk in the void", 2);
-		return (false);
+		return (ft_free_tab(dup_maps), false);
 	}
 	ft_free_tab(dup_maps);
 	return (true);

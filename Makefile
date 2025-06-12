@@ -4,7 +4,7 @@ LIB = lib/libft/libft.a
 MLX = lib/minilibx-linux/libmlx.a
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -Ilib/libft/include -Ilib/minilibx-linux -Iinclude -g3 -O3
-SRCS =	$(MAIN)$(EVENTS)$(IMG)$(MENU)$(HUD)$(UTILS)$(PARSING)$(GAME)$(WEAPONS)
+SRCS =	$(MAIN)$(EVENTS)$(IMG)$(MENU)$(UTILS)$(PARSING)$(GAME)$(WEAPONS)
 SRCS_BONUS =	$(MAIN_BONUS)$(EVENTS_BONUS)$(IMG_BONUS)$(MENU_BONUS)$(HUD_BONUS)$(UTILS_BONUS)$(PARSING_BONUS)$(GAME_BONUS)$(WEAPONS_BONUS)
 
 MAIN =	src/mandatory/main.c \
@@ -12,7 +12,6 @@ MAIN =	src/mandatory/main.c \
 		src/mandatory/game/routine.c \
 		src/mandatory/game/maps_names.c \
 		src/mandatory/game/game_init.c \
-		src/mandatory/game/weapons_init.c \
 
 EVENTS = 	src/mandatory/game/events/destroy.c \
 			src/mandatory/game/events/keyboard/keypress_maps.c \
@@ -41,15 +40,6 @@ MENU =	src/mandatory/game/menu/render_menu.c \
 		src/mandatory/game/char_setup/init_char_nodes.c \
 		src/mandatory/game/char_setup/build_words.c \
 		src/mandatory/game/char_setup/build_words_utils.c \
-
-HUD	=	src/mandatory/game/hud/render_hud.c \
-		src/mandatory/game/hud/head_hud.c \
-		src/mandatory/game/hud/numbers_hud.c \
-		src/mandatory/game/hud/ammo_hud.c \
-		src/mandatory/game/hud/weapon_menu_hud.c \
-		src/mandatory/game/hud/head_init.c \
-
-WEAPONS	=	src/mandatory/game/weapons/render_weapons.c \
 
 
 UTILS =	src/mandatory/utils/copy_img.c \
@@ -103,9 +93,6 @@ EVENTS_BONUS = 	src/game/events/destroy.c \
 			src/game/events/mouse/mouse_click.c \
 			src/game/events/mouse/mouse_click_game.c \
 
-
-IMG = 	src/game/image_loader.c \
-
 IMG_BONUS = 	src/game/image_loader.c \
 		src/game/hashmap/hashmap.c \
 		src/game/hashmap/hashmap_del.c \
@@ -133,8 +120,9 @@ HUD_BONUS	=	src/game/hud/render_hud.c \
 		src/game/hud/head_init.c \
 		src/game/hud/draw_numbers.c \
 
-WEAPONS	=	src/game/weapons/render_weapons.c \
+WEAPONS_BONUS	=	src/game/weapons/render_weapons.c \
 			src/game/weapons/weapons_init.c \
+			src/game/weapons/weapons_init2.c \
 			src/game/weapons/weapons_fired.c \
 			src/game/weapons/weapons_animations.c \
 			src/game/weapons/render_impacts.c \
@@ -143,7 +131,10 @@ WEAPONS	=	src/game/weapons/render_weapons.c \
 			src/game/weapons/weapons_projectiles.c \
 			src/game/weapons/render_projectiles.c \
 			src/game/weapons/hit_detections.c \
-WEAPONS_BONUS	=	src/game/weapons/render_weapons.c \
+	
+WEAPONS	=	src/game/weapons/render_weapons.c \
+					src/game/weapons/weapons_init.c \
+					src/game/weapons/weapons_init2.c \
 
 
 UTILS_BONUS =	src/utils/copy_img.c \
@@ -155,6 +146,10 @@ UTILS_BONUS =	src/utils/copy_img.c \
 		src/utils/transparency.c \
 		src/utils/cleanup_game.c \
 		src/utils/load_buffer.c \
+		src/utils/ismoving.c \
+		src/utils/name_generator.c \
+		src/utils/transparency_scaled.c \
+		src/utils/update_loaded_anim.c \
 
 PARSING_BONUS =	src/parsing/map_extract.c \
 			src/parsing/data_manager.c \
@@ -163,6 +158,7 @@ PARSING_BONUS =	src/parsing/map_extract.c \
 			src/parsing/flag_position.c \
 			src/parsing/textures_content.c \
 			src/parsing/parse_map.c \
+			src/parsing/realloc_map.c \
 			src/parsing/flood_fill.c \
 
 GAME_BONUS =	src/game/play/main_play.c \

@@ -6,31 +6,38 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 19:08:06 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/31 19:12:33 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/08 19:20:37 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 //SELECT RIGHT DATAS DEPENDING ON THE STATE GIVEN
-void	init_font(t_fonts *fonts, const t_font **selected_font,
+bool	init_font(t_fonts *fonts, const t_font **selected_font,
 		t_img **selected_sheet, t_core *core)
 {
 	if (fonts->state == SMALL)
 	{
 		*selected_sheet = (t_img *)hashmap_get(&core->hashmap, "Small_sheet");
+		if (!*selected_sheet)
+			return (false);
 		*selected_font = fonts->small;
 	}
 	if (fonts->state == REGULAR)
 	{
 		*selected_sheet = (t_img *)hashmap_get(&core->hashmap, "Regular_sheet");
+		if (!*selected_sheet)
+			return (false);
 		*selected_font = fonts->regular;
 	}
 	if (fonts->state == BIG)
 	{
 		*selected_sheet = (t_img *)hashmap_get(&core->hashmap, "Big_sheet");
+		if (!*selected_sheet)
+			return (false);
 		*selected_font = fonts->big;
 	}
+	return (true);
 }
 
 //FILL MY TMP IMG WITH GREEN (THE COLOR FOR TRANSPARENCY)

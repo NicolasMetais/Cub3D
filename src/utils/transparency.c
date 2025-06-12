@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/28 00:46:55 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/06 22:55:37 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/12 18:29:40 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,33 +50,5 @@ void	transparency(t_img *bg, const t_img *stickonbg,
 			j++;
 		}
 		i++;
-	}
-}
-
-void transparency_scaled(t_img *bg, const t_img *stickonbg, int start_x, int start_y, int size)
-{
-	int		i, j;
-	int		bg_x, bg_y;
-	float	scale_x = (float)stickonbg->width / size;
-	float	scale_y = (float)stickonbg->height / size;
-	int		src_x, src_y;
-
-	for (i = 0; i < size; i++)
-	{
-		for (j = 0; j < size; j++)
-		{
-			bg_y = i + start_y;
-			bg_x = j + start_x;
-			if (bg_x < 0 || bg_x >= bg->width || bg_y < 0 || bg_y >= bg->height)
-				continue;
-			src_x = (int)(j * scale_x);
-			src_y = (int)(i * scale_y);
-			if (src_x < 0 || src_x >= stickonbg->width || src_y < 0 || src_y >= stickonbg->height)
-				continue;
-
-			unsigned int color = get_img_pxl(stickonbg, src_x, src_y);
-			if (color != 0x00FF00)
-				put_on_bg(bg, bg_y, bg_x, color);
-		}
 	}
 }

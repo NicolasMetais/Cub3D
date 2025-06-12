@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 13:46:40 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/26 19:07:07 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/08 15:27:23 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	free_tabs(t_gc *temp)
 	t_int_array		*tab_i;
 	t_float_array	*tab_f;
 
+	i = -1;
 	if (temp->type == TAB_INT)
 	{
 		tab_i = temp->data;
@@ -32,7 +33,6 @@ void	free_tabs(t_gc *temp)
 	if (temp->type == TAB_STRING)
 	{
 		tab_s = temp->data;
-		i = -1;
 		while (tab_s[++i])
 		{
 			if (tab_s[i])

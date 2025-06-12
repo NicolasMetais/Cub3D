@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 17:55:32 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/06 18:25:38 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/12 20:40:35 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ bool	hud_init(t_core *core)
 	core->hud_img->clean_hud = (t_img *)hashmap_get(&core->hashmap, "hud");
 	core->hud_img->hud = (t_img *)hashmap_get(&core->hashmap, "hud");
 	arms = (t_img *)hashmap_get(&core->hashmap, "arms");
+	if (!core->hud_img->clean_hud || !core->hud_img->hud || !arms)
+		return (false);
 	transparency(core->hud_img->hud, arms, 520, 0);
 	if (!hud_buffers(core))
 		return (false);
@@ -87,7 +89,8 @@ bool	hud_init(t_core *core)
 
 bool	more_buffers(t_core *core)
 {
-	weapons_init(core->player->weapon, core);
+	if (!weapons_init(core->player->weapon, core))
+		return (false);
 	core->weapon_buffer = load_buffer(core->weapon_buffer, 880, 804, core);
 	if (!core->weapon_buffer)
 		return (false);
@@ -110,8 +113,6 @@ bool	game_init(t_core *core)
 	core->game_img = load_buffer(core->game_img, S_LENGHT, S_HEIGHT, core);
 	if (!core->game_img)
 		return (false);
-<<<<<<< HEAD
-=======
 	core->game_img->addr = mlx_get_data_addr(core->game_img->img,
 			&core->game_img->bpp, &core->game_img->line_len,
 			&core->game_img->endian);
@@ -120,14 +121,14 @@ bool	game_init(t_core *core)
 	core->scroll_ingame = S_LENGHT / 2;
 	core->redraw = true;
 	hashmap_insert(&core->hashmap, "game_img", (void *)core->game_img, core);
->>>>>>> origin/mandatory
 	if (!player_init(core))
 		return (false);
 	if (!hud_init(core))
 		return (false);
 	if (!head_init(core))
 		return (false);
-	init_map_textures(core);
+	if (!init_map_textures(core))
+		return (false);
 	if (!more_buffers(core))
 		return (false);
 	mlx_clear_window(core->mlx, core->win);
