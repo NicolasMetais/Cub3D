@@ -15,7 +15,7 @@
 void	print_miscellaneous(t_core *core, int color)
 {
 	int	i;
-	int j;
+	int	j;
 	int	pixel_index;
 
 	if (core->map_height > core->map_width)
@@ -28,13 +28,14 @@ void	print_miscellaneous(t_core *core, int color)
 		j = 0;
 		while (j < core->tmp_rc->map_size + 8)
 		{
-			pixel_index = j * core->game_img->line_len + i * (core->game_img->bpp / 8);
+			pixel_index = j * core->game_img->line_len + i * \
+			(core->game_img->bpp / 8);
 			core->game_img->addr[pixel_index + 0] = (color & 0x0000FF);
 			core->game_img->addr[pixel_index + 1] = (color & 0x00FF00) >> 8;
 			core->game_img->addr[pixel_index + 2] = (color & 0xFF0000) >> 16;
 			if (core->game_img->bpp == 32)
 				core->game_img->addr[pixel_index + 3] = 0;
-			j++;			
+			j++;
 		}
 		i++;
 	}
@@ -42,9 +43,9 @@ void	print_miscellaneous(t_core *core, int color)
 
 static void	draw_map_back(t_core *core, int color)
 {
-	int i;
-	int j;
-	int pixel_index;
+	int	i;
+	int	j;
+	int	pixel_index;
 
 	i = 0;
 	while (i < core->tmp_rc->map_size)
@@ -52,13 +53,14 @@ static void	draw_map_back(t_core *core, int color)
 		j = 0;
 		while (j < core->tmp_rc->map_size)
 		{
-			pixel_index = j * core->game_img->line_len + i * (core->game_img->bpp / 8);
+			pixel_index = j * core->game_img->line_len + i * \
+			(core->game_img->bpp / 8);
 			core->game_img->addr[pixel_index + 0] = (color & 0x0000FF);
 			core->game_img->addr[pixel_index + 1] = (color & 0x00FF00) >> 8;
 			core->game_img->addr[pixel_index + 2] = (color & 0xFF0000) >> 16;
 			if (core->game_img->bpp == 32)
 				core->game_img->addr[pixel_index + 3] = 0;
-			j++;			
+			j++;
 		}
 		i++;
 	}
@@ -67,8 +69,8 @@ static void	draw_map_back(t_core *core, int color)
 static void	draw_tile(t_core *core, int x, int y, int color)
 {
 	int	i;
-	int j;
-	int pixel_index;
+	int	j;
+	int	pixel_index;
 
 	j = 0;
 	while (j < 7)
@@ -78,10 +80,12 @@ static void	draw_tile(t_core *core, int x, int y, int color)
 		{
 			if (x < 32 * 8 && y < 32 * 8)
 			{
-				pixel_index = (y + j) * core->game_img->line_len + (x + i) * (core->game_img->bpp / 8);
+				pixel_index = (y + j) * core->game_img->line_len + (x + i) * \
+				(core->game_img->bpp / 8);
 				core->game_img->addr[pixel_index + 0] = (color & 0x0000FF);
 				core->game_img->addr[pixel_index + 1] = (color & 0x00FF00) >> 8;
-				core->game_img->addr[pixel_index + 2] = (color & 0xFF0000) >> 16;
+				core->game_img->addr[pixel_index + 2] = \
+				(color & 0xFF0000) >> 16;
 				if (core->game_img->bpp == 32)
 					core->game_img->addr[pixel_index + 3] = 0;
 			}
@@ -106,17 +110,9 @@ void	draw_minimap_game(t_core *core)
 		x = 0;
 		while (x < core->map_width)
 		{
-			tile_x = x * 8 - core->tmp_rc->pl_x + core->tmp_rc->map_size / 2;
-			tile_y = y * 8 - core->tmp_rc->pl_y + core->tmp_rc->map_size / 2;
-			if (tile_x < 0)
-				tile_x = 0;
-			if (tile_x > 32 * 8)
-				tile_x = 32 * 8;
-			if (tile_y < 0)
-				tile_y = 0;
-			if (tile_y > 32 * 8)
-				tile_y = 32 * 8;
-			if (core->map[y][x] == '1')
+			tile_x = get_map_tile_x(core, x);
+			tile_y = get_map_tile_y(core, y);
+			if (core->map[y][x] == '1' || core->map[y][x] == '2')
 				draw_tile(core, tile_x, tile_y, 0xFFFFFF);
 			else if (core->map[y][x] != ' ' && core->map[y][x] != 9)
 				draw_tile(core, tile_x, tile_y, 0x000000);

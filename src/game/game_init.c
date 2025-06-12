@@ -110,6 +110,17 @@ bool	game_init(t_core *core)
 	core->game_img = load_buffer(core->game_img, S_LENGHT, S_HEIGHT, core);
 	if (!core->game_img)
 		return (false);
+<<<<<<< HEAD
+=======
+	core->game_img->addr = mlx_get_data_addr(core->game_img->img,
+			&core->game_img->bpp, &core->game_img->line_len,
+			&core->game_img->endian);
+	core->game_img->width = S_LENGHT;
+	core->game_img->height = S_HEIGHT -160;
+	core->scroll_ingame = S_LENGHT / 2;
+	core->redraw = true;
+	hashmap_insert(&core->hashmap, "game_img", (void *)core->game_img, core);
+>>>>>>> origin/mandatory
 	if (!player_init(core))
 		return (false);
 	if (!hud_init(core))

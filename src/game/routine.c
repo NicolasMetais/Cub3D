@@ -84,6 +84,6 @@ int	routine(void *param)
 		if (update_sprite(sprite))
 			skulls_render_pause(core, core->y_pos);
 	}
-	core->redraw = false;
+	//core->redraw = false;
 	return (0);
 }

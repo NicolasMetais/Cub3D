@@ -6,112 +6,27 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 13:33:49 by tvacher           #+#    #+#             */
-/*   Updated: 2025/06/06 13:08:01 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/12 20:08:28 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void    draw_3d(t_core *core)
+void	draw_3d(t_core *core)
 {
-    int     start;
-    int     end;
-    int     pixel_index;
-	float	tex_index;
-	float	step;
-	float	ty;
-	float	ty_off;
-	float	tx;
-
-	ty_off = 0;
-    core->tmp_3d->line_h = (8 * S_HEIGHT) / core->tmp_rc->dist3[core->tmp_rc->r];
-	//step = (float)core->textures->tmp_east->height / (float)core->tmp_3d->line_h;
-    step = (float)core->textures->tmp_east->height / (float)core->tmp_3d->line_h;
-    core->tmp_3d->line_s = (S_HEIGHT - core->tmp_3d->line_h) / 2;
-    core->tmp_3d->line_e = core->tmp_3d->line_s + core->tmp_3d->line_h;
-    if (core->tmp_3d->line_h > S_HEIGHT)
+	get_3d_based_data(core);
+	get_draw_start_data(core);
+	while (core->tmp_3d->y < core->tmp_3d->draw_end)
 	{
-        ty_off = (core->tmp_3d->line_h - S_HEIGHT) / 2;
-        core->tmp_3d->line_e = S_HEIGHT;
-	}
-    core->tmp_3d->y = 0;
-	tx = 0;
-	float offset;
-
-	if (core->tmp_rc->was_vertical)
-    	offset = fmodf(core->tmp_rc->ry, 8);
-	else
-    	offset = fmodf(core->tmp_rc->rx, 8);
-
-	offset = fmodf(offset, 8.0f);
-	if (offset < 0)
-		offset += 8.0f;
-	start = (int)(core->tmp_rc->r * 1);
-    end = (int)((core->tmp_rc->r + 1) * 1);
-	tx = (int)(offset / 8.0f * core->textures->tmp_east->width);
-	if (tx < 0)
-		tx = 0;
-	if (tx >= core->textures->tmp_east->width)
-		tx = core->textures->tmp_east->width - 1;
-	
-	int draw_start = -core->tmp_3d->line_h / 2 + S_HEIGHT / 2;
-	if (draw_start < 0) draw_start = 0;
-	int draw_end = core->tmp_3d->line_h / 2 + S_HEIGHT / 2;
-	if (draw_end >= S_HEIGHT) draw_end = S_HEIGHT - 1;
-
-	float tex_pos = (draw_start - S_HEIGHT / 2 + core->tmp_3d->line_h / 2) * step;
-	core->tmp_3d->y = draw_start;
-	while (core->tmp_3d->y < draw_end)
-	{
-		ty = (int)tex_pos & (core->textures->tmp_east->height - 1);
-		tex_pos += step;
-    	if (end > S_LENGHT)
-			end = S_LENGHT;
-		core->tmp_3d->x = start;
-		if ((int)ty >= core->textures->tmp_east->height)
-			ty = core->textures->tmp_east->height - 1;
-		while (core->tmp_3d->x < end && (core->tmp_3d->x > core->tmp_rc->map_size + 8 || core->tmp_3d->y > core->tmp_rc->map_size + 8) && \
+		get_draw_loop_data(core);
+		while (core->tmp_3d->x < core->tmp_3d->end && \
+		(core->tmp_3d->x > core->tmp_rc->map_size + 8 || \
+		core->tmp_3d->y > core->tmp_rc->map_size + 8) && \
 		core->tmp_3d->y < S_HEIGHT - 160)
 		{
-			pixel_index = core->tmp_3d->y * core->game_img->line_len + core->tmp_3d->x * (core->game_img->bpp / 8);
-			if (core->tmp_3d->y >= core->tmp_3d->line_s && core->tmp_3d->y <= \
-    		core->tmp_3d->line_e && core->tmp_rc->dist2[core->tmp_rc->r] > core->tmp_rc->dist[core->tmp_rc->r] && (core->tmp_3d->y > draw_start && core->tmp_3d->y < draw_end))
-    		{
-        		if (core->tmp_rc->ra > PI)
-        		{
-					tex_index = (int)ty * core->textures->tmp_east->line_len + (int)tx * (core->textures->tmp_east->bpp / 8);
-					core->game_img->addr[pixel_index + 0] = core->textures->tmp_east->addr[(int)tex_index + 0];
-					core->game_img->addr[pixel_index + 1] = core->textures->tmp_east->addr[(int)tex_index + 1];
-					core->game_img->addr[pixel_index + 2] = core->textures->tmp_east->addr[(int)tex_index + 2];
-        		}
-        		else
-        		{
-					tex_index = (int)ty * core->textures->tmp_north->line_len + (int)tx * (core->textures->tmp_north->bpp / 8);
-					core->game_img->addr[pixel_index + 0] = core->textures->tmp_north->addr[(int)tex_index + 0];
-					core->game_img->addr[pixel_index + 1] = core->textures->tmp_north->addr[(int)tex_index + 1];
-					core->game_img->addr[pixel_index + 2] = core->textures->tmp_north->addr[(int)tex_index + 2];
-        		}
-    		}
-   			else if (core->tmp_3d->y >= core->tmp_3d->line_s && core->tmp_3d->y <= \
-            core->tmp_3d->line_e && core->tmp_rc->dist[core->tmp_rc->r] > core->tmp_rc->dist2[core->tmp_rc->r] && (core->tmp_3d->y > draw_start && core->tmp_3d->y < draw_end))
-            {
-                if (core->tmp_rc->ra > PI / 2 && core->tmp_rc->ra < 3 * PI / 2)
-                {
-					tex_index = (int)ty * core->textures->tmp_west->line_len + (int)tx * (core->textures->tmp_west->bpp / 8);
-					core->game_img->addr[pixel_index + 0] = core->textures->tmp_west->addr[(int)tex_index + 0];
-					core->game_img->addr[pixel_index + 1] = core->textures->tmp_west->addr[(int)tex_index + 1];
-					core->game_img->addr[pixel_index + 2] = core->textures->tmp_west->addr[(int)tex_index + 2];
-                }
-                else
-                {
-					tex_index = (int)ty * core->textures->tmp_south->line_len + (int)tx * (core->textures->tmp_south->bpp / 8);
-					core->game_img->addr[pixel_index + 0] = core->textures->tmp_south->addr[(int)tex_index + 0];
-					core->game_img->addr[pixel_index + 1] = core->textures->tmp_south->addr[(int)tex_index + 1];
-					core->game_img->addr[pixel_index + 2] = core->textures->tmp_south->addr[(int)tex_index + 2];
-                }
-            }
-            core->tmp_3d->x += 1;
-        }
+			print_3d_render(core);
+			core->tmp_3d->x++;
+		}
 		core->tmp_3d->y++;
 	}
 }

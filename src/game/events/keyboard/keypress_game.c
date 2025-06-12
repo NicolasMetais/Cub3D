@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 16:38:24 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/06 20:53:56 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/12 20:05:41 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,25 +31,35 @@ void	switch_weapons(int key, t_core *core)
 
 void	on_keypress_game(int key, t_core *core)
 {
-	if (key == XK_Left || key == XK_a || key == XK_A)
+	if (key == 65361)
 		core->player->key_left = true;
-	else if (key == XK_Right || key == XK_d || key == XK_D)
+	else if (key == 'a')
+		core->player->straf_left = true;
+	else if (key == 65363)
 		core->player->key_right = true;
-	else if (key == XK_Up || key == XK_w || key == XK_W)
+	else if (key == 'd')
+		core->player->straf_right = true;
+	else if (key == 65362 || key == 'w')
 		core->player->key_up = true;
 	else if (key == XK_Down || key == XK_s || key == XK_S)
 		core->player->key_down = true;
 	switch_weapons(key, core);
 
+	else if (key == 'e')
+		handle_door(core);
 }
 
 void	on_keyrelease_game(int key, t_core *core)
 {
-	if (key == XK_Left || key == XK_a || key == XK_A)
+	if (key == 65361)
 		core->player->key_left = false;
-	else if (key == XK_Right || key == XK_d || key == XK_D)
+	else if (key == 'a')
+		core->player->straf_left = false;
+	else if (key == 65363)
 		core->player->key_right = false;
-	else if (key == XK_Up || key == XK_w || key == XK_W)
+	else if (key == 'd')
+		core->player->straf_right = false;
+	else if (key == 65362 || key == 'w')
 		core->player->key_up = false;
 	else if (key == XK_Down || key == XK_s || key == XK_S)
 		core->player->key_down = false;
@@ -65,4 +75,8 @@ void	game_keypress(t_core *core, double delta_time)
 		move_player(core, LEFT, delta_time);
 	if (core->player->key_right)
 		move_player(core, RIGHT, delta_time);
+	if (core->player->straf_right)
+		move_player(core, S_RIGHT, delta_time);
+	if (core->player->straf_left)
+		move_player(core, S_LEFT, delta_time);
 }

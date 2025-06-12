@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 16:23:22 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/05 10:48:19 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/12 20:03:24 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ typedef struct s_player
 	bool			key_left;
 	bool			key_right;
 	bool			firing;
+	bool			straf_right;
+	bool			straf_left;
 	double			speed;
 	double			bobbing_speed;
 	double			delta_time;
