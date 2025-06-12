@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 18:12:36 by tvacher           #+#    #+#             */
-/*   Updated: 2025/06/12 21:09:47 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/12 21:12:39 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,6 @@ void	get_raycast_data(t_core *core)
 		draw_3d(core);
 		rays_updates(core);
 	}
-	
 }
 
 void	get_rc_data(t_core *core)

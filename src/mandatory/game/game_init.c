@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 17:55:32 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/12 20:39:49 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/12 22:21:32 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ bool	game_init(t_core *core)
 	core->game_img->width = S_LENGHT;
 	core->game_img->height = S_HEIGHT;
 	core->redraw = true;
-	hashmap_insert(&core->hashmap, "game_img", (void *)core->game_img, core);
+	hashmap_insert(&core->hashmap, "game_img1", (void *)core->game_img, core);
 	if (!player_init(core))
 		return (false);
 	if (!hud_init(core))

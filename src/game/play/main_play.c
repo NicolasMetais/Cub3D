@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 13:33:49 by tvacher           #+#    #+#             */
-/*   Updated: 2025/06/12 20:43:12 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/12 21:13:04 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,6 +217,8 @@ bool    start_game(t_core *core)
     print_background(core);
     draw_minimap_game(core);
 	get_raycast_data(core);
+    impacts(core);
+    render_projectiles(core);
     print_player(core, 0xFFFF00);
     sprite = core->player->weapon[core->player->curr_wpn].anim;
 	if (core->player->weapon[core->player->curr_wpn].lock)

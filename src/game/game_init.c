@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 17:55:32 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/12 20:40:35 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/12 22:23:58 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,17 +110,12 @@ bool	game_init(t_core *core)
 	core->game_img = gc_malloc(&core->gc, sizeof(t_img), STRUCT, "game_img");
 	if (!core->game_img)
 		return (false);
-	core->game_img = load_buffer(core->game_img, S_LENGHT, S_HEIGHT, core);
+	core->game_img = load_buffer(core->game_img, S_LENGHT,
+			S_HEIGHT - 160, core);
 	if (!core->game_img)
 		return (false);
-	core->game_img->addr = mlx_get_data_addr(core->game_img->img,
-			&core->game_img->bpp, &core->game_img->line_len,
-			&core->game_img->endian);
-	core->game_img->width = S_LENGHT;
-	core->game_img->height = S_HEIGHT -160;
 	core->scroll_ingame = S_LENGHT / 2;
 	core->redraw = true;
-	hashmap_insert(&core->hashmap, "game_img", (void *)core->game_img, core);
 	if (!player_init(core))
 		return (false);
 	if (!hud_init(core))
