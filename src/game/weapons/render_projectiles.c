@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 18:28:02 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/12 18:47:13 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/12 19:57:56 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,26 +33,31 @@ void	projectile_animation(t_projectile_node *proj)
 bool	update_projectiles(t_core *core)
 {
 	t_projectile_node	*proj;
-	t_projectile_node	*prev;
-	t_projectile_node	*next;
-	t_pos				pos;
+	t_pos				new_pos;
+	t_pos				old_pos;
+	t_pos				collision_pos;
 
-	prev = NULL;
 	proj = core->proj.proj_list;
 	while (proj)
 	{
-		next = proj->next;
-		proj->x += cosf(proj->angle) * proj->speed;
-		proj->y += sinf(proj->angle) * proj->speed;
-		pos.x = proj->x + proj->dir_x;
-		pos.y = proj->y + proj->dir_y;
-		if (is_colliding(pos, core))
+		old_pos.x = proj->x;
+		old_pos.y = proj->y;
+		new_pos.x = proj->x + cosf(proj->angle) * proj->speed;
+		new_pos.y = proj->y + sinf(proj->angle) * proj->speed;
+		if (is_colliding(old_pos, new_pos, core, &collision_pos))
 		{
-			if (!setup_proj_impacts(core, pos, proj))
+			proj->x = collision_pos.x;
+			proj->y = collision_pos.y;
+			if (!setup_proj_impacts(core, collision_pos, proj))
 				return (false);
 		}
+		else
+		{
+			proj->x = new_pos.x;	
+			proj->y = new_pos.y;
+		}
 		projectile_animation(proj);
-		proj = next;
+		proj = proj->next;
 	}
 	return (true);
 }
@@ -62,17 +67,24 @@ void	draw_projectile(t_core *core, t_projectile_node *proj, float angle_diff)
 	float	dist;
 	float	corr;
 	float	size;
+	float	screen_x;
 	t_pos	pos;
 
-	dist = sqrtf(core->proj.dx * core->proj.dx + core->proj.dy * core->proj.dy);
+	dist = sqrtf((proj->x - core->tmp_rc->pl_x)
+			* (proj->x - core->tmp_rc->pl_x)
+			+ (proj->y - core->tmp_rc->pl_y) * (proj->y - core->tmp_rc->pl_y));
 	corr = dist * cosf(angle_diff);
 	size = (int)((4 * (S_HEIGHT / (2.0f
 						* tanf(core->proj.fov_rad / 2.0f)))) / corr);
-	pos.x = (int)((angle_diff / core->proj.fov_rad + 0.5f)
-			* S_LENGHT) - size / 2;
+	screen_x = (int)((angle_diff / core->proj.fov_rad + 0.5f) * S_LENGHT);
+	pos.x = screen_x - size / 2;
 	pos.y = S_HEIGHT / 2 - size / 2;
-	transparency_scaled(core->game_img, proj->activ_img->image,
-		pos, size);
+	if (screen_x >= 0 && screen_x < S_LENGHT)
+	{
+		if (dist < core->tmp_rc->dist3[(int)screen_x])
+			transparency_scaled(core->game_img, proj->activ_img->image,
+				pos, size);
+	}
 }
 
 void	calculation_proj(t_core *core, t_projectile_node *proj)

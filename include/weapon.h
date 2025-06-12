@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 16:33:30 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/08 19:18:39 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/12 19:47:11 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ void	render_projectiles(t_core *core);
 bool	update_projectiles(t_core *core);
 bool	new_impact(t_core *core, float x, float y);
 bool	iswall(t_pos pos, t_core *core);
-int		is_colliding(t_pos pos, t_core *core);
+int		is_colliding(t_pos start, t_pos end, t_core *core, t_pos *collision);
 bool	setup_proj_impacts(t_core *core, t_pos pos, t_projectile_node *proj);
 
 
