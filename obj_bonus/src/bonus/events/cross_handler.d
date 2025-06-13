@@ -1,5 +1,5 @@
-obj_bonus/src/bonus/events/keyboard/keypress_game.o: \
-  src/bonus/events/keyboard/keypress_game.c include/cub3d.h \
+obj_bonus/src/bonus/events/cross_handler.o: \
+  src/bonus/events/cross_handler.c include/cub3d.h \
   lib/minilibx-linux/mlx.h lib/libft/include/libft.h \
   lib/libft/include/../get_next_line/include/get_next_line.h \
   include/word_creator.h include/events.h include/game.h include/img.h \

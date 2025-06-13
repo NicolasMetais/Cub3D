@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/03 16:47:09 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/29 17:54:49 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/13 01:35:27 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include <stdbool.h>
 
 typedef struct s_img	t_img;
+typedef struct s_core	t_core;
+
 
 typedef struct s_hashmap_entry
 {

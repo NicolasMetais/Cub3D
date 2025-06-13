@@ -6,6 +6,8 @@
 		"dirent.h": "c",
 		"keysym.h": "c",
 		"limits.h": "c",
-		"stdbool.h": "c"
+		"stdbool.h": "c",
+		"word_creator.h": "c",
+		"fcntl.h": "c"
 	}
 }

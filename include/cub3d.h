@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 01:54:17 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/13 01:12:00 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/13 02:18:17 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,104 +56,21 @@
 
 //HEADERS
 # include "word_creator.h"
+# include "events.h"
+# include "game.h"
+# include "img.h"
+# include "hashmap.h"
 # include "parsing.h"
 # include "hashmap.h"
 # include "weapon.h"
+# include "menu.h"
+# include "hud.h"
 # include "player.h"
 
 //MATHS
 # include <math.h>
 # define PI 3.14159265359
 # define RAD 0.0174533
-
-extern int	map[];
-
-//LA CROIX MARCHE PAS ENCULE CODE LE
-
-typedef struct s_img_loader
-{
-	t_img	**img;
-	char	*path;
-}	t_img_loader;
-
-typedef struct s_word_loader
-{
-	t_img		**img;
-	char		*word;
-	t_font_size	state;
-}	t_word_loader;
-
-typedef struct s_img
-{
-	void	*img;
-	char	*addr;
-	int		bpp;
-	int		line_len;
-	int		endian;
-	int		width;
-	int		height;
-}	t_img;
-
-typedef struct s_node_img
-{
-	t_img				*image;
-	int					offset_x;
-	int					offset_y;
-	bool				has_offset;
-	struct s_node_img	*next;
-}	t_node_img;
-
-//fired only used for weapons
-typedef struct s_sprite
-{
-	int				nb;
-	int				timer;
-	int				speed;
-	struct timeval	update;
-	bool			activ;
-	bool			started;
-	t_node_img		*head;
-	t_node_img		*img_list;
-}	t_sprite;
-
-typedef struct s_menu_img
-{
-	t_img		*bg;
-	t_img		*bg_clean;
-	t_img		*slider_bar;
-	t_img		*cursor;
-	t_img		*loaded_map;
-	t_img		*minimap;
-	t_sprite	*skulls;
-}	t_menu_img;
-
-typedef struct s_hud_img
-{
-	t_img		*clean_hud;
-	t_img		*hud;
-	t_img		*pause_buffer;
-	t_img		*clean_pause_buffer;
-	t_sprite	*neutral;
-	t_sprite	*tired;
-	t_sprite	*hurt;
-	t_sprite	*bloody;
-	t_sprite	*critical;
-	t_img		*ammo1;
-	t_img		*ammo2;
-	t_img		*ammo3;
-	t_img		*ammo4;
-	t_img		*life;
-	t_img		*armor;
-	t_img		*ammo;
-	bool		hud_render;
-	bool		ammo1_render;
-	bool		ammo2_render;
-	bool		ammo3_render;
-	bool		ammo4_render;
-	bool		health_render;
-	bool		armor_render;
-	bool		new_weapon_render;
-}	t_hud_img;
 
 typedef enum s_state
 {
@@ -165,176 +82,11 @@ typedef enum s_state
 	PAUSE_OPTION,
 }	t_state;
 
-typedef struct s_textures
-{
-	char	*north;
-	char	*south;
-	char	*west;
-	char	*east;
-	char	*path_sky;
-	char	*path_door;
-	t_img	*tmp_north;
-	t_img	*tmp_south;
-	t_img	*tmp_west;
-	t_img	*tmp_east;
-	t_img	*sky;
-	t_img	*door;
-	char	*floor_color;
-	char	*ceiling_color;
-}	t_textures;
-
-typedef struct s_colors
-{
-	t_int_array		*floor;
-	t_int_array		*ceiling;
-}	t_colors;
-
 typedef struct s_pos
 {
 	float	x;
 	float	y;
 }	t_pos;
-
-typedef struct s_menu_maps
-{
-	char	*name;
-	bool	parsed;
-}	t_menu_maps;
-
-typedef enum e_move {
-	UP,
-	DOWN,
-	LEFT,
-	RIGHT,
-	S_RIGHT,
-	S_LEFT
-}	t_move;
-
-typedef struct s_tmp_imgdata
-{
-	char	*img_data;
-	int		bpp;
-	int		size;
-	int		endian;
-	int		line_len;
-	void	*img;
-}	t_tmp_imgdata;
-
-typedef struct s_tmp_3d
-{
-    float   line_h;
-    float   line_s;
-    float   line_e;
-    float     x;
-    float     y;
-    int     start;
-    int     end;
-    int     pixel_index;
-	float	tex_index;
-	float	step;
-	float	ty;
-	float	ty_off;
-	float	tx;
-	float	offset;
-	float 	tex_pos;
-	int		draw_start;
-	int		draw_end;
-
-}	t_tmp_3d;
-
-typedef struct s_open_door
-{
-    float   line_h;
-    float   line_s;
-    float   line_e;
-    float     x;
-    float     y;
-    int     start;
-    int     end;
-    int     pixel_index;
-	float	tex_index;
-	float	step;
-	float	ty;
-	float	ty_off;
-	float	tx;
-	float	offset;
-	float 	tex_pos;
-	int		draw_start;
-	int		draw_end;
-
-}	t_open_door;
-
-//r.. = rays data, m.. = map data, pl.. = player data, dist* = rays lenght;
-
-typedef struct s_tmp_rc
-{
-	double	pl_x;
-	double	pl_y;
-	double	pldelt_x;
-	double	pldelt_y;
-	double	pl_angle;
-	int		r;
-	int		max_r;
-	int		res; //always power of 2;
-    int		mx;
-    int		my;
-    int		mp;
-    int		px;
-    int		py;
-    double	rx;
-    double	ry;
-    double	ra;
-	double	ca;
-    double   x;
-    double   y;
-    double   atan;
-    double   ntan;
-    float   *dist;
-    float   *dist2;
-    float   *dist3;
-	char	v_wall;
-	char	h_wall;
-	char	hit_wall;
-	char	front_wall;
-	int		front_x;
-	int		front_y;
-	double	hx;
-	double	hy;
-	double	vx;
-	double	vy;
-	int		of_x;	//values for collision and movements
-	int		of_y;
-	int		px2;
-	int		py2;
-	int		px2_add;
-	int		py2_add;
-	int		px2_sub;
-	int		py2_sub;
-	int		was_vertical;
-	int		map_size;
-	double	door_x;  //values for opening door
-	double	door_y;
-	float	*door_dist;
-	double	v_door_x;
-	double	v_door_y;
-	float	*v_door_dist;
-	double	h_door_x;
-	double	h_door_y;
-	float	*h_door_dist;
-	int		open_door;
-
-}	t_tmp_rc;
-
-typedef struct s_door_anim
-{
-	int		map_x;
-	int		map_y;
-	long	start;
-	long	elapsed;
-	int		frame;
-	int		active;
-	float	corrected_ty;
-}	t_door_anim;
 
 typedef struct s_core
 {
@@ -386,6 +138,7 @@ typedef struct s_core
 	t_move			move;
 }	t_core;
 
+//Norm struct for transparency with scaling i need so much variables zZzZzZzZzZz
 typedef struct s_scale_ctx
 {
 	t_img		*bg;
@@ -394,187 +147,58 @@ typedef struct s_scale_ctx
 	t_pos		scale;
 }	t_scale_ctx;
 
-//Parsing
-bool			parsing_cub(t_core *core, char *av);
+//-----------------Game-----------------
+//launch the game lol
+bool			launch_game(t_core *core);
+//routine function executed every frame
+int				routine(void *param);
 
-//UTILS
+//---------------X11 shitty memory------------------
+//destroy a non-used img from my hashmap
+void			destroy_single_img(void *value, t_core *core);
+//destroy all img from my hashmap
+void			destroy_img(t_core *core);
+
+//-------------UTILS-----------------
+//regular sprite update
 bool			update_sprite(t_sprite *sprite);
+//update sprite on random nodes
 bool			update_sprite_random(t_sprite *sprite);
+//update weapon animation
 bool			update_animation(t_sprite *sprite);
-
+//generate a name with a concatenate id for hashmap good usage
 bool			name_generator(int count, char *prefix_name,
 					t_img *image, t_core *core);
+//detect empty line in file
 bool			is_empty_line(char *str);
+//cleanup split
 void			cleanup_split(char **str);
+//clean all allocated memory + X11 memory
 void			cleanup_game(t_core *core);
+//copy an image pixel per pixels
 void			copy_img(t_img *dest, t_img *copy);
+//copy a part of an image
 void			partial_copy_img(t_img *dest, t_img *copy,
 					int x_start, int y_start);
+//load an empty image for buffer purpose
 t_img			*load_buffer(t_img *image, int x, int y, t_core *core);
+//add transparency on green pixel + rescale an image
 void			transparency_scaled(t_img *bg, const t_img *fg,
 					t_pos start, int size);
+//is my player moving ?
 bool			is_moving(t_player *player);
+//small getter for ammo type
 t_img			*get_ammo_img(t_core *core, int type);
-
-//utils de mandatory
-bool	load_img(t_img **img, char *path, t_core *core);
-int		mouse_direction(int x, int y, void *param);
-
-
-
-
-
-//TRANSPARENCY
+//regular transparency on green pixels
 void			transparency(t_img *bg, const t_img *stickonbg,
 					int start_x, const int start_y);
+//put a pixel on another one
 void			put_on_bg(t_img *bg, size_t y, size_t x, int color);
+//get a pixel
 unsigned int	get_img_pxl(const t_img *stickonbg, size_t x, size_t y);
 
-//Create new t_img
-bool			load_image(t_img **img, char *path, t_core *core, char *scale);
-bool			load_word_image(t_img **img, t_core *core,
-					char *word, char *state);
-void			fill_img_in_green(t_img *img);
-
-//Game
-bool			launch_game(t_core *core);
-int				routine(void *param);
-
-//Menu
-bool			start_menu(t_core *core);
-bool			render_menu(t_core *core);
-bool			render_maps_menu(t_core *core);
-bool			extract_maps_names(t_core *core);
-bool			render_options_menu(t_core *core);
-void			skulls_render(t_core *core, const int *y);
-bool			slider_constructor(t_core *core, int width);
-bool			loaded_map(t_img *bg, t_core *core);
-bool			render_pause_menu(t_core *core);
-void			skulls_render_pause(t_core *core, const int *y);
-bool			create_pause_bg(t_core *core);
-bool			render_pause_options(t_core *core);
-
-//Init img
-bool			extract_img_data(t_core *core);
-bool			load_assets(t_core *core, char **data);
-
-
-//Slider bar img construc
-bool			slider_constructor(t_core *core, int width);
-
-//MAP SELECTOR
-bool			map_selector(t_core *core);
-
-//Keypress Event
-void			maps_menu_keypress(int key, t_core *core);
-int				handle_keypress(int key, void *param);
-int				handle_destroy(t_core *core);
-void			pause_menu_keypress(int key, t_core *core);
-void			pause_option_keypress(int key, t_core *core);
-
-
-
-//Mouse Event
-int				mouse_menu_click(int button, int x, int y, t_core *core);
-int				mouse_menu_hover(int x, int y, void *param);
-int				mouse_menu_release(int button, int x, int y, t_core *core);
-void			options_menu_hover(int x, int y, t_core *core);
-int				handle_keyrelease(int key, void *param);
-void			mouse_click_game(t_core *core, int button);
-void			pause_options_hover(int x, int y, t_core *core);
-
-//Slider Update
-void			update_slider(t_core *core, const int *y, t_img *bg);
-bool			slider(t_core *core, t_pos pos, int x, t_img *bg);
-
-
-//Percent with number render
-bool			render_percent(t_core *core, char *percent,
-					int render, t_img *bg);
-
-
-//Destroy X11 memory img
-void			destroy_single_img(void *value, t_core *core);
-void			destroy_img(t_core *core);
-bool			launch_game(t_core *core);
-int				routine(void *param);
-
-bool    		start_game(t_core *core);
-
-
-//Keypress and moves
-int				handle_keypress(int key, void *param);
-int				handle_destroy(t_core *core);
-void			move_player(t_core *core, t_move move, double delta_time);
-void			init_new_pos(t_core *core);
-void			handle_right(t_core *core, double move_dist);
-void			handle_left(t_core *core, double move_dist);
-void			mouse_scroll_game(t_core *core, int x, int y);
-
-//Temp_functions
-void			move_player(t_core *core, t_move move, double delta_time);
-void			init_tmp(t_core *core);
-bool    		init_map_textures(t_core *core);
-
-//Layers printing
-void			print_background(t_core *core);
-void			print_player(t_core *core, int color);
-void			print_rays(t_core *core, int color);
-void			print_3d(t_core *core);
-void			draw_ceiling_floor(t_core *core);
-void			get_rc_data(t_core *core);
-void			rays_updates(t_core *core);
-void			draw_player_line(t_core *core, int color);
-void			move_player(t_core *core, t_move move, double delta_time);
-void			init_tmp(t_core *core);
-void			anim_door(t_core *core);
-
-//Minimap in game
-void			draw_minimap_game(t_core *core);
-void			print_miscellaneous(t_core *core, int color);
-int				get_map_tile_x(t_core *core, int x);
-int				get_map_tile_y(t_core *core, int y);
-
-//Raycast
-void			get_rc_data(t_core *core);
-void			get_raycast_data(t_core *core);
-void			loop_tiles_width(t_core *core, int i);
-void			loop_tiles_height(t_core *core, int i);
-void			draw_3d(t_core *core);
-void			get_3d_based_data(t_core *core);
-void			get_draw_start_data(t_core *core);
-void			get_draw_loop_data(t_core *core);
-void			print_3d_render(t_core *core);
-void			print_3d_vertical(t_core *core);
-void			print_3d_horizontal(t_core *core);
-void			handle_door(t_core *core);
-//void			print_anim_door(t_core *core, int i);
-
-// //Layers printing
-// void			print_background(t_core *core, int x, int y, int color);
-// void			print_player(t_core *core, int color);
-// void			print_rays(t_core *core, int color);
-// void			print_3d(t_core *core, int pixel_index);
-// void			get_rc_data(t_core *core);
-// void			rays_updates(t_core *core);
-// void			draw_player_line(t_core *core, int color);
-
-//HUD
-bool			render_hud(t_core *core);
-void			render_head(t_core *core);
-bool			render_numbers(t_core *core, t_img	*bg);
-bool			render_weapon_menu(t_core *core);
-bool			render_ammo(t_core *core, t_img	*bg);
-bool			head_init(t_core *core);
-bool			hud_render_percent(t_img *buffer, t_core *core,
-					char *percent, int render);
-void			hud_render_number(t_img *buffer, t_core *core,
-					char *percent, int render);
-bool			render_armor_red_num(t_core *core, t_img *bg, char *num);
-bool			render_health_red_num(t_core *core, t_img *bg, char *num);
-bool			render_ammo_red_num(t_core *core, t_img *bg);
-
-
-
+//-----------------UTILS FOR THE MANDATORY PARTS-------------
+bool			load_img(t_img **img, char *path, t_core *core);
+int				mouse_direction(int x, int y, void *param);
 
 #endif

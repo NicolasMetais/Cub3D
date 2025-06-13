@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 01:58:43 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/12 17:27:52 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/13 01:41:23 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,31 @@
 # include <stdbool.h>
 
 typedef struct s_core		t_core;
-typedef struct s_textures	t_textures;
-typedef struct s_colors		t_colors;
 typedef struct s_pos		t_pos;
+
+typedef struct s_textures
+{
+	char	*north;
+	char	*south;
+	char	*west;
+	char	*east;
+	char	*path_sky;
+	char	*path_door;
+	t_img	*tmp_north;
+	t_img	*tmp_south;
+	t_img	*tmp_west;
+	t_img	*tmp_east;
+	t_img	*sky;
+	t_img	*door;
+	char	*floor_color;
+	char	*ceiling_color;
+}	t_textures;
+
+typedef struct s_colors
+{
+	t_int_array		*floor;
+	t_int_array		*ceiling;
+}	t_colors;
 
 //Je stocke toutes les data que je parse au cas ou le parsing foire
 typedef struct s_tmp
@@ -37,11 +59,11 @@ typedef struct s_tmp
 
 typedef struct s_parse_map
 {
-	size_t	i;
-	int		j;
-	int		count;
-	char	*cpy;
-	const char *s;
+	size_t		i;
+	int			j;
+	int			count;
+	char		*cpy;
+	const char	*s;
 }	t_parse_map;
 
 //Extension checker
@@ -72,7 +94,11 @@ void	free_parsing(t_tmp *stock);
 //Put all valid datas inside the garbage
 bool	load_valid_datas(t_core *core, t_tmp *stock);
 
+//dup_map for flood_fill
 bool	realloc_map(t_tmp *stock, char **dup_maps);
+
+//launch parsing
+bool	parsing_cub(t_core *core, char *av);
 
 
 #endif

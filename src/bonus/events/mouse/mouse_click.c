@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 14:49:13 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/06 23:02:56 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/13 02:16:52 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	mouse_click_starting_menu(t_core *core)
 		render_maps_menu(core);
 	}
 	if (core->menu_option == 3)
-		handle_destroy(core);
+		cleanup_game(core);
 }
 
 void	mouse_click_maps_menu(t_core *core)

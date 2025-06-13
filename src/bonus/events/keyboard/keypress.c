@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 16:53:24 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/12 17:01:34 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/13 02:16:19 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	enter_handler(int key, t_core *core)
 			render_maps_menu(core);
 		}
 		if (core->menu_option == 3)
-			handle_destroy(core);
+			cleanup_game(core);
 	}
 }
 
@@ -101,7 +101,7 @@ int	handle_keypress(int key, void *param)
 
 	core = (t_core *)param;
 	if (key == XK_Escape && core->state != GAME)
-		handle_destroy(core);
+		cleanup_game(core);
 	else if (key == XK_Escape && core->state == GAME)
 	{
 		if (!create_pause_bg(core))

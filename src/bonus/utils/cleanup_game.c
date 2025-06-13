@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 02:08:56 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/13 00:36:18 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/13 02:16:30 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,5 @@ void	cleanup_game(t_core *core)
 	if (core->mlx)
 		mlx_destroy_display(core->mlx);
 	free_gc(core->gc, NULL);
+	exit(0);
 }

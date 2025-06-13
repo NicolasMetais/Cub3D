@@ -17,6 +17,8 @@ EVENTS =	src/mandatory/events/keyboard/keypress.c \
 			src/mandatory/events/keyboard/keypress_game.c \
 			src/mandatory/events/keyboard/keyrelease.c \
 			src/mandatory/events/mouse/mouse_direction.c \
+			src/mandatory/events/cross_handler.c \
+			
 
 IMG =	src/mandatory/destroy_img.c \
 
@@ -68,6 +70,7 @@ EVENTS_BONUS = 	src/bonus/events/destroy.c \
 			src/bonus/events/mouse/mouse_release.c \
 			src/bonus/events/mouse/mouse_click.c \
 			src/bonus/events/mouse/mouse_click_game.c \
+			src/bonus/events/cross_handler.c \
 
 IMG_BONUS = 	src/bonus/image_loader.c \
 		src/bonus/hashmap/hashmap.c \
