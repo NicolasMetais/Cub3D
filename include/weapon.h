@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 16:33:30 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/12 19:47:11 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/13 16:01:13 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ typedef struct s_impact_node
 	float					x;
 	float					y;
 	int						lifetime;
+	float					size;
+	int						wpn_type;
 	int						frame;
 	t_node_img				*activ_img;
 	t_sprite				*sprite;
@@ -56,6 +58,7 @@ typedef struct s_projectile_node
 	float						y;
 	float						dir_x;
 	float						dir_y;
+	int							wpn_type;
 	float						speed;
 	float						angle;
 	t_sprite					*sprite;
@@ -107,7 +110,7 @@ bool	shoot_projectile(t_core *core, float angle);
 bool	new_proj(t_core *core, float x, float y, float angle);
 void	render_projectiles(t_core *core);
 bool	update_projectiles(t_core *core);
-bool	new_impact(t_core *core, float x, float y);
+bool	new_impact(t_core *core, float x, float y, int wpn_type);
 bool	iswall(t_pos pos, t_core *core);
 int		is_colliding(t_pos start, t_pos end, t_core *core, t_pos *collision);
 bool	setup_proj_impacts(t_core *core, t_pos pos, t_projectile_node *proj);

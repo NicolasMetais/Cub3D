@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 22:41:23 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/12 18:46:00 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/13 16:02:09 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 bool	setup_proj_impacts(t_core *core, t_pos pos, t_projectile_node *proj)
 {
-	if (!new_impact(core, pos.x, pos.y))
+	if (!new_impact(core, pos.x, pos.y, proj->wpn_type))
 		return (false);
 	if (proj->prev)
 		proj->prev->next = proj->next;
@@ -60,14 +60,7 @@ void	draw_impact(t_core *core, t_impact_node *current)
 {
 	float	impact_size;
 
-	if (core->player->curr_wpn == 6)
-		impact_size = 3;
-	else if (core->player->curr_wpn == 5)
-		impact_size = 5;
-	else if (core->player->curr_wpn == 7)
-		impact_size = 3;
-	else
-		impact_size = 0.2;
+	impact_size = current->size;
 	core->impact.factor = tanf(core->impact.angle)
 		/ tanf(core->impact.fov_rad / 2.0f);
 	core->impact.screen_x = (int)S_LENGHT / 2

@@ -6,13 +6,13 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 13:18:48 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/12 21:00:18 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/13 15:58:22 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static t_impact_node	*new_node(t_core *core, float x, float y)
+static t_impact_node	*new_node(t_core *core, float x, float y, int wpn_type)
 {
 	t_impact_node	*new;
 
@@ -22,14 +22,27 @@ static t_impact_node	*new_node(t_core *core, float x, float y)
 	new->x = x;
 	new->y = y;
 	new->lifetime = 15;
-	if (core->player->curr_wpn == 6)
+	new->wpn_type = wpn_type;
+	if (new->wpn_type == 6)
+	{
+		new->size = 3;
 		new->sprite = hashmap_get(&core->hashmap_sprites, "plasma_puff");
-	else if (core->player->curr_wpn == 5)
+	}
+	else if (new->wpn_type == 5)
+	{
+		new->size = 5;
 		new->sprite = hashmap_get(&core->hashmap_sprites, "rocket_puff");
-	else if (core->player->curr_wpn == 7)
+	}
+	else if (new->wpn_type == 7)
+	{
+		new->size = 3;
 		new->sprite = hashmap_get(&core->hashmap_sprites, "BFG9000_puff");
+	}
 	else
+	{
+		new->size = 0.2;
 		new->sprite = hashmap_get(&core->hashmap_sprites, "puff");
+	}
 	if (!new->sprite)
 		return (NULL);
 	new->activ_img = new->sprite->img_list;
@@ -40,12 +53,12 @@ static t_impact_node	*new_node(t_core *core, float x, float y)
 	return (new);
 }
 
-bool	new_impact(t_core *core, float x, float y)
+bool	new_impact(t_core *core, float x, float y, int wpn_type)
 {
 	t_impact_node	*new;
 	t_impact_node	*last;
 
-	new = new_node(core, x, y);
+	new = new_node(core, x, y, wpn_type);
 	if (!new)
 		return (false);
 	if (!core->impact.impact_list)

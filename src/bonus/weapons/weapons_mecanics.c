@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 10:27:18 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/12 21:08:05 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/13 16:02:19 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ bool	shoot_pistol(t_core *core, float angle)
 		pos.y = core->tmp_rc->pl_y + sin(angle) * (fire - 0.1);
 		if (iswall(pos, core))
 		{
-			if (!new_impact(core, pos.x, pos.y))
+			if (!new_impact(core, pos.x, pos.y, 2))
 				return (false);
 			break ;
 		}

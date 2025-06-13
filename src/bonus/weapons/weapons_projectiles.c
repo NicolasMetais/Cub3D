@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 16:41:57 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/12 18:08:16 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/13 16:01:50 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ static t_projectile_node	*new_node(t_core *core,
 	else
 		new->speed = 0.4f;
 	new->angle = angle;
+	new->wpn_type = core->player->curr_wpn;
 	if (core->player->curr_wpn == 6)
 		new->sprite = hashmap_get(&core->hashmap_sprites, "plasma_proj");
 	else if (core->player->curr_wpn == 5)
