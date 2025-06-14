@@ -45,7 +45,8 @@ void	cube3d(char *av, t_core *core)
 		return ;
 	if (!window_init(core))
 		return ;
-	get_rc_data(core);
+	if (!rc_init(core))
+		return ;
 	if (!launch_game(core))
 		return ;
 }

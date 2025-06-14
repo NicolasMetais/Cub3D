@@ -16,15 +16,15 @@ void	draw_3d(t_core *core)
 {
 	get_3d_based_data(core);
 	get_draw_start_data(core);
-	while (core->tmp_3d->y < core->tmp_3d->draw_end)
+	while (core->rc3d->y < core->rc3d->draw_end)
 	{
 		get_draw_loop_data(core);
-		while (core->tmp_3d->x < core->tmp_3d->end)
+		while (core->rc3d->x < core->rc3d->end)
 		{
 			print_3d_render(core);
-			core->tmp_3d->x++;
+			core->rc3d->x++;
 		}
-		core->tmp_3d->y++;
+		core->rc3d->y++;
 	}
 }
 

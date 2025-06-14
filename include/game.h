@@ -15,7 +15,7 @@
 
 # include <stdbool.h>
 
-typedef struct s_tmp_3d
+typedef struct s_rc3d
 {
     float   line_h;
     float   line_s;
@@ -35,7 +35,7 @@ typedef struct s_tmp_3d
 	int		draw_start;
 	int		draw_end;
 
-}	t_tmp_3d;
+}	t_rc3d;
 
 typedef struct s_open_door
 {
@@ -61,7 +61,7 @@ typedef struct s_open_door
 
 //r.. = rays data, m.. = map data, pl.. = player data, dist* = rays lenght;
 
-typedef struct s_tmp_rc
+typedef struct s_rc
 {
 	double	pl_x;
 	double	pl_y;
@@ -118,7 +118,7 @@ typedef struct s_tmp_rc
 	float	*h_door_dist;
 	int		open_door;
 
-}	t_tmp_rc;
+}	t_rc;
 
 typedef struct s_door_anim
 {
@@ -128,7 +128,7 @@ typedef struct s_door_anim
 	long	elapsed;
 	int		frame;
 	int		active;
-	float	corrected_ty;
+	float	corrected_tx;
 }	t_door_anim;
 
 //start the game ;D
@@ -147,12 +147,18 @@ void			print_player(t_core *core, int color);
 void			print_rays(t_core *core, int color);
 void			print_3d(t_core *core);
 void			draw_ceiling_floor(t_core *core);
-void			get_rc_data(t_core *core);
+bool			rc_init(t_core *core);
 void			rays_updates(t_core *core);
 void			draw_player_line(t_core *core, int color);
 void			move_player(t_core *core, t_move move, double delta_time);
 void			init_tmp(t_core *core);
+
+//Doors
 void			anim_door(t_core *core);
+void			handle_door(t_core *core);
+void			print_anim_door(t_core *core, int i);
+void			print_door_render(t_core *core);
+void			get_door_loop_data(t_core *core);
 
 //Minimap in game
 void			draw_minimap_game(t_core *core);
@@ -161,7 +167,6 @@ int				get_map_tile_x(t_core *core, int x);
 int				get_map_tile_y(t_core *core, int y);
 
 //Raycast
-void			get_rc_data(t_core *core);
 void			get_raycast_data(t_core *core);
 void			loop_tiles_width(t_core *core, int i);
 void			loop_tiles_height(t_core *core, int i);
@@ -172,8 +177,9 @@ void			get_draw_loop_data(t_core *core);
 void			print_3d_render(t_core *core);
 void			print_3d_vertical(t_core *core);
 void			print_3d_horizontal(t_core *core);
-void			handle_door(t_core *core);
-//void			print_anim_door(t_core *core, int i);
+void			draw_3d_door(t_core *core);
+void			get_door_start_data(t_core *core);
+void			get_door_data(t_core *core);
 
 // //Layers printing
 // void			print_background(t_core *core, int x, int y, int color);

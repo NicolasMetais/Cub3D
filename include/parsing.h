@@ -26,10 +26,12 @@ typedef struct s_textures
 	char	*east;
 	char	*path_sky;
 	char	*path_door;
+	char 	*path_open_door;
 	t_img	*tmp_north;
 	t_img	*tmp_south;
 	t_img	*tmp_west;
 	t_img	*tmp_east;
+	t_img 	*open_doors;
 	t_img	*sky;
 	t_img	*door;
 	char	*floor_color;

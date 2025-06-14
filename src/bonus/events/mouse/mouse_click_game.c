@@ -27,11 +27,13 @@ void	mouse_scroll_game(t_core *core, int x, int y)
 		mlx_mouse_move(core->mlx, core->win, S_LENGHT -100, S_HEIGHT / 2);
 	if (x > S_LENGHT - 100)
 		mlx_mouse_move(core->mlx, core->win, 100, S_HEIGHT / 2);
-	core->tmp_rc->pl_angle += 0.03 * offset;
-	if (core->tmp_rc->pl_angle > 2 * PI)
-		core->tmp_rc->pl_angle -= 2 * PI;
-	core->tmp_rc->pldelt_x = cos(core->tmp_rc->pl_angle);
-	core->tmp_rc->pldelt_y = sin(core->tmp_rc->pl_angle);
+	core->rc->pl_angle += 0.05 * offset;
+	if (core->rc->pl_angle > 2 * PI)
+		core->rc->pl_angle -= 2 * PI;
+	if (core->rc->pl_angle < 0)
+		core->rc->pl_angle += 2 * PI;
+	core->rc->pldelt_x = cos(core->rc->pl_angle);
+	core->rc->pldelt_y = sin(core->rc->pl_angle);
 	core->scroll_ingame = x;
 }
 

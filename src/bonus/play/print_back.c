@@ -28,7 +28,7 @@ static void	print_ceiling(t_core *core, int pixel_index, int i, int j)
 	int	tex_index;
 	int	offset;
 
-	offset = (int)((core->tmp_rc->pl_angle) * S_LENGHT) / 16;
+	offset = (int)((core->rc->pl_angle) * S_LENGHT) / 16;
 	tex_index = (j * core->textures->sky->line_len + (offset + i) * \
 	(core->textures->sky->bpp / 8));
 	core->game_img->addr[pixel_index + 0] = \
@@ -51,8 +51,8 @@ void	print_background(t_core *core)
 		i = -1;
 		while (++i < S_LENGHT && j < S_HEIGHT - 160)
 		{
-			if (i > core->tmp_rc->map_size + 8 || \
-			j > core->tmp_rc->map_size + 8)
+			if (i > core->rc->map_size + 8 || \
+			j > core->rc->map_size + 8)
 			{
 				pixel_index = j * core->game_img->line_len + i * \
 				(core->game_img->bpp / 8);

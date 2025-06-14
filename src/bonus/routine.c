@@ -51,7 +51,7 @@ bool	game_routine(t_sprite *sprite, t_core *core)
 		else
 			core->player->bobbing_time = 0;
 		calculate_bob(core, 10.0, 2.0);
-		core->tmp_rc->max_r = S_LENGHT;
+		core->rc->max_r = S_LENGHT;
 		movements(core);
 		if (!start_game(core))
 			return (false);

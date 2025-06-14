@@ -19,6 +19,7 @@ bool	extend_strdup(t_parse_map *pm)
 	if (pm->s[pm->i] != '0' && pm->s[pm->i] != '1'
 		&& pm->s[pm->i] != 'N' && pm->s[pm->i] != 'S'
 		&& pm->s[pm->i] != 'E' && pm->s[pm->i] != 'W'
+		&& pm->s[pm->i] != '\t' && pm->s[pm->i] != '2'
 		&& pm->s[pm->i] != '\t' && pm->s[pm->i] != ' ')
 		return (free(pm->cpy), ft_putendl_fd(
 				"Error \n Invalid character in the map", 2), false);

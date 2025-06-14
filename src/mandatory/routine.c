@@ -41,7 +41,7 @@ int	routine(void *param)
 	core = (t_core *)param;
 	if (core->state == GAME)
 	{
-		core->tmp_rc->max_r = S_LENGHT;
+		core->rc->max_r = S_LENGHT;
 		movements(core);
 		if (core->redraw == true)
 			start_game(core);

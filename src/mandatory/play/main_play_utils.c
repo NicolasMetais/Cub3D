@@ -48,10 +48,10 @@ bool	init_map_textures(t_core *core)
 
 void	rays_updates(t_core *core)
 {
-	core->tmp_rc->r++;
-	core->tmp_rc->ra += RAD / (core->tmp_rc->max_r / core->fov);
-	if (core->tmp_rc->ra < 0)
-		core->tmp_rc->ra += 2 * PI;
-	if (core->tmp_rc->ra > 2 * PI)
-		core->tmp_rc->ra -= 2 * PI;
+	core->rc->r++;
+	core->rc->ra += RAD / (core->rc->max_r / core->fov);
+	if (core->rc->ra < 0)
+		core->rc->ra += 2 * PI;
+	if (core->rc->ra > 2 * PI)
+		core->rc->ra -= 2 * PI;
 }

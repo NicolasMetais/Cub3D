@@ -130,12 +130,12 @@ typedef struct s_core
 	t_colors		*colors;
 	t_pos			*spawn;
 	t_gc_controller	*gc;
-	t_tmp_rc		*tmp_rc;
-	t_tmp_imgdata	*tmp_imgdata;
-	t_tmp_3d		*tmp_3d;
-	t_door_anim		*door_anim;
-	t_open_door		*open_door;
-	t_move			move;
+	t_rc		*rc;
+	t_rc3d		*rc3d;
+	t_moves			*r_straff;
+	t_moves			*l_straff;
+	t_moves			*up;
+	t_moves			*down;
 }	t_core;
 
 //Norm struct for transparency with scaling i need so much variables zZzZzZzZzZz
