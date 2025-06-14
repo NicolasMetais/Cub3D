@@ -77,7 +77,7 @@ void	draw_impact(t_core *core, t_impact_node *current)
 		&& core->impact.screen_x < S_LENGHT)
 	{
 		if (core->impact.dist
-			- core->tmp_rc->dist3[core->impact.screen_x] <= 1.0f)
+			- core->rc->dist3[core->impact.screen_x] <= 1.0f)
 			transparency_scaled(core->game_img,
 				current->activ_img->image,
 				(t_pos){(core->impact.screen_x - core->impact.size / 2),
@@ -87,12 +87,12 @@ void	draw_impact(t_core *core, t_impact_node *current)
 
 void	setup_draw_impact(t_core *core, t_impact_node *current)
 {
-	core->impact.x = current->x - core->tmp_rc->pl_x;
-	core->impact.y = current->y - core->tmp_rc->pl_y;
+	core->impact.x = current->x - core->rc->pl_x;
+	core->impact.y = current->y - core->rc->pl_y;
 	core->impact.dist = sqrtf(core->impact.x * core->impact.x
 			+ core->impact.y * core->impact.y);
 	core->impact.angle = atan2(core->impact.y, core->impact.x)
-		- core->tmp_rc->pl_angle;
+		- core->rc->pl_angle;
 	if (core->impact.angle < -PI)
 		core->impact.angle += 2 * PI;
 	if (core->impact.angle > PI)

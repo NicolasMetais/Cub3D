@@ -22,6 +22,17 @@ typedef enum e_move {
 	S_LEFT
 }	t_move;
 
+typedef struct s_moves {
+	double	straf_x;
+	double	straf_y;
+	double	next_x;
+	double	next_y;
+	double	margin_x;
+	double	margin_y;
+	int map_x;
+	int map_y;
+}	t_moves;
+
 //----------------Keypress Events--------------
 //handler menu maps up and down keyboard inputs
 void			maps_menu_keypress(int key, t_core *core);
@@ -43,6 +54,10 @@ void			handle_right(t_core *core, double move_dist);
 void			handle_left(t_core *core, double move_dist);
 //mouse handler for camera deplacements
 void			mouse_scroll_game(t_core *core, int x, int y);
+//struct movement init
+bool			moves_init(t_core *core);
+//colision detection
+bool			is_map_colision(t_core *core, int x, int y);
 
 //----------------Mouse Event------------------
 //handler for starting menu to click with the mouse on the menu

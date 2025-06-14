@@ -137,6 +137,7 @@ GAME_BONUS =	src/bonus/play/main_play.c \
 		src/bonus/play/print_3d_utils.c \
 		src/bonus/play/raycast.c \
 		src/bonus/play/raycast_utils.c \
+		src/bonus/play/doors.c \
 
 OBJ_DIR = obj
 OBJ_DIR_BONUS = obj_bonus

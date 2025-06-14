@@ -20,8 +20,8 @@ bool	shoot_pistol(t_core *core, float angle)
 	fire = 0.0;
 	while (fire < 9999)
 	{
-		pos.x = core->tmp_rc->pl_x + cos(angle) * (fire - 0.1);
-		pos.y = core->tmp_rc->pl_y + sin(angle) * (fire - 0.1);
+		pos.x = core->rc->pl_x + cos(angle) * (fire - 0.1);
+		pos.y = core->rc->pl_y + sin(angle) * (fire - 0.1);
 		if (iswall(pos, core))
 		{
 			if (!new_impact(core, pos.x, pos.y))
@@ -37,8 +37,8 @@ bool	shoot_projectile(t_core *core, float angle)
 {
 	t_pos	pos;
 
-	pos.x = core->tmp_rc->pl_x + cos(angle) * 3;
-	pos.y = core->tmp_rc->pl_y + sin(angle) * 3;
+	pos.x = core->rc->pl_x + cos(angle) * 3;
+	pos.y = core->rc->pl_y + sin(angle) * 3;
 	if (!new_proj(core, pos.x, pos.y, angle))
 		return (false);
 	return (true);
@@ -54,7 +54,7 @@ bool	shoot_shotgun(t_core *core)
 
 	spread = 10 * (PI / 180.0);
 	step = spread / (7 - 1);
-	starting_angle = core->tmp_rc->pl_angle - (spread / 2.0);
+	starting_angle = core->rc->pl_angle - (spread / 2.0);
 	i = -1;
 	while (++i < 7)
 	{

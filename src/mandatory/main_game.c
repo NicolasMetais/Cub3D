@@ -16,12 +16,12 @@
 bool	launch_game(t_core *core)
 {
 	if (core->map_height > core->map_width)
-		core->tmp_rc->map_size = core->map_height * 8;
+		core->rc->map_size = core->map_height * 8;
 	else
-		core->tmp_rc->map_size = core->map_width * 8;
-	core->state = GAME;
+		core->rc->map_size = core->map_width * 8;
 	if (!game_init(core))
 		return (1);
+	core->state = GAME;
 	core->fov = 60;
 	mlx_hook(core->win, 2, 1L << 0, &handle_keypress, core);
 	mlx_hook(core->win, 3, 1L << 1, &handle_keyrelease, core);

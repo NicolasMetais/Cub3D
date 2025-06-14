@@ -77,9 +77,9 @@ void	fire_charged_weapons(t_core *core)
 		return ;
 	}
 	if (core->player->curr_wpn == 4)
-		shoot_pistol(core, core->tmp_rc->pl_angle);
+		shoot_pistol(core, core->rc->pl_angle);
 	if (core->player->curr_wpn == 6)
-		shoot_projectile(core, core->tmp_rc->pl_angle);
+		shoot_projectile(core, core->rc->pl_angle);
 }
 
 void	weapon_fired(t_core *core)
@@ -95,9 +95,9 @@ void	weapon_fired(t_core *core)
 			core->player->ammo[ammo_index] -= 1;
 	}
 	if (core->player->curr_wpn == 2)
-		shoot_pistol(core, core->tmp_rc->pl_angle);
+		shoot_pistol(core, core->rc->pl_angle);
 	if (core->player->curr_wpn == 3)
 		shoot_shotgun(core);
 	if (core->player->curr_wpn > 4)
-		shoot_projectile(core, core->tmp_rc->pl_angle);
+		shoot_projectile(core, core->rc->pl_angle);
 }

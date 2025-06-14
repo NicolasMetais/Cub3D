@@ -23,6 +23,10 @@ bool	player_init(t_core *core)
 			STRUCT, "pos player");
 	if (!core->player->position)
 		return (false);
+	if (core->map_height > core->map_width)
+		core->rc->map_size = core->map_height * 8;
+	else
+		core->rc->map_size = core->map_width * 8;
 	core->player->position->x = core->spawn->x;
 	core->player->position->y = core->spawn->y;
 	core->player->health = 100;
@@ -117,6 +121,8 @@ bool	game_init(t_core *core)
 	core->scroll_ingame = S_LENGHT / 2;
 	core->redraw = true;
 	if (!player_init(core))
+		return (false);
+	if (!moves_init(core))
 		return (false);
 	if (!hud_init(core))
 		return (false);
