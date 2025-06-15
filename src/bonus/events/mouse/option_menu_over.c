@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 14:01:54 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/15 18:17:48 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/15 18:36:16 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,32 @@ bool	percent_option_rendering(t_core *core, t_slider	*slider, t_img *bg)
 	else if (!ft_strcmp(slider->label, "SOUND"))
 	{
 		if (!render_percent(core, percent, 830, bg))
+			return (false);
+	}
+	return (true);
+}
+
+bool	percent_pause_option_rendering(t_core *core,
+			t_slider	*slider, t_img *bg)
+{
+	char	*percent;
+
+	percent = ft_itoa(*slider->int_var);
+	if (!percent)
+		return (false);
+	if (!ft_strcmp(slider->label, "FOV"))
+	{
+		if (!render_percent(core, percent, 350, bg))
+			return (false);
+	}
+	else if (!ft_strcmp(slider->label, "SPEED"))
+	{
+		if (!render_percent(core, percent, 490, bg))
+			return (false);
+	}
+	else if (!ft_strcmp(slider->label, "SOUND"))
+	{
+		if (!render_percent(core, percent, 630, bg))
 			return (false);
 	}
 	return (true);

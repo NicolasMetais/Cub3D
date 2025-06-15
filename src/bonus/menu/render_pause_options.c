@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 19:49:55 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/15 18:15:21 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/15 18:33:23 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,13 +94,13 @@ static void	rewrite_options(t_core *core, const int *y, t_img *bg)
 		return ;
 	transparency(bg, fov, (bg->width / 5) - 200, y[0] + 10);
 	update_slider_cursor(core, &core->menu_img->sliders[0], y[0], bg);
-	percent_option_rendering(core, &core->menu_img->sliders[0], bg);
+	percent_pause_option_rendering(core, &core->menu_img->sliders[0], bg);
 	transparency(bg, speed, (bg->width / 5) - 250, y[1] + 7);
 	update_slider_cursor(core, &core->menu_img->sliders[1], y[1], bg);
-	percent_option_rendering(core, &core->menu_img->sliders[1], bg);
+	percent_pause_option_rendering(core, &core->menu_img->sliders[1], bg);
 	transparency(bg, sound, (bg->width / 5) - 250, y[2] + 7);
 	update_slider_cursor(core, &core->menu_img->sliders[2], y[2], bg);
-	percent_option_rendering(core, &core->menu_img->sliders[2], bg);
+	percent_pause_option_rendering(core, &core->menu_img->sliders[2], bg);
 	rewrite_cheats(core, core->y_pos, bg);
 }
 

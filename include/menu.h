@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 02:10:48 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/15 18:15:09 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/15 18:27:40 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,9 @@ bool	render_percent(t_core *core, char *percent,
 			int render, t_img *bg);
 //percent render for sliders %
 bool	percent_option_rendering(t_core *core, t_slider	*slider, t_img *bg);
+//percent render for slider in pause menu
+bool	percent_pause_option_rendering(t_core *core,
+			t_slider	*slider, t_img *bg);
 //pixel image copy for sliders (prob a copy img duplicate tho)
 void	slider_copy_pxl(t_img *slider_bar, t_img *tocopy, int px_start);
 //ON/OFF cheat sliders
