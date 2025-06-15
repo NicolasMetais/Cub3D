@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 20:18:16 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/08 19:10:50 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/15 17:49:11 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	pause_options_hover(int x, int y, t_core *core)
 {
 	int		i;
 	t_pos	pos;
+	(void)x;
 
 	i = -1;
 	pos.x = core->hud_img->pause_buffer->width / 2 + 5 - 70;
@@ -23,7 +24,7 @@ void	pause_options_hover(int x, int y, t_core *core)
 		- 90 - core->menu_img->cursor->width;
 	if (core->state == PAUSE_OPTION)
 	{
-		while (++i < 1)
+		while (++i < 5)
 		{
 			if (y >= core->y_pos[i] && y < core->y_pos[i] + MENU_SPACING)
 			{
@@ -33,9 +34,6 @@ void	pause_options_hover(int x, int y, t_core *core)
 			}
 		}
 		if (core->isclicked)
-		{
-			if (!slider(core, pos, x, core->hud_img->pause_buffer))
-				return ;
-		}
+			return ;
 	}
 }

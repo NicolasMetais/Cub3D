@@ -6,65 +6,110 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/30 01:19:51 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/08 18:57:37 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/15 18:16:32 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-/* static void	skulls_render_options(t_core *core, const int *y)
+void	update_slider_cursor(t_core *core, t_slider *slider, int y, t_img *bg)
 {
-	int			x;
-	t_sprite	*skulls;
+	int	width;
+	int	cursor_pos;
+	int	val;
 
-	skulls = hashmap_get(&core->hashmap_sprites, "skulls");
-	x = (core->menu_img->bg->width / 2) - 100;
-	transparency(core->menu_img->bg, skulls->img_list->image,
-		x - (skulls->img_list->image->width + 10),
-		y[core->menu_option]);
-	mlx_put_image_to_window(core->mlx, core->win, core->menu_img->bg->img,
-		0, 0);
-} */
+	val = *slider->int_var;
+	width = slider->slider_max - slider->slider_min;
+	cursor_pos = *slider->x_var;
+	if (y == core->y_pos[3] || y == core->y_pos[4])
+		transparency(bg, core->menu_img->slider_small, 1250, y);
+	else
+		transparency(bg, core->menu_img->slider_bar, (bg->width / 5), y);
+	transparency(bg, core->menu_img->cursor, cursor_pos, y + 5);
+}
 
-void	update_slider(t_core *core, const int *y, t_img *bg)
+static void	on_off_sliders(t_core *core, const int *y, t_img *bg)
 {
-	transparency(bg, core->menu_img->slider_bar, (bg->width / 2) - 70, y[0]);
-	transparency(bg, core->menu_img->slider_bar, (bg->width / 2) - 70, y[0]);
-	transparency(bg, core->menu_img->cursor, core->x, y[0] + 5);
+	t_img		*on;
+	t_img		*off;
+
+	on = (t_img *)hashmap_get(&core->hashmap, "Option_on");
+	if (!on)
+		return ;
+	off = (t_img *)hashmap_get(&core->hashmap, "Option_off");
+	if (!off)
+		return ;
+	if (core->cursor[3] == 1255)
+		transparency(bg, off, 1230, y[3] - 60);
+	else
+		transparency(bg, on, 1230, y[3] - 60);
+	if (core->cursor[4] == 1255)
+		transparency(bg, off, 1230, y[4] - 60);
+	else
+		transparency(bg, on, 1230, y[4] - 60);
+}
+
+static void	rewrite_cheats(t_core *core, const int *y, t_img *bg)
+{
+	t_img		*godmod;
+	t_img		*infinite;
+	t_img		*ammos;
+
+	godmod = (t_img *)hashmap_get(&core->hashmap, "Option_godmod");
+	if (!godmod)
+		return ;
+	infinite = (t_img *)hashmap_get(&core->hashmap, "Option_infinite");
+	if (!infinite)
+		return ;
+	ammos = (t_img *)hashmap_get(&core->hashmap, "Option_ammos");
+	if (!ammos)
+		return ;
+	transparency(bg, godmod, 930, y[3] + 10);
+	transparency(bg, infinite, 955, y[4] - 20);
+	transparency(bg, ammos, 955, y[4] + 25);
+	update_slider_cursor(core, &core->menu_img->sliders[3], y[3], bg);
+	update_slider_cursor(core, &core->menu_img->sliders[4], y[4], bg);
+	on_off_sliders(core, y, bg);
 }
 
 static void	rewrite_options(t_core *core, const int *y, t_img *bg)
 {
-	t_img		*option1;
-	char		*percent;
+	t_img		*fov;
+	t_img		*speed;
+	t_img		*sound;
 
-	option1 = (t_img *)hashmap_get(&core->hashmap, "Option_fov");
-	if (!option1)
+	fov = (t_img *)hashmap_get(&core->hashmap, "Option_fov");
+	if (!fov)
 		return ;
-	transparency(bg, option1, (bg->width / 3), y[0] + 10);
-	update_slider(core, y, bg);
-	percent = ft_itoa(core->fov);
-	if (!percent)
+	speed = (t_img *)hashmap_get(&core->hashmap, "Option_speed");
+	if (!speed)
 		return ;
-	if (!render_percent(core, percent, 790, bg))
+	sound = (t_img *)hashmap_get(&core->hashmap, "Option_sound");
+	if (!sound)
 		return ;
-}
-
-static void	option_menu_init(t_core *core)
-{
-	int	i;
-
-	i = -1;
-	while (++i < 1)
-		core->y_pos[i] = 650 + (i * MENU_SPACING);
+	transparency(bg, fov, (bg->width / 5) - 200, y[0] + 10);
+	update_slider_cursor(core, &core->menu_img->sliders[0], y[0], bg);
+	percent_option_rendering(core, &core->menu_img->sliders[0], bg);
+	transparency(bg, speed, (bg->width / 5) - 250, y[1] + 7);
+	update_slider_cursor(core, &core->menu_img->sliders[1], y[1], bg);
+	percent_option_rendering(core, &core->menu_img->sliders[1], bg);
+	transparency(bg, sound, (bg->width / 5) - 250, y[2] + 7);
+	update_slider_cursor(core, &core->menu_img->sliders[2], y[2], bg);
+	percent_option_rendering(core, &core->menu_img->sliders[2], bg);
+	rewrite_cheats(core, core->y_pos, bg);
 }
 
 bool	render_options_menu(t_core *core)
 {
 	t_img	*option;
+	int		i;
 
+	i = -1;
+	while (++i < 3)
+		core->y_pos[i] = 600 + (i * 140);
+	core->y_pos[3] = 600 + (1 * 70);
+	core->y_pos[4] = 600 + (2 * 110);
 	core->state = OPTIONS_MENU;
-	option_menu_init(core);
 	copy_img(core->menu_img->bg, core->menu_img->bg_clean);
 	option = (t_img *)hashmap_get(&core->hashmap, "Option_title");
 	if (!option)

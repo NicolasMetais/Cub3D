@@ -6,23 +6,11 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 15:44:46 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/13 02:25:13 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/15 02:09:47 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	sliders_default_values(t_core *core)
-{
-	int	slider_min;
-	int	slider_max;
-
-	core->fov_ratio = (float)(FOV_DEFAULT - FOV_MIN) / (FOV_MAX - FOV_MIN);
-	slider_min = core->menu_img->bg->width / 2 - 70;
-	slider_max = slider_min + core->menu_img->slider_bar->width
-		- core->menu_img->cursor->width;
-	core->x = slider_min + ((slider_max - slider_min) * core->fov_ratio);
-}
 
 bool	img_init(t_core *core)
 {
@@ -30,6 +18,8 @@ bool	img_init(t_core *core)
 	char	*name;
 
 	width = 0;
+	core->speed = PLAYER_SPEED;
+	core->active_slider = -1;
 	core->menu_img->cursor = hashmap_get(&core->hashmap, "Slider_cursor");
 	core->menu_img->bg = hashmap_get(&core->hashmap, "Menu_bg_activ");
 	core->menu_img->bg_clean = hashmap_get(&core->hashmap, "Menu_bg_clean");
@@ -47,15 +37,20 @@ bool	img_init(t_core *core)
 			180, 180, core);
 	if (!core->menu_img->minimap)
 		return (false);
-	if (!slider_constructor(core, width))
+	if (!sliders_init(core, width))
 		return (false);
-	sliders_default_values(core);
 	return (true);
 }
 
 //INIT IMAGES
 bool	menus_init(t_core *core)
 {
+	core->sound = SOUND;
+	core->cursor[0] = 482;
+	core->cursor[1] = 347;
+	core->cursor[2] = 482;
+	core->cursor[3] = 1255;
+	core->cursor[4] = 1255;
 	core->fonts = gc_malloc(&core->gc, sizeof(t_fonts), STRUCT, "fonts");
 	if (!core->fonts)
 		return (false);
@@ -69,6 +64,10 @@ bool	menus_init(t_core *core)
 	core->menu_img->slider_bar = gc_malloc(&core->gc, sizeof(t_img),
 			STRUCT, "slider_bar");
 	if (!core->menu_img->slider_bar)
+		return (false);
+	core->menu_img->slider_small = gc_malloc(&core->gc, sizeof(t_img),
+			STRUCT, "slider_small");
+	if (!core->menu_img->slider_small)
 		return (false);
 	core->menu_img->minimap = gc_malloc(&core->gc, sizeof(t_img),
 			STRUCT, "minimap");

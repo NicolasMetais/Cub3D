@@ -90,6 +90,9 @@ MENU_BONUS =	src/bonus/menu/render_menu.c \
 		src/bonus/char_setup/build_words_utils.c \
 		src/bonus/menu/render_pause_menu.c \
 		src/bonus/menu/render_pause_options.c \
+		src/bonus/menu/slider_init.c \
+		src/bonus/menu/small_slider.c \
+
 
 HUD_BONUS	=	src/bonus/hud/render_hud.c \
 		src/bonus/hud/head_hud.c \
@@ -172,8 +175,8 @@ $(OBJ_DIR_BONUS)/src/%.o: src/%.c
 
 -include $(OBJS:.o=.d)
 
-f: re
-	$(CC) $(OBJS) $(LIB) $(MLX) -lX11 -lXext -lm -o $(NAME) -fsanitize=address
+f: fclean bonus
+	$(CC) $(OBJS_BONUS) $(LIB) $(MLX) -lX11 -lXext -lm -o $(NAME_BONUS) -fsanitize=address
 
 clean:
 	rm -rf $(OBJ_DIR)

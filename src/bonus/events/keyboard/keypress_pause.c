@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 17:08:30 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/13 02:16:45 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/15 18:07:49 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void	enter_pause_handler(int key, t_core *core)
 		if (core->menu_option == 0)
 		{
 			core->menu_option = 0;
+			mlx_mouse_hide(core->mlx, core->win);
 			core->state = GAME;
 		}
 		if (core->menu_option == 1)

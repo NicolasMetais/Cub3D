@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 01:54:17 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/13 02:18:17 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/15 01:58:01 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@
 
 //VISIBLE SCROLLING ELEMENTS
 # define VISIBLE 4
+
+# define SOUND 50
 
 //LIBC
 # include <stdbool.h>
@@ -99,22 +101,28 @@ typedef struct s_core
 	int				map_start;
 	int				menu_option;
 	bool			redraw;
-	int				y_pos[4];
+	int				y_pos[6];
 	char			tmp[2];
 	int				enter;
 	int				fov;
+	int				sound;
 	float			fov_ratio;
 	int				maps_nb;
 	char			*loaded_map;
 	bool			isclicked;
 	bool			map_changed;
 	bool			hud_redraw;
+	int				active_slider;
+	int				speed;
+	int				godmod;
+	int				infinite_ammos;
 	int				x;
 	int				y;
 	int				scroll_offset;
 	t_projectiles	proj;
 	t_impact		impact;
 	int				scroll_ingame;
+	int				cursor[5];
 	t_img			*game_img;
 	t_img			*weapon_buffer;
 	t_img			*pause_buffer;

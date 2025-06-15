@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 17:55:32 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/12 22:23:58 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/14 17:39:35 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ bool	player_init(t_core *core)
 	core->player->ammo[2] = 50;
 	core->player->ammo[3] = 300;
 	core->player->curr_wpn = 2;
-	core->player->speed = PLAYER_SPEED;
+	core->player->speed = core->speed;
 	return (true);
 }
 

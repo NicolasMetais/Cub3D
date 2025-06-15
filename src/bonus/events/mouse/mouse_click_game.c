@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 19:47:38 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/13 01:10:25 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/14 15:13:50 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,11 @@ void	mouse_scroll_game(t_core *core, int x, int y)
 		mlx_mouse_move(core->mlx, core->win, S_LENGHT -100, S_HEIGHT / 2);
 	if (x > S_LENGHT - 100)
 		mlx_mouse_move(core->mlx, core->win, 100, S_HEIGHT / 2);
-	core->tmp_rc->pl_angle += 0.03 * offset;
+	core->tmp_rc->pl_angle += 0.05 * offset;
 	if (core->tmp_rc->pl_angle > 2 * PI)
 		core->tmp_rc->pl_angle -= 2 * PI;
+	if (core->tmp_rc->pl_angle < 0)
+		core->tmp_rc->pl_angle += 2 * PI;
 	core->tmp_rc->pldelt_x = cos(core->tmp_rc->pl_angle);
 	core->tmp_rc->pldelt_y = sin(core->tmp_rc->pl_angle);
 	core->scroll_ingame = x;

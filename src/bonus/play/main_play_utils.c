@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:33:47 by tvacher           #+#    #+#             */
-/*   Updated: 2025/06/12 20:18:58 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/15 17:50:17 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ void	anim_door(t_core *core)
 	{
 		gettimeofday(&current, NULL);
 		core->door_anim->elapsed = ((current.tv_sec) * 1000 + (current.tv_usec) / 1000) - core->door_anim->start;
-		printf("%ld\n", core->door_anim->elapsed);
 		if (core->door_anim->elapsed >= 50)
 		{
 			draw_opening_door(core, core->door_anim->frame);

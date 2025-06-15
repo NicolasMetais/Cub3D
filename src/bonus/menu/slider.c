@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 14:39:58 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/12 16:55:19 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/15 00:13:22 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	slider_copy_pxl(t_img *slider_bar, t_img *tocopy, int px_start)
 	}
 }
 
-void	slider_assembler(t_img *slider_bar, t_img *corner_left,
+static void	slider_assembler(t_img *slider_bar, t_img *corner_left,
 			t_img *corner_right, t_img *slider)
 {
 	int	i;

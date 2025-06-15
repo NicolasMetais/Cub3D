@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 17:05:18 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/12 21:04:46 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/13 18:33:09 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,6 @@ bool	render_weapon(t_core *core)
 	}
 	transparency(core->game_img, core->weapon_buffer,
 		(core->game_img->width - core->weapon_buffer->width) / 2,
-		core->game_img->height - (core->weapon_buffer->height));
+		core->game_img->height - (core->weapon_buffer->height - 20));
 	return (true);
 }

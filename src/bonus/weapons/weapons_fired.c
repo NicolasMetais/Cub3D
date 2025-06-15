@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 13:18:48 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/13 15:58:22 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/15 17:50:22 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	fire_charged_weapons(t_core *core)
 	int	ammo_index;
 
 	ammo_index = core->player->weapon[core->player->curr_wpn].ammo_type;
-	if (!INFINITE_AMMOS)
+	if (!core->infinite_ammos)
 	{
 		if (core->player->ammo[ammo_index] >= 1)
 			core->player->ammo[ammo_index] -= 1;
@@ -102,7 +102,7 @@ void	weapon_fired(t_core *core)
 	ammo_index = core->player->weapon[core->player->curr_wpn].ammo_type;
 	if (core->player->ammo[ammo_index] == 0)
 		return ;
-	if (!INFINITE_AMMOS)
+	if (!core->infinite_ammos)
 	{
 		if (core->player->ammo[ammo_index] >= 1)
 			core->player->ammo[ammo_index] -= 1;
