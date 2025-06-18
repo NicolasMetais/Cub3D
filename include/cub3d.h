@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 01:54:17 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/15 01:58:01 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/18 01:39:03 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 # define GAME_SCALE 5
 
 # define SLIDER_SIZE 9
+
+# define PI 3.14159265359
 
 //WINDOW SIZE
 # define S_LENGHT 1600
@@ -44,6 +46,8 @@
 # include <stdbool.h>
 # include <stdio.h>
 # include <fcntl.h>
+# include <pthread.h>
+# include <unistd.h>
 # include <sys/time.h>
 # include <stdlib.h>
 # include <dirent.h>
@@ -54,6 +58,7 @@
 
 //LIBS
 # include "mlx.h"
+# include "raylib.h"
 # include "libft.h"
 
 //HEADERS
@@ -71,7 +76,6 @@
 
 //MATHS
 # include <math.h>
-# define PI 3.14159265359
 # define RAD 0.0174533
 
 typedef enum s_state
@@ -96,6 +100,7 @@ typedef struct s_core
 	void			*win;
 	char			*map_name;
 	char			**map;
+	char			*music_list[28];
 	int				map_height;
 	int				map_width;
 	int				map_start;
@@ -119,6 +124,7 @@ typedef struct s_core
 	int				x;
 	int				y;
 	int				scroll_offset;
+	Music			bg_music;
 	t_projectiles	proj;
 	t_impact		impact;
 	int				scroll_ingame;
@@ -133,7 +139,7 @@ typedef struct s_core
 	t_menu_img		*menu_img;
 	t_state			state;
 	t_hud_img		*hud_img;
-	t_fonts			*fonts;
+	t_fonts			*fontss;
 	t_textures		*textures;
 	t_colors		*colors;
 	t_pos			*spawn;
@@ -160,6 +166,10 @@ typedef struct s_scale_ctx
 bool			launch_game(t_core *core);
 //routine function executed every frame
 int				routine(void *param);
+//----------------MUSIC------------------
+void			music_init(t_core *core);
+bool			play_random_music(t_core *core);
+
 
 //---------------X11 shitty memory------------------
 //destroy a non-used img from my hashmap

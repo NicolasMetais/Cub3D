@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 15:44:46 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/15 02:09:47 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/18 01:48:37 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ bool	menus_init(t_core *core)
 	core->cursor[2] = 482;
 	core->cursor[3] = 1255;
 	core->cursor[4] = 1255;
-	core->fonts = gc_malloc(&core->gc, sizeof(t_fonts), STRUCT, "fonts");
-	if (!core->fonts)
+	core->fontss = gc_malloc(&core->gc, sizeof(t_fonts), STRUCT, "fonts");
+	if (!core->fontss)
 		return (false);
 	init_chars_nodes(core);
 	core->menu_img = gc_malloc(&core->gc, sizeof(t_menu_img),
@@ -99,6 +99,8 @@ bool	create_maps_words(t_core *core)
 //GAME LAUNCH
 bool	launch_game(t_core *core)
 {
+	music_init(core);
+	play_random_music(core);
 	if (!menus_init(core))
 		return (false);
 	if (!extract_maps_names(core))

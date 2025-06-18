@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 17:55:32 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/12 23:43:26 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/16 20:18:08 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,9 @@ bool	game_init(t_core *core)
 			&core->game_img->endian);
 	core->game_img->width = S_LENGHT;
 	core->game_img->height = S_HEIGHT;
-	core->fonts = gc_malloc(&core->gc,
+	core->fontss = gc_malloc(&core->gc,
 			sizeof(t_fonts), STRUCT, "fonts");
-	if (!core->fonts)
+	if (!core->fontss)
 		return (false);
 	core->redraw = true;
 	if (!player_init(core))
