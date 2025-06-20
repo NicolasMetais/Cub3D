@@ -5,7 +5,7 @@ MLX = lib/minilibx-linux/libmlx.a
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -Ilib/libft/include -Ilib/minilibx-linux -Iinclude -g3 -O3
 SRCS =	$(MAIN)$(EVENTS)$(IMG)$(MENU)$(UTILS)$(PARSING)$(GAME)$(WEAPONS)
-SRCS_BONUS =	$(MAIN_BONUS)$(EVENTS_BONUS)$(IMG_BONUS)$(MENU_BONUS)$(HUD_BONUS)$(UTILS_BONUS)$(PARSING)$(GAME_BONUS)$(WEAPONS_BONUS)
+SRCS_BONUS =	$(MAIN_BONUS)$(EVENTS_BONUS)$(IMG_BONUS)$(MENU_BONUS)$(HUD_BONUS)$(UTILS_BONUS)$(PARSING)$(GAME_BONUS)$(WEAPONS_BONUS)$(FOES_BONUS)
 
 MAIN =	src/mandatory/main.c \
 		src/mandatory/main_game.c \
@@ -138,6 +138,8 @@ GAME_BONUS =	src/bonus/play/main_play.c \
 		src/bonus/play/raycast.c \
 		src/bonus/play/raycast_utils.c \
 		src/bonus/play/doors.c \
+
+FOES_BONUS = src/bonus/foes/render_foes.c \
 
 OBJ_DIR = obj
 OBJ_DIR_BONUS = obj_bonus

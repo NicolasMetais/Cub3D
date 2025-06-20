@@ -19,29 +19,29 @@ bool	init_map_textures(t_core *core)
 		return (false);
 	if (!load_image(&core->textures->sky, "tmp_assets/SKY3.xpm", core, "4"))
 		return (false);
-	core->textures->tmp_north = gc_malloc(&core->gc,
+	core->textures->img_north = gc_malloc(&core->gc,
 			sizeof(t_img), STRUCT, "textu");
-	if (!core->textures->tmp_north)
+	if (!core->textures->img_north)
 		return (false);
-	if (!load_img(&core->textures->tmp_north, "tmp_assets/MWALL3_1.xpm", core))
+	if (!load_img(&core->textures->img_north, "tmp_assets/MWALL3_1.xpm", core))
 		return (false);
-	core->textures->tmp_south = gc_malloc(&core->gc,
+	core->textures->img_south = gc_malloc(&core->gc,
 			sizeof(t_img), STRUCT, "textu");
-	if (!core->textures->tmp_south)
+	if (!core->textures->img_south)
 		return (false);
-	if (!load_img(&core->textures->tmp_south, "tmp_assets/MWALL4_1.xpm", core))
+	if (!load_img(&core->textures->img_south, "tmp_assets/MWALL4_1.xpm", core))
 		return (false);
-	core->textures->tmp_east = gc_malloc(&core->gc,
+	core->textures->img_east = gc_malloc(&core->gc,
 			sizeof(t_img), STRUCT, "textu");
-	if (!core->textures->tmp_east)
+	if (!core->textures->img_east)
 		return (false);
-	if (!load_img(&core->textures->tmp_east, "tmp_assets/MWALL4_2.xpm", core))
+	if (!load_img(&core->textures->img_east, "tmp_assets/MWALL4_2.xpm", core))
 		return (false);
-	core->textures->tmp_west = gc_malloc(&core->gc,
+	core->textures->img_west = gc_malloc(&core->gc,
 			sizeof(t_img), STRUCT, "textu");
-	if (!core->textures->tmp_west)
+	if (!core->textures->img_west)
 		return (false);
-	if (!load_img(&core->textures->tmp_west, "tmp_assets/MWALL5_1.xpm", core))
+	if (!load_img(&core->textures->img_west, "tmp_assets/MWALL5_1.xpm", core))
 		return (false);
 	return (true);
 }

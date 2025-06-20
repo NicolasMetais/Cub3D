@@ -15,10 +15,10 @@
 void	cleanup_game(t_core *core)
 {
 	mlx_destroy_image(core->mlx, core->textures->sky->img);
-	mlx_destroy_image(core->mlx, core->textures->tmp_north->img);
-	mlx_destroy_image(core->mlx, core->textures->tmp_south->img);
-	mlx_destroy_image(core->mlx, core->textures->tmp_east->img);
-	mlx_destroy_image(core->mlx, core->textures->tmp_west->img);
+	mlx_destroy_image(core->mlx, core->textures->img_north->img);
+	mlx_destroy_image(core->mlx, core->textures->img_south->img);
+	mlx_destroy_image(core->mlx, core->textures->img_east->img);
+	mlx_destroy_image(core->mlx, core->textures->img_west->img);
 	mlx_destroy_image(core->mlx, core->game_img->img);
 	if (core->mlx && core->win)
 		mlx_destroy_window(core->mlx, core->win);

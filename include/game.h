@@ -37,28 +37,6 @@ typedef struct s_rc3d
 
 }	t_rc3d;
 
-typedef struct s_open_door
-{
-    float   line_h;
-    float   line_s;
-    float   line_e;
-    float     x;
-    float     y;
-    int     start;
-    int     end;
-    int     pixel_index;
-	float	tex_index;
-	float	step;
-	float	ty;
-	float	ty_off;
-	float	tx;
-	float	offset;
-	float 	tex_pos;
-	int		draw_start;
-	int		draw_end;
-
-}	t_open_door;
-
 //r.. = rays data, m.. = map data, pl.. = player data, dist* = rays lenght;
 
 typedef struct s_rc
@@ -120,17 +98,6 @@ typedef struct s_rc
 
 }	t_rc;
 
-typedef struct s_door_anim
-{
-	int		map_x;
-	int		map_y;
-	long	start;
-	long	elapsed;
-	int		frame;
-	int		active;
-	float	corrected_tx;
-}	t_door_anim;
-
 //start the game ;D
 bool			start_game(t_core *core);
 
@@ -177,9 +144,8 @@ void			get_draw_loop_data(t_core *core);
 void			print_3d_render(t_core *core);
 void			print_3d_vertical(t_core *core);
 void			print_3d_horizontal(t_core *core);
-void			draw_3d_door(t_core *core);
-void			get_door_start_data(t_core *core);
-void			get_door_data(t_core *core);
+void			print_open_doors(t_core *core);
+void			print_doors(t_core *core);
 
 // //Layers printing
 // void			print_background(t_core *core, int x, int y, int color);
