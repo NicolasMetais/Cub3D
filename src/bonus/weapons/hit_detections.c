@@ -52,7 +52,8 @@ bool	iswall(t_pos pos, t_core *core)
 		|| pos_y >= core->map_height)
 		return (true);
 	if (core->map[(int)pos_y][(int)pos_x] == '1'
-		|| core->map[(int)pos_y][(int)pos_x] == ' ')
+		|| core->map[(int)pos_y][(int)pos_x] == ' '
+		|| is_enemy(core, pos.x, pos.y))
 	{
 		return (true);
 	}

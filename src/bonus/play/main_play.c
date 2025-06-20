@@ -12,6 +12,35 @@
 
 #include "cub3d.h"
 
+float	get_player_start(t_core *core)
+{
+	int	x;
+	int	y;
+
+	y = (int)core->spawn->x;
+	x = (int)core->spawn->y;
+	if (core->map[x][y] == 'N')
+		return (3 * PI / 2);
+	else if (core->map[x][y] == 'E')
+		return (2 * PI);
+	else if (core->map[x][y] == 'W')
+		return (PI);
+	else
+		return (PI / 2);
+}
+
+static void	renderings(t_core *core)
+{
+	print_background(core);
+	draw_minimap_game(core);
+	get_raycast_data(core);
+	render_foes(core);
+	anim_death_foe(core);
+	impacts(core);
+	render_projectiles(core);
+	print_player(core, 0xFFFF00);
+}
+
 void	draw_3d(t_core *core)
 {
 	get_3d_based_data(core);
@@ -37,21 +66,16 @@ bool	start_game(t_core *core)
 	t_weapon	*wpn;
 
 	wpn = &core->player->weapon[core->player->curr_wpn];
-	print_background(core);
-	draw_minimap_game(core);
-	get_raycast_data(core);
-	impacts(core);
-	render_projectiles(core);
-	print_player(core, 0xFFFF00);
+	renderings(core);
 	sprite = core->player->weapon[core->player->curr_wpn].anim;
 	if (core->player->weapon[core->player->curr_wpn].lock)
 	{
-	if (core->player->firing)
-		update_loaded_animation(wpn, sprite, true, core);
-	else
-		update_loaded_animation(wpn, sprite, false, core);
-	if (!sprite->activ)
-		wpn->lock = false;
+		if (core->player->firing)
+			update_loaded_animation(wpn, sprite, true, core);
+		else
+			update_loaded_animation(wpn, sprite, false, core);
+		if (!sprite->activ)
+			wpn->lock = false;
 	}
 	fill_img_in_green(core->weapon_buffer);
 	if (!update_projectiles(core))

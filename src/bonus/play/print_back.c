@@ -15,28 +15,35 @@
 //check color parsing for ceiling and floor
 static void	print_floor(t_core *core, int pixel_index)
 {
-	core->game_img->addr[pixel_index + 0] = 0xAA;
-	core->game_img->addr[pixel_index + 1] = 0xAA;
-	core->game_img->addr[pixel_index + 2] = 0xAA;
-	// core->game_img->addr[pixel_index + 0] = core->colors->floor->data[0];
-	// core->game_img->addr[pixel_index + 1] = core->colors->floor->data[1];
-	// core->game_img->addr[pixel_index + 2] = core->colors->floor->data[2];
+	// core->game_img->addr[pixel_index + 0] = (char)core->textures->floor_colors[2] & 0xFF;
+	// core->game_img->addr[pixel_index + 1] = (char)core->textures->floor_colors[1] & 0xFF;
+	// core->game_img->addr[pixel_index + 2] = (char)core->textures->floor_colors[0] & 0xFF;
+	core->game_img->addr[pixel_index + 0] = (char)0;
+	core->game_img->addr[pixel_index + 1] = (char)10;
+	core->game_img->addr[pixel_index + 2] = (char)50;
 }
 
 static void	print_ceiling(t_core *core, int pixel_index, int i, int j)
 {
-	int	tex_index;
-	int	offset;
+	float	ang;
+	float	tex_offset;
+	int		tex_x;
+	int		tex_index;
 
-	offset = (int)((core->rc->pl_angle) * S_LENGHT) / 16;
-	tex_index = (j * core->textures->sky->line_len + (offset + i) * \
-	(core->textures->sky->bpp / 8));
+	ang = fmodf(core->rc->pl_angle, 2.0f * PI);
+	if (ang < 0)
+		ang += 2.0f * PI;
+	tex_offset = (ang / (2.0f * PI)) * (float)core->textures->sky->width;
+	tex_x = ((int)(tex_offset - i) % core->textures->sky->width + \
+	core->textures->sky->width) % core->textures->sky->width;
+	tex_index = j * core->textures->sky->line_len + tex_x * \
+	(core->textures->sky->bpp / 8);
 	core->game_img->addr[pixel_index + 0] = \
-	core->textures->sky->addr[(int)tex_index + 0];
+	core->textures->sky->addr[tex_index + 0];
 	core->game_img->addr[pixel_index + 1] = \
-	core->textures->sky->addr[(int)tex_index + 1];
+	core->textures->sky->addr[tex_index + 1];
 	core->game_img->addr[pixel_index + 2] = \
-	core->textures->sky->addr[(int)tex_index + 2];
+	core->textures->sky->addr[tex_index + 2];
 }
 
 void	print_background(t_core *core)

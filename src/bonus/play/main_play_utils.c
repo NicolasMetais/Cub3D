@@ -12,6 +12,35 @@
 
 #include "cub3d.h"
 
+static void	open_door(t_core *core)
+{
+	core->map[core->rc->front_y][core->rc->front_x] = '3';
+	if (core->map[core->rc->front_y - 1][core->rc->front_x] != '0' \
+		&& core->map[core->rc->front_y - 1][core->rc->front_x] != 'F')
+		core->map[core->rc->front_y - 1][core->rc->front_x] = '4';
+	if (core->map[core->rc->front_y + 1][core->rc->front_x] != '0' \
+		&& core->map[core->rc->front_y + 1][core->rc->front_x] != 'F')
+		core->map[core->rc->front_y + 1][core->rc->front_x] = '5';
+	if (core->map[core->rc->front_y][core->rc->front_x + 1] != '0' \
+		&& core->map[core->rc->front_y][core->rc->front_x + 1] != 'F')
+		core->map[core->rc->front_y][core->rc->front_x + 1] = '6';
+	if (core->map[core->rc->front_y][core->rc->front_x - 1] != '0' \
+		&& core->map[core->rc->front_y][core->rc->front_x - 1] != 'F')
+		core->map[core->rc->front_y][core->rc->front_x - 1] = '7';
+}
+
+static void	close_door(t_core *core)
+{
+	if (core->map[core->rc->front_y][core->rc->front_x] == '4')
+		core->map[core->rc->front_y + 1][core->rc->front_x] = '2';
+	if (core->map[core->rc->front_y][core->rc->front_x] == '5')
+		core->map[core->rc->front_y - 1][core->rc->front_x] = '2';
+	if (core->map[core->rc->front_y][core->rc->front_x] == '6')
+		core->map[core->rc->front_y][core->rc->front_x - 1] = '2';
+	if (core->map[core->rc->front_y][core->rc->front_x] == '7')
+		core->map[core->rc->front_y][core->rc->front_x + 1] = '2';
+}
+
 void	handle_door(t_core *core)
 {
 	if (core->rc->dist3[S_LENGHT / 2] < 24 && \
@@ -20,46 +49,29 @@ void	handle_door(t_core *core)
 		|| core->rc->front_wall == '7'))
 	{
 		if (core->map[core->rc->front_y][core->rc->front_x] == '2')
-		{
-			core->map[core->rc->front_y][core->rc->front_x] = '3';
-			if (core->map[core->rc->front_y - 1][core->rc->front_x] != '0')
-				core->map[core->rc->front_y - 1][core->rc->front_x] = '4';
-			if (core->map[core->rc->front_y + 1][core->rc->front_x] != '0')
-				core->map[core->rc->front_y + 1][core->rc->front_x] = '5';
-			if (core->map[core->rc->front_y][core->rc->front_x + 1] != '0')
-				core->map[core->rc->front_y][core->rc->front_x + 1] = '6';
-			if (core->map[core->rc->front_y][core->rc->front_x - 1] != '0')
-				core->map[core->rc->front_y][core->rc->front_x - 1] = '7';
-		}
+			open_door(core);
 		else if (core->rc->dist3[S_LENGHT / 2] > 9)
-		{
-			if (core->map[core->rc->front_y][core->rc->front_x] == '4')
-				core->map[core->rc->front_y + 1][core->rc->front_x] = '2';
-			if (core->map[core->rc->front_y][core->rc->front_x] == '5')
-				core->map[core->rc->front_y - 1][core->rc->front_x] = '2';
-			if (core->map[core->rc->front_y][core->rc->front_x] == '6')
-				core->map[core->rc->front_y][core->rc->front_x - 1] = '2';
-			if (core->map[core->rc->front_y][core->rc->front_x] == '7')
-				core->map[core->rc->front_y][core->rc->front_x + 1] = '2';
-		}
+			close_door(core);
 	}
 }
-
+//check ft_split allocation
 bool	init_map_textures(t_core *core)
 {
+	// core->textures->floor_colors = ft_split(core->textures->floor_color, ',');
 	core->textures->path_sky = "/tmp_assets/SKY3.xpm";
 	core->textures->path_door = "/tmp_assets/DOOR2_4.xpm";
 	core->textures->path_open_door = "/tmp_assets/OPEN_DOOR2_4.xpm";
-	core->textures->open_doors = (t_img *)hashmap_get(&core->hashmap, "Open_Door");
+	core->textures->open_doors = (t_img *)hashmap_get(&core->hashmap, \
+	"Open_Door");
 	core->textures->door = (t_img *)hashmap_get(&core->hashmap, "Door");
 	core->textures->sky = (t_img *)hashmap_get(&core->hashmap, "Sky");
-	core->textures->tmp_north = (t_img *)hashmap_get(&core->hashmap, \
+	core->textures->img_north = (t_img *)hashmap_get(&core->hashmap, \
 	"Wall_north");
-	core->textures->tmp_south = (t_img *)hashmap_get(&core->hashmap, \
+	core->textures->img_south = (t_img *)hashmap_get(&core->hashmap, \
 	"Wall_south");
-	core->textures->tmp_east = (t_img *)hashmap_get(&core->hashmap, \
+	core->textures->img_east = (t_img *)hashmap_get(&core->hashmap, \
 	"Wall_east");
-	core->textures->tmp_west = (t_img *)hashmap_get(&core->hashmap, \
+	core->textures->img_west = (t_img *)hashmap_get(&core->hashmap, \
 	"Wall_west");
 	return (true);
 }

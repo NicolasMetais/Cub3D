@@ -132,6 +132,8 @@ bool	game_init(t_core *core)
 		return (false);
 	if (!more_buffers(core))
 		return (false);
+	if (!init_foes(core))
+		return (false);
 	mlx_clear_window(core->mlx, core->win);
 	core->hud_redraw = true;
 	return (true);

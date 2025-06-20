@@ -95,6 +95,19 @@ static void	draw_tile(t_core *core, int x, int y, int color)
 	}
 }
 
+void	is_enemy_tile(t_core *core, int tile_x, int tile_y)
+{
+	t_foes	*enemy;
+
+	enemy = core->foes;
+	while (enemy)
+	{
+		if (enemy->foe_x == tile_x && enemy->foe_y == tile_y)
+			draw_tile(core, tile_x, tile_y, 0xFF0000);
+		enemy = enemy->next;
+	}
+}
+
 void	draw_minimap_game(t_core *core)
 {
 	int	x;
@@ -112,6 +125,7 @@ void	draw_minimap_game(t_core *core)
 		{
 			tile_x = get_map_tile_x(core, x);
 			tile_y = get_map_tile_y(core, y);
+			is_enemy_tile(core, tile_x, tile_y);
 			if (core->map[y][x] == '1' || core->map[y][x] == '2')
 				draw_tile(core, tile_x, tile_y, 0xFFFFFF);
 			else if (core->map[y][x] != ' ' && core->map[y][x] != 9)

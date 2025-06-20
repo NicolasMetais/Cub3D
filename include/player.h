@@ -47,6 +47,9 @@ typedef struct s_player
 
 bool	game_init(t_core *core);
 
+//get player start orientation
+float	get_player_start(t_core *core);
+
 //player_move
 void	game_keypress(t_core *core, double delta_time);
 void	on_keyrelease_game(int key, t_core *core);

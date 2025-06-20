@@ -66,9 +66,11 @@
 # include "menu.h"
 # include "hud.h"
 # include "player.h"
+# include "foes.h"
 
 //MATHS
 # include <math.h>
+# include <time.h>
 # define PI 3.14159265359
 # define RAD 0.0174533
 
@@ -119,6 +121,7 @@ typedef struct s_core
 	t_img			*weapon_buffer;
 	t_img			*pause_buffer;
 	t_player		*player;
+	t_foes			*foes;
 	t_menu_maps		*menu_maps;
 	t_hashmap		hashmap;
 	t_hashmap		hashmap_sprites;
