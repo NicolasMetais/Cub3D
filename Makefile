@@ -2,10 +2,11 @@ NAME = cub3D
 NAME_BONUS = cub3D_bonus
 LIB = lib/libft/libft.a
 MLX = lib/minilibx-linux/libmlx.a
+RAYLIB = lib/raylib-4.5.0_linux_amd64/lib/libraylib.a
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -Ilib/libft/include -Ilib/minilibx-linux -Iinclude -g3 -O3
+CFLAGS = -Wall -Wextra -Werror -Ilib/raylib-4.5.0_linux_amd64/include -Ilib/libft/include -Ilib/minilibx-linux -Iinclude -g3 -O3
 SRCS =	$(MAIN)$(EVENTS)$(IMG)$(MENU)$(UTILS)$(PARSING)$(GAME)$(WEAPONS)
-SRCS_BONUS =	$(MAIN_BONUS)$(EVENTS_BONUS)$(IMG_BONUS)$(MENU_BONUS)$(HUD_BONUS)$(UTILS_BONUS)$(PARSING)$(GAME_BONUS)$(WEAPONS_BONUS)$(FOES_BONUS)
+SRCS_BONUS =	$(MAIN_BONUS)$(EVENTS_BONUS)$(IMG_BONUS)$(MENU_BONUS)$(HUD_BONUS)$(UTILS_BONUS)$(PARSING)$(GAME_BONUS)$(WEAPONS_BONUS)$(MUSIC_BONUS)$(FOES_BONUS)
 
 MAIN =	src/mandatory/main.c \
 		src/mandatory/main_game.c \
@@ -13,12 +14,14 @@ MAIN =	src/mandatory/main.c \
 		src/mandatory/game_init.c \
 		src/mandatory/image_loader.c \
 
+MUSIC_BONUS =	src/bonus/musics/music_inits.c \
+				src/bonus/musics/musics.c \
+
 EVENTS =	src/mandatory/events/keyboard/keypress.c \
 			src/mandatory/events/keyboard/keypress_game.c \
 			src/mandatory/events/keyboard/keyrelease.c \
 			src/mandatory/events/mouse/mouse_direction.c \
 			src/mandatory/events/cross_handler.c \
-			
 
 IMG =	src/mandatory/destroy_img.c \
 
@@ -90,6 +93,9 @@ MENU_BONUS =	src/bonus/menu/render_menu.c \
 		src/bonus/char_setup/build_words_utils.c \
 		src/bonus/menu/render_pause_menu.c \
 		src/bonus/menu/render_pause_options.c \
+		src/bonus/menu/slider_init.c \
+		src/bonus/menu/small_slider.c \
+
 
 HUD_BONUS	=	src/bonus/hud/render_hud.c \
 		src/bonus/hud/head_hud.c \
@@ -157,7 +163,7 @@ $(NAME): $(OBJS) $(LIB) $(MLX)
 bonus: $(NAME_BONUS)
 
 $(NAME_BONUS): $(OBJS_BONUS) $(LIB) $(MLX)
-	$(CC) $(OBJS_BONUS) $(LIB) $(MLX) -lX11 -lXext -lm -o $(NAME_BONUS)
+	$(CC) $(OBJS_BONUS) $(LIB) $(MLX) -lGL -lm -lpthread -ldl -lX11 -lXext $(RAYLIB) -o $(NAME_BONUS)
 
 $(LIB):
 	$(MAKE) -C lib/libft
@@ -175,8 +181,8 @@ $(OBJ_DIR_BONUS)/src/%.o: src/%.c
 
 -include $(OBJS:.o=.d)
 
-f: re
-	$(CC) $(OBJS) $(LIB) $(MLX) -lX11 -lXext -lm -o $(NAME) -fsanitize=address
+f: fclean bonus
+	$(CC) $(OBJS_BONUS) $(LIB) $(MLX) -lX11 -lXext -lm -o $(NAME_BONUS) -fsanitize=address
 
 clean:
 	rm -rf $(OBJ_DIR)

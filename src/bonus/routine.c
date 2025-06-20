@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 15:49:25 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/12 20:19:26 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/18 21:46:26 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,13 @@ int	routine(void *param)
 
 	core = (t_core *)param;
 	sprite = NULL;
+	UpdateMusicStream(core->bg_music);
+	if (!IsMusicStreamPlaying(core->bg_music))
+	{
+		printf("changement de music\n");
+		UnloadMusicStream(core->bg_music);
+		play_random_music(core);
+	}
 	if (core->state == START_MENU || core->state == OPTIONS_MENU
 		|| core->state == MAPS_MENU)
 	{

@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 16:53:24 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/13 02:16:19 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/17 20:22:51 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,7 @@ int	handle_keypress(int key, void *param)
 		cleanup_game(core);
 	else if (key == XK_Escape && core->state == GAME)
 	{
+		mlx_mouse_show(core->mlx, core->win);
 		if (!create_pause_bg(core))
 			return (0);
 		core->redraw = true;

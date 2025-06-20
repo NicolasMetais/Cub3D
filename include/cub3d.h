@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 01:54:17 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/13 02:18:17 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/20 14:01:55 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 
 # define SLIDER_SIZE 9
 
+# define PI 3.14159265359
+
 //WINDOW SIZE
 # define S_LENGHT 1600
 # define S_HEIGHT 1000
@@ -38,10 +40,14 @@
 //VISIBLE SCROLLING ELEMENTS
 # define VISIBLE 4
 
+# define SOUND 50
+
 //LIBC
 # include <stdbool.h>
 # include <stdio.h>
 # include <fcntl.h>
+# include <pthread.h>
+# include <unistd.h>
 # include <sys/time.h>
 # include <stdlib.h>
 # include <dirent.h>
@@ -52,6 +58,7 @@
 
 //LIBS
 # include "mlx.h"
+# include "raylib.h"
 # include "libft.h"
 
 //HEADERS
@@ -72,6 +79,10 @@
 # include <math.h>
 # include <time.h>
 # define PI 3.14159265359
+# include "sounds.h"
+
+//MATHS
+# include <math.h>
 # define RAD 0.0174533
 
 typedef enum s_state
@@ -96,27 +107,36 @@ typedef struct s_core
 	void			*win;
 	char			*map_name;
 	char			**map;
+	char			*music_list[28];
 	int				map_height;
 	int				map_width;
 	int				map_start;
 	int				menu_option;
 	bool			redraw;
-	int				y_pos[4];
+	int				y_pos[6];
 	char			tmp[2];
 	int				enter;
 	int				fov;
+	int				sound;
 	float			fov_ratio;
 	int				maps_nb;
 	char			*loaded_map;
 	bool			isclicked;
 	bool			map_changed;
 	bool			hud_redraw;
+	int				active_slider;
+	int				speed;
+	int				godmod;
+	int				infinite_ammos;
 	int				x;
 	int				y;
 	int				scroll_offset;
+	Music			bg_music;
 	t_projectiles	proj;
 	t_impact		impact;
 	int				scroll_ingame;
+	int				cursor[5];
+	t_sounds		sound_list;
 	t_img			*game_img;
 	t_img			*weapon_buffer;
 	t_img			*pause_buffer;
@@ -128,7 +148,7 @@ typedef struct s_core
 	t_menu_img		*menu_img;
 	t_state			state;
 	t_hud_img		*hud_img;
-	t_fonts			*fonts;
+	t_fonts			*fontss;
 	t_textures		*textures;
 	t_colors		*colors;
 	t_pos			*spawn;
@@ -155,6 +175,10 @@ typedef struct s_scale_ctx
 bool			launch_game(t_core *core);
 //routine function executed every frame
 int				routine(void *param);
+//----------------MUSIC------------------
+void			music_init(t_core *core);
+bool			play_random_music(t_core *core);
+
 
 //---------------X11 shitty memory------------------
 //destroy a non-used img from my hashmap

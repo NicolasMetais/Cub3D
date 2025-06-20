@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 15:25:43 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/08 19:11:28 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/16 20:17:35 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,12 +112,12 @@ bool	build_words(t_core *core, t_img **img, t_font_size size, char *word)
 	height = 0;
 	i = -1;
 	if (size == SMALL)
-		core->fonts->state = SMALL;
+		core->fontss->state = SMALL;
 	if (size == REGULAR)
-		core->fonts->state = REGULAR;
+		core->fontss->state = REGULAR;
 	if (size == BIG)
-		core->fonts->state = BIG;
-	get_img_size(core->fonts, word, &width, &height);
+		core->fontss->state = BIG;
+	get_img_size(core->fontss, word, &width, &height);
 	(*img)->img = mlx_new_image(core->mlx, width, height);
 	if (!(*img)->img)
 		return (false);
@@ -126,7 +126,7 @@ bool	build_words(t_core *core, t_img **img, t_font_size size, char *word)
 	(*img)->addr = mlx_get_data_addr((*img)->img, &(*img)->bpp,
 			&(*img)->line_len, &(*img)->endian);
 	fill_img_in_green(*img);
-	if (!write_words(img, core->fonts, word, core))
+	if (!write_words(img, core->fontss, word, core))
 		return (false);
 	return (true);
 }

@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 16:33:30 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/13 16:01:13 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/18 20:10:53 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ typedef struct s_weapon
 	t_sprite		*anim;
 	t_sprite		*fire;
 	bool			lock;
+	Sound			firing;
 }	t_weapon;
 
 bool	weapons_init(t_weapon weapon[9], t_core *core);

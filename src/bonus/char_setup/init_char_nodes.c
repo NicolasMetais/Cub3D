@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/01 02:48:04 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/02 00:34:41 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/16 20:17:59 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ const t_font	*init_chars_big(void)
 
 void	init_chars_nodes(t_core *core)
 {
-	core->fonts->small = init_chars_small();
-	core->fonts->regular = init_chars_regular();
-	core->fonts->big = init_chars_big();
+	core->fontss->small = init_chars_small();
+	core->fontss->regular = init_chars_regular();
+	core->fontss->big = init_chars_big();
 }

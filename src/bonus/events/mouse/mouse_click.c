@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 14:49:13 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/13 02:16:52 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/15 17:07:29 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,47 @@ void	mouse_click_maps_menu(t_core *core)
 			return ;
 }
 
+bool	on_off_cursors_update(t_slider *slider, int i)
+{
+	if (i == 3 || i == 4)
+	{
+		if (*slider->int_var == 0)
+		{
+			*slider->int_var = 1;
+			*slider->x_var = slider->slider_max;
+		}
+		else
+		{
+			*slider->int_var = 0;
+			*slider->x_var = slider->slider_min;
+		}
+		return (true);
+	}
+	return (false);
+}
+
 void	mouse_click_options_menu(int x, int y, t_core *core)
 {
-	if (x >= core->x && x <= core->x + core->menu_img->cursor->width
-		&& y >= core->y_pos[0] + 5 && y <= core->y_pos[0]
-		+ 5 + core->menu_img->cursor->height)
+	t_slider	*slider;
+	int			i;
+	int			cursor_x;
+	int			cursor_y;
+
+	i = -1;
+	while (++i < 5)
 	{
-		core->isclicked = true;
+		slider = &core->menu_img->sliders[i];
+		cursor_x = *slider->x_var;
+		cursor_y = core->y_pos[i] + 5;
+		if (x >= cursor_x && x <= cursor_x + core->menu_img->cursor->width
+			&& y >= cursor_y && y <= cursor_y
+			+ core->menu_img->cursor->height)
+		{
+			if (on_off_cursors_update(slider, i))
+				return ;
+			core->isclicked = true;
+			core->active_slider = i;
+		}
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 02:08:56 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/13 02:16:30 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/20 12:52:51 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ void	free_impact(t_core *core)
 
 void	cleanup_game(t_core *core)
 {
+	unload_all_sound(core);
+	CloseAudioDevice();
 	free_impact(core);
 	//free projectiles ossi
 	destroy_img(core);
