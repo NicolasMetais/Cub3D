@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 03:53:57 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/12 18:50:30 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/20 13:04:12 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ bool	update_animation(t_sprite *sprite)
 	return (false);
 }
 
-//UPDATE THE SPRITE EVERY X MILISEC LIKE PHILOSOPHER WITH A RANDOM FRAM
+//UPDATE THE SPRITE EVERY X MILISEC LIKE PHILOSOPHER WITH A RANDOM FRAME
 bool	update_sprite_random(t_sprite *sprite)
 {
 	struct timeval			current;

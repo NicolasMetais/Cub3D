@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 02:10:48 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/15 18:27:40 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/18 19:04:21 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	update_slider_cursor(t_core *core, t_slider *slider, int y, t_img *bg);
 //slider inits
 bool	sliders_init(t_core *core, int width);
 //update var on sliders
-void	slider_updater(t_pos pos, int x, t_slider *slider);
+void	slider_updater(t_pos pos, int x, t_slider *slider, t_core *core);
 //modular percent rendering with numbers for hud and options
 bool	render_percent(t_core *core, char *percent,
 			int render, t_img *bg);

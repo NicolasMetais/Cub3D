@@ -15,7 +15,7 @@ MAIN =	src/mandatory/main.c \
 		src/mandatory/image_loader.c \
 
 MUSIC_BONUS =	src/bonus/musics/music_inits.c \
-				src/bonus/musics/play_random_music.c \
+				src/bonus/musics/musics.c \
 
 EVENTS =	src/mandatory/events/keyboard/keypress.c \
 			src/mandatory/events/keyboard/keypress_game.c \

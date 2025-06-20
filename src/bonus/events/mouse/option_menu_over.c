@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 14:01:54 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/15 18:36:16 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/18 19:06:40 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ bool	render_percent(t_core *core, char *percent, int render, t_img *bg)
 	return (true);
 }
 
-void	slider_updater(t_pos pos, int x, t_slider *slider)
+void	slider_updater(t_pos pos, int x, t_slider *slider, t_core *core)
 {
 	float	ratio;
 	float	slider_width;
@@ -54,7 +54,8 @@ void	slider_updater(t_pos pos, int x, t_slider *slider)
 	*slider->int_var = slider->min_val + ratio
 		* (slider->max_val - slider->min_val);
 	*slider->x_var = pos.x + ratio * slider_width;
-
+	if (ft_strcmp(slider->label, "SOUND") == 0)
+		SetMusicVolume(core->bg_music, ratio);
 }
 
 bool	percent_option_rendering(t_core *core, t_slider	*slider, t_img *bg)
@@ -135,5 +136,5 @@ void	options_menu_hover(int x, int y, t_core *core)
 	slider = &core->menu_img->sliders[core->active_slider];
 	pos.x = slider->slider_min;
 	pos.y = slider->slider_max;
-	slider_updater(pos, x, slider);
+	slider_updater(pos, x, slider, core);
 }

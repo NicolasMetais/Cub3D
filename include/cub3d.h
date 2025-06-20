@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 01:54:17 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/18 01:39:03 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/18 20:54:26 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@
 # include "menu.h"
 # include "hud.h"
 # include "player.h"
+# include "sounds.h"
 
 //MATHS
 # include <math.h>
@@ -129,6 +130,7 @@ typedef struct s_core
 	t_impact		impact;
 	int				scroll_ingame;
 	int				cursor[5];
+	t_sounds		sound_list;
 	t_img			*game_img;
 	t_img			*weapon_buffer;
 	t_img			*pause_buffer;

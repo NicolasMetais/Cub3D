@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 10:27:18 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/13 16:02:19 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/18 20:27:43 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ bool	shoot_pistol(t_core *core, float angle)
 	float	fire;
 
 	fire = 0.0;
+	play_sound(core, core->player->weapon[core->player->curr_wpn].firing);
 	while (fire < 9999)
 	{
 		pos.x = core->tmp_rc->pl_x + cos(angle) * (fire - 0.1);
@@ -37,6 +38,7 @@ bool	shoot_projectile(t_core *core, float angle)
 {
 	t_pos	pos;
 
+	play_sound(core, core->player->weapon[core->player->curr_wpn].firing);
 	pos.x = core->tmp_rc->pl_x + cos(angle) * 3;
 	pos.y = core->tmp_rc->pl_y + sin(angle) * 3;
 	if (!new_proj(core, pos.x, pos.y, angle))

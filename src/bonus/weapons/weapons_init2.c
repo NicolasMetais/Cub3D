@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 19:15:56 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/11 14:32:22 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/20 13:49:22 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ bool	weapons_init_five(t_weapon weapon[9], t_core *core)
 	weapon[6].fire = hashmap_get(&core->hashmap_sprites, "plasmarifle_fire");
 	if (!weapon[6].fire)
 		return (false);
+	weapon[6].firing = core->sound_list.plasma;
 	weapon[7].ammo_type = 3;
 	weapon[7].damage.min = 2060;
 	weapon[7].damage.max = 4200;
@@ -65,6 +66,7 @@ bool	weapons_init_five(t_weapon weapon[9], t_core *core)
 	weapon[7].fire = hashmap_get(&core->hashmap_sprites, "BFG9000_fire");
 	if (!weapon[7].fire)
 		return (false);
+	weapon[7].firing = core->sound_list.bfg;
 	if (!animation_options_init(weapon, core))
 		return (false);
 	return (true);

@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 19:47:38 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/14 15:13:50 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/18 20:34:12 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,9 @@ void	mouse_click_game(t_core *core, int button)
 	if (button == 1)
 	{
 		weapon = &core->player->weapon[core->player->curr_wpn];
+		if (core->player->curr_wpn == 0 || core->player->curr_wpn == 1)
+			play_sound(core,
+				core->player->weapon[core->player->curr_wpn].firing);
 		if ((core->player->ammo[weapon->ammo_type] > 0 && !weapon->lock)
 			|| core->player->curr_wpn <= 1)
 		{

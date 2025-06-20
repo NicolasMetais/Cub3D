@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 15:44:46 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/18 01:48:37 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/18 21:53:41 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,11 +102,11 @@ bool	launch_game(t_core *core)
 	music_init(core);
 	play_random_music(core);
 	if (!menus_init(core))
-		return (false);
+	return (false);
 	if (!extract_maps_names(core))
-		return (false);
+	return (false);
 	if (!create_maps_words(core))
-		return (false);
+	return (false);
 	core->fov = 90;
 	core->win = mlx_new_window(core->mlx, S_LENGHT, S_HEIGHT, "Cub3D");
 	if (!core->win)
