@@ -14,56 +14,56 @@
 
 void	print_3d_vertical(t_core *core)
 {
-	if (core->tmp_rc->ra > PI)
+	if (core->rc->ra > PI)
 	{
-		core->tmp_3d->tex_index = (int)core->tmp_3d->ty * \
-		core->textures->tmp_east->line_len + (int)core->tmp_3d->tx * \
+		core->rc3d->tex_index = (int)core->rc3d->ty * \
+		core->textures->tmp_east->line_len + (int)core->rc3d->tx * \
 		(core->textures->tmp_east->bpp / 8);
-		core->game_img->addr[core->tmp_3d->pixel_index + 0] = \
-		core->textures->tmp_east->addr[(int)core->tmp_3d->tex_index + 0];
-		core->game_img->addr[core->tmp_3d->pixel_index + 1] = \
-		core->textures->tmp_east->addr[(int)core->tmp_3d->tex_index + 1];
-		core->game_img->addr[core->tmp_3d->pixel_index + 2] = \
-		core->textures->tmp_east->addr[(int)core->tmp_3d->tex_index + 2];
+		core->game_img->addr[core->rc3d->pixel_index + 0] = \
+		core->textures->tmp_east->addr[(int)core->rc3d->tex_index + 0];
+		core->game_img->addr[core->rc3d->pixel_index + 1] = \
+		core->textures->tmp_east->addr[(int)core->rc3d->tex_index + 1];
+		core->game_img->addr[core->rc3d->pixel_index + 2] = \
+		core->textures->tmp_east->addr[(int)core->rc3d->tex_index + 2];
 	}
 	else
 	{
-		core->tmp_3d->tex_index = (int)core->tmp_3d->ty * \
-		core->textures->tmp_north->line_len + (int)core->tmp_3d->tx * \
+		core->rc3d->tex_index = (int)core->rc3d->ty * \
+		core->textures->tmp_north->line_len + (int)core->rc3d->tx * \
 		(core->textures->tmp_north->bpp / 8);
-		core->game_img->addr[core->tmp_3d->pixel_index + 0] = \
-		core->textures->tmp_north->addr[(int)core->tmp_3d->tex_index + 0];
-		core->game_img->addr[core->tmp_3d->pixel_index + 1] = \
-		core->textures->tmp_north->addr[(int)core->tmp_3d->tex_index + 1];
-		core->game_img->addr[core->tmp_3d->pixel_index + 2] = \
-		core->textures->tmp_north->addr[(int)core->tmp_3d->tex_index + 2];
+		core->game_img->addr[core->rc3d->pixel_index + 0] = \
+		core->textures->tmp_north->addr[(int)core->rc3d->tex_index + 0];
+		core->game_img->addr[core->rc3d->pixel_index + 1] = \
+		core->textures->tmp_north->addr[(int)core->rc3d->tex_index + 1];
+		core->game_img->addr[core->rc3d->pixel_index + 2] = \
+		core->textures->tmp_north->addr[(int)core->rc3d->tex_index + 2];
 	}
 }
 
 void	print_3d_horizontal(t_core *core)
 {
-	if (core->tmp_rc->ra > PI / 2 && core->tmp_rc->ra < 3 * PI / 2)
+	if (core->rc->ra > PI / 2 && core->rc->ra < 3 * PI / 2)
 	{
-		core->tmp_3d->tex_index = (int)core->tmp_3d->ty * \
-		core->textures->tmp_west->line_len + (int)core->tmp_3d->tx * \
+		core->rc3d->tex_index = (int)core->rc3d->ty * \
+		core->textures->tmp_west->line_len + (int)core->rc3d->tx * \
 		(core->textures->tmp_west->bpp / 8);
-		core->game_img->addr[core->tmp_3d->pixel_index + 0] = \
-		core->textures->tmp_west->addr[(int)core->tmp_3d->tex_index + 0];
-		core->game_img->addr[core->tmp_3d->pixel_index + 1] = \
-		core->textures->tmp_west->addr[(int)core->tmp_3d->tex_index + 1];
-		core->game_img->addr[core->tmp_3d->pixel_index + 2] = \
-		core->textures->tmp_west->addr[(int)core->tmp_3d->tex_index + 2];
+		core->game_img->addr[core->rc3d->pixel_index + 0] = \
+		core->textures->tmp_west->addr[(int)core->rc3d->tex_index + 0];
+		core->game_img->addr[core->rc3d->pixel_index + 1] = \
+		core->textures->tmp_west->addr[(int)core->rc3d->tex_index + 1];
+		core->game_img->addr[core->rc3d->pixel_index + 2] = \
+		core->textures->tmp_west->addr[(int)core->rc3d->tex_index + 2];
 	}
 	else
 	{
-		core->tmp_3d->tex_index = (int)core->tmp_3d->ty * \
-		core->textures->tmp_south->line_len + (int)core->tmp_3d->tx * \
+		core->rc3d->tex_index = (int)core->rc3d->ty * \
+		core->textures->tmp_south->line_len + (int)core->rc3d->tx * \
 		(core->textures->tmp_south->bpp / 8);
-		core->game_img->addr[core->tmp_3d->pixel_index + 0] = \
-		core->textures->tmp_south->addr[(int)core->tmp_3d->tex_index + 0];
-		core->game_img->addr[core->tmp_3d->pixel_index + 1] = \
-		core->textures->tmp_south->addr[(int)core->tmp_3d->tex_index + 1];
-		core->game_img->addr[core->tmp_3d->pixel_index + 2] = \
-		core->textures->tmp_south->addr[(int)core->tmp_3d->tex_index + 2];
+		core->game_img->addr[core->rc3d->pixel_index + 0] = \
+		core->textures->tmp_south->addr[(int)core->rc3d->tex_index + 0];
+		core->game_img->addr[core->rc3d->pixel_index + 1] = \
+		core->textures->tmp_south->addr[(int)core->rc3d->tex_index + 1];
+		core->game_img->addr[core->rc3d->pixel_index + 2] = \
+		core->textures->tmp_south->addr[(int)core->rc3d->tex_index + 2];
 	}
 }

@@ -19,14 +19,14 @@ void	print_miscellaneous(t_core *core, int color)
 	int	pixel_index;
 
 	if (core->map_height > core->map_width)
-		core->tmp_rc->map_size = 32 * 8;
+		core->rc->map_size = 32 * 8;
 	else
-		core->tmp_rc->map_size = 32 * 8;
+		core->rc->map_size = 32 * 8;
 	i = 0;
-	while (i < core->tmp_rc->map_size + 8)
+	while (i < core->rc->map_size + 8)
 	{
 		j = 0;
-		while (j < core->tmp_rc->map_size + 8)
+		while (j < core->rc->map_size + 8)
 		{
 			pixel_index = j * core->game_img->line_len + i * \
 			(core->game_img->bpp / 8);
@@ -48,10 +48,10 @@ static void	draw_map_back(t_core *core, int color)
 	int	pixel_index;
 
 	i = 0;
-	while (i < core->tmp_rc->map_size)
+	while (i < core->rc->map_size)
 	{
 		j = 0;
-		while (j < core->tmp_rc->map_size)
+		while (j < core->rc->map_size)
 		{
 			pixel_index = j * core->game_img->line_len + i * \
 			(core->game_img->bpp / 8);

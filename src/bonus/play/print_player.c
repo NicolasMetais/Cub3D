@@ -18,11 +18,11 @@ void	print_player(t_core *core, int color)
 	int	y;
 	int	px_index;
 
-	y = core->tmp_rc->map_size / 2;
-	while (y < core->tmp_rc->map_size / 2 + 4)
+	y = core->rc->map_size / 2;
+	while (y < core->rc->map_size / 2 + 4)
 	{
-		x = core->tmp_rc->map_size / 2;
-		while (x < core->tmp_rc->map_size / 2 + 4)
+		x = core->rc->map_size / 2;
+		while (x < core->rc->map_size / 2 + 4)
 		{
 			px_index = y * core->game_img->line_len + x * \
 			(core->game_img->bpp / 8);
@@ -48,8 +48,8 @@ void	draw_player_line(t_core *core, int color)
 	i = 0;
 	while (i < 8)
 	{
-		px = core->tmp_rc->map_size / 2 + cos(core->tmp_rc->pl_angle) * i;
-		py = core->tmp_rc->map_size / 2 + sin(core->tmp_rc->pl_angle) * i;
+		px = core->rc->map_size / 2 + cos(core->rc->pl_angle) * i;
+		py = core->rc->map_size / 2 + sin(core->rc->pl_angle) * i;
 		if (px >= 0 && py >= 0)
 		{
 			px_index = py * core->game_img->line_len + px * \
@@ -69,24 +69,24 @@ void	print_rays(t_core *core, int color)
 	int	i;
 	int	px_index;
 
-	if (core->tmp_rc->r == core->tmp_rc->max_r / 2)
+	if (core->rc->r == core->rc->max_r / 2)
 	{
 		i = 0;
 		color = 0xFF0000;
 	}
 	else
-		i = (int)core->tmp_rc->dist3[core->tmp_rc->r] - 2;
-	while (i < (int)core->tmp_rc->dist3[core->tmp_rc->r] + 2)
+		i = (int)core->rc->dist3[core->rc->r] - 2;
+	while (i < (int)core->rc->dist3[core->rc->r] + 2)
 	{
-		core->tmp_rc->px = core->tmp_rc->map_size / 2 + \
-		cos(core->tmp_rc->ra) * i;
-		core->tmp_rc->py = core->tmp_rc->map_size / 2 + \
-		sin(core->tmp_rc->ra) * i;
-		if (core->tmp_rc->px >= 0 && core->tmp_rc->py >= 0 \
-			&& core->tmp_rc->px < 32 * 8 - 8)
+		core->rc->px = core->rc->map_size / 2 + \
+		cos(core->rc->ra) * i;
+		core->rc->py = core->rc->map_size / 2 + \
+		sin(core->rc->ra) * i;
+		if (core->rc->px >= 0 && core->rc->py >= 0 \
+			&& core->rc->px < 32 * 8 - 8)
 		{
-			px_index = core->tmp_rc->py * core->game_img->line_len + \
-			core->tmp_rc->px * (core->game_img->bpp / 8);
+			px_index = core->rc->py * core->game_img->line_len + \
+			core->rc->px * (core->game_img->bpp / 8);
 			core->game_img->addr[px_index + 0] = (color >> 0) & 0xFF;
 			core->game_img->addr[px_index + 1] = (color >> 8) & 0xFF;
 			core->game_img->addr[px_index + 2] = (color >> 16) & 0xFF;
