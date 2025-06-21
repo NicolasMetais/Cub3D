@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 01:54:17 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/21 16:18:24 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/21 17:34:31 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 # define TILE 64
 //FOV
 # define FOV_MIN 60
-# define FOV_MAX 120
-# define FOV_DEFAULT 90
+# define FOV_MAX 90
+# define FOV_DEFAULT 60
 
 //SCALE IMAGE RENDERING
 # define GAME_SCALE 5
