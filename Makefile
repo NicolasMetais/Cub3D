@@ -6,7 +6,7 @@ RAYLIB = lib/raylib-4.5.0_linux_amd64/lib/libraylib.a
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -Ilib/raylib-4.5.0_linux_amd64/include -Ilib/libft/include -Ilib/minilibx-linux -Iinclude -g3 -O3
 SRCS =	$(MAIN)$(EVENTS)$(IMG)$(MENU)$(UTILS)$(PARSING)$(GAME)$(WEAPONS)
-SRCS_BONUS =	$(MAIN_BONUS)$(EVENTS_BONUS)$(IMG_BONUS)$(MENU_BONUS)$(HUD_BONUS)$(UTILS_BONUS)$(PARSING)$(GAME_BONUS)$(WEAPONS_BONUS)$(MUSIC_BONUS)$(FOES_BONUS)
+SRCS_BONUS =	$(MAIN_BONUS)$(EVENTS_BONUS)$(IMG_BONUS)$(MENU_BONUS)$(HUD_BONUS)$(UTILS_BONUS)$(PARSING)$(GAME_BONUS)$(WEAPONS_BONUS)$(MUSIC_BONUS)$(FOES_BONUS)$(NOTIF_BONUS)$(PICKUP_BONUS)
 
 MAIN =	src/mandatory/main.c \
 		src/mandatory/main_game.c \
@@ -57,6 +57,7 @@ GAME =	src/mandatory/play/main_play.c \
 MAIN_BONUS =	src/main.c \
 				src/bonus/main_game.c \
 				src/bonus/routine.c \
+				src/bonus/movements.c \
 				src/bonus/maps_names.c \
 				src/bonus/game_init.c \
 
@@ -66,10 +67,9 @@ EVENTS_BONUS = 	src/bonus/events/destroy.c \
 			src/bonus/events/keyboard/keypress.c \
 			src/bonus/events/keyboard/keyrelease.c \
 			src/bonus/events/keyboard/keypress_pause.c \
-			src/bonus/events/keyboard/keypress_pause_options.c \
 			src/bonus/events/mouse/mouse_over.c \
 			src/bonus/events/mouse/option_menu_over.c \
-			src/bonus/events/mouse/pause_options_hover.c \
+			src/bonus/events/mouse/pause_hover.c \
 			src/bonus/events/mouse/mouse_release.c \
 			src/bonus/events/mouse/mouse_click.c \
 			src/bonus/events/mouse/mouse_click_game.c \
@@ -95,7 +95,7 @@ MENU_BONUS =	src/bonus/menu/render_menu.c \
 		src/bonus/menu/render_pause_options.c \
 		src/bonus/menu/slider_init.c \
 		src/bonus/menu/small_slider.c \
-
+		src/bonus/menu/render_game_over.c \
 
 HUD_BONUS	=	src/bonus/hud/render_hud.c \
 		src/bonus/hud/head_hud.c \
@@ -115,6 +115,7 @@ WEAPONS_BONUS	=	src/bonus/weapons/render_weapons.c \
 			src/bonus/weapons/offsets_animations.c \
 			src/bonus/weapons/weapons_projectiles.c \
 			src/bonus/weapons/render_projectiles.c \
+			src/bonus/weapons/proj_calcul.c \
 			src/bonus/weapons/hit_detections.c \
 
 UTILS_BONUS =	src/bonus/utils/copy_img.c \
@@ -144,6 +145,10 @@ GAME_BONUS =	src/bonus/play/main_play.c \
 		src/bonus/play/raycast.c \
 		src/bonus/play/raycast_utils.c \
 		src/bonus/play/doors.c \
+
+NOTIF_BONUS =	src/bonus/notifs/render_notifs.c \
+
+PICKUP_BONUS =	src/bonus/pickup/items_init.c \
 
 FOES_BONUS = src/bonus/foes/render_foes.c \
 
@@ -182,7 +187,7 @@ $(OBJ_DIR_BONUS)/src/%.o: src/%.c
 -include $(OBJS:.o=.d)
 
 f: fclean bonus
-	$(CC) $(OBJS_BONUS) $(LIB) $(MLX) -lX11 -lXext -lm -o $(NAME_BONUS) -fsanitize=address
+	$(CC) $(OBJS_BONUS) $(LIB) $(MLX) -lGL -lm -lpthread -ldl -lX11 -lXext $(RAYLIB) -fsanitize=address -fsanitize=undefined -o $(NAME_BONUS) 
 
 clean:
 	rm -rf $(OBJ_DIR)

@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 19:15:56 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/20 13:49:22 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/21 17:05:33 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ bool	animation_options_init(t_weapon weapon[9], t_core *core)
 	{145, 120}};
 
 	setup_animation_exceptions(weapon);
-	weapon[7].name = "BFG 9000";
 	i = 1;
 	j = 0;
 	while (++i < 8)
@@ -36,6 +35,24 @@ bool	animation_options_init(t_weapon weapon[9], t_core *core)
 			return (false);
 		j++;
 	}
+	return (true);
+}
+
+bool	weapons_init_six(t_weapon weapon[9], t_core *core)
+{
+	weapon[7].fire = hashmap_get(&core->hashmap_sprites, "BFG9000_fire");
+	if (!weapon[7].fire)
+		return (false);
+	weapon[0].firing = core->sound_list.chainsaw;
+	weapon[1].firing = core->sound_list.punch;
+	weapon[2].firing = core->sound_list.pistol;
+	weapon[3].firing = core->sound_list.shotgun;
+	weapon[4].firing = core->sound_list.pistol;
+	weapon[5].firing = core->sound_list.rocketlauncher;
+	weapon[6].firing = core->sound_list.plasma;
+	weapon[7].firing = core->sound_list.bfg;
+	if (!animation_options_init(weapon, core))
+		return (false);
 	weapon[4].loop_loaded = weapon[4].anim->img_list->next;
 	weapon[6].loop_loaded = weapon[6].anim->img_list->next;
 	return (true);
@@ -52,7 +69,7 @@ bool	weapons_init_five(t_weapon weapon[9], t_core *core)
 	weapon[6].fire = hashmap_get(&core->hashmap_sprites, "plasmarifle_fire");
 	if (!weapon[6].fire)
 		return (false);
-	weapon[6].firing = core->sound_list.plasma;
+	weapon[7].name = "BFG 9000";
 	weapon[7].ammo_type = 3;
 	weapon[7].damage.min = 2060;
 	weapon[7].damage.max = 4200;
@@ -63,11 +80,7 @@ bool	weapons_init_five(t_weapon weapon[9], t_core *core)
 	weapon[7].anim = hashmap_get(&core->hashmap_sprites, "BFG9000");
 	if (!weapon[7].anim)
 		return (false);
-	weapon[7].fire = hashmap_get(&core->hashmap_sprites, "BFG9000_fire");
-	if (!weapon[7].fire)
-		return (false);
-	weapon[7].firing = core->sound_list.bfg;
-	if (!animation_options_init(weapon, core))
+	if (!weapons_init_six(weapon, core))
 		return (false);
 	return (true);
 }

@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/17 14:01:54 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/18 19:06:40 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/21 16:53:32 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,6 @@ bool	percent_pause_option_rendering(t_core *core,
 	return (true);
 }
 
-
 void	options_menu_hover(int x, int y, t_core *core)
 {
 	int			i;
@@ -127,7 +126,7 @@ void	options_menu_hover(int x, int y, t_core *core)
 			if (core->state == OPTIONS_MENU)
 				render_options_menu(core);
 			else if (core->state == PAUSE_OPTION)
-				render_pause_menu(core);
+				render_pause_options(core);
 			break ;
 		}
 	}

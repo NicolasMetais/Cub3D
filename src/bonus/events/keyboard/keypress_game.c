@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 16:38:24 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/12 20:17:07 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/20 18:34:04 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,11 @@ void	switch_weapons(int key, t_core *core)
 
 void	on_keypress_game(int key, t_core *core)
 {
+	if (!core->enter)
+	{
+		core->enter = 1;
+		return ;
+	}
 	if (key == 65361)
 		core->player->key_left = true;
 	else if (key == 'a')

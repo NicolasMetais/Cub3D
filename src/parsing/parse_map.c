@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 18:50:31 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/15 17:17:53 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/20 15:16:31 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ char	*ft_strdup_error(const char *s, int *count)
 		return (NULL);
 	pm.i = -1;
 	while (s[++pm.i])
-		extend_strdup(&pm);
+		if (!extend_strdup(&pm))
+			return (NULL);
 	pm.cpy[pm.j] = '\0';
 	return ((void *)pm.cpy);
 }
@@ -83,7 +84,7 @@ char	**dup_map(t_tmp *stock)
 			stock->width = ft_strlen(stock->tmp_maps[i]);
 		dup_maps[j] = ft_strdup_error(stock->tmp_maps[i++], &count);
 		if (!dup_maps[j++])
-			return ((ft_free_tab(dup_maps), NULL));
+			return (NULL);
 	}
 	dup_maps[j] = NULL;
 	realloc_map(stock, dup_maps);
@@ -92,20 +93,17 @@ char	**dup_map(t_tmp *stock)
 
 bool	parse_map(t_tmp *stock)
 {
-	char	**dup_maps;
-
 	stock->spawn = malloc(sizeof(t_pos));
 	if (!stock->spawn)
 		return (false);
-	dup_maps = dup_map(stock);
-	if (!dup_maps)
+	stock->valid_map_tiles = dup_map(stock);
+	if (!stock->valid_map_tiles)
 		return (false);
-	if (!walkable(dup_maps, stock))
+	if (!walkable(stock->valid_map_tiles, stock))
 	{
 		ft_putendl_fd(
 			"Error \n Invalid map. i shoudn't be able to walk in the void", 2);
-		return (ft_free_tab(dup_maps), false);
+		return (false);
 	}
-	ft_free_tab(dup_maps);
 	return (true);
 }

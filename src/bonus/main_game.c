@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 15:44:46 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/18 21:53:41 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/21 16:24:06 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ bool	img_init(t_core *core)
 	char	*name;
 
 	width = 0;
-	core->speed = PLAYER_SPEED;
 	core->active_slider = -1;
 	core->menu_img->cursor = hashmap_get(&core->hashmap, "Slider_cursor");
 	core->menu_img->bg = hashmap_get(&core->hashmap, "Menu_bg_activ");
@@ -45,12 +44,6 @@ bool	img_init(t_core *core)
 //INIT IMAGES
 bool	menus_init(t_core *core)
 {
-	core->sound = SOUND;
-	core->cursor[0] = 482;
-	core->cursor[1] = 347;
-	core->cursor[2] = 482;
-	core->cursor[3] = 1255;
-	core->cursor[4] = 1255;
 	core->fontss = gc_malloc(&core->gc, sizeof(t_fonts), STRUCT, "fonts");
 	if (!core->fontss)
 		return (false);
@@ -85,6 +78,13 @@ bool	create_maps_words(t_core *core)
 
 	new = NULL;
 	i = 0;
+	core->speed = PLAYER_SPEED;
+	core->sound = SOUND;
+	core->cursor[0] = 482;
+	core->cursor[1] = 347;
+	core->cursor[2] = 482;
+	core->cursor[3] = 1255;
+	core->cursor[4] = 1255;
 	while (i < core->maps_nb)
 	{
 		if (!load_word_image(&new, core, core->menu_maps[i].name, "regular"))
@@ -102,11 +102,11 @@ bool	launch_game(t_core *core)
 	music_init(core);
 	play_random_music(core);
 	if (!menus_init(core))
-	return (false);
+		return (false);
 	if (!extract_maps_names(core))
-	return (false);
+		return (false);
 	if (!create_maps_words(core))
-	return (false);
+		return (false);
 	core->fov = 90;
 	core->win = mlx_new_window(core->mlx, S_LENGHT, S_HEIGHT, "Cub3D");
 	if (!core->win)

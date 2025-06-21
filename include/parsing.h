@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 01:58:43 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/15 22:31:42 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/21 16:15:48 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@ typedef struct s_textures
 	char	*east;
 	char	*path_sky;
 	char	*path_door;
-	char 	*path_open_door;
+	char	*path_open_door;
 	t_img	*img_north;
 	t_img	*img_south;
 	t_img	*img_west;
 	t_img	*img_east;
-	t_img 	*open_doors;
+	t_img	*open_doors;
 	t_img	*sky;
 	t_img	*door;
 	char	*floor_color;
@@ -57,6 +57,7 @@ typedef struct s_tmp
 	int			height;
 	char		**tmp_maps;
 	char		**tmp_map_content;
+	char		**valid_map_tiles;
 	char		*tmp_loaded_map;
 	int			map_start;
 }	t_tmp;
@@ -77,8 +78,8 @@ bool	valid_extension(char *version, char *tocheck);
 bool	file_extract(char *file_name, char ***tab, t_core *core);
 
 //check and extract textures from the file
-bool	parse_textures_colors(t_tmp *stock, char *prefix[7], void *targets[6]
-			, t_core *core);
+bool	parse_textures_colors(t_tmp *stock, char *prefix[7],
+			void *targets[6], t_core *core);
 
 //Check if there's at least, 1 texture each, colors and a correct map
 bool	check_flag_position(t_tmp *stock, char *prefix[7]);
@@ -103,6 +104,5 @@ bool	realloc_map(t_tmp *stock, char **dup_maps);
 
 //launch parsing
 bool	parsing_cub(t_core *core, char *av);
-
 
 #endif

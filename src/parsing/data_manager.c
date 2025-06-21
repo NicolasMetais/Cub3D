@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:56:58 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/11 18:03:28 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/20 15:39:12 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,14 @@ void	free_parsing(t_tmp *stock)
 		free(stock->spawn);
 	if (stock->tmp_map_content)
 		ft_free_tab(stock->tmp_map_content);
+	if (stock->valid_map_tiles)
+		ft_free_tab(stock->valid_map_tiles);
 	if (stock->tmp_loaded_map)
 		free(stock->tmp_loaded_map);
 	free(stock);
 }
 
-bool	more_loads(t_core *core)
+bool	more_loads(t_core *core, t_tmp *stock)
 {
 	if (!add_to_gc(&core->gc, core->colors, STRUCT, "colors_struct"))
 		return (false);
@@ -54,6 +56,10 @@ bool	more_loads(t_core *core)
 	if (!add_to_gc(&core->gc, core->textures->ceiling_color, STRING, "text"))
 		return (false);
 	if (!add_to_gc(&core->gc, core->textures->floor_color, STRING, "text"))
+		return (false);
+	core->valid_map_tiles = stock->valid_map_tiles;
+	if (!add_to_gc(&core->gc, core->valid_map_tiles,
+			TAB_STRING, "valid_map tiles"))
 		return (false);
 	return (true);
 }
@@ -79,7 +85,7 @@ bool	load_valid_datas(t_core *core, t_tmp *stock)
 	if (!add_to_gc(&core->gc, core->textures, STRUCT, "textures_struct"))
 		return (false);
 	core->colors = stock->tmp_colors;
-	if (!more_loads(core))
+	if (!more_loads(core, stock))
 		return (false);
 	free(stock);
 	return (true);

@@ -6,11 +6,29 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 00:17:59 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/15 01:54:26 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/21 16:53:41 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+bool	sliders_init_third(t_core *core, int width)
+{
+	core->menu_img->sliders[4] = (t_slider){
+		.slider_min = 1255,
+		.slider_max = 1285,
+		.x_var = &core->cursor[4],
+		.int_var = &core->infinite_ammos,
+		.min_val = 0,
+		.max_val = 1,
+		.label = "AMMOS"
+	};
+	if (!slider_constructor(core, width))
+		return (false);
+	if (!small_slider_constructor(core))
+		return (false);
+	return (true);
+}
 
 bool	sliders_init_bis(t_core *core, int width)
 {
@@ -32,18 +50,7 @@ bool	sliders_init_bis(t_core *core, int width)
 		.max_val = 1,
 		.label = "GODMOD"
 	};
-		core->menu_img->sliders[4] = (t_slider){
-		.slider_min = 1255,
-		.slider_max = 1285,
-		.x_var = &core->cursor[4],
-		.int_var = &core->infinite_ammos,
-		.min_val = 0,
-		.max_val = 1,
-		.label = "AMMOS"
-	};
-	if (!slider_constructor(core, width))
-		return (false);
-	if (!small_slider_constructor(core))
+	if (!sliders_init_third(core, width))
 		return (false);
 	return (true);
 }

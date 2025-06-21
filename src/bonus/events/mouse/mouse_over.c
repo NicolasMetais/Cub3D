@@ -6,11 +6,28 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 03:13:52 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/15 17:47:43 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/21 15:49:24 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	mouse_click_pause_menu(t_core *core)
+{
+	if (core->menu_option == 0)
+	{
+		core->enter = 0;
+		core->state = GAME;
+	}
+	if (core->menu_option == 1)
+	{
+		core->state = PAUSE_OPTION;
+		core->menu_option = 0;
+		render_pause_options(core);
+	}
+	if (core->menu_option == 2)
+		cleanup_game(core);
+}
 
 void	starting_menu_hover(int y, t_core *core)
 {
@@ -64,10 +81,11 @@ int	mouse_menu_hover(int x, int y, void *param)
 	starting_menu_hover(y, core);
 	options_menu_hover(x, y, core);
 	pause_options_hover(x, y, core);
+	pause_hover(x, y, core);
 	maps_menu_hover(y, core);
 	if (core->state == GAME)
 	{
-		mlx_mouse_hide(core->mlx, core->win); //<== this function leaks
+		mlx_mouse_hide(core->mlx, core->win);
 		mouse_scroll_game(core, x, y);
 	}
 	return (0);

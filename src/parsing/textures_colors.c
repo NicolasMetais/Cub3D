@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 17:28:37 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/08 14:59:05 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/20 15:42:34 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ bool	extract_textures(char **dest, t_tmp *stock, char *prefix)
 			tmp += ft_strlen(prefix);
 			while (*tmp == ' ' || *tmp == '\t')
 				tmp++;
+			free(*dest);
 			*dest = strdup_without_spaces(tmp);
 			if (!*dest)
 				return (false);

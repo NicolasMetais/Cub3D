@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 02:10:48 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/18 19:04:21 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/21 16:16:03 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define MENU_H
 
 # include <stdbool.h>
-
 
 typedef struct s_img	t_img;
 typedef struct s_sprite	t_sprite;
@@ -93,8 +92,7 @@ bool	percent_pause_option_rendering(t_core *core,
 void	slider_copy_pxl(t_img *slider_bar, t_img *tocopy, int px_start);
 //ON/OFF cheat sliders
 bool	small_slider_constructor(t_core *core);
-
-
-
+//Game over menu rendering
+bool	render_game_over(t_core *core);
 
 #endif

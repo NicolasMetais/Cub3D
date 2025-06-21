@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 14:49:13 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/15 17:07:29 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/20 18:25:10 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,8 @@ int	mouse_menu_click(int button, int x, int y, t_core *core)
 			mouse_click_maps_menu(core);
 		if (core->state == OPTIONS_MENU || core->state == PAUSE_OPTION)
 			mouse_click_options_menu(x, y, core);
+		if (core->state == PAUSE)
+			mouse_click_pause_menu(core);
 	}
 	if (core->state == MAPS_MENU)
 	{
@@ -109,5 +111,7 @@ int	mouse_menu_click(int button, int x, int y, t_core *core)
 	}
 	if (core->state == GAME)
 		mouse_click_game(core, button);
+	if (button && core->state == GAME_OVER)
+		cleanup_game(core);
 	return (0);
 }

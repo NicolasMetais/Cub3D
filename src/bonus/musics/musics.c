@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 23:34:41 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/20 13:50:56 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/20 14:53:28 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ bool	play_random_music(t_core *core)
 
 	srand(time(NULL));
 	i = rand() % 28;
-	SetMusicVolume(core->bg_music, 0.5f); // A MODIF
+	SetMusicVolume(core->bg_music, (float)core->sound / 100.0f);
 	core->bg_music = LoadMusicStream(core->music_list[i]);
 	core->bg_music.looping = false;
 	if (!core->bg_music.stream.buffer)
@@ -74,7 +74,7 @@ bool	play_random_music(t_core *core)
 
 bool	play_sound(t_core *core, Sound sound)
 {
-	SetMusicVolume(core->bg_music, 0.5f);
+	SetSoundVolume(sound, (float)core->sound / 100.0f);
 	PlaySound(sound);
 	return (true);
 }

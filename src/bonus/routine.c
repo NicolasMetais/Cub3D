@@ -6,40 +6,25 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 15:49:25 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/18 21:46:26 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/21 16:12:33 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-double	seconds(void)
+bool	pause_routine(t_sprite *sprite, t_core *core)
 {
-	struct timeval	sec;
-
-	gettimeofday(&sec, NULL);
-	return ((double)(sec.tv_sec) + (double)sec.tv_usec / 1000000.0f);
-}
-
-void	movements(t_core *core)
-{
-	double			current_time;
-
-	current_time = seconds();
-	if (core->player->last_time == 0.0)
-		core->player->delta_time = 0.0;
-	else
-		core->player->delta_time = current_time - core->player->last_time;
-	core->player->last_time = current_time;
-	game_keypress(core, core->player->delta_time);
-}
-
-void	calculate_bob(t_core *core, double ampli, double freq)
-{
-	core->player->bobbing_speed = 2.0 * PI * freq;
-	core->player->bob_y = ampli * sin(core->player->bobbing_speed
-			* core->player->bobbing_time);
-	core->player->bob_x = (ampli / 2.0)
-		* sin(core->player->bobbing_speed * 2.0 * core->player->bobbing_time);
+	if (core->state == PAUSE)
+	{
+		sprite = hashmap_get(&core->hashmap_sprites, "skulls");
+		if (!sprite)
+			return (false);
+		if (core->redraw)
+			render_pause_menu(core);
+		if (update_sprite(sprite))
+			skulls_render_pause(core, core->y_pos);
+	}
+	return (true);
 }
 
 bool	game_routine(t_sprite *sprite, t_core *core)
@@ -56,16 +41,14 @@ bool	game_routine(t_sprite *sprite, t_core *core)
 		if (!start_game(core))
 			return (false);
 	}
-	else if (core->state == PAUSE)
+	else if (core->state == GAME_OVER)
 	{
-		sprite = hashmap_get(&core->hashmap_sprites, "skulls");
-		if (!sprite)
-			return (false);
-		if (core->redraw)
-			render_pause_menu(core);
+		sprite = (t_sprite *)hashmap_get(&core->hashmap_sprites, "the_end");
 		if (update_sprite(sprite))
-			skulls_render_pause(core, core->y_pos);
+			render_game_over(core);
 	}
+	if (!pause_routine(sprite, core))
+		return (false);
 	return (true);
 }
 
@@ -80,7 +63,6 @@ int	routine(void *param)
 	UpdateMusicStream(core->bg_music);
 	if (!IsMusicStreamPlaying(core->bg_music))
 	{
-		printf("changement de music\n");
 		UnloadMusicStream(core->bg_music);
 		play_random_music(core);
 	}
