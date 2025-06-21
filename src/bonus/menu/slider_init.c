@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 00:17:59 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/21 16:53:41 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/21 18:45:29 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ bool	sliders_init(t_core *core, int width)
 		.x_var = &core->cursor[1],
 		.int_var = &core->speed,
 		.min_val = 10,
-		.max_val = 300,
+		.max_val = 150,
 		.label = "SPEED"
 	};
 	if (!sliders_init_bis(core, width))

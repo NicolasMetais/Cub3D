@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 15:44:46 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/21 16:24:06 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/21 18:51:53 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ bool	create_maps_words(t_core *core)
 	i = 0;
 	core->speed = PLAYER_SPEED;
 	core->sound = SOUND;
-	core->cursor[0] = 482;
+	core->cursor[0] = 325;
 	core->cursor[1] = 347;
 	core->cursor[2] = 482;
 	core->cursor[3] = 1255;
@@ -107,7 +107,7 @@ bool	launch_game(t_core *core)
 		return (false);
 	if (!create_maps_words(core))
 		return (false);
-	core->fov = 90;
+	core->fov = 60;
 	core->win = mlx_new_window(core->mlx, S_LENGHT, S_HEIGHT, "Cub3D");
 	if (!core->win)
 		return (false);

@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 13:33:49 by tvacher           #+#    #+#             */
-/*   Updated: 2025/06/21 15:10:32 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/21 19:14:20 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,7 @@ bool	start_game(t_core *core)
 	render_hud(core);
 	render_head(core);
 	render_notifs(core);
+	if (core->player->health <= 0)
+		core->state = GAME_OVER;
 	return (true);
 }

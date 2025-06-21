@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 16:23:22 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/21 16:15:03 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/21 19:02:27 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ typedef struct s_weapon		t_weapon;
 typedef struct s_player
 {
 	t_pos			*position;
-	unsigned int	health;
+	int				health;
 	unsigned int	armor;
 	unsigned int	ammo[4];
 	int				curr_wpn;

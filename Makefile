@@ -187,7 +187,7 @@ $(OBJ_DIR_BONUS)/src/%.o: src/%.c
 -include $(OBJS:.o=.d)
 
 f: fclean bonus
-	$(CC) $(OBJS_BONUS) $(LIB) $(MLX) -lGL -lm -lpthread -ldl -lX11 -lXext $(RAYLIB) -fsanitize=address -fsanitize=undefined -o $(NAME_BONUS) 
+	$(CC) $(OBJS_BONUS) $(LIB) $(MLX) -lGL -lm -lpthread -ldl -lX11 -lXext $(RAYLIB) -fsanitize=address -o $(NAME_BONUS) 
 
 clean:
 	rm -rf $(OBJ_DIR)
