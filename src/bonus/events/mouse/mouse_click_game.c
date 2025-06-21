@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 19:47:38 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/20 14:02:20 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/21 16:27:10 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,30 +37,38 @@ void	mouse_scroll_game(t_core *core, int x, int y)
 	core->scroll_ingame = x;
 }
 
-void	mouse_click_game(t_core *core, int button)
+void	fire_event(t_core *core)
 {
 	t_sprite	*anim;
 	t_sprite	*fire;
 	t_weapon	*weapon;
 
-	if (button == 1)
+	weapon = &core->player->weapon[core->player->curr_wpn];
+	if (core->player->curr_wpn == 0 || core->player->curr_wpn == 1)
+		play_sound(core,
+			core->player->weapon[core->player->curr_wpn].firing);
+	if ((core->player->ammo[weapon->ammo_type] > 0 && !weapon->lock)
+		|| core->player->curr_wpn <= 1)
 	{
-		weapon = &core->player->weapon[core->player->curr_wpn];
-		if (core->player->curr_wpn == 0 || core->player->curr_wpn == 1)
-			play_sound(core,
-				core->player->weapon[core->player->curr_wpn].firing);
-		if ((core->player->ammo[weapon->ammo_type] > 0 && !weapon->lock)
-			|| core->player->curr_wpn <= 1)
-		{
-			anim = weapon->anim;
-			fire = weapon->fire;
-			weapon->lock = true;
-			anim->activ = true;
-			anim->started = true;
-			gettimeofday(&anim->update, NULL);
-			if (core->player->curr_wpn == 4 || core->player->curr_wpn == 6)
-				core->player->firing = true;
-			weapon_fired(core);
-		}
+		anim = weapon->anim;
+		fire = weapon->fire;
+		weapon->lock = true;
+		anim->activ = true;
+		anim->started = true;
+		gettimeofday(&anim->update, NULL);
+		if (core->player->curr_wpn == 4 || core->player->curr_wpn == 6)
+			core->player->firing = true;
+		weapon_fired(core);
 	}
+}
+
+void	mouse_click_game(t_core *core, int button)
+{
+	if (!core->enter)
+	{
+		core->enter = 1;
+		return ;
+	}
+	if (button == 1)
+		fire_event(core);
 }

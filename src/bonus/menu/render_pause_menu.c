@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 16:00:31 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/08 18:58:17 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/21 15:42:36 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ bool	render_pause_menu(t_core *core)
 {
 	t_img	*pause;
 
+	core->state = PAUSE;
 	start_menu_init(core);
 	copy_img(core->hud_img->pause_buffer, core->hud_img->clean_pause_buffer);
 	pause = (t_img *)hashmap_get(&core->hashmap, "Pause_menu");

@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 01:54:17 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/20 14:01:55 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/21 16:18:24 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@
 # include "libft.h"
 
 //HEADERS
+# include "item.h"
 # include "word_creator.h"
 # include "events.h"
 # include "game.h"
@@ -74,12 +75,12 @@
 # include "hud.h"
 # include "player.h"
 # include "foes.h"
+# include "sounds.h"
 
 //MATHS
 # include <math.h>
 # include <time.h>
 # define PI 3.14159265359
-# include "sounds.h"
 
 //MATHS
 # include <math.h>
@@ -93,6 +94,7 @@ typedef enum s_state
 	GAME,
 	PAUSE,
 	PAUSE_OPTION,
+	GAME_OVER
 }	t_state;
 
 typedef struct s_pos
@@ -106,6 +108,7 @@ typedef struct s_core
 	void			*mlx;
 	void			*win;
 	char			*map_name;
+	char			**valid_map_tiles;
 	char			**map;
 	char			*music_list[28];
 	int				map_height;
@@ -124,6 +127,9 @@ typedef struct s_core
 	bool			isclicked;
 	bool			map_changed;
 	bool			hud_redraw;
+	bool			isnotif;
+	t_img			*notif;
+	struct timeval	notif_timer;
 	int				active_slider;
 	int				speed;
 	int				godmod;
@@ -136,7 +142,9 @@ typedef struct s_core
 	t_impact		impact;
 	int				scroll_ingame;
 	int				cursor[5];
+	t_item			item_list[20];
 	t_sounds		sound_list;
+	t_img			*notif_buffer;
 	t_img			*game_img;
 	t_img			*weapon_buffer;
 	t_img			*pause_buffer;
@@ -153,8 +161,8 @@ typedef struct s_core
 	t_colors		*colors;
 	t_pos			*spawn;
 	t_gc_controller	*gc;
-	t_rc		*rc;
-	t_rc3d		*rc3d;
+	t_rc			*rc;
+	t_rc3d			*rc3d;
 	t_moves			*r_straff;
 	t_moves			*l_straff;
 	t_moves			*up;
@@ -178,7 +186,6 @@ int				routine(void *param);
 //----------------MUSIC------------------
 void			music_init(t_core *core);
 bool			play_random_music(t_core *core);
-
 
 //---------------X11 shitty memory------------------
 //destroy a non-used img from my hashmap
@@ -223,6 +230,14 @@ void			transparency(t_img *bg, const t_img *stickonbg,
 void			put_on_bg(t_img *bg, size_t y, size_t x, int color);
 //get a pixel
 unsigned int	get_img_pxl(const t_img *stickonbg, size_t x, size_t y);
+//dark filter on image with ratio
+void			d4rk_img(t_img *img, float ratio);
+//second calculation
+double			seconds(void);
+//movement delta calculator
+void			movements(t_core *core);
+//bobbing calculator
+void			calculate_bob(t_core *core, double ampli, double freq);
 
 //-----------------UTILS FOR THE MANDATORY PARTS-------------
 bool			load_img(t_img **img, char *path, t_core *core);

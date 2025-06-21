@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 01:23:05 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/13 02:11:39 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/21 16:18:48 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@
 
 typedef struct s_img	t_img;
 typedef struct s_sprite	t_sprite;
-
-
 
 typedef struct s_hud_img
 {
@@ -70,6 +68,5 @@ bool	render_health_red_num(t_core *core, t_img *bg, char *num);
 void	hud_render_number(t_img *buffer, t_core *core,
 			char *percent, int render);
 bool	render_ammo_red_num(t_core *core, t_img *bg);
-
 
 #endif

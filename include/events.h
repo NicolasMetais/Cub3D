@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 02:14:30 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/13 02:21:44 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/21 16:18:37 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ typedef struct s_moves {
 	double	next_y;
 	double	margin_x;
 	double	margin_y;
-	int map_x;
-	int map_y;
+	int		map_x;
+	int		map_y;
 }	t_moves;
 
 //----------------Keypress Events--------------
@@ -72,9 +72,11 @@ void			options_menu_hover(int x, int y, t_core *core);
 void			mouse_click_game(t_core *core, int button);
 //handler for mouse over on sliders in game options
 void			pause_options_hover(int x, int y, t_core *core);
-
+//handler on pause menu
+void			pause_hover(int x, int y, t_core *core);
+//mouse_click on pause_menu
+void			mouse_click_pause_menu(t_core *core);
 //Detect clic on the cross
-int	cross_handler(void *param);
-
+int				cross_handler(void *param);
 
 #endif

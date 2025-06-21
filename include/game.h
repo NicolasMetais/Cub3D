@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 01:32:25 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/14 16:28:52 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/21 16:18:07 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,28 +17,27 @@
 
 typedef struct s_rc3d
 {
-    float   line_h;
-    float   line_s;
-    float   line_e;
-    float     x;
-    float     y;
-    int     start;
-    int     end;
-    int     pixel_index;
+	float	line_h;
+	float	line_s;
+	float	line_e;
+	float	x;
+	float	y;
+	int		start;
+	int		end;
+	int		pixel_index;
 	float	tex_index;
 	float	step;
 	float	ty;
 	float	ty_off;
 	float	tx;
 	float	offset;
-	float 	tex_pos;
+	float	tex_pos;
 	int		draw_start;
 	int		draw_end;
 
 }	t_rc3d;
 
 //r.. = rays data, m.. = map data, pl.. = player data, dist* = rays lenght;
-
 typedef struct s_rc
 {
 	double	pl_x;
@@ -48,23 +47,23 @@ typedef struct s_rc
 	double	pl_angle;
 	int		r;
 	int		max_r;
-	int		res; //always power of 2;
-    int		mx;
-    int		my;
-    int		mp;
-    int		px;
-    int		py;
-    double	rx;
-    double	ry;
-    double	ra;
+	int		res;
+	int		mx;
+	int		my;
+	int		mp;
+	int		px;
+	int		py;
+	double	rx;
+	double	ry;
+	double	ra;
 	double	ca;
-    double   x;
-    double   y;
-    double   atan;
-    double   ntan;
-    float   *dist;
-    float   *dist2;
-    float   *dist3;
+	double	x;
+	double	y;
+	double	atan;
+	double	ntan;
+	float	*dist;
+	float	*dist2;
+	float	*dist3;
 	char	v_wall;
 	char	h_wall;
 	char	hit_wall;
@@ -75,7 +74,7 @@ typedef struct s_rc
 	double	hy;
 	double	vx;
 	double	vy;
-	int		of_x;	//values for collision and movements
+	int		of_x;
 	int		of_y;
 	int		px2;
 	int		py2;
@@ -85,7 +84,7 @@ typedef struct s_rc
 	int		py2_sub;
 	int		was_vertical;
 	int		map_size;
-	double	door_x;  //values for opening door
+	double	door_x;
 	double	door_y;
 	float	*door_dist;
 	double	v_door_x;

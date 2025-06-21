@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 22:41:32 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/20 13:11:56 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/21 16:57:23 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	music_init_3(t_core *core)
 			"sounds/weapons/rocketLauncher_fire.wav");
 	core->sound_list.plasma = LoadSound("sounds/weapons/plasma_fire.wav");
 	core->sound_list.bfg = LoadSound("sounds/weapons/BFG_fire.wav");
-
 }
 
 void	music_init_2(t_core *core)

@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 19:49:55 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/15 18:33:23 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/21 15:50:24 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,6 @@ bool	render_pause_options(t_core *core)
 		core->y_pos[i] = 400 + (i * 140);
 	core->y_pos[3] = 400 + (1 * 70);
 	core->y_pos[4] = 400 + (2 * 110);
-	core->state = PAUSE_OPTION;
 	copy_img(core->hud_img->pause_buffer, core->hud_img->clean_pause_buffer);
 	option = (t_img *)hashmap_get(&core->hashmap, "Option_title");
 	if (!option)

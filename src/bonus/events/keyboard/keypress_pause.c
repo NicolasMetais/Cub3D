@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 17:08:30 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/15 18:07:49 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/21 16:53:18 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ void	d4rk_img(t_img *img, float ratio)
 
 bool	create_pause_bg(t_core *core)
 {
+	core->enter = 0;
 	copy_img(core->hud_img->clean_pause_buffer, core->game_img);
 	transparency(core->hud_img->clean_pause_buffer, core->hud_img->hud,
 		0, 840);
@@ -60,9 +61,15 @@ bool	create_pause_bg(t_core *core)
 		1380, 925);
 	transparency(core->hud_img->clean_pause_buffer, core->hud_img->ammo4,
 		1380, 955);
+	transparency(core->hud_img->clean_pause_buffer, core->hud_img->life,
+		250, 880);
+	transparency(core->hud_img->clean_pause_buffer, core->hud_img->armor,
+		945, 880);
+	transparency(core->hud_img->clean_pause_buffer, core->hud_img->ammo,
+		5, 880);
 	d4rk_img(core->hud_img->clean_pause_buffer, 0.2);
 	core->menu_option = 0;
-	core->state = PAUSE;
+	render_pause_menu(core);
 	return (true);
 }
 
@@ -78,6 +85,7 @@ void	enter_pause_handler(int key, t_core *core)
 		}
 		if (core->menu_option == 1)
 		{
+			core->state = PAUSE_OPTION;
 			core->menu_option = 0;
 			render_pause_options(core);
 		}

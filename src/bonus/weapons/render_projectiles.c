@@ -6,61 +6,11 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 18:28:02 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/14 15:16:36 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/21 16:55:48 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	projectile_animation(t_projectile_node *proj)
-{
-	struct timeval	current;
-	long			elapsed;
-
-	gettimeofday(&current, NULL);
-	elapsed = (current.tv_sec - proj->timer.tv_sec) * 1000
-		+ (current.tv_usec - proj->timer.tv_usec) / 1000;
-	if (elapsed > 250)
-	{
-		if (proj->activ_img->next)
-			proj->activ_img = proj->activ_img->next;
-		else
-			proj->activ_img = proj->sprite->img_list;
-		proj->timer = current;
-	}
-}
-
-bool	update_projectiles(t_core *core)
-{
-	t_projectile_node	*proj;
-	t_pos				new_pos;
-	t_pos				old_pos;
-	t_pos				collision_pos;
-
-	proj = core->proj.proj_list;
-	while (proj)
-	{
-		old_pos.x = proj->x;
-		old_pos.y = proj->y;
-		new_pos.x = proj->x + cosf(proj->angle) * proj->speed;
-		new_pos.y = proj->y + sinf(proj->angle) * proj->speed;
-		if (is_colliding(old_pos, new_pos, core, &collision_pos))
-		{
-			proj->x = collision_pos.x;
-			proj->y = collision_pos.y;
-			if (!setup_proj_impacts(core, collision_pos, proj))
-				return (false);
-		}
-		else
-		{
-			proj->x = new_pos.x;	
-			proj->y = new_pos.y;
-		}
-		projectile_animation(proj);
-		proj = proj->next;
-	}
-	return (true);
-}
 
 void	draw_projectile(t_core *core, t_projectile_node *proj, float angle_diff)
 {

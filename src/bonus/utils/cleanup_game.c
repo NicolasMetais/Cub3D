@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 02:08:56 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/20 12:52:51 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/21 16:48:58 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,34 @@ void	free_impact(t_core *core)
 	}
 }
 
+void	free_proj(t_core *core)
+{
+	t_projectile_node	*head;
+	t_projectile_node	*curr;
+	t_projectile_node	*next;
+
+	head = core->proj.proj_list;
+	if (!head)
+		return ;
+	curr = head;
+	while (curr)
+	{
+		next = curr->next;
+		free(curr);
+		curr = next;
+	}
+	head = NULL;
+}
+
 void	cleanup_game(t_core *core)
 {
-	unload_all_sound(core);
-	CloseAudioDevice();
+	if (IsAudioDeviceReady())
+	{
+		unload_all_sound(core);
+		CloseAudioDevice();
+	}
 	free_impact(core);
-	//free projectiles ossi
+	free_proj(core);
 	destroy_img(core);
 	if (core->mlx && core->win)
 		mlx_destroy_window(core->mlx, core->win);

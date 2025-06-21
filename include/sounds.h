@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 19:56:48 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/20 13:11:53 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/21 16:14:54 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,5 @@ typedef struct s_sounds
 bool	play_sound(t_core *core, Sound sound);
 //unload all sounds
 void	unload_all_sound(t_core *core);
-
 
 #endif

@@ -6,11 +6,24 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 16:41:57 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/13 16:01:50 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/21 16:53:52 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+static	t_sprite	*choose_sprite(t_core *core, t_sprite *sprite)
+{
+	if (core->player->curr_wpn == 6)
+		sprite = hashmap_get(&core->hashmap_sprites, "plasma_proj");
+	else if (core->player->curr_wpn == 5)
+		sprite = hashmap_get(&core->hashmap_sprites, "rocket");
+	else if (core->player->curr_wpn == 7)
+		sprite = hashmap_get(&core->hashmap_sprites, "BFG9000_proj");
+	if (!sprite)
+		return (NULL);
+	return (sprite);
+}
 
 static t_projectile_node	*new_node(t_core *core,
 		float x, float y, float angle)
@@ -29,16 +42,11 @@ static t_projectile_node	*new_node(t_core *core,
 		new->speed = 0.6f;
 	else
 		new->speed = 0.4f;
+	new->sprite = choose_sprite(core, new->sprite);
+	if (!new->speed)
+		return (NULL);
 	new->angle = angle;
 	new->wpn_type = core->player->curr_wpn;
-	if (core->player->curr_wpn == 6)
-		new->sprite = hashmap_get(&core->hashmap_sprites, "plasma_proj");
-	else if (core->player->curr_wpn == 5)
-		new->sprite = hashmap_get(&core->hashmap_sprites, "rocket");
-	else if (core->player->curr_wpn == 7)
-		new->sprite = hashmap_get(&core->hashmap_sprites, "BFG9000_proj");
-	if (!new->sprite)
-		return (NULL);
 	new->activ_img = new->sprite->img_list;
 	return (gettimeofday(&new->timer, NULL), new);
 }

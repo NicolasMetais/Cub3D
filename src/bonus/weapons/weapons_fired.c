@@ -6,11 +6,38 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/02 13:18:48 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/15 17:50:22 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/21 17:01:33 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+static bool	choose_size_and_sprite(t_core *core, t_impact_node **new)
+{
+	if ((*new)->wpn_type == 6)
+	{
+		(*new)->size = 3;
+		(*new)->sprite = hashmap_get(&core->hashmap_sprites, "plasma_puff");
+	}
+	else if ((*new)->wpn_type == 5)
+	{
+		(*new)->size = 5;
+		(*new)->sprite = hashmap_get(&core->hashmap_sprites, "rocket_puff");
+	}
+	else if ((*new)->wpn_type == 7)
+	{
+		(*new)->size = 3;
+		(*new)->sprite = hashmap_get(&core->hashmap_sprites, "BFG9000_puff");
+	}
+	else
+	{
+		(*new)->size = 0.2;
+		(*new)->sprite = hashmap_get(&core->hashmap_sprites, "puff");
+	}
+	if (!(*new)->sprite)
+		return (false);
+	return (true);
+}
 
 static t_impact_node	*new_node(t_core *core, float x, float y, int wpn_type)
 {
@@ -23,27 +50,7 @@ static t_impact_node	*new_node(t_core *core, float x, float y, int wpn_type)
 	new->y = y;
 	new->lifetime = 15;
 	new->wpn_type = wpn_type;
-	if (new->wpn_type == 6)
-	{
-		new->size = 3;
-		new->sprite = hashmap_get(&core->hashmap_sprites, "plasma_puff");
-	}
-	else if (new->wpn_type == 5)
-	{
-		new->size = 5;
-		new->sprite = hashmap_get(&core->hashmap_sprites, "rocket_puff");
-	}
-	else if (new->wpn_type == 7)
-	{
-		new->size = 3;
-		new->sprite = hashmap_get(&core->hashmap_sprites, "BFG9000_puff");
-	}
-	else
-	{
-		new->size = 0.2;
-		new->sprite = hashmap_get(&core->hashmap_sprites, "puff");
-	}
-	if (!new->sprite)
+	if (!choose_size_and_sprite(core, &new))
 		return (NULL);
 	new->activ_img = new->sprite->img_list;
 	new->frame = 0;
