@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 18:50:31 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/20 15:16:31 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/21 21:07:50 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,19 +72,21 @@ char	**dup_map(t_tmp *stock)
 	int		j;
 
 	count = 0;
-	i = stock->map_start;
+	i = stock->map_start - 1;
 	j = 0;
+	stock->width = 0;
 	dup_maps = malloc(sizeof(char *) * (ft_strlen_tab(stock->tmp_maps)
 				- stock->map_start + 1));
 	if (!dup_maps)
 		return (false);
-	while (stock->tmp_maps[i])
+	while (stock->tmp_maps[++i])
 	{
-		if (stock->width < (int)ft_strlen(stock->tmp_maps[i]))
-			stock->width = ft_strlen(stock->tmp_maps[i]);
-		dup_maps[j] = ft_strdup_error(stock->tmp_maps[i++], &count);
-		if (!dup_maps[j++])
+		dup_maps[j] = ft_strdup_error(stock->tmp_maps[i], &count);
+		if (!dup_maps[j])
 			return (NULL);
+		if (stock->width < (int)ft_strlen(dup_maps[j]))
+			stock->width = ft_strlen(dup_maps[j]);
+		j++;
 	}
 	dup_maps[j] = NULL;
 	realloc_map(stock, dup_maps);

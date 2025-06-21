@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:56:58 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/20 15:39:12 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/21 20:50:46 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,15 +78,16 @@ bool	load_valid_datas(t_core *core, t_tmp *stock)
 	core->map_start = stock->map_start;
 	core->map_height = stock->height;
 	core->map_width = stock->width;
-	core->spawn = stock->spawn;
-	if (!add_to_gc(&core->gc, core->spawn, STRUCT, "spawn_pos"))
-		return (false);
+	core->spawn->x = stock->spawn->x;
+	core->spawn->y = stock->spawn->y;
 	core->textures = stock->tmp_textures;
 	if (!add_to_gc(&core->gc, core->textures, STRUCT, "textures_struct"))
 		return (false);
 	core->colors = stock->tmp_colors;
 	if (!more_loads(core, stock))
 		return (false);
+	free(stock->spawn);
 	free(stock);
+
 	return (true);
 }

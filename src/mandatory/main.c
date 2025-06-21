@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 02:02:15 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/29 18:47:04 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/21 20:21:36 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,9 @@ bool	window_init(t_core *core)
 void	cube3d(char *av, t_core *core)
 {
 	if (!garbage_init(&core->gc))
+		return ;
+	core->spawn = gc_malloc(&core->gc, sizeof(t_pos), STRUCT, "spawn_pos");
+	if (!core->spawn)
 		return ;
 	if (!parsing_cub(core, av))
 		return ;
