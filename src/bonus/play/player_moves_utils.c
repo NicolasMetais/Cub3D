@@ -12,6 +12,19 @@
 
 #include "cub3d.h"
 
+bool	seen_colision(t_core *core, int x, int y)
+{
+	if (core->map[x][y] == '1' || \
+		core->map[x][y] == '2' || \
+		core->map[x][y] == '4' || \
+		core->map[x][y] == '5' || \
+		core->map[x][y] == '6' || \
+		core->map[x][y] == '7')
+		return (true);
+	else
+		return (false);
+}
+
 bool	is_map_colision(t_core *core, int x, int y)
 {
 	if (core->map[x][y] != '1' && \

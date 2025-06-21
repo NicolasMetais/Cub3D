@@ -58,9 +58,9 @@ void	handle_door(t_core *core)
 bool	init_map_textures(t_core *core)
 {
 	// core->textures->floor_colors = ft_split(core->textures->floor_color, ',');
-	core->textures->path_sky = "/tmp_assets/SKY3.xpm";
-	core->textures->path_door = "/tmp_assets/DOOR2_4.xpm";
-	core->textures->path_open_door = "/tmp_assets/OPEN_DOOR2_4.xpm";
+	core->textures->path_sky = "/tmp_assets/SKY/SKY3.xpm";
+	core->textures->path_door = "/tmp_assets/WALL/DOOR2_4.xpm";
+	core->textures->path_open_door = "/tmp_assets/WALL/OPEN_DOOR2_4.xpm";
 	core->textures->open_doors = (t_img *)hashmap_get(&core->hashmap, \
 	"Open_Door");
 	core->textures->door = (t_img *)hashmap_get(&core->hashmap, "Door");

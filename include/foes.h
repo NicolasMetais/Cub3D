@@ -23,6 +23,11 @@ typedef struct s_foes {
 	int				type;
 	int				life;
 	int				death;
+	int				atk;
+	int				range;
+	int				damage;
+	int				walk_speed;
+	int				atk_speed;
 	float			foe_x;
 	float			foe_y;
 	float			angle;
@@ -37,7 +42,7 @@ typedef struct s_foes {
 	t_pos			*pos;
 	t_img			*img_foe;
 	t_sprite		*walking;
-	t_sprite		*atack;
+	t_sprite		*attack;
 	t_sprite		*anim_death;
 	t_node_img		*activ_img;
 	struct s_foes	*next;
@@ -56,5 +61,7 @@ bool	is_enemy(t_core *core, float x, float y);
 void	bump_player_enemy(t_core *core);
 void	handle_enemy_death(t_core *core, t_foes *enemy);
 void	anim_death_foe(t_core *core);
+void	sort_enemies_by_distance(t_foes **head);
+bool	seen_colision(t_core *core, int x, int y);
 
 #endif

@@ -12,6 +12,32 @@
 
 #include "cub3d.h"
 
+// void	print_foes(t_core *core, int color)
+// {
+// 	int	x;
+// 	int	y;
+// 	int	px_index;
+
+// 	y = enemy->;
+// 	while (y < core->rc->map_size / 2 + 4)
+// 	{
+// 		x = core->rc->map_size / 2;
+// 		while (x < core->rc->map_size / 2 + 4)
+// 		{
+// 			px_index = y * core->game_img->line_len + x * \
+// 			(core->game_img->bpp / 8);
+// 			core->game_img->addr[px_index + 0] = (color >> 0) & 0xFF;
+// 			core->game_img->addr[px_index + 1] = (color >> 8) & 0xFF;
+// 			core->game_img->addr[px_index + 2] = (color >> 16) & 0xFF;
+// 			if (core->game_img->bpp == 4)
+// 				core->game_img->addr[px_index + 0] = 0xFF;
+// 			x++;
+// 		}
+// 		y++;
+// 	}
+// 	draw_player_line(core, color);
+// }
+
 void	print_player(t_core *core, int color)
 {
 	int	x;

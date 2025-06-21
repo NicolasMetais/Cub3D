@@ -35,7 +35,6 @@ static void	renderings(t_core *core)
 	draw_minimap_game(core);
 	get_raycast_data(core);
 	render_foes(core);
-	anim_death_foe(core);
 	impacts(core);
 	render_projectiles(core);
 	print_player(core, 0xFFFF00);
