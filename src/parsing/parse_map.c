@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 18:50:31 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/23 21:59:27 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/23 23:07:15 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,17 +133,18 @@ char	**dup_map(t_tmp *stock)
 
 bool	parse_map(t_tmp *stock)
 {
+	bool	spawn;
+
+	spawn = false;
 	stock->spawn = malloc(sizeof(t_pos));
 	if (!stock->spawn)
 		return (false);
 	stock->valid_map_tiles = dup_map(stock);
 	if (!stock->valid_map_tiles)
 		return (false);
-	if (!walkable(stock->valid_map_tiles, stock))
-	{
-		ft_putendl_fd(
-			"Error \n Invalid map. i shoudn't be able to walk in the void", 2);
+	if (!walkable(stock->valid_map_tiles, stock, &spawn))
 		return (false);
-	}
+	if (!spawn)
+		return (ft_putendl_fd("Error \n No spawn pos", 2), false);
 	return (true);
 }

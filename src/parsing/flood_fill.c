@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 22:57:33 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/21 16:20:15 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/23 23:07:08 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,10 @@ bool	flood_fill(char **map, int x, int y, int len)
 	return (true);
 }
 
-bool	walkable(char **dup_maps, t_tmp *stock)
+bool	walkable(char **dup_maps, t_tmp *stock, bool *spawn)
 {
-	int	i;
-	int	j;
+	int		i;
+	int		j;
 
 	i = -1;
 	while (dup_maps[++i])
@@ -46,12 +46,14 @@ bool	walkable(char **dup_maps, t_tmp *stock)
 			if (dup_maps[i][j] == 'N' || dup_maps[i][j] == 'S'
 				|| dup_maps[i][j] == 'E' || dup_maps[i][j] == 'W')
 			{
+				*spawn = true;
 				stock->spawn->x = j;
 				stock->spawn->y = i;
 				if (!flood_fill(dup_maps, j, i, ft_strlen_tab(dup_maps)))
 				{
 					dup_maps[i][j] = 'V';
-					return (false);
+					return (ft_putendl_fd(
+							"Error \n Invalid map. void detected", 2), false);
 				}
 			}
 		}

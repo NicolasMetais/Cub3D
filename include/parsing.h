@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 01:58:43 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/21 16:15:48 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/23 23:07:40 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ bool	parse_textures_content(t_core *core, t_tmp *stock, void *targets[6]);
 bool	parse_map(t_tmp *stock);
 
 //Checker to check if my player is surrounded by walls
-bool	walkable(char **dup_maps, t_tmp *stock);
+bool	walkable(char **dup_maps, t_tmp *stock, bool *spawn);
 
 //Free all temporary data from half-loaded maps
 void	free_parsing(t_tmp *stock);
