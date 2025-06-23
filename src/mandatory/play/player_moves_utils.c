@@ -3,14 +3,48 @@
 /*                                                        :::      ::::::::   */
 /*   player_moves_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tvacher <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: tvacher <tvacher@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 17:56:39 by tvacher           #+#    #+#             */
-/*   Updated: 2025/06/07 17:56:50 by tvacher          ###   ########.fr       */
+/*   Updated: 2025/06/23 21:17:20 by tvacher          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+bool	is_map_colision(t_core *core, int x, int y)
+{
+	if (core->map[x][y] != '1' && \
+		core->map[x][y] != '2' && \
+		core->map[x][y] != '4' && \
+		core->map[x][y] != '5' && \
+		core->map[x][y] != '6' && \
+		core->map[x][y] != '7')
+		return (true);
+	else
+		return (false);
+}
+
+bool	moves_init(t_core *core)
+{
+	core->r_straff = gc_malloc(&core->gc, sizeof(t_moves),
+			STRUCT, "r_straff");
+	if (!core->r_straff)
+		return (false);
+	core->l_straff = gc_malloc(&core->gc, sizeof(t_moves),
+			STRUCT, "l_straff");
+	if (!core->r_straff)
+		return (false);
+	core->up = gc_malloc(&core->gc, sizeof(t_moves),
+			STRUCT, "up");
+	if (!core->r_straff)
+		return (false);
+	core->down = gc_malloc(&core->gc, sizeof(t_moves),
+			STRUCT, "down");
+	if (!core->r_straff)
+		return (false);
+	return (true);
+}
 
 void	init_new_pos(t_core *core)
 {

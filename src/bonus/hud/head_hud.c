@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   head_hud.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tvacher <tvacher@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 14:38:17 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/12 16:13:18 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/23 15:53:48 by tvacher          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ bool	dead_head_render(t_core *core)
 	dead = hashmap_get(&core->hashmap, "STFDEAD0");
 	if (!dead)
 		return (false);
-	transparency(core->hud_img->hud, dead->img, 740, 7);
+	transparency(core->hud_img->hud, dead, 740, 7);
 	mlx_put_image_to_window(core->mlx, core->win, core->hud_img->hud->img,
 		0, 840);
 	return (true);

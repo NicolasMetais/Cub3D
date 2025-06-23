@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_play.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tvacher <tvacher@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 13:33:49 by tvacher           #+#    #+#             */
-/*   Updated: 2025/06/21 15:10:32 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/23 20:47:01 by tvacher          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ static void	renderings(t_core *core)
 	draw_minimap_game(core);
 	get_raycast_data(core);
 	render_foes(core);
+	render_items(core);
 	impacts(core);
 	render_projectiles(core);
 	print_player(core, 0xFFFF00);

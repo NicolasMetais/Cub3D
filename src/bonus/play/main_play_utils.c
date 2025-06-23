@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_play_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tvacher <tvacher@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:33:47 by tvacher           #+#    #+#             */
-/*   Updated: 2025/06/20 13:59:00 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/23 20:47:21 by tvacher          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,25 +54,26 @@ void	handle_door(t_core *core)
 			close_door(core);
 	}
 }
-//check ft_split allocation
+
 bool	init_map_textures(t_core *core)
 {
-	// core->textures->floor_colors = ft_split(core->textures->floor_color, ',');
-	core->textures->path_sky = "/tmp_assets/SKY/SKY3.xpm";
-	core->textures->path_door = "/tmp_assets/WALL/DOOR2_4.xpm";
-	core->textures->path_open_door = "/tmp_assets/WALL/OPEN_DOOR2_4.xpm";
+	core->textures->floor_colors = ft_split(core->textures->floor_color, ',');
+	if (!core->textures->floor_colors)
+		return (false);
 	core->textures->open_doors = (t_img *)hashmap_get(&core->hashmap, \
 	"Open_Door");
 	core->textures->door = (t_img *)hashmap_get(&core->hashmap, "Door");
 	core->textures->sky = (t_img *)hashmap_get(&core->hashmap, "Sky");
-	core->textures->img_north = (t_img *)hashmap_get(&core->hashmap, \
-	"Wall_north");
-	core->textures->img_south = (t_img *)hashmap_get(&core->hashmap, \
-	"Wall_south");
-	core->textures->img_east = (t_img *)hashmap_get(&core->hashmap, \
-	"Wall_east");
-	core->textures->img_west = (t_img *)hashmap_get(&core->hashmap, \
-	"Wall_west");
+	if (!load_image(&core->textures->img_north, \
+		core->textures->north, core, "1"))
+		return (false);
+	if (!load_image(&core->textures->img_south, \
+		core->textures->south, core, "1"))
+		return (false);
+	if (!load_image(&core->textures->img_east, core->textures->east, core, "1"))
+		return (false);
+	if (!load_image(&core->textures->img_west, core->textures->west, core, "1"))
+		return (false);
 	return (true);
 }
 

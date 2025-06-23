@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   weapons_init.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tvacher <tvacher@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 18:17:25 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/21 17:04:35 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/23 17:27:12 by tvacher          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ bool	weapons_init_fourth(t_weapon weapon[9], t_core *core)
 	weapon[5].ammo_type = 2;
 	weapon[5].damage.min = 148;
 	weapon[5].damage.max = 288;
-	weapon[5].owned = true;
+	weapon[5].owned = false;
 	weapon[5].normal = hashmap_get(&core->hashmap, "MISGA0");
 	if (!weapon[5].normal)
 		return (false);
@@ -35,7 +35,7 @@ bool	weapons_init_fourth(t_weapon weapon[9], t_core *core)
 	weapon[6].ammo_type = 3;
 	weapon[6].damage.min = 5;
 	weapon[6].damage.max = 40;
-	weapon[6].owned = true;
+	weapon[6].owned = false;
 	if (!weapons_init_five(weapon, core))
 		return (false);
 	return (true);
@@ -56,7 +56,7 @@ bool	weapons_init_third(t_weapon weapon[9], t_core *core)
 	weapon[4].ammo_type = 0;
 	weapon[4].damage.min = 5;
 	weapon[4].damage.max = 15;
-	weapon[4].owned = true;
+	weapon[4].owned = false;
 	weapon[4].normal = hashmap_get(&core->hashmap, "CHGGA0");
 	if (!weapon[4].normal)
 		return (false);
@@ -89,7 +89,7 @@ bool	weapons_init_bis(t_weapon weapon[9], t_core *core)
 	weapon[3].ammo_type = 1;
 	weapon[3].damage.min = 35;
 	weapon[3].damage.max = 105;
-	weapon[3].owned = true;
+	weapon[3].owned = false;
 	if (!weapons_init_third(weapon, core))
 		return (false);
 	return (true);

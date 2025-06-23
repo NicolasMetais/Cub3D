@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tvacher <tvacher@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 17:55:32 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/21 16:22:59 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/23 14:19:43 by tvacher          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,11 +107,11 @@ bool	more_buffers(t_core *core)
 			core->hud_img->clean_pause_buffer, S_LENGHT, S_HEIGHT, core);
 	if (!core->hud_img->clean_pause_buffer)
 		return (false);
+	if (!init_foes(core))
+		return (false);
 	if (!item_init(core))
 		return (false);
 	if (!notif_init(core))
-		return (false);
-	if (!init_foes(core))
 		return (false);
 	return (true);
 }

@@ -3,24 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   print_back.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tvacher <tvacher@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 13:48:11 by tvacher           #+#    #+#             */
-/*   Updated: 2025/06/12 23:42:38 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/23 20:44:02 by tvacher          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-//check color parsing for ceiling and floor
 static void	print_floor(t_core *core, int pixel_index)
 {
-	// core->game_img->addr[pixel_index + 0] = (char)core->textures->floor_colors[2] & 0xFF;
-	// core->game_img->addr[pixel_index + 1] = (char)core->textures->floor_colors[1] & 0xFF;
-	// core->game_img->addr[pixel_index + 2] = (char)core->textures->floor_colors[0] & 0xFF;
-	core->game_img->addr[pixel_index + 0] = (char)0;
-	core->game_img->addr[pixel_index + 1] = (char)10;
-	core->game_img->addr[pixel_index + 2] = (char)50;
+	int	r;
+	int	g;
+	int	b;
+
+	r = ft_atoi(core->textures->floor_colors[0]);
+	g = ft_atoi(core->textures->floor_colors[1]);
+	b = ft_atoi(core->textures->floor_colors[2]);
+	core->game_img->addr[pixel_index + 0] = (b & 0xFF << 16);
+	core->game_img->addr[pixel_index + 1] = (g & 0xFF << 8);
+	core->game_img->addr[pixel_index + 2] = (r & 0xFF << 0);
 }
 
 static void	print_ceiling(t_core *core, int pixel_index, int i, int j)

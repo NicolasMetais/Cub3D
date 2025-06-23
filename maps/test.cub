@@ -1,9 +1,9 @@
-NO ./LE /    		 	 		 		 	tmp_assets/MWALL3_1.xpm
-WE ./LE /tmp_assets/MWAL	 	 	 	 L4_1.xpm
-SO ./LE /tmp_assets/MWALL4_2.xpm
-EA ./LE /tmp_assets/MWAL	 	 	 L5_1.xpm
+NO tmp_assets/WALL/MWALL3_1.xpm
+WE tmp_assets/WALL/MWALL4_1.xpm
+SO tmp_assets/WALL/MWALL4_2.xpm
+EA tmp_assets/WALL/MWALL5_1.xpm
 
-F 200, 100, 0 
+F 113, 0, 0
 C 254,30                    				   											,25
 
 		1111111111111111111111111111111111111

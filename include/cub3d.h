@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tvacher <tvacher@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 01:54:17 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/21 17:34:31 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/23 14:53:24 by tvacher          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,6 +143,7 @@ typedef struct s_core
 	int				scroll_ingame;
 	int				cursor[5];
 	t_item			item_list[20];
+	t_items			*items;
 	t_sounds		sound_list;
 	t_img			*notif_buffer;
 	t_img			*game_img;

@@ -3,27 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   player_moves_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tvacher <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: tvacher <tvacher@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 17:56:39 by tvacher           #+#    #+#             */
-/*   Updated: 2025/06/07 17:56:50 by tvacher          ###   ########.fr       */
+/*   Updated: 2025/06/23 20:48:36 by tvacher          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-bool	seen_colision(t_core *core, int x, int y)
-{
-	if (core->map[x][y] == '1' || \
-		core->map[x][y] == '2' || \
-		core->map[x][y] == '4' || \
-		core->map[x][y] == '5' || \
-		core->map[x][y] == '6' || \
-		core->map[x][y] == '7')
-		return (true);
-	else
-		return (false);
-}
 
 bool	is_map_colision(t_core *core, int x, int y)
 {

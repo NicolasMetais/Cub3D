@@ -3,20 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tvacher <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: tvacher <tvacher@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 18:12:36 by tvacher           #+#    #+#             */
-/*   Updated: 2025/06/07 18:12:47 by tvacher          ###   ########.fr       */
+/*   Updated: 2025/06/23 20:45:31 by tvacher          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	horizontal_cast(t_core *core)
+void	horizontal_cast(t_core *core, int i)
 {
-	int	i;
-
-	i = 0;
 	core->rc->atan = -1 / tan(core->rc->ra);
 	if (core->rc->ra > PI)
 	{
@@ -43,11 +40,8 @@ void	horizontal_cast(t_core *core)
 	loop_tiles_height(core, i);
 }
 
-void	vertical_cast(t_core *core)
+void	vertical_cast(t_core *core, int i)
 {
-	int	i;
-
-	i = 0;
 	core->rc->ntan = -tan(core->rc->ra);
 	if (core->rc->ra > PI / 2 && core->rc->ra < 3 * PI / 2)
 	{
@@ -102,19 +96,14 @@ static void	get_good_dist(t_core *core)
 
 void	get_raycast_data(t_core *core)
 {
-	core->rc->ra = core->rc->pl_angle - RAD * ((core->fov) / 2);
-	if (core->rc->ra < 0)
-		core->rc->ra += 2 * PI;
-	if (core->rc->ra > 2 * PI)
-		core->rc->ra -= 2 * PI;
-	core->rc->r = 0;
+	update_angle_in_rc_data(core);
 	while (core->rc->r < core->rc->max_r)
 	{
-		horizontal_cast(core);
+		horizontal_cast(core, 0);
 		core->rc->dist[core->rc->r] = sqrt((core->rc->rx - core->rc->pl_x) \
 		* (core->rc->rx - core->rc->pl_x) + \
 		(core->rc->ry - core->rc->pl_y) * (core->rc->ry - core->rc->pl_y));
-		vertical_cast(core);
+		vertical_cast(core, 0);
 		core->rc->dist2[core->rc->r] = sqrt((core->rc->rx - core->rc->pl_x) \
 		* (core->rc->rx - core->rc->pl_x) + \
 		(core->rc->ry - core->rc->pl_y) * (core->rc->ry - core->rc->pl_y));
