@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 20:18:16 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/21 15:33:22 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/23 16:33:35 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,11 @@ void	pause_options_hover(int x, int y, t_core *core)
 	{
 		if (y >= core->y_pos[i] && y < core->y_pos[i] + MENU_SPACING)
 		{
-			core->menu_option = i;
-			render_pause_options(core);
+			if (core->menu_option != i)
+			{
+				core->menu_option = i;
+				render_pause_options(core);
+			}
 			break ;
 		}
 	}

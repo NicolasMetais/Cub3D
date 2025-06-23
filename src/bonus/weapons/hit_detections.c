@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 10:51:43 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/12 19:55:09 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/23 16:42:44 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,11 @@ bool	iswall(t_pos pos, t_core *core)
 		return (true);
 	if (core->map[(int)pos_y][(int)pos_x] == '1'
 		|| core->map[(int)pos_y][(int)pos_x] == ' '
+		|| core->map[(int)pos_y][(int)pos_x] == '2'
+		|| core->map[(int)pos_y][(int)pos_x] == '4'
+		|| core->map[(int)pos_y][(int)pos_x] == '5'
+		|| core->map[(int)pos_y][(int)pos_x] == '6'
+		|| core->map[(int)pos_y][(int)pos_x] == '7'
 		|| is_enemy(core, pos.x, pos.y))
 	{
 		return (true);

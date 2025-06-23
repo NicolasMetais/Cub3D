@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 15:49:25 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/21 19:04:32 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/23 15:58:20 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ bool	game_routine(t_sprite *sprite, t_core *core)
 	}
 	else if (core->state == GAME_OVER)
 	{
-		printf("yeweqweqewqs\n");
 		sprite = (t_sprite *)hashmap_get(&core->hashmap_sprites, "the_end");
 		if (update_sprite(sprite))
 			render_game_over(core);

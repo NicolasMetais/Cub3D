@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 13:33:49 by tvacher           #+#    #+#             */
-/*   Updated: 2025/06/21 20:07:39 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/23 16:29:42 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,8 @@ bool	start_game(t_core *core)
 		return (false);
 	render_weapon(core);
 	mlx_put_image_to_window(core->mlx, core->win, core->game_img->img, 0, 0);
-	render_hud(core);
 	render_head(core);
+	render_hud(core);
 	render_notifs(core);
 	if (core->player->health <= 0)
 		core->state = GAME_OVER;
