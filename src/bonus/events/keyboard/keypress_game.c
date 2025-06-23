@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   keypress_game.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tvacher <tvacher@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/30 16:38:24 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/20 18:34:04 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/23 17:55:47 by tvacher          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,9 @@ void	switch_weapons(int key, t_core *core)
 	int	index;
 
 	index = core->player->curr_wpn;
-	if (key >= XK_1 && key <= XK_7 && core->player->weapon[key - XK_0].owned)
+	if (key == XK_1 && core->player->weapon[0].owned)
+		key = XK_0;
+	if (key >= XK_0 && key <= XK_7 && core->player->weapon[key - XK_0].owned)
 	{
 		core->player->firing = false;
 		core->player->weapon[index].lock = false;

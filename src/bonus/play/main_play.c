@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 13:33:49 by tvacher           #+#    #+#             */
-/*   Updated: 2025/06/23 16:29:42 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/23 21:39:33 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ static void	renderings(t_core *core)
 	draw_minimap_game(core);
 	get_raycast_data(core);
 	render_foes(core);
+	render_items(core);
 	impacts(core);
 	render_projectiles(core);
 	print_player(core, 0xFFFF00);
@@ -84,7 +85,5 @@ bool	start_game(t_core *core)
 	render_head(core);
 	render_hud(core);
 	render_notifs(core);
-	if (core->player->health <= 0)
-		core->state = GAME_OVER;
 	return (true);
 }

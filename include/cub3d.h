@@ -6,12 +6,16 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 01:54:17 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/21 17:34:31 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/23 21:51:01 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
+
+# ifndef IS_BONUS
+#  define IS_BONUS 0
+# endif
 
 # define TILE 64
 //FOV
@@ -105,6 +109,7 @@ typedef struct s_pos
 
 typedef struct s_core
 {
+	bool			isbonus;
 	void			*mlx;
 	void			*win;
 	char			*map_name;
@@ -143,6 +148,7 @@ typedef struct s_core
 	int				scroll_ingame;
 	int				cursor[5];
 	t_item			item_list[20];
+	t_items			*items;
 	t_sounds		sound_list;
 	t_img			*notif_buffer;
 	t_img			*game_img;

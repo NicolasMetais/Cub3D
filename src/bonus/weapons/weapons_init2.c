@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   weapons_init2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tvacher <tvacher@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/08 19:15:56 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/21 17:05:33 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/23 17:33:38 by tvacher          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ bool	weapons_init_five(t_weapon weapon[9], t_core *core)
 	weapon[7].ammo_type = 3;
 	weapon[7].damage.min = 2060;
 	weapon[7].damage.max = 4200;
-	weapon[7].owned = true;
+	weapon[7].owned = false;
 	weapon[7].normal = hashmap_get(&core->hashmap, "BFGGA0");
 	if (!weapon[7].normal)
 		return (false);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tvacher <tvacher@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 17:55:32 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/16 20:18:08 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/23 21:16:14 by tvacher          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ bool	game_init(t_core *core)
 	if (!core->fontss)
 		return (false);
 	core->redraw = true;
+	if (!moves_init(core))
+		return (false);
 	if (!player_init(core))
 		return (false);
 	init_map_textures(core);

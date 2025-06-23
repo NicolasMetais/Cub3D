@@ -6,13 +6,13 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 18:50:31 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/21 21:07:50 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/23 21:59:27 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-bool	extend_strdup(t_parse_map *pm)
+bool	extend_strdup_bonus(t_parse_map *pm)
 {
 	int		c;
 
@@ -21,6 +21,34 @@ bool	extend_strdup(t_parse_map *pm)
 		&& pm->s[pm->i] != 'E' && pm->s[pm->i] != 'W'
 		&& pm->s[pm->i] != '\t' && pm->s[pm->i] != '2'
 		&& pm->s[pm->i] != '\t' && pm->s[pm->i] != ' ')
+		return (free(pm->cpy), ft_putendl_fd(
+				"Error \n Invalid character in the map", 2), false);
+	if (pm->s[pm->i] == 'N' || pm->s[pm->i] == 'S'
+		|| pm->s[pm->i] == 'E' || pm->s[pm->i] == 'W')
+			(pm->count)++;
+	if (pm->count > 1)
+		return (free(pm->cpy), ft_putendl_fd(
+				"Error \n Too many spawn point", 2), false);
+	if (pm->s[pm->i] == '\t')
+	{
+		c = -1;
+		while (++c < 4)
+			pm->cpy[pm->j++] = ' ';
+	}
+	else
+		pm->cpy[pm->j++] = pm->s[pm->i];
+	return (true);
+}
+
+bool	extend_strdup(t_parse_map *pm)
+{
+	int		c;
+
+	if (pm->s[pm->i] != '0' && pm->s[pm->i] != '1'
+		&& pm->s[pm->i] != 'N' && pm->s[pm->i] != 'S'
+		&& pm->s[pm->i] != 'E' && pm->s[pm->i] != 'W'
+		&& pm->s[pm->i] != '\t' && pm->s[pm->i] != '\t'
+		&& pm->s[pm->i] != ' ')
 		return (free(pm->cpy), ft_putendl_fd(
 				"Error \n Invalid character in the map", 2), false);
 	if (pm->s[pm->i] == 'N' || pm->s[pm->i] == 'S'
@@ -58,8 +86,18 @@ char	*ft_strdup_error(const char *s, int *count)
 		return (NULL);
 	pm.i = -1;
 	while (s[++pm.i])
-		if (!extend_strdup(&pm))
-			return (NULL);
+	{
+		if (IS_BONUS == 1)
+		{
+			if (!extend_strdup_bonus(&pm))
+				return (NULL);
+		}
+		else
+		{
+			if (!extend_strdup(&pm))
+				return (NULL);
+		}
+	}
 	pm.cpy[pm.j] = '\0';
 	return ((void *)pm.cpy);
 }

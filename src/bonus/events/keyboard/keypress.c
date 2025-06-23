@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 16:53:24 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/21 19:12:56 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/23 21:40:49 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,8 +122,6 @@ int	handle_keypress(int key, void *param)
 		}
 		cleanup_game(core);
 	}
-	if (key == XK_t)
-		core->state = GAME_OVER;
 	if (core->state == PAUSE)
 		pause_menu_keypress(key, core);
 	if (core->state == START_MENU)

@@ -1,5 +1,6 @@
-obj_bonus/src/main.o: src/main.c include/cub3d.h lib/minilibx-linux/mlx.h \
-  lib/raylib-4.5.0_linux_amd64/include/raylib.h \
+obj_bonus/src/bonus/pickup/items_animations.o: \
+  src/bonus/pickup/items_animations.c include/cub3d.h \
+  lib/minilibx-linux/mlx.h lib/raylib-4.5.0_linux_amd64/include/raylib.h \
   lib/libft/include/libft.h \
   lib/libft/include/../get_next_line/include/get_next_line.h \
   include/item.h include/word_creator.h include/events.h include/game.h \

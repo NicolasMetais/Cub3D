@@ -54,7 +54,7 @@ GAME =	src/mandatory/play/main_play.c \
 		src/mandatory/play/raycast.c \
 		src/mandatory/play/raycast_utils.c \
 
-MAIN_BONUS =	src/main.c \
+MAIN_BONUS =	src/bonus/main.c \
 				src/bonus/main_game.c \
 				src/bonus/routine.c \
 				src/bonus/movements.c \
@@ -149,8 +149,24 @@ GAME_BONUS =	src/bonus/play/main_play.c \
 NOTIF_BONUS =	src/bonus/notifs/render_notifs.c \
 
 PICKUP_BONUS =	src/bonus/pickup/items_init.c \
+			src/bonus/pickup/render_objects.c \
+			src/bonus/pickup/items_animations.c \
+			src/bonus/pickup/items_node_creation.c \
+			src/bonus/pickup/items_picks_utils.c \
+			src/bonus/pickup/items_picks.c \
 
 FOES_BONUS = src/bonus/foes/render_foes.c \
+			src/bonus/foes/anim_init1.c \
+			src/bonus/foes/anim_init2.c \
+			src/bonus/foes/anim_init3.c \
+			src/bonus/foes/anim_init4.c \
+			src/bonus/foes/anim_init5.c \
+			src/bonus/foes/foe_anim_utils.c \
+			src/bonus/foes/foe_anim.c \
+			src/bonus/foes/foe_init.c \
+			src/bonus/foes/foe_life_col.c \
+			src/bonus/foes/render_foes_utils.c \
+			src/bonus/foes/render_foes_utils_utils.c \
 
 OBJ_DIR = obj
 OBJ_DIR_BONUS = obj_bonus
@@ -169,7 +185,6 @@ bonus: $(NAME_BONUS)
 
 $(NAME_BONUS): $(OBJS_BONUS) $(LIB) $(MLX)
 	$(CC) $(OBJS_BONUS) $(LIB) $(MLX) -lGL -lm -lpthread -ldl -lX11 -lXext $(RAYLIB) -o $(NAME_BONUS)
-
 $(LIB):
 	$(MAKE) -C lib/libft
 
@@ -182,7 +197,7 @@ $(OBJ_DIR)/src/%.o: src/%.c
 
 $(OBJ_DIR_BONUS)/src/%.o: src/%.c
 	mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -MMD -MP -c $< -o $@
+	$(CC) $(CFLAGS) -D IS_BONUS=1 -MMD -MP -c $< -o $@
 
 -include $(OBJS:.o=.d)
 

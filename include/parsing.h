@@ -36,8 +36,10 @@ typedef struct s_textures
 	t_img	*door;
 	char	*floor_color;
 	char	**floor_colors;
+	char	**floor_hexa;
 	char	*ceiling_color;
 	char	**ceiling_colors;
+	char	**ceiling_hexa;
 }	t_textures;
 
 typedef struct s_colors
@@ -104,5 +106,8 @@ bool	realloc_map(t_tmp *stock, char **dup_maps);
 
 //launch parsing
 bool	parsing_cub(t_core *core, char *av);
+
+//load image
+bool	load_img(t_img **img, char *path, t_core *core);
 
 #endif

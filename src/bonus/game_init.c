@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 17:55:32 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/21 20:15:12 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/23 21:35:25 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 bool	player_init(t_core *core)
 {
 	core->player = gc_malloc(&core->gc, sizeof(t_player),
-		STRUCT, "struct player");
+			STRUCT, "struct player");
 	if (!core->player)
 		return (false);
 	ft_memset(core->player, 0, sizeof(t_player));
 	core->player->position = gc_malloc(&core->gc, sizeof(t_pos),
-		STRUCT, "pos player");
+			STRUCT, "pos player");
 	if (!core->player->position)
 		return (false);
 	if (core->map_height > core->map_width)
@@ -107,11 +107,11 @@ bool	more_buffers(t_core *core)
 			core->hud_img->clean_pause_buffer, S_LENGHT, S_HEIGHT, core);
 	if (!core->hud_img->clean_pause_buffer)
 		return (false);
+	if (!init_foes(core))
+		return (false);
 	if (!item_init(core))
 		return (false);
 	if (!notif_init(core))
-		return (false);
-	if (!init_foes(core))
 		return (false);
 	if (!rc_init(core))
 		return (false);

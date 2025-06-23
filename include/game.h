@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tvacher <tvacher@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 01:32:25 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/21 16:18:07 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/23 21:29:06 by tvacher          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,13 +146,6 @@ void			print_3d_horizontal(t_core *core);
 void			print_open_doors(t_core *core);
 void			print_doors(t_core *core);
 
-// //Layers printing
-// void			print_background(t_core *core, int x, int y, int color);
-// void			print_player(t_core *core, int color);
-// void			print_rays(t_core *core, int color);
-// void			print_3d(t_core *core, int pixel_index);
-// void			get_rc_data(t_core *core);
-// void			rays_updates(t_core *core);
-// void			draw_player_line(t_core *core, int color);
+void			update_angle_in_rc_data(t_core *core);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/22 20:57:39 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/26 13:30:25 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/23 21:28:00 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ bool	check_flag_position(t_tmp *stock, char *prefix[7])
 
 	stock->map_start = first_map_line(stock, prefix);
 	prefix_nb = is_textures_colors(stock, prefix);
-	if (prefix_nb < 0)
+	if (prefix_nb <= 0)
 		return (false);
 	if (prefix_nb < 6)
 	{

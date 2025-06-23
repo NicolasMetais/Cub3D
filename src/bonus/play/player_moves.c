@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_moves.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tvacher <tvacher@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 15:40:42 by tvacher           #+#    #+#             */
-/*   Updated: 2025/06/20 14:02:49 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/23 21:03:25 by tvacher          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,59 +89,30 @@ static void	handle_down(t_core *core, double move_dist)
 		core->rc->pl_y = core->down->next_y;
 }
 
-// static void	handle_up(t_core *core, double move_dist)
-// {
-//     double  next_x;
-//     double  next_y;
-//     int map_x;
-//     int map_y;
-
-//     next_x = core->rc->pl_x + core->rc->pldelt_x * move_dist;
-//     next_y = core->rc->pl_y + core->rc->pldelt_y * move_dist;
-
-//     // Test horizontal
-//     map_x = (int)(next_x / 8);
-//     map_y = (int)(core->rc->pl_y / 8);
-//     if (map_x >= 0 && map_y >= 0 && map_y < core->map_height && map_x < core->map_width &&
-//         core->map[map_y][map_x] != '1' && core->map[map_y][map_x] != '2')
-//         core->rc->pl_x = next_x;
-
-//     // Test vertical
-//     map_x = (int)(core->rc->pl_x / 8);  // Recalculé après potentiel changement de x
-//     map_y = (int)(next_y / 8);
-//     if (map_x >= 0 && map_y >= 0 && map_y < core->map_height && map_x < core->map_width &&
-//         core->map[map_y][map_x] != '1' && core->map[map_y][map_x] != '2')
-//         core->rc->pl_y = next_y;
-// }
-
-static void handle_up(t_core *core, double move_dist)
+static void	handle_up(t_core *core, double move_dist)
 {
-    double next_x;
-    double next_y;
-	double	margin_x;
-	double	margin_y;
-	int map_x;
-	int map_y;
+	int		map_x;
+	int		map_y;
 
-	margin_x = 0;
-	margin_y = 0;
-	next_x = core->rc->pl_x + core->rc->pldelt_x * move_dist;
-	next_y = core->rc->pl_y + core->rc->pldelt_y * move_dist;
-    if (core->rc->pldelt_x < 0)
-        margin_x = -1.5;
-    if (core->rc->pldelt_y < 0)
-        margin_y = -1.5;
-    map_x = (int)((next_x + margin_x) / 8);
-    map_y = (int)(core->rc->pl_y / 8);
-    if (is_map_colision(core, map_y, map_x))
-        core->rc->pl_x = next_x;
-    map_x = (int)(core->rc->pl_x / 8);
-    map_y = (int)((next_y + margin_y) / 8);
-    if (is_map_colision(core, map_y, map_x))
-        core->rc->pl_y = next_y;
+	core->up->next_x = core->rc->pl_x + core->rc->pldelt_x * move_dist;
+	core->up->next_y = core->rc->pl_y + core->rc->pldelt_y * move_dist;
+	core->up->margin_x = 1.5;
+	if (core->rc->pldelt_x < 0)
+		core->up->margin_x = -1.5;
+	core->up->margin_y = 1.5;
+	if (core->rc->pldelt_y < 0)
+		core->up->margin_y = -1.5;
+	map_x = (int)((core->up->next_x + core->up->margin_x) / 8);
+	map_y = (int)(core->rc->pl_y / 8);
+	if (is_map_colision(core, map_y, map_x))
+		core->rc->pl_x = core->up->next_x;
+	map_x = (int)(core->rc->pl_x / 8);
+	map_y = (int)((core->up->next_y + core->up->margin_y) / 8);
+	if (is_map_colision(core, map_y, map_x))
+		core->rc->pl_y = core->up->next_y;
 }
 
-void    move_player(t_core *core, t_move move, double delta_time)
+void	move_player(t_core *core, t_move move, double delta_time)
 {
 	double	move_dist;
 
