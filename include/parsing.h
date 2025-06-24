@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 01:58:43 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/23 23:07:40 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/24 17:53:49 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,5 +109,14 @@ bool	parsing_cub(t_core *core, char *av);
 
 //load image
 bool	load_img(t_img **img, char *path, t_core *core);
+
+//bonus checker for parsing diff
+bool	bonus_or_not(t_parse_map *pm);
+
+//bonus char check
+bool	extend_strdup_bonus(t_parse_map *pm);
+
+//mandatory char check
+bool	extend_strdup(t_parse_map *pm);
 
 #endif

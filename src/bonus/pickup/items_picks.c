@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   items_picks.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tvacher <tvacher@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 20:22:27 by tvacher           #+#    #+#             */
-/*   Updated: 2025/06/23 20:23:22 by tvacher          ###   ########.fr       */
+/*   Updated: 2025/06/24 17:18:15 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ void	update_items_player(t_core *core)
 		{
 			if (items->item->dist < 6)
 			{
+				PlaySound(core->sound_list.pickup_item);
 				handle_items(core, items->item);
 				items->item->state = TAKEN;
 			}

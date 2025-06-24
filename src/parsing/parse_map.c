@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 18:50:31 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/23 23:07:15 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/24 17:52:14 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,16 +87,8 @@ char	*ft_strdup_error(const char *s, int *count)
 	pm.i = -1;
 	while (s[++pm.i])
 	{
-		if (IS_BONUS == 1)
-		{
-			if (!extend_strdup_bonus(&pm))
-				return (NULL);
-		}
-		else
-		{
-			if (!extend_strdup(&pm))
-				return (NULL);
-		}
+		if (!bonus_or_not(&pm))
+			return (NULL);
 	}
 	pm.cpy[pm.j] = '\0';
 	return ((void *)pm.cpy);

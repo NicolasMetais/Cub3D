@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 22:41:32 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/21 16:57:23 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/24 17:47:21 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	music_init_3(t_core *core)
 {
 	core->sound_list.demon_nearby = LoadSound(
 			"sounds/enemies/demon_nearby.wav");
-	core->sound_list.imp_death = LoadSound("sounds/enemies/imp_death.wav");
+	core->sound_list.imp_death = LoadSound("sounds/enemies/imp_death1.wav");
 	core->sound_list.imp_death2 = LoadSound("sounds/enemies/imp_death2.wav");
 	core->sound_list.imp_growl1 = LoadSound("sounds/enemies/imp_growl1.wav");
 	core->sound_list.imp_growl2 = LoadSound("sounds/enemies/imp_growl2.wav");
@@ -37,6 +37,8 @@ void	music_init_3(t_core *core)
 			"sounds/weapons/rocketLauncher_fire.wav");
 	core->sound_list.plasma = LoadSound("sounds/weapons/plasma_fire.wav");
 	core->sound_list.bfg = LoadSound("sounds/weapons/BFG_fire.wav");
+	core->sound_list.demon_injured = LoadSound(
+			"sounds/enemies/demon_injured.wav");
 }
 
 void	music_init_2(t_core *core)
@@ -50,6 +52,7 @@ void	music_init_2(t_core *core)
 	core->music_list[27] = "sounds/musics/d_victor.ogg";
 	core->sound_list.barrel_exp = LoadSound("sounds/player/barrel_exp.wav");
 	core->sound_list.player_death = LoadSound("sounds/player/death.wav");
+	core->sound_list.player_injured = LoadSound("sounds/player/injured.wav");
 	core->sound_list.player_death2 = LoadSound("sounds/player/death2.wav");
 	core->sound_list.player_bump = LoadSound("sounds/player/hit_wall.wav");
 	core->sound_list.pickup_item = LoadSound("sounds/player/item_pickup.wav");
@@ -63,8 +66,6 @@ void	music_init_2(t_core *core)
 	core->sound_list.demon_atk = LoadSound("sounds/enemies/demon_atk.wav");
 	core->sound_list.demon_death = LoadSound("sounds/enemies/demon_death.wav");
 	core->sound_list.demon_growl = LoadSound("sounds/enemies/demon_growl.wav");
-	core->sound_list.demon_injured = LoadSound(
-			"sounds/enemies/demon_injured.wav");
 	music_init_3(core);
 }
 

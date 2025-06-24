@@ -165,6 +165,7 @@ FOES_BONUS = src/bonus/foes/render_foes.c \
 			src/bonus/foes/foe_anim.c \
 			src/bonus/foes/foe_init.c \
 			src/bonus/foes/foe_life_col.c \
+			src/bonus/foes/foe_damage.c \
 			src/bonus/foes/render_foes_utils.c \
 			src/bonus/foes/render_foes_utils_utils.c \
 

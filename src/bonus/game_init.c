@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 17:55:32 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/23 21:35:25 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/24 17:14:03 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,13 +82,6 @@ bool	hud_init(t_core *core)
 	if (!hud_buffers(core))
 		return (false);
 	core->hud_img->hud_render = true;
-	core->hud_img->ammo1_render = true;
-	core->hud_img->ammo2_render = true;
-	core->hud_img->ammo3_render = true;
-	core->hud_img->ammo4_render = true;
-	core->hud_img->health_render = true;
-	core->hud_img->armor_render = true;
-	core->hud_img->new_weapon_render = true;
 	return (true);
 }
 

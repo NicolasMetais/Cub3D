@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   anim_init2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tvacher <tvacher@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 19:11:08 by tvacher           #+#    #+#             */
-/*   Updated: 2025/06/23 19:11:38 by tvacher          ###   ########.fr       */
+/*   Updated: 2025/06/24 17:10:42 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void	init_head_list(t_core *core, t_foes *node)
 	node->walk_speed = 300;
 	node->damage = 5;
 	node->init_frame = 6;
+	node->death_sound = &core->sound_list.cacodemon_death;
 	node->img_body = hashmap_get(&core->hashmap, "HEADL0");
 	if (!node->img_body)
 		return ;
@@ -90,6 +91,7 @@ void	init_play_list(t_core *core, t_foes *node)
 	node->walk_speed = 300;
 	node->damage = 1;
 	node->init_frame = 6;
+	node->death_sound = &core->sound_list.player_death2;
 	node->img_body = hashmap_get(&core->hashmap, "PLAYW0");
 	if (!node->img_body)
 		return ;
