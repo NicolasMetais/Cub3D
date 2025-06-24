@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cleanup_game.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tvacher <tvacher@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 02:08:56 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/24 15:00:17 by tvacher          ###   ########.fr       */
+/*   Updated: 2025/06/24 18:28:00 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,8 @@ void	cleanup_game(t_core *core)
 		mlx_destroy_window(core->mlx, core->win);
 	if (core->mlx)
 		mlx_destroy_display(core->mlx);
-	free_ult(core->textures->floor_colors);
+	if (core->textures)
+		free_ult(core->textures->floor_colors);
 	free_gc(core->gc, NULL);
 	exit(0);
 }

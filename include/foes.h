@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   foes.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tvacher <tvacher@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 17:27:47 by tvacher           #+#    #+#             */
-/*   Updated: 2025/06/24 16:51:10 by tvacher          ###   ########.fr       */
+/*   Updated: 2025/06/24 18:03:15 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_foes {
 	double			rel_angle;
 	int				screen_x;
 	int				sprite_size;
+	Sound			*death_sound;
 	t_pos			*pos;
 	t_img			*img_body;
 	t_sprite		*walking;
@@ -72,6 +73,9 @@ int			foes_to_create(t_core *core);
 void		sort_enemies_by_distance(t_foes **head);
 t_sprite	*copy_sprite(t_core *core, t_sprite *src, int i);
 bool		can_see_player(t_core *core, float ex, float ey);
+
+//damage
+void		damage_deal(t_core *core, t_foes *enemy);
 
 //animations
 void		anim_attack_foe(t_core *core);

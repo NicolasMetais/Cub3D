@@ -6,11 +6,26 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/11 20:30:16 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/21 21:08:08 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/24 17:53:55 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+bool	bonus_or_not(t_parse_map *pm)
+{
+	if (IS_BONUS == 1)
+	{
+		if (!extend_strdup_bonus(pm))
+			return (false);
+	}
+	else
+	{
+		if (!extend_strdup(pm))
+			return (false);
+	}
+	return (true);
+}
 
 bool	realloc_map_2(t_tmp	*stock, char **dup_maps, int i)
 {
@@ -37,8 +52,9 @@ void	free_partial_map(char **map, int up_to)
 {
 	int	i;
 
-	for (i = 0; i < up_to; i++)
-		free(map[i]);
+	i = 0;
+	while (i < up_to)
+		free(map[i++]);
 	free(map);
 }
 

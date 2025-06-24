@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_back.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tvacher <tvacher@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 13:48:11 by tvacher           #+#    #+#             */
-/*   Updated: 2025/06/23 22:36:09 by tvacher          ###   ########.fr       */
+/*   Updated: 2025/06/24 18:49:42 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ static void	print_floor(t_core *core, int pixel_index)
 	r = ft_atoi(core->textures->floor_colors[0]);
 	g = ft_atoi(core->textures->floor_colors[1]);
 	b = ft_atoi(core->textures->floor_colors[2]);
-	core->game_img->addr[pixel_index + 0] = (b & 0xFF << 16);
-	core->game_img->addr[pixel_index + 1] = (g & 0xFF << 8);
+	core->game_img->addr[pixel_index + 0] = (b & 0xFF << 0);
+	core->game_img->addr[pixel_index + 1] = (g & 0xFF << 0);
 	core->game_img->addr[pixel_index + 2] = (r & 0xFF << 0);
 }
 
@@ -35,8 +35,8 @@ static void	print_ceiling(t_core *core, int pixel_index)
 	r = ft_atoi(core->textures->ceiling_colors[0]);
 	g = ft_atoi(core->textures->ceiling_colors[1]);
 	b = ft_atoi(core->textures->ceiling_colors[2]);
-	core->game_img->addr[pixel_index + 0] = (b & 0xFF << 16);
-	core->game_img->addr[pixel_index + 1] = (g & 0xFF << 8);
+	core->game_img->addr[pixel_index + 0] = (b & 0xFF << 0);
+	core->game_img->addr[pixel_index + 1] = (g & 0xFF << 0);
 	core->game_img->addr[pixel_index + 2] = (r & 0xFF << 0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/24 18:50:31 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/23 23:07:15 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/24 18:43:24 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ bool	extend_strdup_bonus(t_parse_map *pm)
 				"Error \n Invalid character in the map", 2), false);
 	if (pm->s[pm->i] == 'N' || pm->s[pm->i] == 'S'
 		|| pm->s[pm->i] == 'E' || pm->s[pm->i] == 'W')
-			(pm->count)++;
-	if (pm->count > 1)
+			(*pm->count)++;
+	if ((*pm->count) > 1)
 		return (free(pm->cpy), ft_putendl_fd(
 				"Error \n Too many spawn point", 2), false);
 	if (pm->s[pm->i] == '\t')
@@ -53,8 +53,8 @@ bool	extend_strdup(t_parse_map *pm)
 				"Error \n Invalid character in the map", 2), false);
 	if (pm->s[pm->i] == 'N' || pm->s[pm->i] == 'S'
 		|| pm->s[pm->i] == 'E' || pm->s[pm->i] == 'W')
-			(pm->count)++;
-	if (pm->count > 1)
+			(*pm->count)++;
+	if ((*pm->count) > 1)
 		return (free(pm->cpy), ft_putendl_fd(
 				"Error \n Too many spawn point", 2), false);
 	if (pm->s[pm->i] == '\t')
@@ -76,7 +76,7 @@ char	*ft_strdup_error(const char *s, int *count)
 	pm.i = -1;
 	pm.s = s;
 	pm.j = 0;
-	pm.count = *count;
+	pm.count = count;
 	tab = 0;
 	while (s[++pm.i])
 		if (s[pm.i] == '\t')
@@ -87,16 +87,8 @@ char	*ft_strdup_error(const char *s, int *count)
 	pm.i = -1;
 	while (s[++pm.i])
 	{
-		if (IS_BONUS == 1)
-		{
-			if (!extend_strdup_bonus(&pm))
-				return (NULL);
-		}
-		else
-		{
-			if (!extend_strdup(&pm))
-				return (NULL);
-		}
+		if (!bonus_or_not(&pm))
+			return (NULL);
 	}
 	pm.cpy[pm.j] = '\0';
 	return ((void *)pm.cpy);
@@ -121,7 +113,7 @@ char	**dup_map(t_tmp *stock)
 	{
 		dup_maps[j] = ft_strdup_error(stock->tmp_maps[i], &count);
 		if (!dup_maps[j])
-			return (NULL);
+			return (ft_free_tab(dup_maps), NULL);
 		if (stock->width < (int)ft_strlen(dup_maps[j]))
 			stock->width = ft_strlen(dup_maps[j]);
 		j++;

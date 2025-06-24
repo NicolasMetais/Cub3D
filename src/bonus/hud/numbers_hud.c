@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 15:16:14 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/12 15:54:55 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/24 17:15:11 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,6 @@ bool	render_ammo_red_num(t_core *core, t_img *bg)
 {
 	char	*num;
 
-	if (!(core->hud_img->ammo1_render || core->hud_img->ammo2_render
-			|| core->hud_img->ammo3_render || core->hud_img->ammo4_render))
-		return (true);
 	num = ft_itoa(core->player->ammo[core->player->weapon
 		[core->player->curr_wpn].ammo_type]);
 	if (!num)
@@ -43,52 +40,46 @@ bool	render_ammo_red_num(t_core *core, t_img *bg)
 
 bool	render_health_red_num(t_core *core, t_img *bg, char *num)
 {
-	if (core->hud_img->health_render)
+	if (ft_strlen(num) == 1)
 	{
-		if (ft_strlen(num) == 1)
-		{
-			partial_copy_img(core->hud_img->life, bg, 300, 40);
-			if (!hud_render_percent(core->hud_img->life, core, num, 300))
-				return (false);
-		}
-		else if (ft_strlen(num) == 2)
-		{
-			partial_copy_img(core->hud_img->life, bg, 270, 40);
-			if (!hud_render_percent(core->hud_img->life, core, num, 270))
-				return (false);
-		}
-		else
-		{
-			partial_copy_img(core->hud_img->life, bg, 250, 40);
-			if (!hud_render_percent(core->hud_img->life, core, num, 250))
-				return (false);
-		}
+		partial_copy_img(core->hud_img->life, bg, 300, 40);
+		if (!hud_render_percent(core->hud_img->life, core, num, 300))
+			return (false);
+	}
+	else if (ft_strlen(num) == 2)
+	{
+		partial_copy_img(core->hud_img->life, bg, 270, 40);
+		if (!hud_render_percent(core->hud_img->life, core, num, 270))
+			return (false);
+	}
+	else
+	{
+		partial_copy_img(core->hud_img->life, bg, 250, 40);
+		if (!hud_render_percent(core->hud_img->life, core, num, 250))
+			return (false);
 	}
 	return (true);
 }
 
 bool	render_armor_red_num(t_core *core, t_img *bg, char *num)
 {
-	if (core->hud_img->armor_render)
+	if (ft_strlen(num) == 1)
 	{
-		if (ft_strlen(num) == 1)
-		{
-			partial_copy_img(core->hud_img->armor, bg, 945, 40);
-			if (!hud_render_percent(core->hud_img->armor, core, num, 945))
-				return (false);
-		}
-		else if (ft_strlen(num) == 2)
-		{
-			partial_copy_img(core->hud_img->armor, bg, 930, 40);
-			if (!hud_render_percent(core->hud_img->armor, core, num, 930))
-				return (false);
-		}
-		else
-		{
-			partial_copy_img(core->hud_img->armor, bg, 905, 40);
-			if (!hud_render_percent(core->hud_img->armor, core, num, 905))
-				return (false);
-		}
+		partial_copy_img(core->hud_img->armor, bg, 945, 40);
+		if (!hud_render_percent(core->hud_img->armor, core, num, 945))
+			return (false);
+	}
+	else if (ft_strlen(num) == 2)
+	{
+		partial_copy_img(core->hud_img->armor, bg, 930, 40);
+		if (!hud_render_percent(core->hud_img->armor, core, num, 930))
+			return (false);
+	}
+	else
+	{
+		partial_copy_img(core->hud_img->armor, bg, 905, 40);
+		if (!hud_render_percent(core->hud_img->armor, core, num, 905))
+			return (false);
 	}
 	return (true);
 }

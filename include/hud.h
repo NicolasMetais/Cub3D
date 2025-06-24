@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 01:23:05 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/21 16:18:48 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/24 17:13:42 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,6 @@ typedef struct s_hud_img
 	t_img		*armor;
 	t_img		*ammo;
 	bool		hud_render;
-	bool		ammo1_render;
-	bool		ammo2_render;
-	bool		ammo3_render;
-	bool		ammo4_render;
-	bool		health_render;
-	bool		armor_render;
-	bool		new_weapon_render;
 }	t_hud_img;
 
 //---------------------HUD---------------------

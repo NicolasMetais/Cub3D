@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   foe_anim.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tvacher <tvacher@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 18:56:30 by tvacher           #+#    #+#             */
-/*   Updated: 2025/06/24 17:37:55 by tvacher          ###   ########.fr       */
+/*   Updated: 2025/06/24 19:17:44 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	handle_enemy_death(t_core *core, t_foes *enemy)
 {
 	(void)core;
 	enemy->death = 1;
+	PlaySound(*enemy->death_sound);
 }
 
 static void	anim_loop_walk(t_core *core, t_foes *enemy)
@@ -48,7 +49,7 @@ void	anim_walk_foe(t_core *core)
 	enemy = core->foes;
 	while (enemy)
 	{
-		enemy->walking->speed = enemy->walk_speed;
+		enemy->walking->speed = 200;
 		if (enemy->death == 0 && enemy->atk == 0)
 		{
 			if (!enemy || !enemy->walking)
@@ -77,12 +78,7 @@ static void	anim_loop_attack(t_core *core, t_foes *enemy)
 		}
 		enemy->attack->update = current;
 		if (enemy->atk == 1)
-		{
-			if (core->player->armor > 0 && core->godmod == 0)
-				core->player->armor -= enemy->damage;
-			else if (core->godmod == 0)
-				core->player->health -= enemy->damage;
-		}
+			damage_deal(core, enemy);
 		if (core->player->health <= 0)
 			core->state = GAME_OVER;
 	}

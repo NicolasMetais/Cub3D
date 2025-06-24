@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:33:47 by tvacher           #+#    #+#             */
-/*   Updated: 2025/06/23 21:34:05 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/24 18:56:47 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,15 @@ bool	init_map_textures(t_core *core)
 	ft_split(core->textures->ceiling_color, ',');
 	if (!core->textures->floor_colors)
 		return (false);
-	if (!load_image(&core->textures->img_north, \
-		core->textures->north, core, "1"))
+	if (!load_img(&core->textures->img_north, \
+		core->textures->north, core))
 		return (false);
-	if (!load_image(&core->textures->img_south, \
-		core->textures->south, core, "1"))
+	if (!load_img(&core->textures->img_south, \
+		core->textures->south, core))
 		return (false);
-	if (!load_image(&core->textures->img_east, core->textures->east, core, "1"))
+	if (!load_img(&core->textures->img_east, core->textures->east, core))
 		return (false);
-	if (!load_image(&core->textures->img_west, core->textures->west, core, "1"))
+	if (!load_img(&core->textures->img_west, core->textures->west, core))
 		return (false);
 	return (true);
 }

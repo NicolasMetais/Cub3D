@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tvacher <tvacher@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 17:55:32 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/23 22:47:46 by tvacher          ###   ########.fr       */
+/*   Updated: 2025/06/24 19:02:15 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ bool	game_init(t_core *core)
 			sizeof(t_fonts), STRUCT, "fonts");
 	if (!core->fontss)
 		return (false);
-	init_map_textures(core);
+	if (!init_map_textures(core))
+		return (false);
 	if (!player_init(core))
 		return (false);
 	if (!moves_init(core))

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_3d.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tvacher <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 18:13:16 by tvacher           #+#    #+#             */
-/*   Updated: 2025/06/07 18:13:29 by tvacher          ###   ########.fr       */
+/*   Updated: 2025/06/24 18:54:00 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ void	get_draw_loop_data(t_core *core)
 
 void	get_draw_start_data(t_core *core)
 {
+	if (!core->textures->img_east)
+		return ;
 	core->rc3d->start = (int)(core->rc->r * 1);
 	core->rc3d->end = (int)((core->rc->r + 1) * 1);
 	core->rc3d->tx = (int)(core->rc3d->offset / 8.0f * \
@@ -63,6 +65,8 @@ void	get_draw_start_data(t_core *core)
 
 void	get_3d_based_data(t_core *core)
 {
+	if (!core->textures->img_east)
+		return ;
 	core->rc3d->ty_off = 0;
 	core->rc3d->line_h = (8 * S_HEIGHT) / \
 	core->rc->dist3[core->rc->r];

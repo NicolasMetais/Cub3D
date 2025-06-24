@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/23 18:00:44 by nmetais           #+#    #+#             */
-/*   Updated: 2025/05/23 21:45:09 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/24 16:35:42 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ bool	valid_numbers_range(char **colors, void **var_ptr)
 	tmp = *var_ptr;
 	while (colors[++i])
 	{
-		tmp->data[i] = ft_atoi(colors[i]);
+		if (!safe_atoi(colors[i], &tmp->data[i]))
+			return (ft_putendl_fd("Error \n overflow", 2), false);
 		if (tmp->data[i] < 0 || tmp->data[i] > 255)
 		{
 			error = ft_strjoin(

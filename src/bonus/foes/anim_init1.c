@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   anim_init1.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tvacher <tvacher@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 19:09:37 by tvacher           #+#    #+#             */
-/*   Updated: 2025/06/23 19:10:57 by tvacher          ###   ########.fr       */
+/*   Updated: 2025/06/24 19:21:51 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	init_poss_list(t_core *core, t_foes *node)
 	node->img_body = hashmap_get(&core->hashmap, "POSSU0");
 	if (!node->img_body)
 		return ;
+	node->death_sound = &core->sound_list.player_death;
 	init_poss_walking_list(core, node);
 	init_poss_attack_list(core, node);
 	init_poss_death_list(core, node);
@@ -41,6 +42,7 @@ void	init_sarg_list(t_core *core, t_foes *node)
 	node->img_body = hashmap_get(&core->hashmap, "SARGN0");
 	if (!node->img_body)
 		return ;
+	node->death_sound = &core->sound_list.imp_death;
 	init_sarg_walking_list(core, node);
 	init_sarg_attack_list(core, node);
 	init_sarg_death_list(core, node);
@@ -55,6 +57,7 @@ void	init_skul_list(t_core *core, t_foes *node)
 	node->walk_speed = 300;
 	node->damage = 5;
 	node->init_frame = 4;
+	node->death_sound = &core->sound_list.barrel_exp;
 	init_skul_walking_list(core, node);
 	init_skul_attack_list(core, node);
 	init_skul_death_list(core, node);
@@ -72,6 +75,7 @@ void	init_cybr_list(t_core *core, t_foes *node)
 	node->img_body = hashmap_get(&core->hashmap, "CYBRP0");
 	if (!node->img_body)
 		return ;
+	node->death_sound = &core->sound_list.demon_death;
 	init_cybr_walking_list(core, node);
 	init_cybr_attack_list(core, node);
 	init_cybr_death_list(core, node);
@@ -91,5 +95,8 @@ void	init_foe_img(t_core *core, t_foes *node)
 		init_skul_list(core, node);
 	else
 		init_sarg_list(core, node);
+	gettimeofday(&node->walking->update, NULL);
+	gettimeofday(&node->attack->update, NULL);
+	gettimeofday(&node->anim_death->update, NULL);
 	node->activ_img = node->walking->img_list;
 }

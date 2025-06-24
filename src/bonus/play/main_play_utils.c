@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_play_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tvacher <tvacher@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:33:47 by tvacher           #+#    #+#             */
-/*   Updated: 2025/06/23 20:47:21 by tvacher          ###   ########.fr       */
+/*   Updated: 2025/06/24 19:31:44 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ bool	init_map_textures(t_core *core)
 	"Open_Door");
 	core->textures->door = (t_img *)hashmap_get(&core->hashmap, "Door");
 	core->textures->sky = (t_img *)hashmap_get(&core->hashmap, "Sky");
+	if (!core->textures->open_doors || !core->textures->door || core->textures->sky)
+		return (false);
 	if (!load_image(&core->textures->img_north, \
 		core->textures->north, core, "1"))
 		return (false);
@@ -74,6 +76,10 @@ bool	init_map_textures(t_core *core)
 		return (false);
 	if (!load_image(&core->textures->img_west, core->textures->west, core, "1"))
 		return (false);
+	hashmap_insert(&core->hashmap, "North", core->textures->img_north, core);
+	hashmap_insert(&core->hashmap, "South", core->textures->img_south, core);
+	hashmap_insert(&core->hashmap, "East", core->textures->img_east, core);
+	hashmap_insert(&core->hashmap, "West", core->textures->img_west, core);
 	return (true);
 }
 

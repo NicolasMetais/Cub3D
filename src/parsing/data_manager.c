@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:56:58 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/21 20:50:46 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/24 17:48:47 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,5 @@ bool	load_valid_datas(t_core *core, t_tmp *stock)
 		return (false);
 	free(stock->spawn);
 	free(stock);
-
 	return (true);
 }

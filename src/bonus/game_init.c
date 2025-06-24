@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tvacher <tvacher@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 17:55:32 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/24 14:39:52 by tvacher          ###   ########.fr       */
+/*   Updated: 2025/06/24 18:07:53 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ bool	player_init(t_core *core)
 	core->player->position->x = core->spawn->x;
 	core->player->position->y = core->spawn->y;
 	core->player->health = 100;
-	core->player->ammo[0] = 200;
-	core->player->ammo[1] = 50;
-	core->player->ammo[2] = 50;
-	core->player->ammo[3] = 300;
+	core->player->ammo[0] = 50;
+	core->player->ammo[1] = 10;
+	core->player->ammo[2] = 10;
+	core->player->ammo[3] = 10;
 	core->player->curr_wpn = 2;
 	core->player->speed = core->speed;
 	core->menu_img->sliders[1].int_var = &core->player->speed;
@@ -82,13 +82,6 @@ bool	hud_init(t_core *core)
 	if (!hud_buffers(core))
 		return (false);
 	core->hud_img->hud_render = true;
-	core->hud_img->ammo1_render = true;
-	core->hud_img->ammo2_render = true;
-	core->hud_img->ammo3_render = true;
-	core->hud_img->ammo4_render = true;
-	core->hud_img->health_render = true;
-	core->hud_img->armor_render = true;
-	core->hud_img->new_weapon_render = true;
 	return (true);
 }
 
