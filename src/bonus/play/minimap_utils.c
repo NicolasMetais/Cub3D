@@ -3,14 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   minimap_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tvacher <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: tvacher <tvacher@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/07 17:47:07 by tvacher           #+#    #+#             */
-/*   Updated: 2025/06/07 17:47:23 by tvacher          ###   ########.fr       */
+/*   Updated: 2025/06/24 15:03:42 by tvacher          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+bool	is_wall_in_minimap(t_core *core, int x, int y)
+{
+	if (core->map[y][x] == '1' \
+	|| core->map[y][x] == '4' || core->map[y][x] == '5' \
+	|| core->map[y][x] == '6' || core->map[y][x] == '7')
+		return (true);
+	return (false);
+}
 
 int	get_map_tile_x(t_core *core, int x)
 {

@@ -6,7 +6,7 @@
 /*   By: tvacher <tvacher@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 18:56:30 by tvacher           #+#    #+#             */
-/*   Updated: 2025/06/23 20:58:26 by tvacher          ###   ########.fr       */
+/*   Updated: 2025/06/24 16:57:26 by tvacher          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	anim_loop_walk(t_core *core, t_foes *enemy)
 	elapsed = (current.tv_sec - enemy->walking->update.tv_sec) * 1000
 		+ (current.tv_usec - enemy->walking->update.tv_usec) / 1000;
 	enemy->activ_img = enemy->walking->img_list;
-	if (elapsed > enemy->walking->speed)
+	if (enemy->walking->speed && elapsed > enemy->walking->speed)
 	{
 		if (enemy->walking->img_list && enemy->walking->img_list->next)
 		{
@@ -48,6 +48,7 @@ void	anim_walk_foe(t_core *core)
 	enemy = core->foes;
 	while (enemy)
 	{
+		enemy->walking->speed = 0;
 		if (enemy->death == 0 && enemy->atk == 0)
 		{
 			if (!enemy || !enemy->walking)
@@ -67,7 +68,7 @@ static void	anim_loop_attack(t_core *core, t_foes *enemy)
 	elapsed = (current.tv_sec - enemy->attack->update.tv_sec) * 1000
 		+ (current.tv_usec - enemy->attack->update.tv_usec) / 1000;
 	enemy->activ_img = enemy->attack->img_list;
-	if (elapsed > enemy->attack->speed)
+	if (enemy->attack->speed && elapsed > enemy->attack->speed)
 	{
 		if (enemy->attack->img_list && enemy->attack->img_list->next)
 		{
@@ -94,6 +95,7 @@ void	anim_attack_foe(t_core *core)
 	enemy = core->foes;
 	while (enemy)
 	{
+		enemy->attack->speed = 0;
 		if (enemy->death == 0 && enemy->atk == 1)
 		{
 			if (!enemy || !enemy->attack)

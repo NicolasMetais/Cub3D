@@ -3,18 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   cleanup_game.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tvacher <tvacher@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/04 02:08:56 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/17 20:55:12 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/24 14:59:17 by tvacher          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+void	free_ult(char **str)
+{
+	int	i;
+
+	if (!str || !str[0])
+		return ;
+	i = 0;
+	while (str[i])
+		i++;
+	while (i-- > 0)
+		free(str[i]);
+	free(str);
+	str = NULL;
+}
+
 void	cleanup_game(t_core *core)
 {
-	mlx_destroy_image(core->mlx, core->textures->sky->img);
 	mlx_destroy_image(core->mlx, core->textures->img_north->img);
 	mlx_destroy_image(core->mlx, core->textures->img_south->img);
 	mlx_destroy_image(core->mlx, core->textures->img_east->img);
@@ -24,6 +38,8 @@ void	cleanup_game(t_core *core)
 		mlx_destroy_window(core->mlx, core->win);
 	if (core->mlx)
 		mlx_destroy_display(core->mlx);
+	free_ult(core->textures->floor_colors);
+	free_ult(core->textures->ceiling_colors);
 	free_gc(core->gc, NULL);
 	exit(0);
 }

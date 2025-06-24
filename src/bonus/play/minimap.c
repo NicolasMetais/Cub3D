@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tvacher <tvacher@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/31 11:13:56 by tvacher           #+#    #+#             */
-/*   Updated: 2025/06/12 20:19:11 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/24 15:05:04 by tvacher          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	print_miscellaneous(t_core *core, int color)
 	}
 }
 
-static void	draw_map_back(t_core *core, int color)
+void	draw_map_back(t_core *core, int color)
 {
 	int	i;
 	int	j;
@@ -66,7 +66,7 @@ static void	draw_map_back(t_core *core, int color)
 	}
 }
 
-static void	draw_tile(t_core *core, int x, int y, int color)
+void	draw_tile(t_core *core, int x, int y, int color)
 {
 	int	i;
 	int	j;
@@ -95,19 +95,6 @@ static void	draw_tile(t_core *core, int x, int y, int color)
 	}
 }
 
-void	is_enemy_tile(t_core *core, int tile_x, int tile_y)
-{
-	t_foes	*enemy;
-
-	enemy = core->foes;
-	while (enemy)
-	{
-		if (enemy->foe_x == tile_x && enemy->foe_y == tile_y)
-			draw_tile(core, tile_x, tile_y, 0xFF0000);
-		enemy = enemy->next;
-	}
-}
-
 void	draw_minimap_game(t_core *core)
 {
 	int	x;
@@ -125,8 +112,9 @@ void	draw_minimap_game(t_core *core)
 		{
 			tile_x = get_map_tile_x(core, x);
 			tile_y = get_map_tile_y(core, y);
-			is_enemy_tile(core, tile_x, tile_y);
-			if (core->map[y][x] == '1' || core->map[y][x] == '2')
+			if (core->map[y][x] == '2')
+				draw_tile(core, tile_x, tile_y, 0x00FF00);
+			else if (is_wall_in_minimap(core, x, y))
 				draw_tile(core, tile_x, tile_y, 0xFFFFFF);
 			else if (core->map[y][x] != ' ' && core->map[y][x] != 9)
 				draw_tile(core, tile_x, tile_y, 0x000000);

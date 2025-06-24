@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_play.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tvacher <tvacher@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/14 13:33:49 by tvacher           #+#    #+#             */
-/*   Updated: 2025/06/12 22:29:40 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/23 22:47:55 by tvacher          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,5 @@ bool	start_game(t_core *core)
 	print_background(core);
 	get_raycast_data(core);
 	mlx_put_image_to_window(core->mlx, core->win, core->game_img->img, 0, 0);
-	core->redraw = false;
 	return (true);
 }

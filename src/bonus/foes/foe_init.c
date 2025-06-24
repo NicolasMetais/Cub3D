@@ -6,7 +6,7 @@
 /*   By: tvacher <tvacher@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 19:06:19 by tvacher           #+#    #+#             */
-/*   Updated: 2025/06/23 21:07:50 by tvacher          ###   ########.fr       */
+/*   Updated: 2025/06/24 14:33:54 by tvacher          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ bool	get_number_of_foes(t_core *core)
 		y = 0;
 		while (y < core->map_width)
 		{
-			if (core->map[x][y] == 'F')
+			if (core->map[x][y] == 'F' && core->valid_map_tiles[x][y] == 'V')
 			{
 				res = rand() % 7;
 				if (!create_foes(core, res, x, y))

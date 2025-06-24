@@ -11,7 +11,7 @@ static char *result[] = {
 "@ c #AF7B1F",
 "# c #C39B2F",
 "$ c #EBDB57",
-"% c None",
+"% c #00FF00",
 /* pixels */
 "#$#%#$#%#$#%#$#",
 "@@@%@@@%@@@%@@@",

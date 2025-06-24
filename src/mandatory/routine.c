@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   routine.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tvacher <tvacher@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 15:49:25 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/17 18:43:48 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/23 22:47:52 by tvacher          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,7 @@ int	routine(void *param)
 	{
 		core->rc->max_r = S_LENGHT;
 		movements(core);
-		if (core->redraw == true)
-			start_game(core);
+		start_game(core);
 	}
-	core->redraw = false;
 	return (0);
 }
