@@ -145,6 +145,7 @@ GAME_BONUS =	src/bonus/play/main_play.c \
 		src/bonus/play/raycast.c \
 		src/bonus/play/raycast_utils.c \
 		src/bonus/play/doors.c \
+		src/bonus/play/player_tp.c \
 
 NOTIF_BONUS =	src/bonus/notifs/render_notifs.c \
 

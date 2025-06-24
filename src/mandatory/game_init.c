@@ -6,7 +6,7 @@
 /*   By: tvacher <tvacher@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 17:55:32 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/23 21:16:14 by tvacher          ###   ########.fr       */
+/*   Updated: 2025/06/23 22:47:46 by tvacher          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,6 @@ bool	player_init(t_core *core)
 		return (false);
 	core->player->position->x = core->spawn->x;
 	core->player->position->y = core->spawn->y;
-	core->player->health = 100;
-	core->player->ammo[0] = 50;
-	core->player->curr_wpn = 2;
 	core->player->speed = PLAYER_SPEED;
 	return (true);
 }
@@ -49,12 +46,11 @@ bool	game_init(t_core *core)
 			sizeof(t_fonts), STRUCT, "fonts");
 	if (!core->fontss)
 		return (false);
-	core->redraw = true;
-	if (!moves_init(core))
-		return (false);
+	init_map_textures(core);
 	if (!player_init(core))
 		return (false);
-	init_map_textures(core);
+	if (!moves_init(core))
+		return (false);
 	mlx_clear_window(core->mlx, core->win);
 	return (true);
 }

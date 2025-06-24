@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tvacher <tvacher@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 02:02:15 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/23 21:46:12 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/23 22:48:21 by tvacher          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ int	main(int ac, char **av)
 	if (ac == 2)
 	{
 		ft_memset(&core, 0, sizeof(core));
-		core.redraw = true;
 		cube3d(av[1], &core);
 		cleanup_game(&core);
 	}

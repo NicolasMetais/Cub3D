@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 01:58:43 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/23 23:07:40 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/24 18:02:09 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,8 @@ typedef struct s_textures
 	t_img	*door;
 	char	*floor_color;
 	char	**floor_colors;
-	char	**floor_hexa;
 	char	*ceiling_color;
 	char	**ceiling_colors;
-	char	**ceiling_hexa;
 }	t_textures;
 
 typedef struct s_colors

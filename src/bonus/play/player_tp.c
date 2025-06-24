@@ -1,26 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   keypress.c                                         :+:      :+:    :+:   */
+/*   player_tp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tvacher <tvacher@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/27 16:53:24 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/23 22:44:04 by tvacher          ###   ########.fr       */
+/*   Created: 2025/06/24 17:14:57 by tvacher           #+#    #+#             */
+/*   Updated: 2025/06/24 17:59:31 by tvacher          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-//KEYBOARD MANAGEMENT
-int	handle_keypress(int key, void *param)
+void	player_tp(t_core *core, int map_x, int map_y)
 {
-	t_core	*core;
-
-	core = (t_core *)param;
-	if (key == XK_Escape)
-		cleanup_game(core);
-	if (core->state == GAME)
-		on_keypress_game(key, core);
-	return (true);
+	if (core->valid_map_tiles[map_y][map_x] != 'V' && \
+	core->valid_map_tiles[map_y][map_x] != 'D' && \
+	core->valid_map_tiles[map_y][map_x] != '1')
+	{
+		core->rc->pl_x = core->spawn->x * 8;
+		core->rc->pl_y = core->spawn->y * 8;
+	}
 }

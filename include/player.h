@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tvacher <tvacher@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 16:23:22 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/23 21:34:22 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/24 17:46:48 by tvacher          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,6 @@ float	get_player_start(t_core *core);
 void	game_keypress(t_core *core, double delta_time);
 void	on_keyrelease_game(int key, t_core *core);
 void	on_keypress_game(int key, t_core *core);
+void	player_tp(t_core *core, int map_x, int map_y);
 
 #endif

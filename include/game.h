@@ -6,7 +6,7 @@
 /*   By: tvacher <tvacher@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/13 01:32:25 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/23 21:29:06 by tvacher          ###   ########.fr       */
+/*   Updated: 2025/06/23 23:32:31 by tvacher          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,5 +147,9 @@ void			print_open_doors(t_core *core);
 void			print_doors(t_core *core);
 
 void			update_angle_in_rc_data(t_core *core);
+
+void			draw_map_back(t_core *core, int color);
+void			draw_tile(t_core *core, int x, int y, int color);
+bool			is_wall_in_minimap(t_core *core, int x, int y);
 
 #endif

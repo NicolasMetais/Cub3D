@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
+/*   By: tvacher <tvacher@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/27 15:44:46 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/21 18:51:53 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/24 17:03:04 by tvacher          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ bool	img_init(t_core *core)
 		core->menu_img->loaded_map, core);
 	free(name);
 	core->menu_img->minimap = load_buffer(core->menu_img->minimap,
-			180, 180, core);
+			260, 260, core);
 	if (!core->menu_img->minimap)
 		return (false);
 	if (!sliders_init(core, width))

@@ -6,7 +6,7 @@
 /*   By: tvacher <tvacher@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/21 12:01:44 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/23 21:29:50 by tvacher          ###   ########.fr       */
+/*   Updated: 2025/06/24 13:38:00 by tvacher          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ typedef struct s_sprite		t_sprite;
 typedef struct s_core		t_core;
 typedef struct s_pos		t_pos;
 typedef struct s_foes		t_foes;
+typedef struct s_player		t_player;
 typedef struct s_node_img	t_node_img;
 
 typedef enum s_item_type
@@ -105,5 +106,6 @@ bool	create_item_chain(t_core *core, t_foes *enemy, int random);
 void	sort_items_by_distance(t_items **head);
 bool	is_animation(t_item *item);
 void	anim_items(t_core *core);
+bool	not_drop_yet(t_player *player, int r);
 
 #endif

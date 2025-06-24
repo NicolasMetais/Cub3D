@@ -6,11 +6,28 @@
 /*   By: tvacher <tvacher@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 14:16:08 by tvacher           #+#    #+#             */
-/*   Updated: 2025/06/23 21:10:48 by tvacher          ###   ########.fr       */
+/*   Updated: 2025/06/24 13:38:17 by tvacher          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+bool	not_drop_yet(t_player *player, int r)
+{
+	if (r == 14 && player->weapon[3].owned == true)
+		return (false);
+	else if (r == 15 && player->weapon[4].owned == true)
+		return (false);
+	else if (r == 17 && player->weapon[5].owned == true)
+		return (false);
+	else if (r == 18 && player->weapon[6].owned == true)
+		return (false);
+	else if (r == 19 && player->weapon[7].owned == true)
+		return (false);
+	else if (r == 16 && player->weapon[0].owned == true)
+		return (false);
+	return (true);
+}
 
 static void	get_render(t_core *core, t_items *items, t_pos start)
 {

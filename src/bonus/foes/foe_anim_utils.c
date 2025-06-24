@@ -6,7 +6,7 @@
 /*   By: tvacher <tvacher@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 19:02:56 by tvacher           #+#    #+#             */
-/*   Updated: 2025/06/23 21:05:14 by tvacher          ###   ########.fr       */
+/*   Updated: 2025/06/24 17:28:06 by tvacher          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,8 @@ static void	anim_loop_death(t_core *core, t_foes *enemy)
 	elapsed = (current.tv_sec - enemy->anim_death->update.tv_sec) * 1000
 		+ (current.tv_usec - enemy->anim_death->update.tv_usec) / 1000;
 	enemy->activ_img = enemy->anim_death->img_list;
-	if (elapsed > enemy->anim_death->speed && enemy->anim_death->nb > 0)
+	if (enemy->anim_death->speed && \
+	elapsed > enemy->anim_death->speed && enemy->anim_death->nb > 0)
 	{
 		if (enemy->anim_death->img_list && enemy->anim_death->img_list->next)
 		{
@@ -112,6 +113,7 @@ void	anim_death_foe(t_core *core)
 	enemy = core->foes;
 	while (enemy)
 	{
+		enemy->anim_death->speed = 300;
 		if (enemy->death == 1)
 		{
 			if (!enemy || !enemy->anim_death)

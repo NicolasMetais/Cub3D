@@ -28,7 +28,7 @@ static char *result[] = {
 "5 c #9F9F9F",
 "6 c gray67",
 "7 c LightGray",
-"8 c None",
+"8 c #00FF00",
 /* pixels */
 "882;;;;;;;;288",
 "85333333333358",
