@@ -6,7 +6,7 @@
 /*   By: tvacher <tvacher@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/25 15:40:42 by tvacher           #+#    #+#             */
-/*   Updated: 2025/06/23 21:03:25 by tvacher          ###   ########.fr       */
+/*   Updated: 2025/06/24 17:45:54 by tvacher          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ static void	handle_straf_right(t_core *core, double move_dist)
 	map_x = (int)(core->rc->pl_x / 8);
 	map_y = (int)((core->r_straff->next_y + core->r_straff->margin_y) / 8);
 	if (is_map_colision(core, map_y, map_x))
-	core->rc->pl_y = core->r_straff->next_y;
+		core->rc->pl_y = core->r_straff->next_y;
+	player_tp(core, map_x, map_y);
 }
 
 static void	handle_straf_left(t_core *core, double move_dist)
@@ -64,6 +65,7 @@ static void	handle_straf_left(t_core *core, double move_dist)
 	map_y = (int)((core->l_straff->next_y + core->l_straff->margin_y) / 8);
 	if (is_map_colision(core, map_y, map_x))
 		core->rc->pl_y = core->l_straff->next_y;
+	player_tp(core, map_x, map_y);
 }
 
 static void	handle_down(t_core *core, double move_dist)
@@ -87,6 +89,7 @@ static void	handle_down(t_core *core, double move_dist)
 	map_y = (int)((core->down->next_y + core->down->margin_y) / 8);
 	if (is_map_colision(core, map_y, map_x))
 		core->rc->pl_y = core->down->next_y;
+	player_tp(core, map_x, map_y);
 }
 
 static void	handle_up(t_core *core, double move_dist)
@@ -110,6 +113,7 @@ static void	handle_up(t_core *core, double move_dist)
 	map_y = (int)((core->up->next_y + core->up->margin_y) / 8);
 	if (is_map_colision(core, map_y, map_x))
 		core->rc->pl_y = core->up->next_y;
+	player_tp(core, map_x, map_y);
 }
 
 void	move_player(t_core *core, t_move move, double delta_time)

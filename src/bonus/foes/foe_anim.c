@@ -6,7 +6,7 @@
 /*   By: tvacher <tvacher@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 18:56:30 by tvacher           #+#    #+#             */
-/*   Updated: 2025/06/24 16:57:26 by tvacher          ###   ########.fr       */
+/*   Updated: 2025/06/24 17:37:55 by tvacher          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	anim_walk_foe(t_core *core)
 	enemy = core->foes;
 	while (enemy)
 	{
-		enemy->walking->speed = 0;
+		enemy->walking->speed = enemy->walk_speed;
 		if (enemy->death == 0 && enemy->atk == 0)
 		{
 			if (!enemy || !enemy->walking)
@@ -78,9 +78,9 @@ static void	anim_loop_attack(t_core *core, t_foes *enemy)
 		enemy->attack->update = current;
 		if (enemy->atk == 1)
 		{
-			if (core->player->armor > 0)
+			if (core->player->armor > 0 && core->godmod == 0)
 				core->player->armor -= enemy->damage;
-			else
+			else if (core->godmod == 0)
 				core->player->health -= enemy->damage;
 		}
 		if (core->player->health <= 0)
@@ -95,7 +95,7 @@ void	anim_attack_foe(t_core *core)
 	enemy = core->foes;
 	while (enemy)
 	{
-		enemy->attack->speed = 0;
+		enemy->attack->speed = enemy->atk_speed;
 		if (enemy->death == 0 && enemy->atk == 1)
 		{
 			if (!enemy || !enemy->attack)

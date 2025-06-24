@@ -6,7 +6,7 @@
 /*   By: tvacher <tvacher@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 19:02:56 by tvacher           #+#    #+#             */
-/*   Updated: 2025/06/24 16:57:44 by tvacher          ###   ########.fr       */
+/*   Updated: 2025/06/24 17:28:06 by tvacher          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ void	anim_death_foe(t_core *core)
 	enemy = core->foes;
 	while (enemy)
 	{
-		enemy->anim_death->speed = 0;
+		enemy->anim_death->speed = 300;
 		if (enemy->death == 1)
 		{
 			if (!enemy || !enemy->anim_death)
