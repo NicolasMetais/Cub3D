@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 13:33:37 by nmetais           #+#    #+#             */
-/*   Updated: 2025/04/24 21:38:25 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/24 16:33:07 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ void		ft_sort_int_tab(int *tab, int size);
 long long	ft_atol(const char *nptr);
 char		*ft_itoa(int n);
 int			ft_atoi(const char *nptr);
+bool		safe_atoi(const char *str, int *out);
+
 
 //Memoire
 int			ft_memcmp(const void *s1, const void *s2, size_t n);

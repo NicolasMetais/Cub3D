@@ -213,6 +213,7 @@ clean:
 fclean: clean
 	rm -f $(NAME)
 	rm -f $(NAME_BONUS)
+	rm -f $(LIB)
 
 re: fclean all
 

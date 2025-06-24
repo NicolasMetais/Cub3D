@@ -1,5 +1,6 @@
 SRCS = 	convert/ft_atoi.c \
 		convert/ft_atol.c \
+		convert/ft_atoi_safe.c \
 		strings/ft_bzero.c \
 		mem/ft_calloc.c \
 		strings/ft_isalnum.c \
