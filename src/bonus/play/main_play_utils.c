@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/26 18:33:47 by tvacher           #+#    #+#             */
-/*   Updated: 2025/06/24 19:31:44 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/24 20:09:43 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,8 @@ bool	init_map_textures(t_core *core)
 	"Open_Door");
 	core->textures->door = (t_img *)hashmap_get(&core->hashmap, "Door");
 	core->textures->sky = (t_img *)hashmap_get(&core->hashmap, "Sky");
-	if (!core->textures->open_doors || !core->textures->door || core->textures->sky)
+	if (!core->textures->open_doors
+		|| !core->textures->door || !core->textures->sky)
 		return (false);
 	if (!load_image(&core->textures->img_north, \
 		core->textures->north, core, "1"))

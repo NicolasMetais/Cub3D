@@ -6,7 +6,7 @@
 /*   By: nmetais <nmetais@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/13 13:43:55 by nmetais           #+#    #+#             */
-/*   Updated: 2025/06/11 17:51:55 by nmetais          ###   ########.fr       */
+/*   Updated: 2025/06/24 20:08:54 by nmetais          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,20 @@ unsigned int	hashmap_size(char **data)
 	return (size);
 }
 
+bool	overflow_secure(char **tmp)
+{
+	int		test;
+
+	test = 0;
+	if (ft_strlen_tab(tmp) >= 3 && ft_strncmp(tmp[2], "word_creator", 12) != 0)
+	{
+		if (ft_strlen_tab(tmp) >= 3 && !safe_atoi(tmp[2], &test))
+			return (ft_putendl_fd("Error \n Wrong size", 2),
+				ft_free_tab(tmp), false);
+	}
+	return (true);
+}
+
 bool	extract_img_data(t_core *core)
 {
 	int		i;
@@ -76,6 +90,8 @@ bool	extract_img_data(t_core *core)
 		tmp = ft_split(data[i], '\t');
 		if (!tmp)
 			return (ft_free_tab(tmp), false);
+		if (!overflow_secure(tmp))
+			return (false);
 		if (ft_strlen_tab(tmp) >= 3 && !store_img(tmp, core))
 			return (ft_free_tab(tmp), false);
 		ft_free_tab(tmp);
